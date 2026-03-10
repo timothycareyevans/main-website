@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width", initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>Timothy Carey Evans</title>
+    </head>
+    <body>
+        <section class="showcase">
+            <header>
+                <h2 class="logo">Timothy Carey Evans</h2>
+                <div class="toggle"></div>
+            </header>
+
+            <video src="Planet_2880x1220_HPA.mp4" width="100" muted loop autoplay></video>
+            
+            <div class="overlay"></div>
+
+            <div class="text">
+                <h3>Hack the Planet</h3>
+                <h4>San Francisco, CA</h4>
+                <a href="#">Read More</a>
+            </div>
+        </section>
+
+        <div class="menu">
+            <ul>
+                <li><a href="#">Coding</a></li>
+                <li><a href="#">Notes</a></li>
+                <li><a href="#">Bookmarks</a></li>
+                <li><a href="#">Training</a></li>
+            </ul>
+        </div>
+
+        <script>
+            const menuToggle = document.querySelector('.toggle')
+            const showcase = document.querySelector('.showcase')
+
+            menuToggle.addEventListener('click', () => {
+                menuToggle.classList.toggle('active')
+                showcase.classList.toggle('active')
+            })
+        </script>
+    </body>
+</html>
