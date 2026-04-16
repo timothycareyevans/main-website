@@ -20,6 +20,7 @@
             </header>
 
             <video class="video-desktop" src="Planet_2880x1220_HPA.mp4" width="100" autoplay loop muted playsinline></video>
+            <video class="video-tablet" src="error.mp4" autoplay loop muted playsinline></video>
             <video class="video-mobile" src="bay_bridge_timelapse.mp4" autoplay loop muted playsinline></video>
             
             <div class="overlay"></div>
@@ -61,14 +62,23 @@
                 showcase.classList.toggle('active')
             })
 
-            if (window.innerWidth <= 768) {
-                document.querySelector('.video-desktop').pause()
-                document.querySelector('.video-desktop').removeAttribute('src')
-                document.querySelector('.video-desktop').load()
+            const stopVideo = (selector) => {
+                const v = document.querySelector(selector)
+                v.pause()
+                v.removeAttribute('src')
+                v.load()
+            }
+
+            const width = window.innerWidth
+            if (width <= 768) {
+                stopVideo('.video-desktop')
+                stopVideo('.video-tablet')
+            } else if (width <= 1024) {
+                stopVideo('.video-desktop')
+                stopVideo('.video-mobile')
             } else {
-                document.querySelector('.video-mobile').pause()
-                document.querySelector('.video-mobile').removeAttribute('src')
-                document.querySelector('.video-mobile').load()
+                stopVideo('.video-tablet')
+                stopVideo('.video-mobile')
             }
         </script>
     </body>

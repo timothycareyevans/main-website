@@ -117,7 +117,8 @@
     opacity: 0.8;
 }
 
-.video-mobile {
+.video-mobile,
+.video-tablet {
     display: none;
 }
 
@@ -275,6 +276,19 @@
 
     .menu {
         background: #333;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .video-desktop {
+        display: none;
+    }
+
+    .showcase .video-tablet {
+        display: block;
+        top: 0;
+        height: 100%;
+        object-fit: cover;
     }
 }
     
