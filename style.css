@@ -222,7 +222,7 @@
     color: var(--overlay-color);
 }
 
-@media (max-width: 798px) {
+@media (max-width: 768px) {
     .showcase,
     .showcase header {
         padding: 40px;
@@ -268,7 +268,7 @@
     }
 }
 
-@media (max-width: 798px) and (prefers-color-scheme: dark) {
+@media (max-width: 768px) and (prefers-color-scheme: dark) {
     .menu ul li a {
         color: #fff;
     }
