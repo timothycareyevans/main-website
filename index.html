@@ -54,6 +54,16 @@
                 menuToggle.classList.toggle('active')
                 showcase.classList.toggle('active')
             })
+
+            if (window.innerWidth <= 798) {
+                document.querySelector('.video-desktop').pause()
+                document.querySelector('.video-desktop').removeAttribute('src')
+                document.querySelector('.video-desktop').load()
+            } else {
+                document.querySelector('.video-mobile').pause()
+                document.querySelector('.video-mobile').removeAttribute('src')
+                document.querySelector('.video-mobile').load()
+            }
         </script>
     </body>
 </html>
