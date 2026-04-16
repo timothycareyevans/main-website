@@ -69,6 +69,23 @@
                 v.load()
             }
 
+            const playVideo = (selector) => {
+                const v = document.querySelector(selector)
+                v.muted = true
+                v.playsInline = true
+                const attempt = () => {
+                    const p = v.play()
+                    if (p && typeof p.catch === 'function') {
+                        p.catch(() => {
+                            // Retry once after a short delay for stricter autoplay policies
+                            setTimeout(() => v.play().catch(() => {}), 300)
+                        })
+                    }
+                }
+                if (v.readyState >= 2) attempt()
+                else v.addEventListener('loadeddata', attempt, { once: true })
+            }
+
             const getBreakpoint = (width) => {
                 if (width <= 768) return 'mobile'
                 if (width <= 1024) return 'tablet'
@@ -80,12 +97,15 @@
             if (currentBreakpoint === 'mobile') {
                 stopVideo('.video-desktop')
                 stopVideo('.video-tablet')
+                playVideo('.video-mobile')
             } else if (currentBreakpoint === 'tablet') {
                 stopVideo('.video-desktop')
                 stopVideo('.video-mobile')
+                playVideo('.video-tablet')
             } else {
                 stopVideo('.video-tablet')
                 stopVideo('.video-mobile')
+                playVideo('.video-desktop')
             }
 
             let resizeTimer
