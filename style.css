@@ -239,7 +239,7 @@
         display: none;
     }
 
-    .video-mobile {
+    .showcase .video-mobile {
         display: block;
         top: 0;
         height: 100%;
