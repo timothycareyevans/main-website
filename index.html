@@ -69,17 +69,35 @@
                 v.load()
             }
 
-            const width = window.innerWidth
-            if (width <= 768) {
+            const getBreakpoint = (width) => {
+                if (width <= 768) return 'mobile'
+                if (width <= 1024) return 'tablet'
+                return 'desktop'
+            }
+
+            let currentBreakpoint = getBreakpoint(window.innerWidth)
+
+            if (currentBreakpoint === 'mobile') {
                 stopVideo('.video-desktop')
                 stopVideo('.video-tablet')
-            } else if (width <= 1024) {
+            } else if (currentBreakpoint === 'tablet') {
                 stopVideo('.video-desktop')
                 stopVideo('.video-mobile')
             } else {
                 stopVideo('.video-tablet')
                 stopVideo('.video-mobile')
             }
+
+            let resizeTimer
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer)
+                resizeTimer = setTimeout(() => {
+                    const newBreakpoint = getBreakpoint(window.innerWidth)
+                    if (newBreakpoint !== currentBreakpoint) {
+                        location.reload()
+                    }
+                }, 250)
+            })
         </script>
     </body>
 </html>
