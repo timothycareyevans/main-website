@@ -49,22 +49,36 @@
 
 .toggle {
     position: relative;
-    width: 60px;
-    height: 60px;
-    background: url('menu.png');
-    background-repeat: no-repeat;
-    background-size: 30px;
-    background-position: center;
+    width: 40px;
+    height: 30px;
     cursor: pointer;
-    filter: invert(1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.toggle.active {
-    background: url('close.png');
-    background-repeat: no-repeat;
-    background-size: 25px;
-    background-position: center;
-    filter: invert(0);
+.toggle span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    border-radius: 2px;
+    transition: 0.4s;
+    transform-origin: center;
+}
+
+.toggle.active span:nth-child(1) {
+    transform: translateY(13.5px) rotate(45deg);
+    background: #fff;
+}
+
+.toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.toggle.active span:nth-child(3) {
+    transform: translateY(-13.5px) rotate(-45deg);
+    background: #fff;
 }
 
 .showcase video {
