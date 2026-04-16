@@ -198,6 +198,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background: #2c6075;
 }
 
 .menu ul {
@@ -260,6 +261,20 @@
 
     .toggle.active .toggle-dots span {
         background: #555;
+    }
+
+    .menu ul li a {
+        color: #111;
+    }
+}
+
+@media (max-width: 798px) and (prefers-color-scheme: dark) {
+    .menu ul li a {
+        color: #fff;
+    }
+
+    .menu {
+        background: #333;
     }
 }
     
