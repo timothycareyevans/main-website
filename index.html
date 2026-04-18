@@ -1,123 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
-        <title>Timothy Carey Evans</title>
-    </head>
-    <body>
-        <section class="showcase">
-            <header>
-                <h2 class="logo">Timothy Carey Evans</h2>
-                <div class="toggle">
-                    <div class="toggle-dots">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Timothy Carey Evans</title>
+</head>
+<body>
+    <div class="page">
+        <header class="nav">
+            <a href="#" class="brand">Timothy Carey Evans</a>
+            <nav class="nav-links">
+                <a href="#about">About me</a>
+                <a href="#work">Portfolio work</a>
+                <a href="#services">My services</a>
+            </nav>
+            <a href="#contact" class="cta-pill">
+                <span>Work with me</span>
+                <span class="arrow">&rarr;</span>
+            </a>
+        </header>
+
+        <section class="hero">
+            <div class="hero-left">
+                <div class="badge">
+                    <div class="badge-dots">
+                        <span></span><span></span><span></span>
                     </div>
+                    <span class="badge-text">Hack the Planet</span>
                 </div>
-            </header>
+                <h1 class="headline">
+                    Results that matter<br>
+                    <em>expertise you can trust.</em>
+                </h1>
+                <p class="lede">
+                    I build at the intersection of cybersecurity and artificial intelligence &mdash;
+                    turning bold ideas into shipped, resilient systems.
+                </p>
+                <a href="https://timothycareyevans.com/startyourday/index.html" class="cta-yellow">
+                    <span>Start Your Day</span>
+                    <span class="arrow-dark">&rarr;</span>
+                </a>
+            </div>
 
-            <video class="video-desktop" src="Planet_2880x1220_HPA.mp4" width="100" autoplay loop muted playsinline></video>
-            <video class="video-tablet" src="error.mp4" autoplay loop muted playsinline></video>
-            <video class="video-mobile" src="bay_bridge_timelapse.mp4" autoplay loop muted playsinline></video>
-            
-            <div class="overlay"></div>
-
-            <div class="text">
-                <h3>Hack the Planet</h3>
-                <h4>San Francisco, CA</h4>
-                <a href="https://www.timothycareyevans.com/startyourday/index.html">Start Your Day</a>
+            <div class="hero-right">
+                <div class="media-frame">
+                    <video class="video-desktop" src="error.mp4" autoplay loop muted playsinline></video>
+                    <video class="video-tablet" src="error.mp4" autoplay loop muted playsinline></video>
+                    <video class="video-mobile" src="bay_bridge_timelapse.mp4" autoplay loop muted playsinline></video>
+                </div>
             </div>
         </section>
 
-        <div class="menu">
-            <ul>
-                <li><a href="https://www.timothycareyevans.com/cybersecurity/index.html">Cybersecurity</a></li>
-                <li><a href="https://www.timothycareyevans.com/artificialintelligence/index.html">Artifical Intelligence</a></li>
-                <br>
-                <li><a href="#">Projects</a></li>
-                <li><a href="#">Tasks</a></li>
-                <br>
-                <li><a href="#">Notes</a></li>
-                <li><a href="#">Bookmarks</a></li>
-                <li><a href="#">Resources</a></li>
-                <br>
-                <li><a href="https://www.timothycareyevans.com/timeleach/">TIMELEACH</a></li>
-                <br>
-                <li><a href="https://www.github.com/timothycareyevans">Github</a></li>
-                <li><a href="https://www.linkedin.com/in/timothy-e-a3b8324">Linkedin</a></li>
-                <li><a href="#">Resume</a></li>
-                <li><a href="#">Contact Me</a></li>
+        <section class="partners">
+            <div class="partners-label">Featured Tools</div>
+            <ul class="partners-list">
+                <li>Google Cloud</li>
+                <li>AWS</li>
+                <li>OpenAI</li>
+                <li>Anthropic</li>
             </ul>
-        </div>
+        </section>
 
-        <script>
-            const menuToggle = document.querySelector('.toggle')
-            const showcase = document.querySelector('.showcase')
+        <section class="why" id="services">
+            <div class="eyebrow">Why me</div>
+            <h2 class="section-headline">
+                Why settle for less when<br>
+                <em>you can have the best?</em>
+            </h2>
+            <div class="cards">
+                <a class="card" href="https://timothycareyevans.com/cybersecurity/index.html">
+                    <div class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/>
+                        </svg>
+                    </div>
+                    <h3>Cybersecurity</h3>
+                    <p>Hardening modern systems against real-world adversaries &mdash; from threat modeling to incident response.</p>
+                </a>
+                <a class="card" href="https://timothycareyevans.com/artificialintelligence/index.html">
+                    <div class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/>
+                        </svg>
+                    </div>
+                    <h3>Artificial Intelligence</h3>
+                    <p>Designing AI tools that augment humans without the hand-waving &mdash; practical, measurable, shipped.</p>
+                </a>
+                <a class="card" href="https://timothycareyevans.com/timeleach/video.html">
+                    <div class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="9"/>
+                            <path d="M12 7v5l3 2"/>
+                        </svg>
+                    </div>
+                    <h3>TIMELEACH</h3>
+                    <p>A personal experiment in reclaiming attention &mdash; built as a reminder that time is the only resource that doesn't scale.</p>
+                </a>
+            </div>
+        </section>
 
-            menuToggle.addEventListener('click', () => {
-                menuToggle.classList.toggle('active')
-                showcase.classList.toggle('active')
-            })
+        <footer class="foot">
+            <div class="foot-left">&copy; <span id="year"></span> Timothy Carey Evans</div>
+            <div class="foot-right">
+                <a href="https://github.com/timothycareyevans">Github</a>
+                <a href="https://www.linkedin.com/in/timothy-e-a3b8324">Linkedin</a>
+            </div>
+        </footer>
+    </div>
 
-            const stopVideo = (selector) => {
-                const v = document.querySelector(selector)
-                v.pause()
-                v.removeAttribute('src')
-                v.load()
-            }
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear()
 
-            const playVideo = (selector) => {
-                const v = document.querySelector(selector)
-                v.muted = true
-                v.playsInline = true
-                const attempt = () => {
-                    const p = v.play()
-                    if (p && typeof p.catch === 'function') {
-                        p.catch(() => {
-                            // Retry once after a short delay for stricter autoplay policies
-                            setTimeout(() => v.play().catch(() => {}), 300)
-                        })
-                    }
+        const stopVideo = (selector) => {
+            const v = document.querySelector(selector)
+            if (!v) return
+            v.pause()
+            v.removeAttribute('src')
+            v.load()
+        }
+
+        const playVideo = (selector) => {
+            const v = document.querySelector(selector)
+            if (!v) return
+            v.muted = true
+            v.playsInline = true
+            const attempt = () => {
+                const p = v.play()
+                if (p && typeof p.catch === 'function') {
+                    p.catch(() => setTimeout(() => v.play().catch(() => {}), 300))
                 }
-                if (v.readyState >= 2) attempt()
-                else v.addEventListener('loadeddata', attempt, { once: true })
             }
+            if (v.readyState >= 2) attempt()
+            else v.addEventListener('loadeddata', attempt, { once: true })
+        }
 
-            const getBreakpoint = (width) => {
-                if (width <= 768) return 'mobile'
-                if (width <= 1024) return 'tablet'
-                return 'desktop'
-            }
+        const getBreakpoint = (width) => {
+            if (width <= 768) return 'mobile'
+            if (width <= 1024) return 'tablet'
+            return 'desktop'
+        }
 
-            let currentBreakpoint = getBreakpoint(window.innerWidth)
+        let currentBreakpoint = getBreakpoint(window.innerWidth)
+        if (currentBreakpoint === 'mobile') {
+            stopVideo('.video-desktop'); stopVideo('.video-tablet'); playVideo('.video-mobile')
+        } else if (currentBreakpoint === 'tablet') {
+            stopVideo('.video-desktop'); stopVideo('.video-mobile'); playVideo('.video-tablet')
+        } else {
+            stopVideo('.video-tablet'); stopVideo('.video-mobile'); playVideo('.video-desktop')
+        }
 
-            if (currentBreakpoint === 'mobile') {
-                stopVideo('.video-desktop')
-                stopVideo('.video-tablet')
-                playVideo('.video-mobile')
-            } else if (currentBreakpoint === 'tablet') {
-                stopVideo('.video-desktop')
-                stopVideo('.video-mobile')
-                playVideo('.video-tablet')
-            } else {
-                stopVideo('.video-tablet')
-                stopVideo('.video-mobile')
-                playVideo('.video-desktop')
-            }
-
-            let resizeTimer
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimer)
-                resizeTimer = setTimeout(() => {
-                    const newBreakpoint = getBreakpoint(window.innerWidth)
-                    if (newBreakpoint !== currentBreakpoint) {
-                        location.reload()
-                    }
-                }, 250)
-            })
-        </script>
-    </body>
+        let resizeTimer
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer)
+            resizeTimer = setTimeout(() => {
+                const newBp = getBreakpoint(window.innerWidth)
+                if (newBp !== currentBreakpoint) location.reload()
+            }, 250)
+        })
+    </script>
+</body>
 </html>
