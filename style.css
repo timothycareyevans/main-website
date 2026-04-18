@@ -382,3 +382,230 @@ html, body {
     .foot { flex-direction: column; gap: 10px; }
     .foot-right a { margin-left: 0; margin-right: 20px; }
 }
+
+/* ==========================================================================
+   Legacy layout (mobile + tablet) — original fullscreen-video + side-menu.
+   Only rendered when data-layout="legacy" (viewport <= 1024px at page load).
+   All selectors are scoped under .legacy-wrap to keep them from leaking into
+   the desktop layout.
+   ========================================================================== */
+
+.legacy-wrap,
+.legacy-wrap * {
+    font-family: 'Poppins', sans-serif;
+}
+
+.legacy-wrap .showcase {
+    position: absolute;
+    right: 0;
+    width: 100%;
+    min-height: 100vh;
+    padding: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #111;
+    color: #fff;
+    z-index: 2;
+    transition: 0.5s;
+}
+
+.legacy-wrap .showcase.active {
+    right: 300px;
+}
+
+.legacy-wrap .showcase header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px 100px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.legacy-wrap .logo {
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.legacy-wrap .toggle {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.4s;
+}
+
+.legacy-wrap .toggle-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: 0.4s;
+}
+
+.legacy-wrap .toggle-dots span {
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: #fff;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+.legacy-wrap .toggle.active {
+    border-color: #fff;
+}
+
+.legacy-wrap .toggle.active .toggle-dots {
+    position: relative;
+    width: 20px;
+    height: 20px;
+}
+
+.legacy-wrap .toggle.active .toggle-dots span {
+    position: absolute;
+    width: 3px;
+    height: 20px;
+    border-radius: 2px;
+    background: #fff;
+}
+
+.legacy-wrap .toggle.active .toggle-dots span:nth-child(1) { transform: rotate(45deg); }
+.legacy-wrap .toggle.active .toggle-dots span:nth-child(2) { opacity: 0; }
+.legacy-wrap .toggle.active .toggle-dots span:nth-child(3) { transform: rotate(-45deg); }
+
+.legacy-wrap .showcase video {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 100px);
+    object-fit: contain;
+    opacity: 0.8;
+}
+
+.legacy-wrap .legacy-video-mobile { display: none; }
+
+.legacy-wrap .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.legacy-wrap .text {
+    position: relative;
+    z-index: 10;
+}
+
+.legacy-wrap .text h3 {
+    font-size: 4em;
+    font-weight: 800;
+    line-height: 1em;
+}
+
+.legacy-wrap .text h4 {
+    font-size: 3em;
+    font-weight: 600;
+    line-height: 1em;
+    margin: 25px 50px 75px 40px;
+}
+
+.legacy-wrap .text a {
+    display: inline-block;
+    font-size: 1em;
+    background: #fff;
+    padding: 10px 30px;
+    text-decoration: none;
+    color: #111;
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: 0.2s;
+}
+
+.legacy-wrap .text a:hover {
+    letter-spacing: 6px;
+}
+
+.legacy-wrap .menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a1a1a;
+}
+
+.legacy-wrap .menu ul {
+    position: relative;
+    list-style: none;
+}
+
+.legacy-wrap .menu ul li a {
+    text-decoration: none;
+    font-size: 24px;
+    color: #555;
+}
+
+.legacy-wrap .menu ul li a:hover {
+    color: #03a9f4;
+}
+
+@media (prefers-color-scheme: dark) {
+    .legacy-wrap .menu ul li a { color: #ccc; }
+}
+
+/* Tablet (769px–1024px): show tablet video */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .legacy-wrap .showcase .legacy-video-tablet {
+        display: block;
+        top: 0;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+/* Mobile (<=768px) */
+@media (max-width: 768px) {
+    .legacy-wrap .showcase,
+    .legacy-wrap .showcase header {
+        padding: 40px;
+    }
+
+    .legacy-wrap .text h3 { font-size: 2em; }
+
+    .legacy-wrap .legacy-video-tablet { display: none; }
+
+    .legacy-wrap .showcase .legacy-video-mobile {
+        display: block;
+        top: 0;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .legacy-wrap .toggle { border-color: #555; }
+    .legacy-wrap .toggle-dots span { background: #555; }
+    .legacy-wrap .toggle.active { border-color: #555; }
+    .legacy-wrap .toggle.active .toggle-dots span { background: #555; }
+
+    .legacy-wrap .menu ul li a { color: #111; }
+}
+
+@media (max-width: 768px) and (prefers-color-scheme: dark) {
+    .legacy-wrap .menu ul li a { color: #fff; }
+    .legacy-wrap .menu { background: #333; }
+}

@@ -6,10 +6,19 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
     <title>Timothy Carey Evans</title>
+    <script>
+        // Decide which layout to render BEFORE paint. Desktop gets the new KRETI-style
+        // layout; tablet and mobile get the legacy fullscreen-video + side-menu layout.
+        (function () {
+            var isDesktop = window.innerWidth > 1024;
+            document.documentElement.setAttribute('data-layout', isDesktop ? 'desktop' : 'legacy');
+        })();
+    </script>
 </head>
 <body>
+    <!-- Desktop (new KRETI-style layout) -->
     <div class="page">
         <header class="nav">
             <a href="#" class="brand">Timothy Carey Evans</a>
@@ -49,8 +58,6 @@
             <div class="hero-right">
                 <div class="media-frame">
                     <video class="video-desktop" src="error.mp4" autoplay loop muted playsinline></video>
-                    <video class="video-tablet" src="error.mp4" autoplay loop muted playsinline></video>
-                    <video class="video-mobile" src="bay_bridge_timelapse.mp4" autoplay loop muted playsinline></video>
                 </div>
             </div>
         </section>
@@ -113,17 +120,66 @@
         </footer>
     </div>
 
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear()
+    <!-- Mobile / Tablet (legacy fullscreen-video layout) -->
+    <div class="legacy-wrap">
+        <section class="showcase">
+            <header>
+                <h2 class="logo">Timothy Carey Evans</h2>
+                <div class="toggle">
+                    <div class="toggle-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </header>
 
-        const stopVideo = (selector) => {
-            const v = document.querySelector(selector)
-            if (!v) return
-            v.pause()
-            v.removeAttribute('src')
-            v.load()
+            <video class="legacy-video-tablet" src="error.mp4" autoplay loop muted playsinline></video>
+            <video class="legacy-video-mobile" src="bay_bridge_timelapse.mp4" autoplay loop muted playsinline></video>
+
+            <div class="overlay"></div>
+
+            <div class="text">
+                <h3>Hack the Planet</h3>
+                <h4>San Francisco, CA</h4>
+                <a href="https://www.timothycareyevans.com/startyourday/index.html">Start Your Day</a>
+            </div>
+        </section>
+
+        <div class="menu">
+            <ul>
+                <li><a href="https://www.timothycareyevans.com/cybersecurity/index.html">Cybersecurity</a></li>
+                <li><a href="https://www.timothycareyevans.com/artificialintelligence/index.html">Artifical Intelligence</a></li>
+                <br>
+                <li><a href="#">Projects</a></li>
+                <li><a href="#">Tasks</a></li>
+                <br>
+                <li><a href="#">Notes</a></li>
+                <li><a href="#">Bookmarks</a></li>
+                <li><a href="#">Resources</a></li>
+                <br>
+                <li><a href="https://www.timothycareyevans.com/timeleach/">TIMELEACH</a></li>
+                <br>
+                <li><a href="https://www.github.com/timothycareyevans">Github</a></li>
+                <li><a href="https://www.linkedin.com/in/timothy-e-a3b8324">Linkedin</a></li>
+                <li><a href="#">Resume</a></li>
+                <li><a href="#">Contact Me</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Purge the layout that isn't active so its <video>s don't load in the background.
+        const layout = document.documentElement.getAttribute('data-layout')
+        if (layout === 'desktop') {
+            const legacy = document.querySelector('.legacy-wrap')
+            if (legacy) legacy.remove()
+        } else {
+            const page = document.querySelector('.page')
+            if (page) page.remove()
         }
 
+        // ---- Helpers ----
         const playVideo = (selector) => {
             const v = document.querySelector(selector)
             if (!v) return
@@ -139,21 +195,44 @@
             else v.addEventListener('loadeddata', attempt, { once: true })
         }
 
-        const getBreakpoint = (width) => {
-            if (width <= 768) return 'mobile'
-            if (width <= 1024) return 'tablet'
-            return 'desktop'
+        const stopVideo = (selector) => {
+            const v = document.querySelector(selector)
+            if (!v) return
+            v.pause()
+            v.removeAttribute('src')
+            v.load()
         }
 
+        // ---- Desktop-only: year and single hero video ----
+        if (layout === 'desktop') {
+            const y = document.getElementById('year')
+            if (y) y.textContent = new Date().getFullYear()
+            playVideo('.video-desktop')
+        }
+
+        // ---- Legacy-only: menu toggle + breakpoint-aware video ----
+        if (layout === 'legacy') {
+            const menuToggle = document.querySelector('.toggle')
+            const showcase = document.querySelector('.showcase')
+            if (menuToggle && showcase) {
+                menuToggle.addEventListener('click', () => {
+                    menuToggle.classList.toggle('active')
+                    showcase.classList.toggle('active')
+                })
+            }
+
+            if (window.innerWidth <= 768) {
+                stopVideo('.legacy-video-tablet')
+                playVideo('.legacy-video-mobile')
+            } else {
+                stopVideo('.legacy-video-mobile')
+                playVideo('.legacy-video-tablet')
+            }
+        }
+
+        // ---- Reload on breakpoint crossing ----
+        const getBreakpoint = (w) => (w <= 768 ? 'mobile' : w <= 1024 ? 'tablet' : 'desktop')
         let currentBreakpoint = getBreakpoint(window.innerWidth)
-        if (currentBreakpoint === 'mobile') {
-            stopVideo('.video-desktop'); stopVideo('.video-tablet'); playVideo('.video-mobile')
-        } else if (currentBreakpoint === 'tablet') {
-            stopVideo('.video-desktop'); stopVideo('.video-mobile'); playVideo('.video-tablet')
-        } else {
-            stopVideo('.video-tablet'); stopVideo('.video-mobile'); playVideo('.video-desktop')
-        }
-
         let resizeTimer
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer)
