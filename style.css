@@ -1,6 +1,6 @@
 :root {
-    --cream: #f8ecd9;
-    --cream-dark: #f0e1c8;
+    --cream: #000000;
+    --cream-dark: #1a1a1a;
     --ink: #1a1a1a;
     --ink-soft: #3d3d3d;
     --muted: #6b6257;
@@ -8,8 +8,8 @@
     --green-hover: #0a2a20;
     --yellow: #e8f23f;
     --yellow-hover: #d6e12e;
-    --card: #fffaf0;
-    --border: #e6d5b8;
+    --card: #000000;
+    --border: #000000;
     --radius: 18px;
     --radius-lg: 28px;
 }
@@ -27,8 +27,13 @@ html, body {
         repeating-linear-gradient(90deg,
             transparent 0,
             transparent 38px,
-            rgba(198, 168, 120, 0.18) 38px,
-            rgba(198, 168, 120, 0.18) 39px);
+            rgba(128, 128, 128, 0.25) 38px,
+            rgba(128, 128, 128, 0.25) 39px),
+        repeating-linear-gradient(0deg,
+            transparent 0,
+            transparent 38px,
+            rgba(128, 128, 128, 0.25) 38px,
+            rgba(128, 128, 128, 0.25) 39px);
 }
 
 .page {
@@ -55,7 +60,7 @@ html, body {
     font-size: 15px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--ink);
+    color: #fff;
     text-decoration: none;
 }
 
@@ -65,14 +70,14 @@ html, body {
 }
 
 .nav-links a {
-    color: var(--ink-soft);
+    color: #ccc;
     text-decoration: none;
     font-size: 15px;
     font-weight: 500;
     transition: color 0.2s;
 }
 
-.nav-links a:hover { color: var(--ink); }
+.nav-links a:hover { color: #fff; }
 
 .cta-pill {
     display: inline-flex;
@@ -140,7 +145,7 @@ html, body {
 .badge-text {
     font-size: 13px;
     font-weight: 600;
-    color: var(--ink);
+    color: #fff;
 }
 
 .headline {
@@ -150,16 +155,17 @@ html, body {
     line-height: 1.05;
     letter-spacing: -0.02em;
     margin-bottom: 20px;
+    color: #fff;
 }
 .headline em {
     font-style: italic;
     font-weight: 500;
-    color: var(--ink-soft);
+    color: #c9c0a8;
 }
 
 .lede {
     font-size: 16px;
-    color: var(--muted);
+    color: #b5ac97;
     margin-bottom: 36px;
     max-width: 460px;
 }
@@ -229,7 +235,7 @@ html, body {
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: #b5ac97;
 }
 .partners-list {
     list-style: none;
@@ -243,7 +249,7 @@ html, body {
     font-family: 'Fraunces', Georgia, serif;
     font-weight: 600;
     font-size: 18px;
-    color: var(--ink-soft);
+    color: #e8e1cf;
     letter-spacing: 0.02em;
 }
 
@@ -257,7 +263,7 @@ html, body {
     font-weight: 700;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: #b5ac97;
     margin-bottom: 18px;
 }
 .section-headline {
@@ -267,11 +273,12 @@ html, body {
     line-height: 1.1;
     letter-spacing: -0.02em;
     margin-bottom: 48px;
+    color: #fff;
 }
 .section-headline em {
     font-style: italic;
     font-weight: 500;
-    color: var(--ink-soft);
+    color: #c9c0a8;
 }
 
 .cards {
@@ -287,7 +294,7 @@ html, body {
     border-radius: var(--radius);
     padding: 28px;
     text-decoration: none;
-    color: var(--ink);
+    color: #fff;
     display: flex;
     flex-direction: column;
     gap: 14px;
@@ -316,7 +323,7 @@ html, body {
     font-weight: 700;
 }
 .card p {
-    color: var(--muted);
+    color: #b5ac97;
     font-size: 14.5px;
     line-height: 1.55;
 }
