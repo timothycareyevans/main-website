@@ -57,11 +57,17 @@ html, body {
 .brand {
     font-family: 'Bruno Ace', sans-serif;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 18px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: #fff;
     text-decoration: none;
+    margin-left: 10px;
+}
+
+.brand span {
+    font-size: 21px;
+    padding-right: 10px;
 }
 
 .nav-links {
