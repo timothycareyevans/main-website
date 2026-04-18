@@ -3,37 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="style.css">
     <title>TIMELEACH</title>
 </head>
-<body>
-    <video id="player" src="TIMELEACH-RE-MIX_Media_u-yzMUpvZYQ_001_1080p.mp4" autoplay loop playsinline></video>
-
-    <script>
-        const v = document.getElementById('player')
-
-        // Try to autoplay with sound first
-        v.muted = false
-        const tryPlay = v.play()
-        if (tryPlay && typeof tryPlay.catch === 'function') {
-            tryPlay.catch(() => {
-                // Blocked by autoplay policy — fall back to muted autoplay,
-                // and unmute on the user's first interaction
-                v.muted = true
-                v.play().catch(() => {})
-
-                const unmute = () => {
-                    v.muted = false
-                    document.removeEventListener('click', unmute)
-                    document.removeEventListener('keydown', unmute)
-                    document.removeEventListener('touchstart', unmute)
-                }
-                document.addEventListener('click', unmute)
-                document.addEventListener('keydown', unmute)
-                document.addEventListener('touchstart', unmute)
-            })
-        }
-    </script>
-</body>
+    <body>
+        <video src="TIMELEACH-RE-MIX_Media_u-yzMUpvZYQ_001_1080p.mp4" width="100" autoplay loop playsinline></video>
+    </body>   
 </html>
