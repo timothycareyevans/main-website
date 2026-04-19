@@ -346,7 +346,7 @@ html, body {
 }
 
 /* Alternating word styles */
-.item:nth-child(odd)  .word { color: goldenrod }
+.item:nth-child(odd)  .word { color: gold }
 .item:nth-child(even) .word {
     color: transparent;
     -webkit-text-stroke: 1px rgba(240,235,224,0.4);
