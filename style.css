@@ -94,7 +94,7 @@ html, body {
     text-decoration: none;
     padding: 10px 10px 10px 20px;
     border-radius: 999px;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 600;
     transition: background 0.2s;
 }
@@ -107,6 +107,9 @@ html, body {
     height: 28px;
     border-radius: 50%;
     background: rgba(255,255,255,0.12);
+}
+.cta-pill .contactme {
+    font-size: 24px;
 }
 
 /* ---- Hero ---- */
