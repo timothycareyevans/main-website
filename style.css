@@ -83,7 +83,11 @@ html, body {
     transition: color 0.2s;
 }
 
-.nav-links a:hover { color: #fff; }
+.nav-links a:hover { filter: brightness(1.25); }
+
+.nav-links a:nth-child(1) { color: #b03060; }   /* About me — burgundy */
+.nav-links a:nth-child(2) { color: #2eb8b8; }   /* Portfolio work — teal */
+.nav-links a:nth-child(3) { color: #90ee90; }   /* My services — light green */
 
 .cta-pill {
     display: inline-flex;
@@ -92,7 +96,7 @@ html, body {
     background: var(--green);
     color: #fff;
     text-decoration: none;
-    padding: 10px 10px 10px 20px;
+    padding: 5px 10px 5px 20px;
     border-radius: 999px;
     font-size: 18px;
     font-weight: 600;
