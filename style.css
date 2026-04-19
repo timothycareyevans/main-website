@@ -70,6 +70,24 @@ html, body {
     padding-right: 10px;
 }
 
+/* Desktop layout only (>1024px), at narrow widths where the brand wraps:
+   force "Evans" onto its own line, left-aligned under "Timothy". */
+@media (min-width: 1025px) and (max-width: 1400px) {
+    .brand {
+        line-height: 1.1;
+    }
+    .brand .brand-name {
+        display: inline-block;
+        vertical-align: middle;
+        text-align: left;
+    }
+    .brand .brand-last {
+        display: block;
+        font-size: inherit;
+        padding-right: 0;
+    }
+}
+
 .nav-links {
     display: flex;
     gap: 32px;
