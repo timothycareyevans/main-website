@@ -145,11 +145,59 @@ html, body {
     font-size: 24px;
 }
 
+/* ---- About banner (sits above the hero) ---- */
+.about-banner {
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    gap: 28px;
+    align-items: stretch;
+    margin-top: 44px;
+}
+
+.about-left {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    max-height: 520px;
+}
+
+.about-image-frame {
+    width: 100%;
+    height: 100%;
+}
+
+.about-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.about-right {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media (max-width: 1024px) {
+    .about-banner { grid-template-columns: 1fr; }
+    .about-left { min-height: 320px; }
+    .about-right { padding: 32px; }
+}
+
 /* ---- Hero ---- */
 .hero {
     display: grid;
     grid-template-columns: 1.05fr 1fr;
     gap: 28px;
+    margin-top: 44px;
     align-items: stretch;
 }
 
@@ -311,6 +359,7 @@ html, body {
     overflow: hidden;
     padding: 12px 0;
     position: relative;
+    margin-top: 44px;
 }
 .track:nth-child(2) {
     border-top: 1px solid var(--line);
@@ -393,7 +442,7 @@ html, body {
 
 /* ---- Why section ---- */
 .why {
-    margin-top: 80px;
+    margin-top: 44px;
     text-align: center;
 }
 .eyebrow {
@@ -468,7 +517,7 @@ html, body {
 
 /* ---- Footer ---- */
 .foot {
-    margin-top: 80px;
+    margin-top: 44px;
     padding: 24px 0 0;
     border-top: 1px solid var(--border);
     display: flex;
