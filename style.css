@@ -148,19 +148,18 @@ html, body {
 /* ---- About banner (sits above the hero) ---- */
 .about-banner {
     display: grid;
-    grid-template-columns: 1fr 1.05fr;
-    gap: 28px;
+    grid-template-columns: 1fr 1.1fr;
     align-items: stretch;
-    margin-top: 44px;
-}
-
-.about-left {
+    margin-top: 8px;
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     overflow: hidden;
-    aspect-ratio: 1 / 1;
     max-height: 520px;
+}
+
+.about-left {
+    overflow: hidden;
 }
 
 .about-image-frame {
@@ -177,17 +176,15 @@ html, body {
 }
 
 .about-right {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
     padding: 48px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
+.about-right .lede { line-height: 1.8; }
 
 @media (max-width: 1024px) {
-    .about-banner { grid-template-columns: 1fr; }
+    .about-banner { grid-template-columns: 1fr; max-height: none; }
     .about-left { min-height: 320px; }
     .about-right { padding: 32px; }
 }
