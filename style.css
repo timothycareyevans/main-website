@@ -4,10 +4,13 @@
     --ink: #1a1a1a;
     --ink-soft: #3d3d3d;
     --muted: #6b6257;
-    --green: #0e3b2e;
-    --green-hover: #0a2a20;
-    --yellow: #e8f23f;
-    --yellow-hover: #d6e12e;
+    --green: #4b00ff;
+    --green-hover: #3900c4;
+    --yellow: #ccff00;
+    --yellow-hover: #b7e600;
+    --magenta: #ec008c;
+    --violet: #4b00ff;
+    --orange: #ff6a00;
     --card: #000000;
     --border: #000000;
     --radius: 18px;
@@ -612,6 +615,84 @@ html, body {
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
+}
+
+/* ---- Palette refresh ---- */
+.nav-links a:nth-child(1) { color: var(--magenta); }
+.nav-links a:nth-child(2) { color: var(--violet); }
+.nav-links a:nth-child(3) { color: var(--orange); }
+
+.badge-dots span {
+    background: linear-gradient(135deg, var(--yellow), #8eb300);
+}
+
+.badge-dots span:nth-child(2) {
+    background: linear-gradient(135deg, var(--magenta), #a0005f);
+}
+
+.badge-dots span:nth-child(3) {
+    background: linear-gradient(135deg, var(--violet), #2a008f);
+}
+
+.headline em {
+    color: #d1c5ff;
+}
+
+.section-headline em {
+    color: #ffb27d;
+}
+
+.partners-list li {
+    color: #f3f0ff;
+}
+
+.manifesto-bridge-shell {
+    background: #ffffff;
+    border-color: rgba(255, 255, 255, 0.9);
+}
+
+.manifesto-bridge-title {
+    color: #111111;
+}
+
+.manifesto-bridge-main .eyebrow {
+    color: #6b6257;
+}
+
+.manifesto-bridge-tag {
+    border: 1px solid rgba(75, 0, 255, 0.22);
+    background: rgba(75, 0, 255, 0.08);
+    color: #4b00ff;
+}
+
+.item:nth-child(odd) .word {
+    color: var(--yellow);
+}
+
+.item:nth-child(even) .word {
+    -webkit-text-stroke: 1px rgba(236, 0, 140, 0.65);
+}
+
+.track:nth-child(2) .item-sep {
+    background: var(--orange);
+}
+
+.track:nth-child(2) .item {
+    color: rgba(188, 168, 255, 0.85);
+}
+
+.proof-carousel-track {
+    scrollbar-color: rgba(75, 0, 255, 0.6) rgba(255, 255, 255, 0.05);
+}
+
+.proof-carousel-track::-webkit-scrollbar-thumb {
+    background: rgba(75, 0, 255, 0.6);
+}
+
+.proof-pill-live {
+    background: rgba(255, 106, 0, 0.12);
+    border: 1px solid rgba(255, 106, 0, 0.32);
+    color: #ffb27d;
 }
 
 /* ---- Footer ---- */
