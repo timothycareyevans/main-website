@@ -202,6 +202,449 @@ html, body {
 }
 .about-right .lede { line-height: 1.8; }
 
+.glyph-hero-section,
+.glyph-discover-section {
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+}
+
+.glyph-hero-section {
+    background: #050505;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glyph-hero-shell {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 68px 32px;
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: 28px;
+    align-items: center;
+}
+
+.glyph-kicker {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(204, 255, 0, 0.18);
+    color: #d9d9dd;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+}
+
+.glyph-hero-title,
+.glyph-discover-title {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(44px, 7vw, 86px);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: #ffffff;
+}
+
+.glyph-hero-text,
+.glyph-discover-copy,
+.glyph-feature-card p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: #b7b1a3;
+}
+
+.glyph-hero-text {
+    max-width: 34rem;
+    margin-top: 22px;
+}
+
+.glyph-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 28px;
+}
+
+.glyph-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 20px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 700;
+    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.glyph-pill:hover {
+    transform: translateY(-1px);
+}
+
+.glyph-pill-primary {
+    background: var(--yellow);
+    color: #111111;
+}
+
+.glyph-pill-ghost {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+}
+
+.glyph-phone-cluster {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    align-items: center;
+    justify-items: center;
+}
+
+.glyph-phone {
+    width: 100%;
+    max-width: 760px;
+    padding: 9px;
+    border-radius: 34px;
+    background: #171721;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glyph-phone-left,
+.glyph-phone-right {
+    transform: scale(0.9);
+    opacity: 0.9;
+}
+
+.glyph-phone-left {
+    rotate: -9deg;
+}
+
+.glyph-phone-right {
+    rotate: 8deg;
+    max-width: 680px;
+}
+
+.glyph-phone-main {
+    max-width: 840px;
+}
+
+.glyph-phone-screen {
+    min-height: 380px;
+    border-radius: 28px;
+    padding: 22px;
+    background: #111119;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glyph-phone-screen-onboard {
+    display: flex;
+    flex-direction: column;
+    background: #14141e;
+}
+
+.glyph-phone-screen-wallet {
+    background: #11111a;
+}
+
+.glyph-phone-screen-discover {
+    background: #14141d;
+}
+
+.glyph-phone-top,
+.glyph-wallet-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.glyph-onboard-visual {
+    position: relative;
+    flex: 1;
+    min-height: 132px;
+    margin: 20px 0 14px;
+}
+
+.glyph-onboard-card,
+.glyph-onboard-cube {
+    position: absolute;
+    border-radius: 22px;
+}
+
+.glyph-onboard-card {
+    inset: 0 14% auto;
+    height: 128px;
+    background: rgba(75, 0, 255, 0.22);
+    transform: rotate(-12deg);
+}
+
+.glyph-onboard-cube {
+    width: 84px;
+    height: 84px;
+    right: 14%;
+    bottom: 2px;
+    background: var(--yellow);
+    transform: rotate(18deg);
+}
+
+.glyph-phone-heading,
+.glyph-discover-banner strong {
+    font-family: 'Fraunces', Georgia, serif;
+    color: #ffffff;
+}
+
+.glyph-phone-heading {
+    font-size: 28px;
+    line-height: 1.12;
+    margin-bottom: 12px;
+}
+
+.glyph-phone-stack {
+    display: grid;
+    gap: 12px;
+}
+
+.glyph-phone-button {
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    background: var(--yellow);
+    color: #111111;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.glyph-phone-button-outline {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.glyph-wallet-card {
+    margin-top: 14px;
+    padding: 16px;
+    border-radius: 22px;
+    background: #1a1a24;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: grid;
+    gap: 6px;
+}
+
+.glyph-wallet-card strong,
+.glyph-discover-metrics strong {
+    color: #ffffff;
+    font-size: 28px;
+    line-height: 1.05;
+}
+
+.glyph-wallet-label,
+.glyph-wallet-sub,
+.glyph-discover-banner span,
+.glyph-discover-metrics span {
+    color: #b7b1a3;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.glyph-wallet-assets {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.glyph-wallet-asset {
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+    font-weight: 700;
+}
+
+.glyph-wallet-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 0;
+    color: #d9d9dd;
+    font-size: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glyph-wallet-nav {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.glyph-wallet-nav span {
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.glyph-wallet-nav span.active {
+    color: #111111;
+    background: var(--yellow);
+}
+
+.glyph-discover-banner {
+    margin-top: 14px;
+    padding: 16px;
+    border-radius: 22px;
+    background: #201b31;
+    display: grid;
+    gap: 10px;
+}
+
+.glyph-discover-banner strong {
+    font-size: 30px;
+    line-height: 1.02;
+}
+
+.glyph-discover-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.glyph-discover-metrics > div {
+    min-width: 0;
+    padding: 14px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.04);
+    display: grid;
+    gap: 6px;
+    overflow: hidden;
+}
+
+.glyph-discover-metrics em {
+    color: var(--yellow);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+}
+
+.glyph-discover-metrics em.down {
+    color: #ff8dbd;
+}
+
+.glyph-discover-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.glyph-discover-tags span {
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.glyph-discover-lines {
+    margin-top: 12px;
+    display: grid;
+    gap: 10px;
+}
+
+.glyph-discover-lines span {
+    height: 10px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--violet), var(--yellow));
+}
+
+.glyph-discover-lines span:last-child {
+    width: 82%;
+}
+
+.glyph-discover-section {
+    background: #080808;
+    padding: 72px 24px 82px;
+}
+
+.glyph-discover-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+}
+
+.glyph-discover-header {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 34px;
+}
+
+.glyph-discover-copy {
+    margin: 18px auto 0;
+    max-width: 42rem;
+}
+
+.glyph-feature-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.glyph-feature-card {
+    padding: 28px 24px;
+    border-radius: 24px;
+    background: #121212;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glyph-feature-card-highlight {
+    background: linear-gradient(135deg, rgba(75, 0, 255, 0.24), rgba(204, 255, 0, 0.06)), #121212;
+}
+
+.glyph-feature-icon {
+    width: 52px;
+    height: 52px;
+    display: grid;
+    place-items: center;
+    border-radius: 16px;
+    background: rgba(204, 255, 0, 0.12);
+    color: var(--yellow);
+    font-size: 22px;
+    margin-bottom: 18px;
+}
+
+.glyph-feature-card h3 {
+    color: #ffffff;
+    font-size: 22px;
+    line-height: 1.15;
+    margin-bottom: 12px;
+}
+
+.glyph-feature-card span {
+    display: inline-block;
+    margin-top: 12px;
+    color: var(--yellow);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
 .faq-section {
     margin-top: 0;
     margin-left: calc(50% - 50vw);
@@ -301,6 +744,12 @@ html, body {
     .about-banner { grid-template-columns: 1fr; max-height: none; }
     .about-left { min-height: 320px; }
     .about-right { padding: 32px; }
+    .glyph-hero-shell { grid-template-columns: 1fr; padding: 54px 24px; }
+    .glyph-phone-cluster { grid-template-columns: 1fr; }
+    .glyph-phone-left,
+    .glyph-phone-right { display: none; }
+    .glyph-phone-main { max-width: 760px; }
+    .glyph-feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 /* ---- Hero ---- */
@@ -1188,6 +1637,11 @@ html, body {
     .faq-filter { padding: 9px 12px; font-size: 13px; }
     .faq-item summary { font-size: 18px; padding: 22px 0 18px; }
     .faq-item p { padding: 0 24px 20px 0; font-size: 15px; }
+    .glyph-discover-section { padding: 54px 20px 62px; }
+    .glyph-hero-title,
+    .glyph-discover-title { font-size: 42px; }
+    .glyph-phone-screen { min-height: 340px; padding: 18px; }
+    .glyph-feature-grid { grid-template-columns: 1fr; }
 
     .proof-carousel::before,
     .proof-carousel::after { width: 40px; }
