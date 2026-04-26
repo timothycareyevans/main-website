@@ -171,7 +171,7 @@ html, body {
     margin-top: 8px;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
-    background: var(--card);
+    background: #b3b3b8;
     border: 1px solid var(--border);
     overflow: hidden;
     max-height: 520px;
@@ -613,7 +613,7 @@ html, body {
 }
 
 .glyph-feature-card-highlight {
-    background: linear-gradient(135deg, rgba(75, 0, 255, 0.24), rgba(204, 255, 0, 0.06)), #121212;
+    background: #121212;
 }
 
 .glyph-feature-icon {
@@ -818,7 +818,7 @@ html, body {
 
 .lede {
     font-size: 16px;
-    color: #b5ac97;
+    color: #000000;
     margin-bottom: 36px;
     max-width: 460px;
 }
