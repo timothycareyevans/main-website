@@ -296,11 +296,24 @@ html, body {
 }
 
 .glyph-phone-cluster {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
-    align-items: center;
-    justify-items: center;
+    width: 100%;
+}
+
+.glyph-hero-image-frame {
+    margin: 0;
+    padding: 12px;
+    border-radius: 36px;
+    overflow: hidden;
+    background: #171721;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+}
+
+.glyph-hero-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 28px;
 }
 
 .glyph-phone {
@@ -605,6 +618,17 @@ html, body {
     gap: 18px;
 }
 
+.glyph-feature-showcase {
+    width: min(1100px, 100%);
+    margin: 42px auto 0;
+}
+
+.glyph-feature-showcase-image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
 .glyph-feature-card {
     padding: 28px 24px;
     border-radius: 24px;
@@ -745,10 +769,7 @@ html, body {
     .about-left { min-height: 320px; }
     .about-right { padding: 32px; }
     .glyph-hero-shell { grid-template-columns: 1fr; padding: 54px 24px; }
-    .glyph-phone-cluster { grid-template-columns: 1fr; }
-    .glyph-phone-left,
-    .glyph-phone-right { display: none; }
-    .glyph-phone-main { max-width: 760px; }
+    .glyph-hero-image-frame { padding: 10px; }
     .glyph-feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
@@ -1640,8 +1661,17 @@ html, body {
     .glyph-discover-section { padding: 54px 20px 62px; }
     .glyph-hero-title,
     .glyph-discover-title { font-size: 42px; }
-    .glyph-phone-screen { min-height: 340px; padding: 18px; }
+    .glyph-hero-image-frame {
+        padding: 10px;
+        border-radius: 28px;
+    }
+    .glyph-hero-image {
+        border-radius: 22px;
+    }
     .glyph-feature-grid { grid-template-columns: 1fr; }
+    .glyph-feature-showcase {
+        margin-top: 28px;
+    }
 
     .proof-carousel::before,
     .proof-carousel::after { width: 40px; }
