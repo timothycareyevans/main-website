@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <rect width="256" height="256" fill="#faf9f4"/>
+  <path d="M18 22H238l10 10v192l-10 10H18L8 224V32Z" fill="none" stroke="#111" stroke-width="2.5" stroke-linejoin="round"/>
+  <line x1="72" y1="38" x2="72" y2="218" stroke="#111" stroke-width="2"/>
+  <g fill="#111" font-family="Arial, sans-serif" font-weight="700">
+    <text x="28" y="62" font-size="18" letter-spacing="2">VOID</text>
+    <text x="22" y="82" font-size="12" letter-spacing="1.6">PROPERTY:</text>
+    <text x="38" y="102" font-size="12" letter-spacing="1.6">TRUE</text>
+  </g>
+  <g fill="none" stroke="#111" stroke-width="3">
+    <circle cx="154" cy="110" r="58"/>
+    <circle cx="154" cy="110" r="50"/>
+    <circle cx="154" cy="110" r="42"/>
+    <circle cx="154" cy="110" r="34"/>
+    <circle cx="154" cy="110" r="26"/>
+    <circle cx="154" cy="110" r="18"/>
+  </g>
+  <circle cx="154" cy="110" r="15" fill="#111"/>
+  <g stroke="#faf9f4" stroke-width="2" stroke-linecap="round">
+    <line x1="154" y1="102" x2="154" y2="118"/>
+    <line x1="146" y1="110" x2="162" y2="110"/>
+  </g>
+  <g fill="#111" font-family="Arial, sans-serif">
+    <text x="196" y="54" font-size="9" letter-spacing="1.2">LIMIT: NONE</text>
+    <text x="196" y="72" font-size="9" letter-spacing="1.2">SELF: NULL</text>
+    <text x="196" y="96" font-size="9" letter-spacing="1.2">PHENOMENA: 1</text>
+    <text x="196" y="120" font-size="9" letter-spacing="1.2">DUALITY: 0</text>
+    <text x="196" y="144" font-size="9" letter-spacing="1.2">STATE:</text>
+    <text x="196" y="158" font-size="9" letter-spacing="1.2">BEYOND</text>
+    <text x="196" y="172" font-size="9" letter-spacing="1.2">CONCEPT</text>
+  </g>
+  <g fill="none" stroke="#111" stroke-width="1.8" stroke-linecap="round">
+    <line x1="150" y1="24" x2="150" y2="36"/>
+    <line x1="150" y1="184" x2="150" y2="196"/>
+    <line x1="82" y1="110" x2="94" y2="110"/>
+    <line x1="206" y1="110" x2="218" y2="110"/>
+  </g>
+</svg>

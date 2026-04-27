@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <rect width="256" height="256" fill="#faf9f4"/>
+  <path d="M20 18H232l12 12v194l-12 12H20L8 224V30Z" fill="none" stroke="#111" stroke-width="2.5" stroke-linejoin="round"/>
+  <g fill="#111" font-family="Arial, sans-serif" font-weight="700">
+    <text x="34" y="54" font-size="18" letter-spacing="1.8">KARMA</text>
+    <text x="34" y="76" font-size="18" letter-spacing="1.8">STACK</text>
+    <text x="130" y="106" font-size="24" letter-spacing="1.2">SELF: NULL</text>
+  </g>
+  <g fill="#111" font-family="Arial, sans-serif">
+    <text x="132" y="40" font-size="9" letter-spacing="1.2">SELF: NULL</text>
+    <text x="132" y="56" font-size="9" letter-spacing="1.2">STATUS: STABLE</text>
+    <text x="132" y="72" font-size="9" letter-spacing="1.2">ID: BST-369</text>
+    <text x="132" y="88" font-size="9" letter-spacing="1.2">VER: 1.2.31</text>
+    <text x="130" y="196" font-size="9" letter-spacing="1.2">KARMA STACK: LOADED</text>
+    <text x="130" y="212" font-size="9" letter-spacing="1.2">ATTACHMENT: LOCKED</text>
+    <text x="130" y="228" font-size="9" letter-spacing="1.2">DESIRE CACHE: OVERFLOW</text>
+  </g>
+  <g fill="none" stroke="#111" stroke-width="2">
+    <path d="M192 98c14 6 20 18 20 34 0 20-10 36-28 48-18-12-28-28-28-48 0-16 6-28 20-34 2 10 4 18 8 22 4-4 6-12 8-22Z"/>
+    <path d="M184 110c8 4 12 12 12 22 0 12-4 22-12 30-8-8-12-18-12-30 0-10 4-18 12-22Z"/>
+    <path d="M184 122c4 2 6 6 6 10 0 6-2 10-6 14-4-4-6-8-6-14 0-4 2-8 6-10Z"/>
+  </g>
+  <g fill="none" stroke="#111" stroke-width="2" stroke-linecap="round">
+    <line x1="128" y1="170" x2="220" y2="170"/>
+    <line x1="40" y1="170" x2="92" y2="170"/>
+    <line x1="98" y1="170" x2="108" y2="170"/>
+  </g>
+</svg>

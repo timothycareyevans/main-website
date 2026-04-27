@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <rect width="256" height="256" fill="#f7f7f4"/>
+  <g fill="none" stroke="#111" stroke-width="2" stroke-linecap="round">
+    <circle cx="128" cy="128" r="18"/>
+    <line x1="128" y1="28" x2="128" y2="100"/>
+    <line x1="128" y1="156" x2="128" y2="228"/>
+    <line x1="28" y1="128" x2="100" y2="128"/>
+    <line x1="156" y1="128" x2="228" y2="128"/>
+    <line x1="62" y1="62" x2="110" y2="110"/>
+    <line x1="146" y1="146" x2="194" y2="194"/>
+    <line x1="62" y1="194" x2="110" y2="146"/>
+    <line x1="146" y1="110" x2="194" y2="62"/>
+  </g>
+  <g fill="#f7f7f4" stroke="#111" stroke-width="2">
+    <circle cx="128" cy="28" r="8"/>
+    <circle cx="128" cy="228" r="8"/>
+    <circle cx="28" cy="128" r="8"/>
+    <circle cx="228" cy="128" r="8"/>
+    <circle cx="62" cy="62" r="8"/>
+    <circle cx="194" cy="194" r="8"/>
+    <circle cx="62" cy="194" r="8"/>
+    <circle cx="194" cy="62" r="8"/>
+  </g>
+  <g fill="#111">
+    <circle cx="208" cy="104" r="2.5"/>
+    <circle cx="214" cy="104" r="2.5"/>
+    <circle cx="220" cy="104" r="2.5"/>
+  </g>
+  <text x="148" y="150" fill="#111" font-family="Arial, sans-serif" font-size="18" letter-spacing="1.5">EPOCH</text>
+</svg>
