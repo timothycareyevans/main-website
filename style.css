@@ -958,6 +958,30 @@ html, body {
     flex-shrink: 0;
 }
 
+.partner-badge-wordmark svg {
+    width: auto;
+    height: 33px;
+    display: block;
+}
+
+.partner-badge-google svg {
+    width: auto;
+    height: 33px;
+    display: block;
+}
+
+.partner-badge-aws svg {
+    width: 120px;
+    height: auto;
+    display: block;
+}
+
+.partner-badge-microsoft svg {
+    width: 189px;
+    height: auto;
+    display: block;
+}
+
 /* ---- Manifesto bridge ---- */
 .manifesto-bridge {
     margin-top: 44px;
