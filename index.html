@@ -159,15 +159,15 @@
             <div class="faq-inner">
                 <div class="faq-header">
                     <h2 class="faq-title" id="faq-title">Frequently Asked Questions</h2>
-                    <div class="faq-filters" aria-hidden="true">
-                        <span class="faq-filter faq-filter-active">All</span>
-                        <span class="faq-filter">Services</span>
-                        <span class="faq-filter">Process</span>
+                    <div class="faq-filters" role="tablist" aria-label="FAQ categories">
+                        <button type="button" class="faq-filter faq-filter-active" data-faq-filter="all" aria-pressed="true">All</button>
+                        <button type="button" class="faq-filter" data-faq-filter="services" aria-pressed="false">Services</button>
+                        <button type="button" class="faq-filter" data-faq-filter="process" aria-pressed="false">Process</button>
                     </div>
                 </div>
 
                 <div class="faq-list">
-                    <details class="faq-item" open>
+                    <details class="faq-item" data-faq-category="services" open>
                         <summary>
                             <span>What kinds of projects do you take on?</span>
                         </summary>
@@ -177,7 +177,7 @@
                         </p>
                     </details>
 
-                    <details class="faq-item">
+                    <details class="faq-item" data-faq-category="services">
                         <summary>
                             <span>Can you help with both design and technical execution?</span>
                         </summary>
@@ -187,7 +187,7 @@
                         </p>
                     </details>
 
-                    <details class="faq-item">
+                    <details class="faq-item" data-faq-category="services">
                         <summary>
                             <span>Do you work on short sprints or longer engagements?</span>
                         </summary>
@@ -197,7 +197,7 @@
                         </p>
                     </details>
 
-                    <details class="faq-item">
+                    <details class="faq-item" data-faq-category="process">
                         <summary>
                             <span>What does your process usually look like?</span>
                         </summary>
@@ -207,7 +207,7 @@
                         </p>
                     </details>
 
-                    <details class="faq-item">
+                    <details class="faq-item" data-faq-category="process">
                         <summary>
                             <span>How do we get started?</span>
                         </summary>
@@ -499,6 +499,34 @@
         const y = document.getElementById('year')
         if (y) y.textContent = new Date().getFullYear()
         playVideo('.video-desktop')
+
+        const faqFilters = [...document.querySelectorAll('[data-faq-filter]')]
+        const faqItems = [...document.querySelectorAll('[data-faq-category]')]
+
+        const applyFaqFilter = (filter) => {
+            faqFilters.forEach((button) => {
+                const isActive = button.dataset.faqFilter === filter
+                button.classList.toggle('faq-filter-active', isActive)
+                button.setAttribute('aria-pressed', String(isActive))
+            })
+
+            let firstVisibleItem = null
+
+            faqItems.forEach((item) => {
+                const matches = filter === 'all' || item.dataset.faqCategory === filter
+                item.hidden = !matches
+                if (!matches) item.removeAttribute('open')
+                if (matches && !firstVisibleItem) firstVisibleItem = item
+            })
+
+            if (firstVisibleItem && !firstVisibleItem.hasAttribute('open')) {
+                firstVisibleItem.setAttribute('open', '')
+            }
+        }
+
+        faqFilters.forEach((button) => {
+            button.addEventListener('click', () => applyFaqFilter(button.dataset.faqFilter))
+        })
     </script>
 </body>
 </html>

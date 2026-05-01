@@ -706,11 +706,16 @@ html, body {
 }
 
 .faq-filter {
+    appearance: none;
+    border: 0;
+    background: transparent;
     padding: 10px 16px;
     border-radius: 10px;
     font-size: 15px;
     font-weight: 600;
     color: #222;
+    cursor: pointer;
+    font: inherit;
 }
 
 .faq-filter-active {
