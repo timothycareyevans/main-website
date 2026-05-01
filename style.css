@@ -1228,6 +1228,23 @@ html, body {
     text-align: left;
 }
 
+.proof-card-live-media {
+    margin: -6px -6px 18px;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+    aspect-ratio: 5 / 4;
+}
+
+.proof-card-live-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+
 .proof-brand-live {
     font-family: 'Fraunces', Georgia, serif;
     font-size: 34px;
