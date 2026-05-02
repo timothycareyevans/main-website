@@ -1041,8 +1041,15 @@ html, body {
 
 .manifesto-bridge-side {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
     align-content: flex-start;
+    gap: 18px;
+}
+
+.manifesto-bridge-tags {
+    display: flex;
+    flex-wrap: wrap;
     gap: 12px;
 }
 
@@ -1058,6 +1065,163 @@ html, body {
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
+}
+
+.manifesto-keypad-shell {
+    width: 100%;
+    padding: 18px;
+    border-radius: 26px;
+    border: 1px solid rgba(75, 0, 255, 0.14);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(244, 240, 255, 0.9));
+    box-shadow: 0 22px 40px rgba(75, 0, 255, 0.08);
+    overflow: hidden;
+}
+
+.manifesto-keypad {
+    position: relative;
+    width: min(100%, 320px);
+    margin: 0 auto;
+    aspect-ratio: 400 / 310;
+    transform-style: preserve-3d;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.manifesto-keypad img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.manifesto-keypad__base,
+.manifesto-key {
+    transition: translate 0.18s ease-out;
+}
+
+.manifesto-keypad__base {
+    position: absolute;
+    inset: auto 0 0;
+    width: 100%;
+}
+
+.manifesto-key {
+    --travel: 22;
+    --hue: 248;
+    --saturate: 1;
+    --brightness: 1;
+    position: absolute;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+    transform-style: preserve-3d;
+}
+
+.manifesto-key[data-keypad-trigger='o'] {
+    --hue: 114;
+    --saturate: 1.4;
+    --brightness: 1.2;
+}
+
+.manifesto-key[data-keypad-trigger='g'] {
+    --hue: 0;
+    --saturate: 0;
+    --brightness: 1.4;
+}
+
+.manifesto-key[data-keypad-trigger='Enter'] {
+    --travel: 18;
+    --hue: 0;
+    --saturate: 0;
+    --brightness: 0.45;
+}
+
+.manifesto-key:focus-visible {
+    outline: 2px solid rgba(75, 0, 255, 0.4);
+    outline-offset: 6px;
+}
+
+.manifesto-key__mask,
+.manifesto-key__content {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+.manifesto-key__content {
+    position: relative;
+    transition: translate 0.12s ease-out;
+    container-type: inline-size;
+}
+
+.manifesto-key[data-pressed='true'] .manifesto-key__content,
+.manifesto-key:active .manifesto-key__content {
+    translate: 0 calc(var(--travel) * 1%);
+}
+
+.manifesto-key__text {
+    position: absolute;
+    top: 5%;
+    left: 0;
+    z-index: 2;
+    width: 86%;
+    height: 46%;
+    padding: 1ch;
+    color: hsl(0 0% 94%);
+    font-size: 12cqi;
+    text-align: left;
+    translate: 8% 10%;
+    transform: rotateX(36deg) rotateY(45deg) rotateX(-90deg);
+    pointer-events: none;
+}
+
+.manifesto-keypad__single .manifesto-key__text {
+    width: 52%;
+    height: 62%;
+    font-size: 18cqi;
+    translate: 45% -16%;
+}
+
+.manifesto-keypad__single {
+    width: 40.5%;
+    left: 54%;
+    bottom: 36%;
+    height: 46%;
+    clip-path: polygon(0 0, 54% 0, 89% 24%, 100% 70%, 54% 100%, 46% 100%, 0 69%, 12% 23%, 47% 0%);
+    mask: url(https://assets.codepen.io/605876/keypad-single.png?format=auto&quality=86) 50% 50% / 100% 100%;
+}
+
+.manifesto-keypad__single--left {
+    left: 29.3%;
+    bottom: 54.2%;
+}
+
+.manifesto-keypad__single img {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 96%;
+    translate: -50% 1%;
+}
+
+.manifesto-keypad__double {
+    width: 64%;
+    height: 65%;
+    left: 6%;
+    bottom: 17.85%;
+    clip-path: polygon(34% 0, 93% 44%, 101% 78%, 71% 100%, 66% 100%, 0 52%, 0 44%, 7% 17%, 30% 0);
+    mask: url(https://assets.codepen.io/605876/keypad-double.png?format=auto&quality=86) 50% 50% / 100% 100%;
+}
+
+.manifesto-keypad__double img {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 99%;
+    translate: -50% 1%;
+}
+
+.manifesto-key img {
+    filter: hue-rotate(calc(var(--hue) * 1deg)) saturate(var(--saturate)) brightness(var(--brightness));
 }
 
 /* ---- Marqee Tracks ---- */
@@ -1749,6 +1913,7 @@ html, body {
     .section-headline { font-size: 28px; }
     .manifesto-bridge-shell { padding: 24px; gap: 18px; }
     .manifesto-bridge-title { font-size: 32px; }
+    .manifesto-keypad-shell { padding: 14px; }
     .faq-section { padding: 48px 20px; }
     .faq-title { font-size: 36px; }
     .faq-filters { gap: 8px; }

@@ -77,7 +77,7 @@
         <section class="glyph-hero-section" aria-labelledby="glyph-hero-title">
             <div class="glyph-hero-shell">
                 <div class="glyph-hero-copy">
-                    <div class="glyph-kicker">Mainnet Live / v2.4</div>
+                    <div class="glyph-kicker">Introduction</div>
                     <h2 class="glyph-hero-title" id="glyph-hero-title">
                         Keyless.<br>
                         No risk of<br>
@@ -226,7 +226,7 @@
                     <div class="badge-dots">
                         <span></span><span></span><span></span>
                     </div>
-                    <span class="badge-text">Intro</span>
+                    <span class="badge-text">Endgame</span>
                 </div>
                 <h1 class="headline">
                     Results that matter<br>
@@ -305,10 +305,43 @@
                     </h2>
                 </div>
                 <div class="manifesto-bridge-side">
-                    <span class="manifesto-bridge-tag">Signal over noise</span>
-                    <span class="manifesto-bridge-tag">Taste with teeth</span>
-                    <span class="manifesto-bridge-tag">Security-minded</span>
-                    <span class="manifesto-bridge-tag">Built to ship</span>
+                    <div class="manifesto-bridge-tags">
+                        <span class="manifesto-bridge-tag">Signal over noise</span>
+                        <span class="manifesto-bridge-tag">Taste with teeth</span>
+                        <span class="manifesto-bridge-tag">Security-minded</span>
+                        <span class="manifesto-bridge-tag">Built to ship</span>
+                    </div>
+                    <div class="manifesto-keypad-shell" aria-label="Interactive keypad">
+                        <div class="manifesto-keypad">
+                            <div class="manifesto-keypad__base">
+                                <img src="https://assets.codepen.io/605876/keypad-base.png?format=auto&quality=86" alt="">
+                            </div>
+                            <button class="manifesto-key manifesto-keypad__single manifesto-keypad__single--left" data-keypad-trigger="o" aria-label="Press OK">
+                                <span class="manifesto-key__mask">
+                                    <span class="manifesto-key__content">
+                                        <span class="manifesto-key__text">ok</span>
+                                        <img src="https://assets.codepen.io/605876/keypad-single.png?format=auto&quality=86" alt="">
+                                    </span>
+                                </span>
+                            </button>
+                            <button class="manifesto-key manifesto-keypad__single" data-keypad-trigger="g" aria-label="Press Go">
+                                <span class="manifesto-key__mask">
+                                    <span class="manifesto-key__content">
+                                        <span class="manifesto-key__text">go</span>
+                                        <img src="https://assets.codepen.io/605876/keypad-single.png?format=auto&quality=86" alt="">
+                                    </span>
+                                </span>
+                            </button>
+                            <button class="manifesto-key manifesto-keypad__double" data-keypad-trigger="Enter" aria-label="Press Create">
+                                <span class="manifesto-key__mask">
+                                    <span class="manifesto-key__content">
+                                        <span class="manifesto-key__text">create.</span>
+                                        <img src="https://assets.codepen.io/605876/keypad-double.png?format=auto&quality=86" alt="">
+                                    </span>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -502,6 +535,8 @@
 
         const faqFilters = [...document.querySelectorAll('[data-faq-filter]')]
         const faqItems = [...document.querySelectorAll('[data-faq-category]')]
+        const manifestoKeys = [...document.querySelectorAll('.manifesto-key')]
+        const keypadClickAudio = new Audio('https://cdn.freesound.org/previews/378/378085_6260145-lq.mp3')
 
         const applyFaqFilter = (filter) => {
             faqFilters.forEach((button) => {
@@ -526,6 +561,40 @@
 
         faqFilters.forEach((button) => {
             button.addEventListener('click', () => applyFaqFilter(button.dataset.faqFilter))
+        })
+
+        const pressManifestoKey = (key) => {
+            key.dataset.pressed = 'true'
+            keypadClickAudio.currentTime = 0
+            keypadClickAudio.play().catch(() => {})
+        }
+
+        const releaseManifestoKey = (key) => {
+            key.dataset.pressed = 'false'
+        }
+
+        manifestoKeys.forEach((key) => {
+            key.dataset.pressed = 'false'
+            key.addEventListener('pointerdown', () => pressManifestoKey(key))
+            key.addEventListener('pointerup', () => releaseManifestoKey(key))
+            key.addEventListener('pointerleave', () => releaseManifestoKey(key))
+            key.addEventListener('blur', () => releaseManifestoKey(key))
+        })
+
+        window.addEventListener('keydown', (event) => {
+            manifestoKeys.forEach((key) => {
+                if (event.key === key.dataset.keypadTrigger && key.dataset.pressed !== 'true') {
+                    pressManifestoKey(key)
+                }
+            })
+        })
+
+        window.addEventListener('keyup', (event) => {
+            manifestoKeys.forEach((key) => {
+                if (event.key === key.dataset.keypadTrigger) {
+                    releaseManifestoKey(key)
+                }
+            })
         })
     </script>
 </body>
