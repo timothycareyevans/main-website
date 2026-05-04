@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>On theDaily — Design, Culture, Technology</title>
+<style>
+
+/* ─── RESET ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  background: #f5f5f0;
+  color: #000000;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; }
+
+/* ─── TOKENS — GRAYSCALE ─── */
+:root {
+  --accent:     #d0d0d0;  /* light gray  — was #00ff00 */
+  --mid:        #888888;  /* medium gray — was #ff00ff */
+  --silver:     #b4b4b4;  /* silver      — was #ffaa00 */
+  --black:      #000000;
+  --white:      #ffffff;
+  --bg:         #f5f5f0;
+  --shadow:     4px 4px 0 var(--black);
+  --shadow-lg:  6px 6px 0 var(--black);
+  --shadow-sm:  2px 2px 0 var(--black);
+  --border:     2px solid var(--black);
+}
+
+/* ─── UTILITY ─── */
+.tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 3px 9px;
+  border: var(--border);
+  box-shadow: var(--shadow-sm);
+}
+.tag-green  { background: var(--accent); }
+.tag-pink   { background: var(--mid); color: var(--white); }
+.tag-orange { background: var(--silver); }
+.tag-black  { background: var(--black); color: var(--white); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 10px 20px;
+  border: var(--border);
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: var(--shadow);
+  transition: box-shadow .08s, transform .08s;
+  background: var(--white);
+}
+.btn:hover  { box-shadow: var(--shadow-sm); transform: translate(2px,2px); }
+.btn:active { box-shadow: none; transform: translate(4px,4px); }
+.btn-accent { background: var(--accent); }
+.btn-black  { background: var(--black); color: var(--white); }
+.btn-mid    { background: var(--mid); color: var(--white); }
+
+/* ─── ANNOUNCEMENT BAR ─── */
+.announce {
+  background: var(--accent);
+  border-bottom: var(--border);
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.announce a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ─── NAV ─── */
+nav {
+  background: var(--white);
+  border-bottom: var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: stretch;
+  height: 64px;
+}
+.nav-logo {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  display: flex;
+  align-items: center;
+  padding-right: 32px;
+  border-right: var(--border);
+  white-space: nowrap;
+}
+.nav-logo span { background: var(--accent); padding: 0 3px; }
+.nav-links {
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  gap: 4px;
+}
+.nav-link {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 6px 12px;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+.nav-link:hover { border-color: var(--black); background: var(--accent); box-shadow: var(--shadow-sm); }
+.nav-link.active { border: var(--border); background: var(--black); color: var(--white); }
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 24px;
+  border-left: var(--border);
+}
+.nav-search {
+  display: flex;
+  align-items: center;
+  border: var(--border);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.nav-search input {
+  border: none;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-family: inherit;
+  font-weight: 600;
+  width: 160px;
+  background: var(--white);
+  outline: none;
+}
+.nav-search button {
+  background: var(--black);
+  color: var(--white);
+  border: none;
+  padding: 8px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  font-weight: 900;
+}
+.nav-subscribe { white-space: nowrap; }
+
+/* ─── HERO / FEATURED ─── */
+.hero {
+  max-width: 1280px;
+  margin: 32px auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 24px;
+  align-items: start;
+}
+.hero-main {
+  border: var(--border);
+  box-shadow: var(--shadow-lg);
+  background: var(--white);
+  overflow: hidden;
+}
+.hero-image {
+  height: 340px;
+  background: var(--black);
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 24px;
+}
+.hero-image-label {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #555;
+}
+.hero-img-num {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #666;
+}
+.hero-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      #111 0px, #111 1px,
+      #000 1px, #000 40px
+    );
+}
+.hero-image::after {
+  content: '';
+  position: absolute;
+  top: 60px; left: 40px;
+  width: 200px; height: 200px;
+  background: var(--accent);
+  border: var(--border);
+}
+.hero-image-accent {
+  position: absolute;
+  bottom: 80px; right: 60px;
+  width: 120px; height: 120px;
+  background: var(--mid);
+  border: var(--border);
+  z-index: 1;
+}
+.hero-body { padding: 28px 32px 32px; }
+.hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.hero-title {
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+}
+.hero-title a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.hero-excerpt {
+  font-size: 15px;
+  line-height: 1.55;
+  color: #444;
+  margin-bottom: 24px;
+}
+.hero-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #ddd;
+  padding-top: 18px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.hero-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.author-avatar {
+  width: 36px; height: 36px;
+  background: var(--silver);
+  border: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 900;
+  box-shadow: var(--shadow-sm);
+}
+.author-info { font-size: 12px; }
+.author-name { font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; }
+.author-date { color: #888; margin-top: 1px; font-size: 11px; }
+.hero-read-time {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #888;
+}
+
+/* ─── HERO SIDEBAR ─── */
+.hero-sidebar { display: flex; flex-direction: column; gap: 16px; }
+.sidebar-card {
+  border: var(--border);
+  box-shadow: var(--shadow);
+  background: var(--white);
+  overflow: hidden;
+}
+.sidebar-card-img {
+  height: 100px;
+  background: var(--black);
+  position: relative;
+}
+.sidebar-card-img.accent-orange { background: var(--silver); }
+.sidebar-card-img.accent-pink   { background: var(--mid); }
+.sidebar-card-img.accent-green  { background: var(--accent); }
+.sidebar-card-img-num {
+  position: absolute;
+  top: 8px; right: 10px;
+  font-size: 9px;
+  font-weight: 800;
+  color: rgba(0,0,0,0.35);
+  letter-spacing: 0.1em;
+}
+.sidebar-card-body { padding: 14px 16px 18px; }
+.sidebar-card-title {
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin: 8px 0 6px;
+}
+.sidebar-card-title a:hover { text-decoration: underline; }
+.sidebar-card-excerpt { font-size: 12px; color: #555; line-height: 1.45; }
+
+/* ─── SECTION HEADERS ─── */
+.section-header {
+  max-width: 1280px;
+  margin: 0 auto 20px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.section-title {
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-title::before {
+  content: '';
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: var(--accent);
+  border: var(--border);
+  box-shadow: var(--shadow-sm);
+}
+.section-link {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.section-link:hover { background: var(--accent); }
+
+/* ─── POST GRID ─── */
+.post-grid {
+  max-width: 1280px;
+  margin: 0 auto 48px;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.post-card {
+  border: var(--border);
+  box-shadow: var(--shadow);
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow .08s, transform .08s;
+}
+.post-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translate(-2px,-2px);
+}
+.post-card-img {
+  height: 160px;
+  background: #ddd;
+  position: relative;
+  border-bottom: var(--border);
+}
+.post-card-img.c1 { background: var(--black); }
+.post-card-img.c2 { background: #222; }
+.post-card-img.c3 { background: #1a1a1a; }
+.post-card-img.c4 { background: #0a0a0a; }
+.post-card-img.c5 { background: #111; }
+.post-card-img.c6 { background: #2a2a2a; }
+.post-card-img .geo {
+  position: absolute;
+  border: var(--border);
+}
+.post-card-img-num {
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  font-size: 9px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.1em;
+}
+.post-card-body {
+  padding: 18px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.post-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+.post-card-title {
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+  flex: 1;
+}
+.post-card-title a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.post-card-excerpt {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #555;
+  margin-bottom: 18px;
+}
+.post-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #eee;
+  padding-top: 14px;
+  margin-top: auto;
+}
+.post-card-author {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mini-avatar {
+  width: 28px; height: 28px;
+  border: var(--border);
+  font-size: 10px;
+  font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--shadow-sm);
+}
+.mini-avatar.av-g { background: var(--accent); }
+.mini-avatar.av-p { background: var(--mid); color: var(--white); }
+.mini-avatar.av-o { background: var(--silver); }
+.mini-avatar.av-b { background: var(--black); color: var(--white); }
+.post-card-author-name { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+.post-card-time { font-size: 11px; color: #999; font-weight: 600; }
+
+/* ─── FEATURE STRIP ─── */
+.feature-strip {
+  border-top: var(--border);
+  border-bottom: var(--border);
+  background: var(--black);
+  color: var(--white);
+  margin-bottom: 48px;
+}
+.feature-strip-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.strip-eyebrow {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.strip-title {
+  font-size: 42px;
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+.strip-title em { font-style: normal; background: var(--mid); color: var(--white); padding: 0 4px; }
+.strip-body {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #aaa;
+  margin-bottom: 24px;
+}
+.strip-stat {
+  border: 2px solid #333;
+  padding: 20px 24px;
+  box-shadow: 4px 4px 0 #333;
+}
+.strip-stat-num {
+  font-size: 48px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--white);
+}
+.strip-stat-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #666;
+  margin-top: 4px;
+}
+.strip-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* ─── TOPICS ─── */
+.topics {
+  max-width: 1280px;
+  margin: 0 auto 48px;
+  padding: 0 24px;
+}
+.topics-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+}
+.topic-card {
+  border: var(--border);
+  box-shadow: var(--shadow-sm);
+  padding: 16px 12px;
+  text-align: center;
+  cursor: pointer;
+  background: var(--white);
+  transition: box-shadow .08s, transform .08s;
+}
+.topic-card:hover { box-shadow: var(--shadow); transform: translate(-2px,-2px); }
+.topic-card:nth-child(1) { background: var(--accent); }
+.topic-card:nth-child(2) { background: var(--silver); }
+.topic-card:nth-child(3) { background: var(--mid); color: var(--white); }
+.topic-card:nth-child(3) .topic-count { color: #ccc; }
+.topic-icon { font-size: 24px; margin-bottom: 8px; }
+.topic-name {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.topic-count { font-size: 10px; color: #555; margin-top: 3px; font-weight: 600; }
+
+/* ─── NEWSLETTER ─── */
+.newsletter {
+  max-width: 1280px;
+  margin: 0 auto 48px;
+  padding: 0 24px;
+}
+.newsletter-inner {
+  border: var(--border);
+  box-shadow: var(--shadow-lg);
+  background: var(--accent);
+  padding: 48px 56px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.nl-title {
+  font-size: 36px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+.nl-body { font-size: 14px; line-height: 1.5; color: #333; }
+.nl-form { display: flex; flex-direction: column; gap: 10px; }
+.nl-form-row { display: flex; gap: 0; }
+.nl-input {
+  flex: 1;
+  border: var(--border);
+  border-right: none;
+  padding: 13px 16px;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 600;
+  background: var(--white);
+  outline: none;
+  box-shadow: var(--shadow-sm);
+}
+.nl-input:focus { border-color: var(--black); background: #f8f8f8; }
+.nl-submit {
+  border: var(--border);
+  background: var(--black);
+  color: var(--white);
+  padding: 13px 24px;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+  transition: box-shadow .08s, transform .08s;
+}
+.nl-submit:hover { box-shadow: 2px 2px 0 rgba(0,0,0,0.3); transform: translate(2px,2px); }
+.nl-fine { font-size: 11px; color: #555; }
+.nl-perks { display: flex; flex-direction: column; gap: 8px; }
+.nl-perk {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.nl-perk-icon {
+  width: 28px; height: 28px;
+  background: var(--black);
+  color: var(--white);
+  border: var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ─── LIST POSTS ─── */
+.list-section {
+  max-width: 1280px;
+  margin: 0 auto 48px;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 32px;
+  align-items: start;
+}
+.list-posts { display: flex; flex-direction: column; gap: 0; }
+.list-post {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 0;
+  border: var(--border);
+  border-bottom: none;
+  background: var(--white);
+  box-shadow: 3px 0 0 var(--black);
+  transition: background .1s;
+}
+.list-post:last-child { border-bottom: var(--border); }
+.list-post:hover { background: #f0f0f0; }
+.list-post-img {
+  border-right: var(--border);
+  background: #444;
+  position: relative;
+  min-height: 90px;
+  display: flex; align-items: center; justify-content: center;
+}
+.list-post-img-num {
+  font-size: 9px;
+  color: rgba(255,255,255,0.2);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+.lp-g { background: #3a3a3a; }
+.lp-p { background: #666666; }
+.lp-o { background: #4f4f4f; }
+.lp-b { background: #111111; }
+.list-post-body { padding: 16px 18px; }
+.list-post-meta { display: flex; gap: 6px; align-items: center; margin-bottom: 6px; flex-wrap: wrap; }
+.list-post-title {
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  margin-bottom: 4px;
+}
+.list-post-title a:hover { text-decoration: underline; }
+.list-post-excerpt { font-size: 12px; color: #666; line-height: 1.4; }
+.list-post-foot {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #999;
+  font-weight: 600;
+}
+
+/* ─── SIDEBAR ─── */
+.sidebar { display: flex; flex-direction: column; gap: 20px; }
+.sidebar-widget {
+  border: var(--border);
+  box-shadow: var(--shadow);
+  background: var(--white);
+  overflow: hidden;
+}
+.widget-header {
+  background: var(--black);
+  color: var(--white);
+  padding: 10px 16px;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+.widget-header.wh-accent  { background: var(--accent);  color: var(--black); }
+.widget-header.wh-silver  { background: var(--silver);  color: var(--black); }
+.widget-body { padding: 16px; }
+
+.trending-list { display: flex; flex-direction: column; gap: 0; }
+.trending-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+.trending-item:last-child { border-bottom: none; }
+.trending-num {
+  font-size: 22px;
+  font-weight: 900;
+  color: #ddd;
+  line-height: 1;
+  min-width: 28px;
+  letter-spacing: -0.04em;
+}
+.trending-title { font-size: 13px; font-weight: 700; line-height: 1.3; margin-bottom: 3px; }
+.trending-title a:hover { text-decoration: underline; }
+.trending-meta { font-size: 10px; color: #999; }
+
+.tags-cloud { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag-pill {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 5px 10px;
+  border: var(--border);
+  background: var(--white);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow .08s, transform .08s, background .08s;
+}
+.tag-pill:hover { background: var(--accent); box-shadow: none; transform: translate(2px,2px); }
+
+.about-avatar-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.about-avatar {
+  width: 52px; height: 52px;
+  background: var(--silver);
+  border: var(--border);
+  box-shadow: var(--shadow-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+.about-name { font-size: 14px; font-weight: 900; }
+.about-role { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+.about-bio { font-size: 12px; line-height: 1.5; color: #444; margin-bottom: 12px; }
+
+/* ─── PAGINATION ─── */
+.pagination-wrap {
+  max-width: 1280px;
+  margin: 0 auto 64px;
+  padding: 0 24px;
+}
+.pagination {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+}
+.page-btn {
+  min-width: 40px; height: 40px;
+  border: var(--border);
+  background: var(--white);
+  font-size: 14px;
+  font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow .08s, transform .08s, background .08s;
+}
+.page-btn:hover { background: var(--accent); box-shadow: none; transform: translate(2px,2px); }
+.page-btn.active { background: var(--black); color: var(--white); }
+.page-dots { font-weight: 700; padding: 0 6px; color: #aaa; font-size: 16px; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--black);
+  color: var(--white);
+  border-top: var(--border);
+}
+.footer-top {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 56px 24px 40px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+}
+.footer-brand-name {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+}
+.footer-brand-name span { background: var(--accent); color: var(--black); padding: 0 4px; }
+.footer-brand-bio { font-size: 13px; color: #666; line-height: 1.55; margin-bottom: 20px; }
+.footer-social { display: flex; gap: 8px; }
+.social-btn {
+  width: 36px; height: 36px;
+  border: 2px solid #333;
+  background: transparent;
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 #333;
+  transition: all .08s;
+  font-family: inherit;
+}
+.social-btn:hover { background: var(--accent); color: var(--black); border-color: var(--accent); box-shadow: none; transform: translate(2px,2px); }
+.footer-col-title {
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #555;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #222;
+  padding-bottom: 10px;
+}
+.footer-links { display: flex; flex-direction: column; gap: 8px; }
+.footer-links a {
+  font-size: 13px;
+  color: #888;
+  font-weight: 600;
+  transition: color .1s;
+}
+.footer-links a:hover { color: var(--accent); }
+.footer-bottom {
+  border-top: 1px solid #1a1a1a;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: #444;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  gap: 12px;
+}
+.footer-bottom a { color: #555; text-decoration: underline; }
+.footer-bottom a:hover { color: var(--accent); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-sidebar { display: none; }
+  .post-grid { grid-template-columns: repeat(2, 1fr); }
+  .topics-grid { grid-template-columns: repeat(3, 1fr); }
+  .newsletter-inner { grid-template-columns: 1fr; gap: 32px; }
+  .list-section { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .feature-strip-inner { grid-template-columns: 1fr; }
+}
+@media (max-width: 680px) {
+  .post-grid { grid-template-columns: 1fr; }
+  .topics-grid { grid-template-columns: repeat(2, 1fr); }
+  .nav-links { display: none; }
+  .nav-search input { width: 100px; }
+  .footer-top { grid-template-columns: 1fr; }
+  .strip-stats { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT -->
+<div class="announce">
+  ★ New series: The Future of Design Systems — <a href="#">Read Issue 01 →</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">On the<span>Daily</span></div>
+    <div class="nav-links">
+      <div class="nav-link active">All</div>
+      <div class="nav-link">Design</div>
+      <div class="nav-link">Technology</div>
+      <div class="nav-link">Culture</div>
+      <div class="nav-link">Opinion</div>
+      <div class="nav-link">Interviews</div>
+    </div>
+    <div class="nav-actions">
+      <div class="nav-search">
+        <input type="text" placeholder="Search…">
+        <button>→</button>
+      </div>
+      <button class="btn btn-black nav-subscribe">Subscribe</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <article class="hero-main">
+    <div class="hero-image">
+      <span class="hero-image-label">FEATURED</span>
+      <span class="hero-img-num">01/12</span>
+      <div class="hero-image-accent"></div>
+    </div>
+    <div class="hero-body">
+      <div class="hero-meta">
+        <span class="tag tag-green">Design</span>
+        <span class="tag tag-pink">Opinion</span>
+        <span style="font-size:11px;color:#999;font-weight:600;">FEATURED</span>
+      </div>
+      <h1 class="hero-title">
+        <a href="#">Every Design System Eventually Becomes the Thing It Was Built to Prevent</a>
+      </h1>
+      <p class="hero-excerpt">
+        There's a pattern nobody talks about. You build a design system to stop the chaos. Designers stop fighting over button styles. Engineers stop reinventing dropdowns. Everyone's relieved. Then, eighteen months later, you have a new kind of chaos — a 900-component library nobody fully understands, a Figma file only three people can open without crashing their machine, and a Slack channel that processes 200 messages a day about whether the "compact" variant of a card should have 12px or 16px padding.
+      </p>
+      <div class="hero-footer">
+        <div class="hero-author">
+          <div class="author-avatar">MK</div>
+          <div class="author-info">
+            <div class="author-name">Maya Kowalski</div>
+            <div class="author-date">May 2, 2026 · Design Systems</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span class="hero-read-time">9 min read</span>
+          <a href="#" class="btn btn-black" style="font-size:12px;padding:8px 16px;">Read →</a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <div class="hero-sidebar">
+    <article class="sidebar-card">
+      <div class="sidebar-card-img accent-orange">
+        <span class="sidebar-card-img-num">02/12</span>
+      </div>
+      <div class="sidebar-card-body">
+        <span class="tag tag-orange">Technology</span>
+        <h2 class="sidebar-card-title"><a href="#">The Model Knows Your Codebase Better Than You Do. Now What?</a></h2>
+        <p class="sidebar-card-excerpt">AI code assistants crossed a threshold this year. The question is no longer capability — it's trust.</p>
+      </div>
+    </article>
+    <article class="sidebar-card">
+      <div class="sidebar-card-img accent-pink">
+        <span class="sidebar-card-img-num">03/12</span>
+      </div>
+      <div class="sidebar-card-body">
+        <span class="tag tag-pink">Culture</span>
+        <h2 class="sidebar-card-title"><a href="#">Why the Brutalist Web Revival Is Actually About Honesty</a></h2>
+        <p class="sidebar-card-excerpt">Raw HTML. Visible borders. No apologies. The aesthetic shift is a rejection of false warmth.</p>
+      </div>
+    </article>
+    <article class="sidebar-card">
+      <div class="sidebar-card-img accent-green">
+        <span class="sidebar-card-img-num">04/12</span>
+      </div>
+      <div class="sidebar-card-body">
+        <span class="tag tag-green">Interview</span>
+        <h2 class="sidebar-card-title"><a href="#">"I Think About Typography the Way Composers Think About Silence"</a></h2>
+        <p class="sidebar-card-excerpt">Thirty minutes with type director Juno Frei about constraint, attention, and why less tracking ruins everything.</p>
+      </div>
+    </article>
+  </div>
+</div>
+
+<!-- LATEST POSTS -->
+<div class="section-header">
+  <div class="section-title">Latest Posts</div>
+  <a href="#" class="section-link">View all →</a>
+</div>
+
+<div class="post-grid">
+
+  <article class="post-card">
+    <div class="post-card-img c1">
+      <div class="geo" style="width:80px;height:80px;background:#d0d0d0;top:30px;left:20px;"></div>
+      <div class="geo" style="width:50px;height:50px;background:#888888;bottom:20px;right:30px;"></div>
+      <span class="post-card-img-num">05/12</span>
+    </div>
+    <div class="post-card-body">
+      <div class="post-card-meta">
+        <span class="tag tag-green">Design</span>
+        <span style="font-size:10px;color:#999;font-weight:600;">7 MIN READ</span>
+      </div>
+      <h2 class="post-card-title"><a href="#">The Spacing System Nobody Talks About: Optical vs Mathematical Alignment</a></h2>
+      <p class="post-card-excerpt">Your grid is consistent. Your components feel wrong. Here's the gap between math and perception that every design tool ignores.</p>
+      <div class="post-card-footer">
+        <div class="post-card-author">
+          <div class="mini-avatar av-g">RH</div>
+          <div class="post-card-author-name">R. Henriksen</div>
+        </div>
+        <span class="post-card-time">Apr 29</span>
+      </div>
+    </div>
+  </article>
+
+  <article class="post-card">
+    <div class="post-card-img c2">
+      <div class="geo" style="width:100px;height:40px;background:#b4b4b4;top:50px;left:50%;transform:translateX(-50%);"></div>
+      <div class="geo" style="width:40px;height:100px;background:#b4b4b4;top:20px;right:30px;opacity:.5;"></div>
+      <span class="post-card-img-num">06/12</span>
+    </div>
+    <div class="post-card-body">
+      <div class="post-card-meta">
+        <span class="tag tag-orange">Technology</span>
+        <span style="font-size:10px;color:#999;font-weight:600;">12 MIN READ</span>
+      </div>
+      <h2 class="post-card-title"><a href="#">Postgres Is Still Winning and the Vector Database Hype Is Cooling</a></h2>
+      <p class="post-card-excerpt">Two years into the AI infrastructure gold rush, the boring, battle-tested option is pulling ahead — again.</p>
+      <div class="post-card-footer">
+        <div class="post-card-author">
+          <div class="mini-avatar av-o">DL</div>
+          <div class="post-card-author-name">D. Larsson</div>
+        </div>
+        <span class="post-card-time">Apr 27</span>
+      </div>
+    </div>
+  </article>
+
+  <article class="post-card">
+    <div class="post-card-img c3">
+      <div class="geo" style="width:120px;height:120px;background:#888888;top:20px;right:20px;opacity:.7;"></div>
+      <div class="geo" style="width:60px;height:60px;background:#ffffff;bottom:20px;left:20px;opacity:.15;"></div>
+      <span class="post-card-img-num">07/12</span>
+    </div>
+    <div class="post-card-body">
+      <div class="post-card-meta">
+        <span class="tag tag-pink">Culture</span>
+        <span style="font-size:10px;color:#999;font-weight:600;">5 MIN READ</span>
+      </div>
+      <h2 class="post-card-title"><a href="#">The Portfolio Site Is Dead. Here's What's Replacing It.</a></h2>
+      <p class="post-card-excerpt">Designers used to obsess over their personal site. Now the work lives on GitHub, Notion, and in DMs. What does that mean for the craft?</p>
+      <div class="post-card-footer">
+        <div class="post-card-author">
+          <div class="mini-avatar av-p">SB</div>
+          <div class="post-card-author-name">S. Baptiste</div>
+        </div>
+        <span class="post-card-time">Apr 24</span>
+      </div>
+    </div>
+  </article>
+
+  <article class="post-card">
+    <div class="post-card-img c4">
+      <div class="geo" style="width:70px;height:70px;background:#cccccc;top:40px;left:40px;"></div>
+      <div class="geo" style="width:90px;height:30px;background:#ffffff;bottom:30px;right:20px;opacity:.1;"></div>
+      <span class="post-card-img-num">08/12</span>
+    </div>
+    <div class="post-card-body">
+      <div class="post-card-meta">
+        <span class="tag tag-black">Opinion</span>
+        <span style="font-size:10px;color:#999;font-weight:600;">4 MIN READ</span>
+      </div>
+      <h2 class="post-card-title"><a href="#">Stop Calling It "Accessibility." Call It "Not Excluding People."</a></h2>
+      <p class="post-card-excerpt">The language of compliance has let too many teams treat a11y as a checkbox rather than a design principle. Time to change the framing.</p>
+      <div class="post-card-footer">
+        <div class="post-card-author">
+          <div class="mini-avatar av-b">TC</div>
+          <div class="post-card-author-name">T. Chakrabarti</div>
+        </div>
+        <span class="post-card-time">Apr 22</span>
+      </div>
+    </div>
+  </article>
+
+  <article class="post-card">
+    <div class="post-card-img c5">
+      <div class="geo" style="width:140px;height:2px;background:#d0d0d0;top:60px;left:10px;"></div>
+      <div class="geo" style="width:140px;height:2px;background:#d0d0d0;top:80px;left:10px;"></div>
+      <div class="geo" style="width:140px;height:2px;background:#d0d0d0;top:100px;left:10px;"></div>
+      <div class="geo" style="width:60px;height:60px;background:#d0d0d0;bottom:20px;right:20px;opacity:.4;"></div>
+      <span class="post-card-img-num">09/12</span>
+    </div>
+    <div class="post-card-body">
+      <div class="post-card-meta">
+        <span class="tag tag-green">Interview</span>
+        <span style="font-size:10px;color:#999;font-weight:600;">18 MIN READ</span>
+      </div>
+      <h2 class="post-card-title"><a href="#">Inside Linear's Design Process: How Speed Became the Core Feature</a></h2>
+      <p class="post-card-excerpt">We sat down with the team behind the fastest issue tracker in the industry to talk about obsession, constraint, and making software feel alive.</p>
+      <div class="post-card-footer">
+        <div class="post-card-author">
+          <div class="mini-avatar av-g">MK</div>
+          <div class="post-card-author-name">M. Kowalski</div>
+        </div>
+        <span class="post-card-time">Apr 19</span>
+      </div>
+    </div>
+  </article>
+
+  <article class="post-card">
+    <div class="post-card-img c6">
+      <div class="geo" style="width:80px;height:80px;background:#b4b4b4;top:20px;right:20px;opacity:.8;"></div>
+      <div class="geo" style="width:80px;height:80px;background:#888888;bottom:20px;left:20px;opacity:.6;"></div>
+      <span class="post-card-img-num">10/12</span>
+    </div>
+    <div class="post-card-body">
+      <div class="post-card-meta">
+        <span class="tag tag-orange">Technology</span>
+        <span style="font-size:10px;color:#999;font-weight:600;">8 MIN READ</span>
+      </div>
+      <h2 class="post-card-title"><a href="#">The CSS Renaissance Is Real and You Should Be Paying Attention</a></h2>
+      <p class="post-card-excerpt">Container queries, cascade layers, the :has() selector, and anchor positioning arrived in the same 18-month window. CSS is finally growing up.</p>
+      <div class="post-card-footer">
+        <div class="post-card-author">
+          <div class="mini-avatar av-o">DL</div>
+          <div class="post-card-author-name">D. Larsson</div>
+        </div>
+        <span class="post-card-time">Apr 17</span>
+      </div>
+    </div>
+  </article>
+
+</div>
+
+<!-- FEATURE STRIP -->
+<div class="feature-strip">
+  <div class="feature-strip-inner">
+    <div>
+      <div class="strip-eyebrow">★ This Week's Long Read</div>
+      <h2 class="strip-title">The <em>typography</em> stack nobody warned you about</h2>
+      <p class="strip-body">
+        Most interfaces fail at type before the user reads a single word. Variable fonts changed what's possible. But the decision of when to use 400, 500, 700, or 900 weight — and whether that maps to your users' optical experience — is still being made wrong by almost everyone.
+      </p>
+      <a href="#" class="btn btn-accent">Read the full piece →</a>
+    </div>
+    <div class="strip-stats">
+      <div class="strip-stat">
+        <div class="strip-stat-num">4.2M</div>
+        <div class="strip-stat-label">Monthly Readers</div>
+      </div>
+      <div class="strip-stat">
+        <div class="strip-stat-num">840</div>
+        <div class="strip-stat-label">Articles Published</div>
+      </div>
+      <div class="strip-stat">
+        <div class="strip-stat-num">120+</div>
+        <div class="strip-stat-label">Contributors</div>
+      </div>
+      <div class="strip-stat">
+        <div class="strip-stat-num">12</div>
+        <div class="strip-stat-label">Years Running</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOPICS -->
+<div class="section-header">
+  <div class="section-title">Browse by Topic</div>
+</div>
+<div class="topics">
+  <div class="topics-grid">
+    <div class="topic-card">
+      <div class="topic-icon">⬛</div>
+      <div class="topic-name">Design</div>
+      <div class="topic-count">214 articles</div>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">⚙️</div>
+      <div class="topic-name">Technology</div>
+      <div class="topic-count">187 articles</div>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🎭</div>
+      <div class="topic-name">Culture</div>
+      <div class="topic-count">143 articles</div>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">💬</div>
+      <div class="topic-name">Opinion</div>
+      <div class="topic-count">98 articles</div>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🎙️</div>
+      <div class="topic-name">Interviews</div>
+      <div class="topic-count">76 articles</div>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">📐</div>
+      <div class="topic-name">Tutorials</div>
+      <div class="topic-count">55 articles</div>
+    </div>
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<div class="newsletter">
+  <div class="newsletter-inner">
+    <div>
+      <h2 class="nl-title">Get On theDaily in your inbox. No noise.</h2>
+      <p class="nl-body">One email, every Thursday. The week's best writing on design, technology, and culture — curated by our editors, not an algorithm.</p>
+    </div>
+    <div class="nl-form">
+      <div class="nl-form-row">
+        <input class="nl-input" type="email" placeholder="your@email.com">
+        <button class="nl-submit">Subscribe →</button>
+      </div>
+      <p class="nl-fine">No spam. Unsubscribe anytime. 47,000 readers and counting.</p>
+      <div class="nl-perks">
+        <div class="nl-perk"><div class="nl-perk-icon">★</div> Weekly editor's picks</div>
+        <div class="nl-perk"><div class="nl-perk-icon">⚡</div> Breaking news first</div>
+        <div class="nl-perk"><div class="nl-perk-icon">🔒</div> Subscriber-only essays</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LIST + SIDEBAR -->
+<div class="section-header">
+  <div class="section-title">More Recent</div>
+  <a href="#" class="section-link">View archive →</a>
+</div>
+
+<div class="list-section">
+  <div class="list-posts">
+
+    <article class="list-post">
+      <div class="list-post-img lp-g"><span class="list-post-img-num">11/12</span></div>
+      <div class="list-post-body">
+        <div class="list-post-meta">
+          <span class="tag tag-green" style="font-size:9px;padding:2px 6px;">Design</span>
+          <span style="font-size:10px;color:#999;font-weight:600;">6 MIN</span>
+        </div>
+        <h3 class="list-post-title"><a href="#">Why Your Icon Library Is Lying to You About Consistency</a></h3>
+        <p class="list-post-excerpt">Optical weight isn't a property you can set in Figma. It's a judgment call that icon libraries almost always get wrong at the edges.</p>
+        <div class="list-post-foot"><span>R. Henriksen</span><span>·</span><span>Apr 15</span></div>
+      </div>
+    </article>
+
+    <article class="list-post">
+      <div class="list-post-img lp-p"><span class="list-post-img-num">12/12</span></div>
+      <div class="list-post-body">
+        <div class="list-post-meta">
+          <span class="tag tag-pink" style="font-size:9px;padding:2px 6px;">Culture</span>
+          <span style="font-size:10px;color:#999;font-weight:600;">10 MIN</span>
+        </div>
+        <h3 class="list-post-title"><a href="#">The Infinite Canvas Was Supposed to Free Us. Instead It Paralysed Us.</a></h3>
+        <p class="list-post-excerpt">FigJam, Miro, Mural — a generation of tools built on the promise of unlimited space. But friction, it turns out, was doing something useful.</p>
+        <div class="list-post-foot"><span>S. Baptiste</span><span>·</span><span>Apr 12</span></div>
+      </div>
+    </article>
+
+    <article class="list-post">
+      <div class="list-post-img lp-o"><span class="list-post-img-num">13/12</span></div>
+      <div class="list-post-body">
+        <div class="list-post-meta">
+          <span class="tag tag-orange" style="font-size:9px;padding:2px 6px;">Technology</span>
+          <span style="font-size:10px;color:#999;font-weight:600;">5 MIN</span>
+        </div>
+        <h3 class="list-post-title"><a href="#">TypeScript Is the New Java (And That's Mostly Fine)</a></h3>
+        <p class="list-post-excerpt">The language of scrappy startups is now the language of enterprise software. The community is having its first real identity crisis.</p>
+        <div class="list-post-foot"><span>D. Larsson</span><span>·</span><span>Apr 10</span></div>
+      </div>
+    </article>
+
+    <article class="list-post">
+      <div class="list-post-img lp-b"><span class="list-post-img-num">14/12</span></div>
+      <div class="list-post-body">
+        <div class="list-post-meta">
+          <span class="tag tag-black" style="font-size:9px;padding:2px 6px;">Opinion</span>
+          <span style="font-size:10px;color:#999;font-weight:600;">3 MIN</span>
+        </div>
+        <h3 class="list-post-title"><a href="#">The 10x Designer Myth Is Back, and It's Worse This Time</a></h3>
+        <p class="list-post-excerpt">AI tools made it easier to produce. Now everyone's confused about what "productive" means for a person whose job is fundamentally about judgment.</p>
+        <div class="list-post-foot"><span>T. Chakrabarti</span><span>·</span><span>Apr 8</span></div>
+      </div>
+    </article>
+
+    <article class="list-post">
+      <div class="list-post-img lp-g"><span class="list-post-img-num">15/12</span></div>
+      <div class="list-post-body">
+        <div class="list-post-meta">
+          <span class="tag tag-green" style="font-size:9px;padding:2px 6px;">Interview</span>
+          <span style="font-size:10px;color:#999;font-weight:600;">22 MIN</span>
+        </div>
+        <h3 class="list-post-title"><a href="#">Tobias van Schneider on Burning Your Portfolio and Starting Over at 40</a></h3>
+        <p class="list-post-excerpt">The designer behind DESK magazine and Semplice sat down to talk about creative reinvention, the myth of the personal brand, and why most design awards are meaningless.</p>
+        <div class="list-post-foot"><span>M. Kowalski</span><span>·</span><span>Apr 5</span></div>
+      </div>
+    </article>
+
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-widget">
+      <div class="widget-header">Trending This Week</div>
+      <div class="widget-body">
+        <div class="trending-list">
+          <div class="trending-item">
+            <div class="trending-num">01</div>
+            <div>
+              <div class="trending-title"><a href="#">Every Design System Eventually Becomes the Thing It Was Built to Prevent</a></div>
+              <div class="trending-meta">Maya Kowalski · 9 min</div>
+            </div>
+          </div>
+          <div class="trending-item">
+            <div class="trending-num">02</div>
+            <div>
+              <div class="trending-title"><a href="#">The CSS Renaissance Is Real and You Should Be Paying Attention</a></div>
+              <div class="trending-meta">D. Larsson · 8 min</div>
+            </div>
+          </div>
+          <div class="trending-item">
+            <div class="trending-num">03</div>
+            <div>
+              <div class="trending-title"><a href="#">The Infinite Canvas Was Supposed to Free Us</a></div>
+              <div class="trending-meta">S. Baptiste · 10 min</div>
+            </div>
+          </div>
+          <div class="trending-item">
+            <div class="trending-num">04</div>
+            <div>
+              <div class="trending-title"><a href="#">TypeScript Is the New Java (And That's Mostly Fine)</a></div>
+              <div class="trending-meta">D. Larsson · 5 min</div>
+            </div>
+          </div>
+          <div class="trending-item">
+            <div class="trending-num">05</div>
+            <div>
+              <div class="trending-title"><a href="#">Inside Linear's Design Process: How Speed Became the Core Feature</a></div>
+              <div class="trending-meta">M. Kowalski · 18 min</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-widget">
+      <div class="widget-header wh-accent">About On theDaily</div>
+      <div class="widget-body">
+        <div class="about-avatar-row">
+          <div class="about-avatar">O</div>
+          <div>
+            <div class="about-name">On theDaily</div>
+            <div class="about-role">Est. 2014 · Digital Publication</div>
+          </div>
+        </div>
+        <p class="about-bio">Independent writing on design, technology, and culture. We publish slowly, think carefully, and never recommend tools we don't use ourselves.</p>
+        <button class="btn btn-black" style="width:100%;justify-content:center;">Follow on X →</button>
+      </div>
+    </div>
+
+    <div class="sidebar-widget">
+      <div class="widget-header wh-silver">Popular Tags</div>
+      <div class="widget-body">
+        <div class="tags-cloud">
+          <div class="tag-pill">Design Systems</div>
+          <div class="tag-pill">Typography</div>
+          <div class="tag-pill">AI</div>
+          <div class="tag-pill">CSS</div>
+          <div class="tag-pill">Accessibility</div>
+          <div class="tag-pill">React</div>
+          <div class="tag-pill">Figma</div>
+          <div class="tag-pill">UX Research</div>
+          <div class="tag-pill">Motion</div>
+          <div class="tag-pill">Frontend</div>
+          <div class="tag-pill">Color Theory</div>
+          <div class="tag-pill">Brutalism</div>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<!-- PAGINATION -->
+<div class="pagination-wrap">
+  <div class="pagination">
+    <div class="page-btn">‹</div>
+    <div class="page-btn active">1</div>
+    <div class="page-btn">2</div>
+    <div class="page-btn">3</div>
+    <span class="page-dots">…</span>
+    <div class="page-btn">18</div>
+    <div class="page-btn">›</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand-name">On the<span>Daily</span></div>
+      <p class="footer-brand-bio">Independent writing on design, technology, and culture since 2014. Read slowly. Think carefully. No sponsored content. No algorithm.</p>
+      <div class="footer-social">
+        <button class="social-btn">𝕏</button>
+        <button class="social-btn">in</button>
+        <button class="social-btn">▶</button>
+        <button class="social-btn">@</button>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Topics</div>
+      <div class="footer-links">
+        <a href="#">Design</a>
+        <a href="#">Technology</a>
+        <a href="#">Culture</a>
+        <a href="#">Opinion</a>
+        <a href="#">Interviews</a>
+        <a href="#">Tutorials</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <div class="footer-links">
+        <a href="#">About</a>
+        <a href="#">Contributors</a>
+        <a href="#">Advertise</a>
+        <a href="#">Newsletter</a>
+        <a href="#">RSS Feed</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Legal</div>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Cookie Settings</a>
+        <a href="#">Editorial Policy</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 ON THEDAILY MEDIA LTD. ALL RIGHTS RESERVED.</span>
+    <span>MADE WITH <span style="color:var(--accent);">■</span> IN BERLIN</span>
+  </div>
+</footer>
+
+</body>
+</html>
