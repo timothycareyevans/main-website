@@ -22,7 +22,7 @@
                 <a href="portfolio-work/">Portfolio work</a>
                 <a href="#services">My services</a>
             </nav>
-            <a href="contact/" class="cta-pill">
+            <a href="#quote-modal" class="cta-pill" data-contact aria-haspopup="dialog">
                 <span><span class="contactme">📧</span> Request a Quote</span>
                 <span class="arrow">&rarr;</span>
             </a>
@@ -519,6 +519,41 @@
         </footer>
     </div>
 
+    <div class="modal" id="quote-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+        <button class="modal-backdrop" type="button" data-close aria-label="Close"></button>
+        <div class="modal-panel" tabindex="-1">
+            <div class="modal-frame">
+                <button class="modal-close" type="button" data-close aria-label="Close">&times;</button>
+                <div class="modal-step modal-choice is-visible">
+                    <h2 id="modal-title">Let's Work Together</h2>
+                    <a class="modal-secondary-link" href="https://calendly.com/timothycareyevans/30min" target="_blank" rel="noopener">Schedule a Meeting</a>
+                    <button type="button" data-message>Send Us a Message</button>
+                    <a class="modal-secondary-link" href="https://x.com/messages/compose?recipient_id=shinobi9982" target="_blank" rel="noopener">Contact Us on X</a>
+                </div>
+                <form class="modal-step modal-form" action="mailto:contact@timothycareyevans.com" method="POST" enctype="text/plain">
+                    <h2>Send Us a Message</h2>
+                    <div class="field-row">
+                        <input type="email" name="email" placeholder="Email" required>
+                        <input type="text" name="company" placeholder="Company" required>
+                    </div>
+                    <select name="interest" required>
+                        <option value="">What are you interested in?</option>
+                        <option>Web & App Development</option>
+                        <option>System Integration & Cloud</option>
+                        <option>Maintenance & Security</option>
+                        <option>Custom AI Solutions</option>
+                        <option>General Consultation</option>
+                    </select>
+                    <textarea name="message" placeholder="Tell us about your project..." required></textarea>
+                    <div class="field-row">
+                        <button type="button" data-back>Back</button>
+                        <button type="submit">Send Message</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
         const playVideo = (selector) => {
             const v = document.querySelector(selector)
@@ -543,6 +578,65 @@
         const faqItems = [...document.querySelectorAll('[data-faq-category]')]
         const manifestoKeys = [...document.querySelectorAll('.manifesto-key')]
         const keypadClickAudio = new Audio('https://cdn.freesound.org/previews/378/378085_6260145-lq.mp3')
+        const modal = document.querySelector('.modal')
+        const modalPanel = modal?.querySelector('.modal-panel')
+        const choiceStep = document.querySelector('.modal-choice')
+        const formStep = document.querySelector('.modal-form')
+        let lastFocusedElement = null
+
+        const setModal = (open) => {
+            if (!modal || !choiceStep || !formStep) return
+            document.body.classList.toggle('modal-open', open)
+            modal.classList.toggle('is-open', open)
+            modal.setAttribute('aria-hidden', String(!open))
+            if (open) {
+                lastFocusedElement = document.activeElement
+                choiceStep.classList.add('is-visible')
+                formStep.classList.remove('is-visible')
+                modalPanel?.focus()
+            } else if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+                lastFocusedElement.focus()
+            }
+        }
+
+        document.querySelectorAll('[data-contact]').forEach((button) => {
+            button.addEventListener('click', (event) => {
+                event.preventDefault()
+                setModal(true)
+            })
+        })
+
+        document.querySelectorAll('[data-close]').forEach((button) => {
+            button.addEventListener('click', () => setModal(false))
+        })
+
+        document.querySelector('[data-message]')?.addEventListener('click', () => {
+            choiceStep?.classList.remove('is-visible')
+            formStep?.classList.add('is-visible')
+        })
+
+        document.querySelector('[data-back]')?.addEventListener('click', () => {
+            formStep?.classList.remove('is-visible')
+            choiceStep?.classList.add('is-visible')
+        })
+
+        formStep?.addEventListener('submit', (event) => {
+            event.preventDefault()
+            const formData = new FormData(formStep)
+            const email = formData.get('email') || ''
+            const company = formData.get('company') || ''
+            const interest = formData.get('interest') || ''
+            const message = formData.get('message') || ''
+            const body = [
+                `Email: ${email}`,
+                `Company: ${company}`,
+                `Interest: ${interest}`,
+                '',
+                String(message)
+            ].join('\n')
+
+            window.location.href = `mailto:contact@timothycareyevans.com?subject=${encodeURIComponent('Project inquiry from timothycareyevans.com')}&body=${encodeURIComponent(body)}`
+        })
 
         const applyFaqFilter = (filter) => {
             faqFilters.forEach((button) => {
@@ -588,6 +682,11 @@
         })
 
         window.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && modal?.classList.contains('is-open')) {
+                setModal(false)
+                return
+            }
+
             manifestoKeys.forEach((key) => {
                 if (event.key === key.dataset.keypadTrigger && key.dataset.pressed !== 'true') {
                     pressManifestoKey(key)

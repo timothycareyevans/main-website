@@ -186,6 +186,148 @@ html, body {
     font-size: 24px;
 }
 
+body.modal-open {
+    overflow: hidden;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 180ms ease;
+}
+
+.modal.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-backdrop {
+    position: absolute;
+    inset: 0;
+    border: 0;
+    background: rgba(0, 0, 0, 0.62);
+    cursor: pointer;
+}
+
+.modal-panel {
+    position: relative;
+    z-index: 1;
+    width: min(560px, 100%);
+    min-height: 360px;
+    max-height: calc(100vh - 48px);
+    overflow: auto;
+    padding: 4px;
+    background: var(--yellow);
+    color: #fff;
+    clip-path: polygon(28px 0, calc(100% - 28px) 0, 100% 28px, 100% calc(100% - 28px), calc(100% - 28px) 100%, 28px 100%, 0 calc(100% - 28px), 0 28px);
+    box-shadow: 0 28px 90px rgba(0, 0, 0, 0.4);
+}
+
+.modal-panel:focus {
+    outline: 2px solid var(--yellow);
+    outline-offset: 4px;
+}
+
+.modal-frame {
+    position: relative;
+    min-height: 352px;
+    padding: 34px;
+    background: #000;
+    clip-path: polygon(25px 0, calc(100% - 25px) 0, 100% 25px, 100% calc(100% - 25px), calc(100% - 25px) 100%, 25px 100%, 0 calc(100% - 25px), 0 25px);
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 18px;
+    z-index: 2;
+    border: 0;
+    background: transparent;
+    color: var(--yellow);
+    font-size: 36px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.modal-step {
+    display: none;
+}
+
+.modal-step.is-visible {
+    display: grid;
+    gap: 14px;
+}
+
+.modal h2 {
+    margin: 0 0 18px;
+    text-align: center;
+    color: #fff;
+    font-size: 34px;
+    line-height: 1.1;
+}
+
+.modal a,
+.modal-form button,
+.modal-choice button {
+    display: block;
+    width: 100%;
+    padding: 15px 18px;
+    border: 2px solid var(--yellow);
+    border-radius: 8px;
+    background: var(--yellow);
+    color: #000;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-choice button,
+.modal-choice .modal-secondary-link,
+.modal-form button:first-child {
+    background: transparent;
+    color: var(--yellow);
+}
+
+.field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.modal input,
+.modal select,
+.modal textarea {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 8px;
+    background: #000;
+    color: #fff;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 15px;
+    padding: 12px 13px;
+    outline: none;
+}
+
+.modal textarea {
+    min-height: 132px;
+    resize: vertical;
+}
+
+.modal input:focus,
+.modal select:focus,
+.modal textarea:focus {
+    border-color: var(--yellow);
+}
+
 /* ---- About banner (sits above the hero) ---- */
 .about-banner {
     display: grid;
@@ -1908,6 +2050,15 @@ html, body {
         margin-left: 0;
     }
     .cta-pill .arrow { width: 24px; height: 24px; }
+    .field-row {
+        grid-template-columns: 1fr;
+    }
+    .modal-panel {
+        padding: 4px;
+    }
+    .modal-frame {
+        padding: 30px 18px;
+    }
 
     .hero-left { padding: 28px; }
     .headline { font-size: 36px; }
