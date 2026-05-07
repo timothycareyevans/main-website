@@ -187,56 +187,17 @@ nav {
 }
 .hero-image {
   height: 340px;
-  background: var(--black);
+  background: #d7ff00;
   position: relative;
   display: flex;
-  align-items: flex-end;
-  padding: 24px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
 }
-.hero-image-label {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  font-size: 9px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: #555;
-}
-.hero-img-num {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  font-size: 11px;
-  font-weight: 700;
-  color: #666;
-}
-.hero-image::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    repeating-linear-gradient(
-      45deg,
-      #111 0px, #111 1px,
-      #000 1px, #000 40px
-    );
-}
-.hero-image::after {
-  content: '';
-  position: absolute;
-  top: 60px; left: 40px;
-  width: 200px; height: 200px;
-  background: var(--accent);
-  border: var(--border);
-}
-.hero-image-accent {
-  position: absolute;
-  bottom: 80px; right: 60px;
-  width: 120px; height: 120px;
-  background: var(--mid);
-  border: var(--border);
-  z-index: 1;
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 .hero-body { padding: 28px 32px 32px; }
 .hero-meta {
@@ -931,9 +892,7 @@ footer {
 <div class="hero">
   <article class="hero-main">
     <div class="hero-image">
-      <span class="hero-image-label">FEATURED</span>
-      <span class="hero-img-num">01/12</span>
-      <div class="hero-image-accent"></div>
+      <img src="design-active-hero.png" alt="Factory continuous agents design active interface artwork">
     </div>
     <div class="hero-body">
       <div class="hero-meta">
