@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Design Active — Teal</title>
+  <title>Initializing / Updates</title>
   <style>
     * {
       box-sizing: border-box;
@@ -126,12 +126,17 @@
 
     h1 {
       margin: 0;
+      color: #fff;
       font-size: clamp(4rem, 12vw, 10rem);
       line-height: .88;
       text-transform: uppercase;
       letter-spacing: -.08em;
       font-weight: 950;
       max-width: 1000px;
+    }
+
+    .h1-dark {
+      color: var(--black);
     }
 
     .hero-copy {
@@ -163,7 +168,7 @@
 
     .btn-primary {
       background: var(--black);
-      color: var(--neon);
+      color: #fff;
       box-shadow: 8px 8px 0 rgba(0,0,0,.4);
     }
 
@@ -204,6 +209,7 @@
     }
 
     .side-title {
+      color: #fff;
       font-size: clamp(3rem, 6vw, 4rem);
       line-height: .9;
       font-weight: 950;
@@ -263,6 +269,7 @@
     }
 
     .feature h3 {
+      color: #fff;
       font-size: 1.5rem;
       margin: 20px 0 14px;
       text-transform: uppercase;
@@ -272,78 +279,6 @@
       opacity: .8;
       line-height: 1.7;
       margin: 0;
-    }
-
-    .bg-showcase {
-      margin-top: 40px;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 24px;
-    }
-
-    .scroll-bg {
-      position: relative;
-      overflow: hidden;
-      border: 2px solid var(--black);
-      min-height: 320px;
-      background: #000;
-      box-shadow: 10px 10px 0 var(--black);
-    }
-
-    .scroll-bg::before {
-      content: "";
-      position: absolute;
-      inset: -200%;
-      opacity: .95;
-      will-change: transform;
-    }
-
-    .pattern-mountains::before {
-      background-image:
-        radial-gradient(circle at 20% 20%, var(--neon) 0 2px, transparent 2px),
-        linear-gradient(135deg, transparent 40%, var(--neon) 41% 60%, transparent 61%),
-        linear-gradient(-135deg, transparent 40%, var(--neon) 41% 60%, transparent 61%);
-      background-size: 80px 80px, 220px 220px, 220px 220px;
-      animation: scrollDiagonal 18s linear infinite;
-    }
-
-    .pattern-lanterns::before {
-      background-image:
-        radial-gradient(circle, var(--neon) 0 24%, transparent 25%),
-        repeating-linear-gradient(90deg, transparent 0 45px, var(--neon) 45px 52px, transparent 52px 100px);
-      background-size: 140px 140px, 140px 140px;
-      animation: scrollVertical 14s linear infinite;
-    }
-
-    .pattern-clouds::before {
-      background-image:
-        radial-gradient(circle at 30px 40px, var(--neon) 0 24px, transparent 25px),
-        radial-gradient(circle at 70px 40px, var(--neon) 0 24px, transparent 25px),
-        radial-gradient(circle at 50px 20px, var(--neon) 0 24px, transparent 25px);
-      background-size: 180px 120px;
-      animation: scrollHorizontal 20s linear infinite;
-    }
-
-    .pattern-flowers::before {
-      background-image:
-        radial-gradient(circle, transparent 0 20px, var(--neon) 21px 28px, transparent 29px),
-        radial-gradient(circle, var(--neon) 0 5px, transparent 6px);
-      background-size: 120px 120px;
-      animation: rotateScroll 24s linear infinite;
-    }
-
-    .bg-label {
-      position: absolute;
-      left: 24px;
-      bottom: 24px;
-      background: var(--black);
-      color: var(--neon);
-      padding: 10px 14px;
-      border: 1px solid var(--neon);
-      text-transform: uppercase;
-      letter-spacing: .2em;
-      font-size: 12px;
-      z-index: 2;
     }
 
     .bottom-grid {
@@ -362,12 +297,17 @@
     }
 
     .protocol h3 {
+      color: #fff;
       margin: 0 0 24px;
       text-transform: uppercase;
     }
 
     .protocol div {
       margin-bottom: 14px;
+    }
+
+    .protocol-step-light {
+      color: #fff;
     }
 
     .mission {
@@ -400,33 +340,12 @@
       line-height: 1.8;
     }
 
-    @keyframes scrollHorizontal {
-      from { transform: translateX(0); }
-      to { transform: translateX(-220px); }
-    }
-
-    @keyframes scrollVertical {
-      from { transform: translateY(0); }
-      to { transform: translateY(-220px); }
-    }
-
-    @keyframes scrollDiagonal {
-      from { transform: translate(0,0); }
-      to { transform: translate(-180px,-180px); }
-    }
-
-    @keyframes rotateScroll {
-      from { transform: rotate(0deg) scale(1.2); }
-      to { transform: rotate(360deg) scale(1.2); }
-    }
-
     @media (max-width: 1000px) {
       .hero-grid,
       .features,
       .bottom-grid,
       .stats,
-      .topbar,
-      .bg-showcase {
+      .topbar {
         grid-template-columns: 1fr;
       }
 
@@ -474,7 +393,7 @@
 
             <div class="status mono">Sys.Status: All Design Operational — 0 Failures — 0 Delays</div>
 
-            <h1>Initializing / Updates</h1>
+            <h1>Initializing / <span class="h1-dark">Updates</span></h1>
 
             <p class="hero-copy mono">
               Deploy brand systems, landing pages, UI kits, motion graphics, and campaign assets with an always-on creative operations stack built for high output.
@@ -509,15 +428,13 @@
 
       <section class="features" aria-label="Design capabilities" id="features"></section>
 
-      <section class="bg-showcase" aria-label="Animated seamless pattern previews" id="patterns"></section>
-
       <section class="bottom-grid" id="protocol">
         <div class="protocol mono">
           <h3>Deployment Protocol</h3>
-          <div>01 / Define mission brief</div>
-          <div>02 / Generate visual system</div>
-          <div>03 / Assemble landing page</div>
-          <div>04 / Launch, measure, iterate</div>
+          <div class="protocol-step-light">01 / Define mission brief</div>
+          <div class="protocol-step-light">02 / Generate visual system</div>
+          <div class="protocol-step-light">03 / Assemble landing page</div>
+          <div class="protocol-step-light">04 / Launch, measure, iterate</div>
         </div>
 
         <div class="mission" id="mission">
@@ -561,13 +478,6 @@
       }
     ];
 
-    const patterns = [
-      { name: "Mountain Scroll", className: "pattern-mountains" },
-      { name: "Lantern Grid", className: "pattern-lanterns" },
-      { name: "Cloud Drift", className: "pattern-clouds" },
-      { name: "Floral Orbit", className: "pattern-flowers" }
-    ];
-
     function renderDots() {
       const dotGrid = document.getElementById("dotGrid");
       dotGrid.innerHTML = "";
@@ -597,30 +507,18 @@
       `).join("");
     }
 
-    function renderPatterns() {
-      const patternsRoot = document.getElementById("patterns");
-      patternsRoot.innerHTML = patterns.map((pattern) => `
-        <div class="scroll-bg ${pattern.className}" aria-label="${pattern.name} animated background">
-          <div class="bg-label mono">${pattern.name}</div>
-        </div>
-      `).join("");
-    }
-
     function runTests() {
       const neon = getComputedStyle(document.documentElement).getPropertyValue("--neon").trim();
       console.assert(neon === "#2eb8b8", "Expected neon brand color #2eb8b8");
       console.assert(document.querySelectorAll(".dot-grid span").length === 8, "Expected eight header dots");
       console.assert(document.querySelectorAll(".stat").length === 3, "Expected three stat cards");
       console.assert(document.querySelectorAll(".feature").length === 4, "Expected four feature cards");
-      console.assert(document.querySelectorAll(".scroll-bg").length === 4, "Expected four animated pattern previews");
-      console.assert(patterns.every((pattern) => document.querySelector(`.${pattern.className}`)), "Expected every animated pattern class to render");
     }
 
     document.addEventListener("DOMContentLoaded", () => {
       renderDots();
       renderStats();
       renderFeatures();
-      renderPatterns();
       runTests();
     });
   </script>
