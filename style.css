@@ -329,6 +329,21 @@ body.modal-open {
 }
 
 /* ---- About banner (sits above the hero) ---- */
+.about-intro-banner {
+    margin-top: 8px;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    background: #050505;
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+.about-intro-banner img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
 .about-banner {
     display: grid;
     grid-template-columns: 1fr 1.1fr;
