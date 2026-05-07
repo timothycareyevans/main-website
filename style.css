@@ -114,6 +114,7 @@ html, body {
 .nav-links {
     display: flex;
     gap: 32px;
+    margin-right: 24px;
 }
 
 .nav-links a {
@@ -152,6 +153,21 @@ html, body {
 .nav-links a:nth-child(2) { color: #2eb8b8; }
 .nav-links a:nth-child(3) { color: #8eb300; }
 .nav-links a:nth-child(4) { color: #a0005f; }
+
+.nav-status {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    color: #fff;
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: 0;
+    padding: 6px 24px 12px;
+}
+
+.nav-status time {
+    text-align: right;
+}
 
 .cta-pill {
     display: inline-flex;
@@ -970,9 +986,13 @@ body.modal-open {
         width: 100%;
         flex-wrap: wrap;
         gap: 14px 20px;
+        margin-right: 0;
     }
     .cta-pill {
         margin-left: auto;
+    }
+    .nav-status {
+        padding: 6px 16px 12px;
     }
     .about-banner { grid-template-columns: 1fr; max-height: none; }
     .about-left { min-height: 320px; }
@@ -2061,6 +2081,15 @@ body.modal-open {
     }
     .nav-links a {
         font-size: 13px;
+    }
+    .nav-status {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 2px;
+        font-size: 18px;
+    }
+    .nav-status time {
+        text-align: left;
     }
     .brand { font-size: 13px; }
     .brand-lockup { gap: 10px; }
