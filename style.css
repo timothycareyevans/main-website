@@ -806,8 +806,8 @@ body.modal-open {
 }
 
 .glyph-feature-icon {
-    width: 52px;
-    height: 52px;
+    width: 104px;
+    height: 104px;
     display: grid;
     place-items: center;
     border-radius: 16px;
@@ -815,6 +815,13 @@ body.modal-open {
     color: var(--yellow);
     font-size: 22px;
     margin-bottom: 18px;
+}
+
+.glyph-feature-icon img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .glyph-feature-card h3 {
