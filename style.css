@@ -1414,7 +1414,6 @@ body.modal-open {
     overflow: hidden;
     padding: 12px 0;
     position: relative;
-    margin-top: 44px;
 }
 .track:nth-child(2) {
     border-top: 1px solid var(--line);
