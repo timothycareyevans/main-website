@@ -43,8 +43,6 @@
     }
 
     .topbar {
-      display: grid;
-      grid-template-columns: 1fr auto;
       border-bottom: 2px solid var(--black);
       text-transform: uppercase;
       letter-spacing: .18em;
@@ -56,13 +54,15 @@
       justify-content: space-between;
       gap: 20px;
       padding: 18px 24px;
-      border-right: 2px solid var(--black);
     }
 
-    .topbar-right {
-      background: var(--black);
-      color: var(--neon);
-      padding: 18px 24px;
+    .topbar-link {
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    .topbar-link:hover {
+      text-decoration: underline;
     }
 
     .hero-grid {
@@ -344,14 +344,11 @@
       .hero-grid,
       .features,
       .bottom-grid,
-      .stats,
-      .topbar {
+      .stats {
         grid-template-columns: 1fr;
       }
 
       .topbar-left {
-        border-right: none;
-        border-bottom: 2px solid var(--black);
         flex-direction: column;
       }
 
@@ -378,10 +375,10 @@
       <section class="hero">
         <header class="topbar mono">
           <div class="topbar-left">
+            <a href="index.html" class="topbar-link">Main Site</a>
             <span>Long Running Agents — 2341429</span>
             <span>// Design Ready</span>
           </div>
-          <div class="topbar-right">37.7749° N — 122.4194° W</div>
         </header>
 
         <div class="hero-grid">

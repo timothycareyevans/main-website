@@ -259,6 +259,8 @@
             <div class="hero-right">
                 <div class="media-frame">
                     <video class="video-desktop" src="error.mp4" autoplay loop muted playsinline></video>
+                    <video class="video-tablet" src="error.mp4" autoplay loop muted playsinline></video>
+                    <video class="video-mobile" src="error.mp4" autoplay loop muted playsinline></video>
                 </div>
             </div>
         </section>
@@ -573,8 +575,8 @@
     </div>
 
     <script>
-        const playVideo = (selector) => {
-            const v = document.querySelector(selector)
+        const playVideo = (video) => {
+            const v = typeof video === 'string' ? document.querySelector(video) : video
             if (!v) return
             v.muted = true
             v.playsInline = true
@@ -608,7 +610,7 @@
         }
         updateCurrentDateTime()
         setInterval(updateCurrentDateTime, 1000)
-        playVideo('.video-desktop')
+        document.querySelectorAll('.video-desktop, .video-tablet, .video-mobile').forEach(playVideo)
 
         const faqFilters = [...document.querySelectorAll('[data-faq-filter]')]
         const faqItems = [...document.querySelectorAll('[data-faq-category]')]
