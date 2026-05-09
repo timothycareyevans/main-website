@@ -1,0 +1,1277 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skydesigner - Static HTML Clone</title>
+  <meta name="description" content="Static HTML recreation of the SkyDesigner landing page.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69df2b63dbe0ed37c70ce9b0_Favicon%20skydesigner%201.png">
+  <style>
+    :root {
+      --black: #070806;
+      --ink: #171915;
+      --muted: #6e7469;
+      --line: rgba(7, 8, 6, .12);
+      --mint: #dff7bd;
+      --neon: #b9ff36;
+      --cream: #f6f1df;
+      --paper: #f8f8f2;
+      --white: #ffffff;
+      --rose: #ffdee7;
+      --blue: #d7e7ff;
+      --green-soft: #e6fbd1;
+      --shadow: 0 20px 60px rgba(7, 8, 6, .14);
+      --radius: 8px;
+      --container: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Geist", "Inter", Arial, sans-serif;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img, video {
+      display: block;
+      max-width: 100%;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 108px 0;
+      max-width: 100vw;
+      overflow: hidden;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 22px;
+      color: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 9px;
+      height: 9px;
+      content: "";
+      border-radius: 99px;
+      background: var(--neon);
+      box-shadow: 0 0 0 4px rgba(185, 255, 54, .18);
+    }
+
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 850px;
+      margin-right: auto;
+      margin-left: auto;
+      margin-bottom: 22px;
+      color: var(--white);
+      font-size: clamp(48px, 8vw, 112px);
+      line-height: .9;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 22px;
+      font-size: clamp(36px, 5vw, 76px);
+      line-height: .96;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin-bottom: 12px;
+      font-size: 28px;
+      line-height: 1.04;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.65;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 22px;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      background: var(--ink);
+      color: var(--white);
+      font-size: 15px;
+      font-weight: 600;
+      transition: transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn.neon {
+      background: var(--neon);
+      color: var(--black);
+    }
+
+    .btn.outline {
+      border-color: rgba(255, 255, 255, .35);
+      background: rgba(255, 255, 255, .06);
+      color: var(--white);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 20;
+      width: 100%;
+      padding: 18px 0;
+      color: var(--white);
+    }
+
+    .nav.scrolled {
+      background: rgba(7, 8, 6, .86);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      min-width: 160px;
+    }
+
+    .brand img {
+      width: 188px;
+    }
+
+    .links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      font-size: 15px;
+      color: rgba(255, 255, 255, .76);
+    }
+
+    .links a:hover {
+      color: var(--white);
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(255, 255, 255, .22);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .05);
+      color: var(--white);
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      margin: 3px auto;
+      border-radius: 99px;
+      background: currentColor;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding: 150px 0 105px;
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: .45;
+      filter: saturate(1.05) contrast(1.05);
+    }
+
+    .hero::before {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background:
+        radial-gradient(circle at 52% 30%, rgba(185, 255, 54, .22), transparent 26%),
+        linear-gradient(180deg, rgba(7, 8, 6, .46), rgba(7, 8, 6, .94));
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 100%;
+    }
+
+    .hero-copy {
+      max-width: 610px;
+      margin: 0 auto 34px;
+      color: rgba(255, 255, 255, .78);
+      font-size: 19px;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .dark {
+      background: var(--black);
+      color: var(--mint);
+    }
+
+    .dark p {
+      color: rgba(223, 247, 189, .74);
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: .7fr 1.2fr;
+      gap: 84px;
+      align-items: start;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 34px;
+    }
+
+    .stat-number {
+      color: var(--neon);
+      font-size: clamp(38px, 5vw, 70px);
+      line-height: .9;
+      font-weight: 600;
+    }
+
+    .stat-label {
+      margin-top: 10px;
+      color: rgba(223, 247, 189, .72);
+    }
+
+    .logo-marquee {
+      width: 100%;
+      overflow: hidden;
+      margin-top: 76px;
+      border-block: 1px solid rgba(223, 247, 189, .14);
+      background: rgba(255, 255, 255, .03);
+    }
+
+    .logo-track {
+      display: flex;
+      width: max-content;
+      gap: 14px;
+      padding: 22px 0;
+      animation: slide 28s linear infinite;
+    }
+
+    .logo-card {
+      display: grid;
+      place-items: center;
+      width: 210px;
+      height: 86px;
+      border: 1px solid rgba(223, 247, 189, .14);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .05);
+    }
+
+    .logo-card img {
+      max-width: 138px;
+      max-height: 42px;
+      filter: brightness(1.4);
+    }
+
+    @keyframes slide {
+      to { transform: translateX(-50%); }
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 28px;
+      margin-bottom: 42px;
+    }
+
+    .section-head p {
+      max-width: 430px;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .service-card {
+      min-height: 370px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--white);
+      box-shadow: 0 8px 24px rgba(7, 8, 6, .05);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .service-icon {
+      width: 58px;
+      height: 58px;
+      margin-bottom: auto;
+      padding: 15px;
+      border-radius: var(--radius);
+      background: var(--mint);
+    }
+
+    .learn {
+      margin-top: 10px;
+      color: var(--black);
+      font-weight: 700;
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+      background: var(--white);
+    }
+
+    .step {
+      min-height: 360px;
+      padding: 28px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .step-number {
+      margin-bottom: 72px;
+      color: var(--muted);
+      font-family: "Inter", sans-serif;
+      font-weight: 700;
+    }
+
+    .fiverr {
+      background: var(--mint);
+    }
+
+    .fiverr-grid {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .fiverr-logo {
+      width: 270px;
+      margin-bottom: 18px;
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 26px;
+      font-weight: 700;
+    }
+
+    .rating img {
+      width: 140px;
+    }
+
+    .testimonial-wrap {
+      margin-top: 56px;
+      overflow: hidden;
+    }
+
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(310px, 1fr));
+      gap: 18px;
+      transition: transform .45s ease;
+    }
+
+    .quote-card {
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 28px;
+      border: 1px solid rgba(7, 8, 6, .12);
+      border-radius: var(--radius);
+      background: var(--white);
+    }
+
+    .quote-card p {
+      color: var(--ink);
+      font-size: 16px;
+    }
+
+    .quote-user {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 24px;
+      font-weight: 700;
+    }
+
+    .quote-user img {
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .testimonial-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .icon-btn {
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--white);
+      cursor: pointer;
+    }
+
+    .about {
+      background: var(--black);
+      color: var(--white);
+      overflow: hidden;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .success-card {
+      min-height: 390px;
+      padding: 36px;
+      border-radius: var(--radius);
+      background: var(--mint);
+      color: var(--black);
+      box-shadow: var(--shadow);
+    }
+
+    .success-card strong {
+      display: block;
+      margin-top: 76px;
+      color: var(--black);
+      font-size: 96px;
+      line-height: .86;
+      font-weight: 600;
+    }
+
+    .pill-loop {
+      display: flex;
+      gap: 12px;
+      width: max-content;
+      margin-top: 62px;
+      animation: slide 24s linear infinite;
+    }
+
+    .pill {
+      padding: 15px 22px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 999px;
+      color: rgba(255, 255, 255, .82);
+      white-space: nowrap;
+    }
+
+    .story {
+      background: var(--mint);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .image-panel {
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: var(--black);
+    }
+
+    .image-panel img {
+      width: 100%;
+      height: 540px;
+      object-fit: cover;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 56px;
+    }
+
+    .blog-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .blog-card {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 22px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--white);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 34px rgba(7, 8, 6, .1);
+    }
+
+    .blog-card img {
+      width: 180px;
+      height: 118px;
+      object-fit: cover;
+      border-radius: calc(var(--radius) - 2px);
+    }
+
+    .date {
+      margin-bottom: 9px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .blog-card h3 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.12;
+    }
+
+    .cta {
+      padding: 0;
+      background: var(--paper);
+    }
+
+    .cta-grid {
+      display: grid;
+      grid-template-columns: .82fr 1.18fr;
+      min-height: 640px;
+      background: var(--mint);
+    }
+
+    .cta-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(34px, 6vw, 78px);
+    }
+
+    .users {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-top: 42px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .avatars {
+      display: flex;
+    }
+
+    .avatars img {
+      width: 46px;
+      height: 46px;
+      object-fit: cover;
+      border: 3px solid var(--mint);
+      border-radius: 50%;
+    }
+
+    .avatars img + img {
+      margin-left: -14px;
+    }
+
+    .cta-visual {
+      position: relative;
+      overflow: hidden;
+      min-height: 520px;
+      background: var(--black);
+    }
+
+    .cta-visual > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: .88;
+    }
+
+    .join-card {
+      position: absolute;
+      right: 8%;
+      bottom: 10%;
+      width: min(320px, 82%);
+      padding: 26px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: var(--radius);
+      background: rgba(7, 8, 6, .72);
+      color: var(--white);
+      backdrop-filter: blur(16px);
+      font-size: 28px;
+      line-height: 1.02;
+      font-weight: 600;
+    }
+
+    .join-card img {
+      width: 34px;
+      margin: 12px 0;
+    }
+
+    .join-card .accent {
+      color: var(--neon);
+    }
+
+    .footer {
+      padding: 70px 0 32px;
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr repeat(3, 1fr);
+      gap: 42px;
+      align-items: start;
+    }
+
+    .footer-logo {
+      width: 188px;
+    }
+
+    .footer-title {
+      margin-bottom: 16px;
+      color: rgba(255, 255, 255, .52);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .footer a, .footer address {
+      display: block;
+      margin: 10px 0;
+      color: rgba(255, 255, 255, .72);
+      font-style: normal;
+    }
+
+    .footer a:hover {
+      color: var(--white);
+    }
+
+    .big-mark {
+      margin-top: 62px;
+      color: var(--white);
+      font-size: clamp(40px, 10vw, 150px);
+      line-height: .85;
+      font-weight: 700;
+      letter-spacing: 0;
+      opacity: .16;
+      overflow-wrap: anywhere;
+    }
+
+    @media (max-width: 980px) {
+      .nav .btn {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: inline-grid;
+        place-items: center;
+        position: fixed;
+        top: 20px;
+        left: min(calc(100vw - 60px), 330px);
+        right: auto;
+        z-index: 100;
+        background: rgba(7, 8, 6, .62);
+      }
+
+      .links {
+        position: absolute;
+        top: 78px;
+        left: 20px;
+        right: 20px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 12px;
+        border: 1px solid rgba(255, 255, 255, .12);
+        border-radius: var(--radius);
+        background: rgba(7, 8, 6, .94);
+      }
+
+      .links.open {
+        display: flex;
+      }
+
+      .links a {
+        padding: 14px;
+      }
+
+      .results-grid,
+      .fiverr-grid,
+      .about-grid,
+      .split,
+      .blog-grid,
+      .cta-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-grid,
+      .work-grid,
+      .stats,
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .section-head {
+        display: block;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 28px, var(--container));
+      }
+
+      .section {
+        padding: 72px 0;
+      }
+
+      h1 {
+        max-width: 300px;
+        font-size: 34px;
+        line-height: .98;
+        overflow-wrap: normal;
+      }
+
+      .hero-copy {
+        max-width: 18rem;
+        font-size: 17px;
+      }
+
+      h2 {
+        font-size: 42px;
+      }
+
+      .brand img {
+        width: 132px;
+      }
+
+      .hero {
+        min-height: 760px;
+        padding-top: 130px;
+      }
+
+      .service-grid,
+      .work-grid,
+      .stats,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-card,
+      .step {
+        min-height: auto;
+      }
+
+      .step-number {
+        margin-bottom: 36px;
+      }
+
+      .testimonials {
+        grid-template-columns: repeat(5, minmax(260px, 1fr));
+      }
+
+      .blog-card {
+        grid-template-columns: 1fr;
+      }
+
+      .blog-card img {
+        width: 100%;
+        height: 190px;
+      }
+
+      .image-panel img {
+        height: 360px;
+      }
+
+      .cta-grid {
+        min-height: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav" data-nav>
+    <div class="container nav-inner">
+      <a class="brand" href="#home" aria-label="SkyDesigner home">
+        <img src="timothy-carey-evans-logo.svg" alt="Timothy Carey Evans logo">
+      </a>
+      <nav class="links" data-menu>
+        <a href="#home">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#blog">Blog</a>
+        <a href="https://meet.skydesigner.me/" target="_blank" rel="noreferrer">Contact</a>
+        <a href="#story">My Freelance Story</a>
+      </nav>
+      <a class="btn" href="https://go.fiverr.com/visit/?bta=20848&brand=fp&campaign=2450589&landingPage=https%3A%2F%2Ffiverr.com%2Fskydesigner" target="_blank" rel="noreferrer">Visit Freelance</a>
+      <button class="menu-toggle" data-toggle aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <video class="hero-video" autoplay muted loop playsinline>
+        <source src="sunrise_this_am_after_the_rain.mp4" type="video/mp4">
+      </video>
+      <div class="container hero-content">
+        <h1>We Build Digital Experiences That Win</h1>
+        <p class="hero-copy">We craft premium websites, brands, and digital experiences that elevate your business and turn visitors into loyal customers.</p>
+        <div class="actions">
+          <a class="btn outline" href="https://go.fiverr.com/visit/?bta=20848&brand=fp&campaign=2450589&landingPage=https%3A%2F%2Ffiverr.com%2Fskydesigner" target="_blank" rel="noreferrer">Book a Call</a>
+          <a class="btn neon" href="https://go.fiverr.com/visit/?bta=20848&brand=fp&campaign=2450589&landingPage=https%3A%2F%2Ffiverr.com%2Fskydesigner" target="_blank" rel="noreferrer">Visit Freelance</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark">
+      <div class="container">
+        <div class="results-grid">
+          <div class="eyebrow">Results</div>
+          <div>
+            <h2>Over a Decade of Designs That Deliver.</h2>
+            <p>Since 2014, we've helped thousands of businesses worldwide build powerful digital presences from early-stage startups to $100M+ companies. Every project. Every pixel. Crafted with purpose.</p>
+            <div class="stats">
+              <div>
+                <div class="stat-number">99%</div>
+                <div class="stat-label">Success Rate</div>
+              </div>
+              <div>
+                <div class="stat-number">$4M+</div>
+                <div class="stat-label">Earned on Freelance</div>
+              </div>
+              <div>
+                <div class="stat-number">30K+</div>
+                <div class="stat-label">Five-Star Reviews</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="logo-marquee" aria-label="Client logos">
+        <div class="logo-track">
+          <div class="logo-card"><img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69de2aad5f9f0564169eec19_Ugo%20lord.svg" alt="Ugo Lord"></div>
+          <div class="logo-card"><img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69de2792dbc897119331ffd9_fiverr-01.svg" alt="Freelance"></div>
+          <div class="logo-card"><img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69de27b50dee9cfbb98d37c3_beast%20village-01.svg" alt="Beast Village"></div>
+          <div class="logo-card"><img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69de282cdf11f8ecf7554b57_Group%201%20(1).svg" alt="Client mark"></div>
+          <div class="logo-card"><img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69de2ac0efd3882d00d18c8d_mto%20orange.svg" alt="MTO"></div>
+          <div class="logo-card"><img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69de2ac0e3765f160eb8ec4e_blckcld.svg" alt="BLCKCLD"></div>
+          <div class="logo-card"><img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69de2aad5f9f0564169eec19_Ugo%20lord.svg" alt="Ugo Lord"></div>
+          <div class="logo-card"><img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69de2792dbc897119331ffd9_fiverr-01.svg" alt="Freelance"></div>
+          <div class="logo-card"><img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69de27b50dee9cfbb98d37c3_beast%20village-01.svg" alt="Beast Village"></div>
+          <div class="logo-card"><img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69de282cdf11f8ecf7554b57_Group%201%20(1).svg" alt="Client mark"></div>
+          <div class="logo-card"><img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69de2ac0efd3882d00d18c8d_mto%20orange.svg" alt="MTO"></div>
+          <div class="logo-card"><img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69de2ac0e3765f160eb8ec4e_blckcld.svg" alt="BLCKCLD"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Services</div>
+            <h2>Expertise built on insight & experience</h2>
+          </div>
+          <div>
+            <p>We deliver strategic solutions grounded in research, experience, and industry best practices.</p>
+            <a class="btn" href="https://go.fiverr.com/visit/?bta=20848&brand=fp&campaign=2450589&landingPage=https%3A%2F%2Ffiverr.com%2Fskydesigner" target="_blank" rel="noreferrer">View Services</a>
+          </div>
+        </div>
+        <div class="service-grid">
+          <article class="service-card">
+            <img class="service-icon" src="https://cdn.prod.website-files.com/69cd96a8da39545f92e47e5c/69cd96a8da39545f92e47fee_ai-fill-neon.svg" alt="">
+            <h3>Branding</h3>
+            <p>Through research driven insights, we create distinctive brand identities that resonate with your audience and set you apart in the market.</p>
+            <a class="learn" href="https://go.fiverr.com/visit/?bta=20848&brand=fp&campaign=2450589&landingPage=https%3A%2F%2Ffiverr.com%2Fskydesigner" target="_blank" rel="noreferrer">learn more</a>
+          </article>
+          <article class="service-card">
+            <img class="service-icon" src="https://cdn.prod.website-files.com/69cd96a8da39545f92e47e5c/69cd96a8da39545f92e48031_phone-filled.svg" alt="">
+            <h3>Web Design</h3>
+            <p>We combine user research with beautiful design in Figma, crafting interactive and animated experiences that engage and convert.</p>
+            <a class="learn" href="https://go.fiverr.com/visit/?bta=20848&brand=fp&campaign=2450589&landingPage=https%3A%2F%2Ffiverr.com%2Fskydesigner" target="_blank" rel="noreferrer">learn more</a>
+          </article>
+          <article class="service-card">
+            <img class="service-icon" src="https://cdn.prod.website-files.com/69cd96a8da39545f92e47e5c/69cd96a8da39545f92e48063_box-fill.svg" alt="">
+            <h3>Web Development</h3>
+            <p>We build high performance websites and platforms using WordPress, Webflow, Shopify, React.js and HTML/CSS.</p>
+            <a class="learn" href="https://go.fiverr.com/visit/?bta=20848&brand=fp&campaign=2450589&landingPage=https%3A%2F%2Ffiverr.com%2Fskydesigner" target="_blank" rel="noreferrer">learn more</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">How we work</div>
+            <h2>How we work</h2>
+          </div>
+          <p>We take a structured, hands-on approach to drive measurable growth.</p>
+        </div>
+        <div class="work-grid">
+          <article class="step">
+            <div class="step-number">001</div>
+            <h3>Discover</h3>
+            <p>We learn about your business, audience, goals, and vision to understand what needs to be built and why.</p>
+          </article>
+          <article class="step">
+            <div class="step-number">002</div>
+            <h3>Define</h3>
+            <p>We shape the strategic direction, structure, and creative foundation so everything feels clear and purposeful.</p>
+          </article>
+          <article class="step">
+            <div class="step-number">003</div>
+            <h3>Design</h3>
+            <p>We create a custom visual direction through branding, layout, and high fidelity design.</p>
+          </article>
+          <article class="step">
+            <div class="step-number">004</div>
+            <h3>Develop</h3>
+            <p>Once approved, we turn the final direction into polished deliverables, from brand systems to responsive websites.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section fiverr">
+      <div class="container">
+        <div class="fiverr-grid">
+          <div>
+            <div class="eyebrow">We are</div>
+            <img class="fiverr-logo" src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69dddfffd503113458fbeabe_image%202.webp" alt="Freelance Pro">
+            <div class="rating">
+              <span>Rated 4.9/5 by 4,900+ clients</span>
+              <img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69dde444e816f86478be81f5_Rating.svg" alt="Rating stars">
+            </div>
+          </div>
+          <p>Hand-picked by the Freelance Pro team, we represent a select group of top-tier professionals recognised for exceptional skills and expertise. With the backing of Freelance Pro, we bring quality and reliability to every project.</p>
+        </div>
+        <div class="testimonial-wrap">
+          <div class="testimonials" data-testimonials>
+            <article class="quote-card">
+              <p>Exceptional service and a very clean, professional design that aligned well with our branding needs. The visuals were strong, and the choice of color patterns was excellent.</p>
+              <div class="quote-user"><img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69e2120ac51e403baf39ee11_5295fffe-38e8-4386-8dfb-e4aa33818568.webp" alt="">duane_427 (US)</div>
+            </article>
+            <article class="quote-card">
+              <p>Bojan and his team truly deliver. It's clear they have a wealth of experience creating modern, functional, visually appealing websites.</p>
+              <div class="quote-user"><img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69e211a58241edc2e183e547_d72fae5f-6c8a-47b5-b107-fdb5a9a0bb0a%20(1).webp" alt="">pixeloutpost (UK)</div>
+            </article>
+            <article class="quote-card">
+              <p>I'm so happy to work with this team. They continue to impress me with creativity and UX structure. I do believe they are number one.</p>
+              <div class="quote-user"><img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69e2135b4ea680b1fd5943d3_Group%201000006690.svg" alt="">pmarmemr (UAE)</div>
+            </article>
+            <article class="quote-card">
+              <p>The final product looks great, feels clean and professional, and reflects exactly what I had in mind. I'd happily recommend him.</p>
+              <div class="quote-user"><img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69e212bfacf4c459d41598bd_Group%201000006689.svg" alt="">callumtokody (AU)</div>
+            </article>
+            <article class="quote-card">
+              <p>Outstanding experience. The landing page exceeded expectations in every way. Modern, clean, and perfectly aligned with my brand.</p>
+              <div class="quote-user"><img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69e212c016ffc869513b166d_Group%201000006688.svg" alt="">ibele_michel (DE)</div>
+            </article>
+          </div>
+          <div class="testimonial-buttons">
+            <button class="icon-btn" data-prev aria-label="Previous testimonial">&larr;</button>
+            <button class="icon-btn" data-next aria-label="Next testimonial">&rarr;</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section about" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div>
+            <div class="eyebrow">About us</div>
+            <h2>We Don't Just Design. We Build Brands That Last.</h2>
+            <p>Based in Bosnia, operating globally. SkyDesigner is an in-house premium design studio with 10+ years of experience turning bold ideas into stunning digital realities for clients across 50+ countries.</p>
+            <a class="btn neon" href="https://go.fiverr.com/visit/?bta=20848&brand=fp&campaign=2450589&landingPage=https%3A%2F%2Ffiverr.com%2Fskydesigner" target="_blank" rel="noreferrer">Learn More</a>
+          </div>
+          <aside class="success-card">
+            <h3>Client Success</h3>
+            <p>Across all projects</p>
+            <strong>99%</strong>
+            <p>Client satisfaction rate</p>
+          </aside>
+        </div>
+      </div>
+      <div class="pill-loop">
+        <span class="pill">Professional</span>
+        <span class="pill">In-House Studio</span>
+        <span class="pill">Strategic</span>
+        <span class="pill">AI-Focused</span>
+        <span class="pill">Startup Feel</span>
+        <span class="pill">Premium Quality</span>
+        <span class="pill">Global Reach</span>
+        <span class="pill">Professional</span>
+        <span class="pill">In-House Studio</span>
+        <span class="pill">Strategic</span>
+        <span class="pill">AI-Focused</span>
+        <span class="pill">Startup Feel</span>
+      </div>
+    </section>
+
+    <section class="section story" id="story">
+      <div class="container split">
+        <div>
+          <div class="eyebrow">Featured on Freelance</div>
+          <h2>Scaling my freelance business to a global creative studio</h2>
+          <p>How one self taught designer built a thriving agency from a small town in Bosnia.</p>
+          <a class="btn" href="https://go.fiverr.com/visit/?bta=20848&brand=fp&campaign=2450589&landingPage=https%3A%2F%2Ffiverr.com%2Fskydesigner" target="_blank" rel="noreferrer">Read Story</a>
+        </div>
+        <div class="image-panel">
+          <img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69eb0597f557c1cc2f58023a_Image%20Container%20(4).webp" alt="SkyDesigner story feature">
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="blog">
+      <div class="container blog-grid">
+        <div>
+          <div class="eyebrow">Blog and articles</div>
+          <h2>Design Thinking. No Fluff.</h2>
+          <p>Straight to the point insights on web design, branding, and what's actually working in the industry right now written by people who do this every day.</p>
+        </div>
+        <div class="blog-list">
+          <a class="blog-card" href="https://www.skydesigner.me/blogs/what-to-send-designer-before-logo-project" target="_blank" rel="noreferrer">
+            <img src="https://cdn.prod.website-files.com/69cd96a8da39545f92e47e5c/69dfce7202288e91d8be6da2_Brief.png" alt="">
+            <div>
+              <div class="date">April 13, 2026</div>
+              <h3>What to send a designer before starting a logo project and why most briefs fail before the work begins</h3>
+            </div>
+          </a>
+          <a class="blog-card" href="https://www.skydesigner.me/blogs/best-fiverr-wordpress-designer" target="_blank" rel="noreferrer">
+            <img src="https://cdn.prod.website-files.com/69cd96a8da39545f92e47e5c/69dfce8c443009047b967c7b_Wordpress.png" alt="">
+            <div>
+              <div class="date">April 14, 2026</div>
+              <h3>Best Freelance WordPress Website Designers: What to Look For in 2026</h3>
+            </div>
+          </a>
+          <a class="blog-card" href="https://www.skydesigner.me/blogs/how-to-select-the-right-webflow-designer-for-you-on-fiverr" target="_blank" rel="noreferrer">
+            <img src="https://cdn.prod.website-files.com/69cd96a8da39545f92e47e5c/69df2ab050ced68edf18f1b7_6967543d856431497198f516_Webflow%20fiverr%20(1).webp" alt="">
+            <div>
+              <div class="date">April 15, 2026</div>
+              <h3>How to Select the Right Webflow Designer for You on Freelance</h3>
+            </div>
+          </a>
+          <a class="blog-card" href="https://www.skydesigner.me/blogs/fiverr-vs-upwork-where-should-you-order-as-a-buyer" target="_blank" rel="noreferrer">
+            <img src="https://cdn.prod.website-files.com/69cd96a8da39545f92e47e5c/69df2b1c8756f8987ad3e240_696e1138166ced2ac73fb778_Webflow%20and%20upwork%20(1).webp" alt="">
+            <div>
+              <div class="date">April 15, 2026</div>
+              <h3>Freelance vs Upwork: Where Should You Order as a Buyer?</h3>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta">
+      <div class="container">
+        <div class="cta-grid">
+          <div class="cta-copy">
+            <div class="eyebrow">Let's work</div>
+            <h2>Built by Humans. Made to Last.</h2>
+            <p>Have a unique vision? We turn ideas into reality with strategic design that helps you achieve your online goals.</p>
+            <div>
+              <a class="btn" href="https://go.fiverr.com/visit/?bta=20848&brand=fp&campaign=2450589&landingPage=https%3A%2F%2Ffiverr.com%2Fskydesigner" target="_blank" rel="noreferrer">Visit us on Freelance</a>
+            </div>
+            <div class="users">
+              <div class="avatars">
+                <img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69cd96a8da39545f92e47f1f_user-01.avif" alt="">
+                <img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69cd96a8da39545f92e47f1e_user-02.avif" alt="">
+                <img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69cd96a8da39545f92e47f20_user-03.avif" alt="">
+              </div>
+              +30k customers
+            </div>
+          </div>
+          <div class="cta-visual">
+            <img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69ce212d91988e19ca5f4737_44599%20(1).webp" alt="Mountain background">
+            <div class="join-card">
+              <div class="accent">Vetted Pro</div>
+              <img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69d37ebedcb70e6ae5f10339_Asset%201.svg" alt="Freelance icon">
+              <div>Premium design.</div>
+              <div>Real results.</div>
+              <div class="accent">30,000+</div>
+              <div>clients trust us.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <a href="#home"><img class="footer-logo" src="timothy-carey-evans-logo.svg" alt="Timothy Carey Evans logo"></a>
+        <div>
+          <div class="footer-title">Nav</div>
+          <a href="#home">Home</a>
+          <a href="#about">About Us</a>
+          <a href="#blog">Blog</a>
+          <a href="https://go.fiverr.com/visit/?bta=20848&brand=fp&campaign=2450589&landingPage=https%3A%2F%2Ffiverr.com%2Fskydesigner" target="_blank" rel="noreferrer">Freelance</a>
+        </div>
+        <div>
+          <div class="footer-title">Pages</div>
+          <a href="https://www.skydesigner.me/legal/terms-of-service" target="_blank" rel="noreferrer">Terms</a>
+          <a href="https://www.skydesigner.me/legal/privacy-policy" target="_blank" rel="noreferrer">Privacy</a>
+          <a href="https://www.skydesigner.me/legal/refund-policy" target="_blank" rel="noreferrer">Refund</a>
+        </div>
+        <div>
+          <div class="footer-title">Company</div>
+          <address>Mladena Stojanovica 1<br>78250 Laktasi<br>Bosna i Hercegovina</address>
+          <a href="https://www.linkedin.com/in/bojan-sandic-inkyy/" target="_blank" rel="noreferrer">LinkedIn</a>
+        </div>
+      </div>
+      <div class="big-mark">timothycareyevans</div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.querySelector("[data-nav]");
+    const menu = document.querySelector("[data-menu]");
+    const toggle = document.querySelector("[data-toggle]");
+    const testimonials = document.querySelector("[data-testimonials]");
+    const prev = document.querySelector("[data-prev]");
+    const next = document.querySelector("[data-next]");
+    let index = 0;
+
+    window.addEventListener("scroll", () => {
+      nav.classList.toggle("scrolled", window.scrollY > 24);
+    });
+
+    toggle.addEventListener("click", () => {
+      menu.classList.toggle("open");
+    });
+
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => menu.classList.remove("open"));
+    });
+
+    function updateTestimonials() {
+      const card = testimonials.querySelector(".quote-card");
+      const gap = 18;
+      const width = card.getBoundingClientRect().width + gap;
+      testimonials.style.transform = `translateX(${-index * width}px)`;
+    }
+
+    next.addEventListener("click", () => {
+      index = Math.min(index + 1, 4);
+      updateTestimonials();
+    });
+
+    prev.addEventListener("click", () => {
+      index = Math.max(index - 1, 0);
+      updateTestimonials();
+    });
+
+    window.addEventListener("resize", updateTestimonials);
+  </script>
+</body>
+</html>

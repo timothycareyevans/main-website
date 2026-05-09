@@ -341,6 +341,182 @@
       line-height: 1.8;
     }
 
+    .startup-evaluator {
+      margin-top: 36px;
+      background: #f4f4f2;
+      color: #101010;
+      border: 2px solid var(--black);
+      box-shadow: 12px 12px 0 var(--black);
+      font-family: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.25;
+    }
+
+    .startup-sheet {
+      width: 100%;
+      padding: 38px clamp(18px, 4vw, 64px) 34px;
+    }
+
+    .startup-header {
+      text-align: center;
+    }
+
+    .startup-header h2 {
+      margin: 0;
+      font-size: clamp(2.35rem, 6vw, 4rem);
+      line-height: 1;
+      letter-spacing: -0.045em;
+      font-weight: 950;
+    }
+
+    .startup-title-rule {
+      width: min(330px, 52vw);
+      height: 0;
+      margin: 24px auto 14px;
+      border-top: 2px dotted #9a9a9a;
+    }
+
+    .startup-subtitle {
+      margin: 0;
+      font-size: clamp(1.25rem, 3.5vw, 2rem);
+      letter-spacing: -0.035em;
+      font-weight: 500;
+    }
+
+    .startup-framework {
+      display: grid;
+      grid-template-columns: 56px repeat(3, 1fr);
+      margin-top: 10px;
+      border: 2px solid #171717;
+      background: #fff;
+    }
+
+    .startup-side-label {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-weight: 900;
+      font-size: 0.95rem;
+      border-right: 2px solid #171717;
+      background: #f4f4f2;
+    }
+
+    .startup-cell {
+      min-height: 88px;
+      padding: 16px 18px;
+      border-right: 2px solid #171717;
+      border-bottom: 1.5px dashed #777;
+    }
+
+    .startup-cell:nth-child(4n + 1) {
+      border-right: 0;
+    }
+
+    .startup-cell h3 {
+      margin: 0 0 12px;
+      text-align: center;
+      font-size: clamp(1.45rem, 3vw, 1.85rem);
+      line-height: 1;
+      font-weight: 950;
+      letter-spacing: -0.06em;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .startup-highlight {
+      display: block;
+      width: fit-content;
+      margin: 0 auto;
+      padding: 2px 4px;
+      font-size: 1.08rem;
+      line-height: 1.15;
+      text-align: center;
+      font-weight: 500;
+      letter-spacing: -0.04em;
+    }
+
+    .startup-highlight-pink {
+      background: rgba(240, 138, 210, 0.45);
+    }
+
+    .startup-highlight-aqua {
+      background: rgba(158, 231, 230, 0.65);
+    }
+
+    .startup-highlight-green {
+      background: rgba(88, 207, 141, 0.65);
+    }
+
+    .startup-focus-list,
+    .startup-consideration-list {
+      margin: 0;
+      padding-left: 22px;
+      font-size: 1.05rem;
+      line-height: 1.25;
+      letter-spacing: -0.035em;
+    }
+
+    .startup-focus-list {
+      font-weight: 800;
+    }
+
+    .startup-consideration-list li + li {
+      margin-top: 5px;
+    }
+
+    .startup-consideration-list strong {
+      font-weight: 950;
+    }
+
+    .startup-score-box {
+      margin-top: 8px;
+      border: 2px solid #171717;
+      background: #fff;
+      padding: 20px clamp(20px, 5vw, 72px) 22px;
+    }
+
+    .startup-score-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      font-size: 1.1rem;
+    }
+
+    .startup-score-table th,
+    .startup-score-table td {
+      padding: 4px 10px;
+    }
+
+    .startup-score-table th {
+      font-weight: 950;
+    }
+
+    .startup-score-table .startup-label {
+      text-align: left;
+      width: 25%;
+      font-weight: 950;
+    }
+
+    .startup-score-table tbody tr {
+      border-bottom: 1.5px dashed #777;
+    }
+
+    .startup-score-table tbody tr:last-child {
+      border-bottom: 0;
+    }
+
+    .startup-score-table .startup-total {
+      font-weight: 950;
+    }
+
+    @media (min-width: 1100px) {
+      .startup-cell {
+        padding-inline: clamp(20px, 2.4vw, 34px);
+      }
+    }
+
     @media (max-width: 1000px) {
       .hero-grid,
       .features,
@@ -366,6 +542,50 @@
       .section-head {
         align-items: flex-start;
         flex-direction: column;
+      }
+
+      .startup-framework {
+        grid-template-columns: 1fr;
+        border-bottom: 0;
+      }
+
+      .startup-side-label {
+        writing-mode: initial;
+        transform: none;
+        min-height: 36px;
+        border-right: 0;
+        border-bottom: 2px solid #171717;
+      }
+
+      .startup-cell {
+        border-right: 0;
+        border-bottom: 2px solid #171717;
+      }
+
+      .startup-score-box {
+        padding: 14px 10px;
+      }
+
+      .startup-score-table {
+        min-width: 0;
+        font-size: 0.78rem;
+      }
+
+      .startup-score-table th,
+      .startup-score-table td {
+        padding: 4px 3px;
+      }
+
+      .startup-score-table .startup-label {
+        width: 22%;
+      }
+
+      .startup-score-table .startup-highlight {
+        display: inline;
+        width: auto;
+        font-size: 0.78rem;
+        line-height: 1;
+        padding: 1px 2px;
       }
     }
   </style>
@@ -419,6 +639,109 @@
               </p>
             </div>
           </aside>
+        </div>
+      </section>
+
+      <section class="startup-evaluator" aria-labelledby="startup-evaluator-title">
+        <div class="startup-sheet">
+          <header class="startup-header">
+            <h2 id="startup-evaluator-title">Evaluate your startup idea</h2>
+            <div class="startup-title-rule" aria-hidden="true"></div>
+            <p class="startup-subtitle">Use the DVF framework to prioritize and select your ventures</p>
+          </header>
+
+          <section class="startup-framework" aria-label="DVF framework details">
+            <div class="startup-side-label">Key Question</div>
+            <article class="startup-cell">
+              <h3>Desirability</h3>
+              <span class="startup-highlight startup-highlight-pink">"Do people<br>want this?"</span>
+            </article>
+            <article class="startup-cell">
+              <h3>Viability</h3>
+              <span class="startup-highlight startup-highlight-aqua">"Can we make this<br>profitable?"</span>
+            </article>
+            <article class="startup-cell">
+              <h3>Feasibility</h3>
+              <span class="startup-highlight startup-highlight-green">"Can we actually build<br>and deliver this?"</span>
+            </article>
+
+            <div class="startup-side-label">Focus</div>
+            <article class="startup-cell">
+              <ul class="startup-focus-list">
+                <li>User Needs and Desires</li>
+              </ul>
+            </article>
+            <article class="startup-cell">
+              <ul class="startup-focus-list">
+                <li>Business Model and Sustainability</li>
+              </ul>
+            </article>
+            <article class="startup-cell">
+              <ul class="startup-focus-list">
+                <li>Technical and Operational Capabilities</li>
+              </ul>
+            </article>
+
+            <div class="startup-side-label">Considerations</div>
+            <article class="startup-cell">
+              <ul class="startup-consideration-list">
+                <li>User research and empathy mapping</li>
+                <li>User <strong>interviews and surveys</strong></li>
+                <li>Proof of concept and <strong>validating questions</strong></li>
+              </ul>
+            </article>
+            <article class="startup-cell">
+              <ul class="startup-consideration-list">
+                <li>Market analysis and surveying competition</li>
+                <li><strong>Financials, revenue streams</strong> and cost structure</li>
+                <li><strong>Financial projections / forecasting</strong></li>
+              </ul>
+            </article>
+            <article class="startup-cell">
+              <ul class="startup-consideration-list">
+                <li><strong>Technical capabilities and infrastructure</strong></li>
+                <li>Resources available (team, time, budget, etc.)</li>
+                <li><strong>Operational processes</strong> and logistics</li>
+              </ul>
+            </article>
+          </section>
+
+          <section class="startup-score-box" aria-label="Sample scoring">
+            <table class="startup-score-table">
+              <thead>
+                <tr>
+                  <th class="startup-label">Sample Scoring</th>
+                  <th><span class="startup-highlight startup-highlight-pink">Desirability</span></th>
+                  <th><span class="startup-highlight startup-highlight-aqua">Viability</span></th>
+                  <th><span class="startup-highlight startup-highlight-green">Feasibility</span></th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Idea 1</td>
+                  <td>4</td>
+                  <td>3</td>
+                  <td>2</td>
+                  <td class="startup-total">9</td>
+                </tr>
+                <tr>
+                  <td>Idea 2</td>
+                  <td>4</td>
+                  <td>5</td>
+                  <td>3</td>
+                  <td class="startup-total">11</td>
+                </tr>
+                <tr>
+                  <td>Idea 3</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>3</td>
+                  <td class="startup-total">8</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
         </div>
       </section>
 
