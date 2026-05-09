@@ -360,6 +360,12 @@ nav {
   background: #ddd;
   position: relative;
   border-bottom: var(--border);
+  overflow: hidden;
+}
+.post-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .post-card-img.c1 { background: var(--black); }
 .post-card-img.c2 { background: #222; }
@@ -975,8 +981,7 @@ footer {
 
   <article class="post-card">
     <div class="post-card-img c1">
-      <div class="geo" style="width:80px;height:80px;background:#d0d0d0;top:30px;left:20px;"></div>
-      <div class="geo" style="width:50px;height:50px;background:#888888;bottom:20px;right:30px;"></div>
+      <img src="hacker-manifesto.jpg" alt="Green hacker manifesto text collage">
       <span class="post-card-img-num">05/12</span>
     </div>
     <div class="post-card-body">
@@ -998,8 +1003,7 @@ footer {
 
   <article class="post-card">
     <div class="post-card-img c2">
-      <div class="geo" style="width:100px;height:40px;background:#b4b4b4;top:50px;left:50%;transform:translateX(-50%);"></div>
-      <div class="geo" style="width:40px;height:100px;background:#b4b4b4;top:20px;right:30px;opacity:.5;"></div>
+      <img src="vscode-landing.jpg" alt="Visual Studio Code editing a landing page">
       <span class="post-card-img-num">06/12</span>
     </div>
     <div class="post-card-body">
@@ -1021,8 +1025,7 @@ footer {
 
   <article class="post-card">
     <div class="post-card-img c3">
-      <div class="geo" style="width:120px;height:120px;background:#888888;top:20px;right:20px;opacity:.7;"></div>
-      <div class="geo" style="width:60px;height:60px;background:#ffffff;bottom:20px;left:20px;opacity:.15;"></div>
+      <img src="golden-gate-bridge-night.jpg" alt="Golden Gate Bridge illuminated at night">
       <span class="post-card-img-num">07/12</span>
     </div>
     <div class="post-card-body">
