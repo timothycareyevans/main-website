@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluate Your Startup Idea</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --paper: #f4f4f2;
+            --ink: #101010;
+            --muted: #323232;
+            --line: #171717;
+            --dash: #777;
+            --pink: #f08ad2;
+            --green: #58cf8d;
+            --aqua: #9ee7e6;
+            --red: #b55555;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #181818;
+            color: var(--ink);
+            font-family: "Inter", Arial, sans-serif;
+            line-height: 1.25;
+        }
+
+        .sheet {
+            width: 100%;
+            margin: 0 auto;
+            min-height: 100vh;
+            background: var(--paper);
+            border-top: 2px solid var(--ink);
+            border-bottom: 2px solid var(--ink);
+            padding: 38px clamp(18px, 4vw, 64px) 34px;
+        }
+
+        .hero {
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(2.35rem, 6vw, 4rem);
+            line-height: 1;
+            letter-spacing: -0.045em;
+            font-weight: 900;
+        }
+
+        .title-rule {
+            width: min(330px, 52vw);
+            height: 0;
+            margin: 24px auto 14px;
+            border-top: 2px dotted #9a9a9a;
+        }
+
+        .subtitle {
+            margin: 0;
+            font-size: clamp(1.25rem, 3.5vw, 2rem);
+            letter-spacing: -0.035em;
+            font-weight: 500;
+        }
+
+        .venn-section {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr minmax(320px, 420px) 1fr;
+            grid-template-rows: 150px 135px;
+            gap: 18px;
+            align-items: center;
+            min-height: 315px;
+            margin: 8px 0 24px;
+        }
+
+        .criterion {
+            position: relative;
+            min-height: 120px;
+            color: var(--ink);
+        }
+
+        .criterion-left {
+            align-self: end;
+            padding-left: 24px;
+        }
+
+        .criterion-right {
+            padding-right: 16px;
+            align-self: start;
+            margin-top: 72px;
+        }
+
+        .criterion-bottom {
+            grid-column: 1;
+            grid-row: 2;
+            position: relative;
+            left: 66px;
+            bottom: auto;
+            width: 250px;
+            align-self: start;
+        }
+
+        .icon {
+            display: block;
+            height: 33px;
+            margin-bottom: 2px;
+            font-size: 34px;
+            line-height: 1;
+            font-weight: 700;
+        }
+
+        .heart {
+            font-weight: 300;
+            transform: translateX(-8px);
+        }
+
+        .check-icon {
+            position: relative;
+            width: 34px;
+            height: 34px;
+            border: 3px solid var(--ink);
+            border-radius: 50%;
+            margin-bottom: 4px;
+        }
+
+        .check-icon::after {
+            content: "";
+            position: absolute;
+            left: 7px;
+            top: 6px;
+            width: 17px;
+            height: 9px;
+            border-left: 4px solid var(--ink);
+            border-bottom: 4px solid var(--ink);
+            transform: rotate(-45deg);
+        }
+
+        .criterion h2 {
+            margin: 0;
+            font-size: 1.36rem;
+            line-height: 1.05;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+        }
+
+        .criterion p {
+            margin: 4px 0 0;
+            max-width: 190px;
+            font-size: 1.28rem;
+            line-height: 1.2;
+            letter-spacing: -0.04em;
+            font-weight: 500;
+        }
+
+        .line {
+            position: absolute;
+            top: 74px;
+            width: 145px;
+            height: 2px;
+            background: var(--line);
+        }
+
+        .line-left {
+            right: -12px;
+        }
+
+        .line-right {
+            left: -28px;
+            top: 66px;
+            width: 160px;
+        }
+
+        .line-bottom {
+            left: 170px;
+            top: 70px;
+            width: 188px;
+        }
+
+        .venn {
+            grid-column: 2;
+            grid-row: 1 / span 2;
+            position: relative;
+            height: 300px;
+        }
+
+        .circle {
+            position: absolute;
+            width: 195px;
+            height: 195px;
+            border-radius: 50%;
+            opacity: 0.75;
+            mix-blend-mode: multiply;
+        }
+
+        .circle-pink {
+            background: var(--pink);
+            left: 34px;
+            top: 24px;
+        }
+
+        .circle-green {
+            background: var(--green);
+            right: 30px;
+            top: 24px;
+        }
+
+        .circle-aqua {
+            background: var(--aqua);
+            left: 95px;
+            bottom: 10px;
+        }
+
+        .sweet-spot {
+            position: absolute;
+            right: -170px;
+            bottom: 70px;
+            font-size: 1.25rem;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+        }
+
+        .scribble {
+            position: absolute;
+            left: 94px;
+            top: 90px;
+            width: 150px;
+            height: 70px;
+            border: 3px solid rgba(174, 72, 72, 0.8);
+            border-radius: 50%;
+            transform: rotate(-16deg);
+        }
+
+        .scribble::after {
+            content: "";
+            position: absolute;
+            right: -70px;
+            top: 38px;
+            width: 132px;
+            height: 52px;
+            border-top: 3px solid rgba(174, 72, 72, 0.7);
+            border-radius: 50%;
+            transform: rotate(25deg);
+        }
+
+        .arrow {
+            position: absolute;
+            right: 8px;
+            bottom: 72px;
+            width: 38px;
+            height: 38px;
+            border-right: 3px solid rgba(174, 72, 72, 0.8);
+            border-bottom: 3px solid rgba(174, 72, 72, 0.8);
+            transform: rotate(28deg) skew(9deg);
+        }
+
+        .framework {
+            display: grid;
+            grid-template-columns: 56px repeat(3, 1fr);
+            border: 2px solid var(--line);
+            background: #fff;
+        }
+
+        .side-label {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: 800;
+            font-size: 0.95rem;
+            border-right: 2px solid var(--line);
+            background: var(--paper);
+        }
+
+        .cell {
+            min-height: 88px;
+            padding: 16px 18px;
+            border-right: 2px solid var(--line);
+            border-bottom: 1.5px dashed var(--dash);
+        }
+
+        .cell:nth-child(4n + 1) {
+            border-right: 0;
+        }
+
+        .cell h3 {
+            margin: 0 0 12px;
+            text-align: center;
+            font-size: clamp(1.45rem, 3vw, 1.85rem);
+            line-height: 1;
+            font-weight: 900;
+            letter-spacing: -0.06em;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .highlight {
+            display: block;
+            width: fit-content;
+            margin: 0 auto;
+            padding: 2px 4px;
+            font-size: 1.08rem;
+            line-height: 1.15;
+            text-align: center;
+            font-weight: 500;
+            letter-spacing: -0.04em;
+        }
+
+        .highlight-pink {
+            background: rgba(240, 138, 210, 0.45);
+        }
+
+        .highlight-aqua {
+            background: rgba(158, 231, 230, 0.65);
+        }
+
+        .highlight-green {
+            background: rgba(88, 207, 141, 0.65);
+        }
+
+        .focus-list,
+        .consideration-list {
+            margin: 0;
+            padding-left: 22px;
+            font-size: 1.05rem;
+            line-height: 1.25;
+            letter-spacing: -0.035em;
+        }
+
+        .focus-list {
+            font-weight: 700;
+        }
+
+        .consideration-list li + li {
+            margin-top: 5px;
+        }
+
+        .consideration-list strong {
+            font-weight: 900;
+        }
+
+        .score-box {
+            margin-top: 8px;
+            border: 2px solid var(--line);
+            background: #fff;
+            padding: 20px clamp(20px, 5vw, 72px) 22px;
+        }
+
+        @media (min-width: 1100px) {
+            .cell {
+                padding-inline: clamp(20px, 2.4vw, 34px);
+            }
+        }
+
+        .score-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .score-table th,
+        .score-table td {
+            padding: 4px 10px;
+        }
+
+        .score-table th {
+            font-weight: 900;
+        }
+
+        .score-table .label {
+            text-align: left;
+            width: 25%;
+            font-weight: 900;
+        }
+
+        .score-table tbody tr {
+            border-bottom: 1.5px dashed var(--dash);
+        }
+
+        .score-table tbody tr:last-child {
+            border-bottom: 0;
+        }
+
+        .score-table .total {
+            font-weight: 900;
+        }
+
+        @media (max-width: 860px) {
+            .sheet {
+                padding: 30px 18px;
+            }
+
+            .venn-section {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                justify-items: center;
+                gap: 8px;
+                min-height: 0;
+            }
+
+            .criterion {
+                width: min(100%, 360px);
+                min-height: auto;
+                padding: 0;
+                text-align: center;
+            }
+
+            .criterion p {
+                max-width: none;
+            }
+
+            .criterion-right {
+                margin-top: 0;
+                order: 3;
+            }
+
+            .criterion-bottom {
+                position: static;
+                order: 4;
+                width: min(100%, 360px);
+            }
+
+            .line {
+                display: none;
+            }
+
+            .venn {
+                grid-column: 1;
+                grid-row: auto;
+                width: min(100%, 420px);
+                order: 2;
+            }
+
+            .sweet-spot {
+                right: 16px;
+                bottom: 44px;
+            }
+
+            .framework {
+                grid-template-columns: 1fr;
+                border-bottom: 0;
+            }
+
+            .side-label {
+                writing-mode: initial;
+                transform: none;
+                min-height: 36px;
+                border-right: 0;
+                border-bottom: 2px solid var(--line);
+            }
+
+            .cell {
+                border-right: 0;
+                border-bottom: 2px solid var(--line);
+            }
+
+            .score-box {
+                padding: 14px 10px;
+            }
+
+            .score-table {
+                min-width: 0;
+                font-size: 0.78rem;
+            }
+
+            .score-table th,
+            .score-table td {
+                padding: 4px 3px;
+            }
+
+            .score-table .label {
+                width: 22%;
+            }
+
+            .score-table .highlight {
+                display: inline;
+                width: auto;
+                font-size: 0.78rem;
+                line-height: 1;
+                padding: 1px 2px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .circle {
+                width: 165px;
+                height: 165px;
+            }
+
+            .circle-pink {
+                left: 18px;
+            }
+
+            .circle-green {
+                right: 18px;
+            }
+
+            .circle-aqua {
+                left: calc(50% - 82px);
+                bottom: 22px;
+            }
+
+            .scribble {
+                left: calc(50% - 74px);
+                top: 92px;
+            }
+
+            .arrow {
+                right: 20px;
+                bottom: 66px;
+            }
+
+            .sweet-spot {
+                right: 0;
+                bottom: 28px;
+                font-size: 1.05rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="sheet">
+        <header class="hero">
+            <h1>Evaluate your startup idea</h1>
+            <div class="title-rule" aria-hidden="true"></div>
+            <p class="subtitle">Use the DVF framework to prioritize and select your ventures</p>
+        </header>
+
+        <section class="framework" aria-label="DVF framework details">
+            <div class="side-label">Key Question</div>
+            <article class="cell">
+                <h3>Desirability</h3>
+                <span class="highlight highlight-pink">"Do people<br>want this?"</span>
+            </article>
+            <article class="cell">
+                <h3>Viability</h3>
+                <span class="highlight highlight-aqua">"Can we make this<br>profitable?"</span>
+            </article>
+            <article class="cell">
+                <h3>Feasibility</h3>
+                <span class="highlight highlight-green">"Can we actually build<br>and deliver this?"</span>
+            </article>
+
+            <div class="side-label">Focus</div>
+            <article class="cell">
+                <ul class="focus-list">
+                    <li>User Needs and Desires</li>
+                </ul>
+            </article>
+            <article class="cell">
+                <ul class="focus-list">
+                    <li>Business Model and Sustainability</li>
+                </ul>
+            </article>
+            <article class="cell">
+                <ul class="focus-list">
+                    <li>Technical and Operational Capabilities</li>
+                </ul>
+            </article>
+
+            <div class="side-label">Considerations</div>
+            <article class="cell">
+                <ul class="consideration-list">
+                    <li>User research and empathy mapping</li>
+                    <li>User <strong>interviews and surveys</strong></li>
+                    <li>Proof of concept and <strong>validating questions</strong></li>
+                </ul>
+            </article>
+            <article class="cell">
+                <ul class="consideration-list">
+                    <li>Market analysis and surveying competition</li>
+                    <li><strong>Financials, revenue streams</strong> and cost structure</li>
+                    <li><strong>Financial projections / forecasting</strong></li>
+                </ul>
+            </article>
+            <article class="cell">
+                <ul class="consideration-list">
+                    <li><strong>Technical capabilities and infrastructure</strong></li>
+                    <li>Resources available (team, time, budget, etc.)</li>
+                    <li><strong>Operational processes</strong> and logistics</li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="score-box" aria-label="Sample scoring">
+            <table class="score-table">
+                <thead>
+                    <tr>
+                        <th class="label">Sample Scoring</th>
+                        <th><span class="highlight highlight-pink">Desirability</span></th>
+                        <th><span class="highlight highlight-aqua">Viability</span></th>
+                        <th><span class="highlight highlight-green">Feasibility</span></th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Idea 1</td>
+                        <td>4</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td class="total">9</td>
+                    </tr>
+                    <tr>
+                        <td>Idea 2</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>3</td>
+                        <td class="total">11</td>
+                    </tr>
+                    <tr>
+                        <td>Idea 3</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td class="total">8</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>
