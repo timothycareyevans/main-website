@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Skydesigner - Static HTML Clone</title>
+  <title>My services</title>
   <meta name="description" content="Static HTML recreation of the SkyDesigner landing page.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" href="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69df2b63dbe0ed37c70ce9b0_Favicon%20skydesigner%201.png">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <style>
     :root {
       --black: #070806;
@@ -80,7 +80,7 @@
       gap: 9px;
       margin: 0 0 22px;
       color: inherit;
-      font-size: 13px;
+      font-size: 20px;
       font-weight: 700;
       letter-spacing: 0;
       text-transform: uppercase;
@@ -316,6 +316,21 @@
       color: rgba(223, 247, 189, .72);
     }
 
+    .results-preview {
+      margin-top: 42px;
+      overflow: hidden;
+      border: 1px solid rgba(223, 247, 189, .2);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .04);
+      box-shadow: 0 22px 70px rgba(0, 0, 0, .28);
+    }
+
+    .results-preview img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
     .logo-marquee {
       width: 100%;
       overflow: hidden;
@@ -436,9 +451,23 @@
       align-items: center;
     }
 
-    .fiverr-logo {
-      width: 270px;
+    .review-logo {
+      display: inline-flex;
+      align-items: center;
       margin-bottom: 18px;
+      color: var(--black);
+      font-family: "Inter", "Geist", Arial, sans-serif;
+      font-size: clamp(42px, 6vw, 78px);
+      line-height: .92;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .review-logo .google-g {
+      margin-right: 14px;
+      font-size: .95em;
+      font-weight: 700;
+      color: #4285f4;
     }
 
     .rating {
@@ -895,17 +924,17 @@
 <body>
   <header class="nav" data-nav>
     <div class="container nav-inner">
-      <a class="brand" href="#home" aria-label="SkyDesigner home">
+      <a class="brand" href="../index.html" aria-label="Home">
         <img src="timothy-carey-evans-logo.svg" alt="Timothy Carey Evans logo">
       </a>
       <nav class="links" data-menu>
-        <a href="#home">Home</a>
-        <a href="#about">About Us</a>
-        <a href="#blog">Blog</a>
-        <a href="https://meet.skydesigner.me/" target="_blank" rel="noreferrer">Contact</a>
-        <a href="#story">My Freelance Story</a>
+        <a href="../index.html">Home</a>
+        <a href="../blog/">On theDaily blog</a>
+        <a href="../initialup.html">Intializing / Updates</a>
+        <a href="../portfolio-work/">Portfolio work</a>
+        <a href="../my-services/">My services</a>
       </nav>
-      <a class="btn" href="https://go.fiverr.com/visit/?bta=20848&brand=fp&campaign=2450589&landingPage=https%3A%2F%2Ffiverr.com%2Fskydesigner" target="_blank" rel="noreferrer">Visit Freelance</a>
+      <a class="btn" href="#" target="_blank" rel="noreferrer">Request a Quote</a>
       <button class="menu-toggle" data-toggle aria-label="Toggle menu">
         <span></span>
         <span></span>
@@ -923,8 +952,8 @@
         <h1>We Build Digital Experiences That Win</h1>
         <p class="hero-copy">We craft premium websites, brands, and digital experiences that elevate your business and turn visitors into loyal customers.</p>
         <div class="actions">
-          <a class="btn outline" href="https://go.fiverr.com/visit/?bta=20848&brand=fp&campaign=2450589&landingPage=https%3A%2F%2Ffiverr.com%2Fskydesigner" target="_blank" rel="noreferrer">Book a Call</a>
-          <a class="btn neon" href="https://go.fiverr.com/visit/?bta=20848&brand=fp&campaign=2450589&landingPage=https%3A%2F%2Ffiverr.com%2Fskydesigner" target="_blank" rel="noreferrer">Visit Freelance</a>
+          <a class="btn outline" href="#" target="_blank" rel="noreferrer">Book a Call</a>
+          <a class="btn neon" href="#" target="_blank" rel="noreferrer">Request a Quote</a>
         </div>
       </div>
     </section>
@@ -932,7 +961,12 @@
     <section class="section dark">
       <div class="container">
         <div class="results-grid">
-          <div class="eyebrow">Results</div>
+          <div>
+            <div class="eyebrow">Results</div>
+            <div class="results-preview">
+              <img src="onthedaily.jpg" alt="On theDaily blog homepage preview">
+            </div>
+          </div>
           <div>
             <h2>Over a Decade of Designs That Deliver.</h2>
             <p>Since 2014, we've helped thousands of businesses worldwide build powerful digital presences from early-stage startups to $100M+ companies. Every project. Every pixel. Crafted with purpose.</p>
@@ -980,7 +1014,7 @@
           </div>
           <div>
             <p>We deliver strategic solutions grounded in research, experience, and industry best practices.</p>
-            <a class="btn" href="https://go.fiverr.com/visit/?bta=20848&brand=fp&campaign=2450589&landingPage=https%3A%2F%2Ffiverr.com%2Fskydesigner" target="_blank" rel="noreferrer">View Services</a>
+            <a class="btn" href="#" target="_blank" rel="noreferrer">View Services</a>
           </div>
         </div>
         <div class="service-grid">
@@ -988,19 +1022,19 @@
             <img class="service-icon" src="https://cdn.prod.website-files.com/69cd96a8da39545f92e47e5c/69cd96a8da39545f92e47fee_ai-fill-neon.svg" alt="">
             <h3>Branding</h3>
             <p>Through research driven insights, we create distinctive brand identities that resonate with your audience and set you apart in the market.</p>
-            <a class="learn" href="https://go.fiverr.com/visit/?bta=20848&brand=fp&campaign=2450589&landingPage=https%3A%2F%2Ffiverr.com%2Fskydesigner" target="_blank" rel="noreferrer">learn more</a>
+            <a class="learn" href="#" target="_blank" rel="noreferrer">learn more</a>
           </article>
           <article class="service-card">
             <img class="service-icon" src="https://cdn.prod.website-files.com/69cd96a8da39545f92e47e5c/69cd96a8da39545f92e48031_phone-filled.svg" alt="">
             <h3>Web Design</h3>
             <p>We combine user research with beautiful design in Figma, crafting interactive and animated experiences that engage and convert.</p>
-            <a class="learn" href="https://go.fiverr.com/visit/?bta=20848&brand=fp&campaign=2450589&landingPage=https%3A%2F%2Ffiverr.com%2Fskydesigner" target="_blank" rel="noreferrer">learn more</a>
+            <a class="learn" href="#" target="_blank" rel="noreferrer">learn more</a>
           </article>
           <article class="service-card">
             <img class="service-icon" src="https://cdn.prod.website-files.com/69cd96a8da39545f92e47e5c/69cd96a8da39545f92e48063_box-fill.svg" alt="">
             <h3>Web Development</h3>
             <p>We build high performance websites and platforms using WordPress, Webflow, Shopify, React.js and HTML/CSS.</p>
-            <a class="learn" href="https://go.fiverr.com/visit/?bta=20848&brand=fp&campaign=2450589&landingPage=https%3A%2F%2Ffiverr.com%2Fskydesigner" target="_blank" rel="noreferrer">learn more</a>
+            <a class="learn" href="#" target="_blank" rel="noreferrer">learn more</a>
           </article>
         </div>
       </div>
@@ -1045,7 +1079,7 @@
         <div class="fiverr-grid">
           <div>
             <div class="eyebrow">We are</div>
-            <img class="fiverr-logo" src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69dddfffd503113458fbeabe_image%202.webp" alt="Freelance Pro">
+            <div class="review-logo" aria-label="Google Reviews"><span class="google-g">G</span>Google Reviews</div>
             <div class="rating">
               <span>Rated 4.9/5 by 4,900+ clients</span>
               <img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69dde444e816f86478be81f5_Rating.svg" alt="Rating stars">
@@ -1090,8 +1124,8 @@
           <div>
             <div class="eyebrow">About us</div>
             <h2>We Don't Just Design. We Build Brands That Last.</h2>
-            <p>Based in Bosnia, operating globally. SkyDesigner is an in-house premium design studio with 10+ years of experience turning bold ideas into stunning digital realities for clients across 50+ countries.</p>
-            <a class="btn neon" href="https://go.fiverr.com/visit/?bta=20848&brand=fp&campaign=2450589&landingPage=https%3A%2F%2Ffiverr.com%2Fskydesigner" target="_blank" rel="noreferrer">Learn More</a>
+            <p>Based in San Francisco, operating globally, TCE is an in-house premium design studio with 10+ years of experience turning bold ideas into stunning digital realities for clients across 50+ countries.</p>
+            <a class="btn neon" href="#" target="_blank" rel="noreferrer">Learn More</a>
           </div>
           <aside class="success-card">
             <h3>Client Success</h3>
@@ -1122,8 +1156,8 @@
         <div>
           <div class="eyebrow">Featured on Freelance</div>
           <h2>Scaling my freelance business to a global creative studio</h2>
-          <p>How one self taught designer built a thriving agency from a small town in Bosnia.</p>
-          <a class="btn" href="https://go.fiverr.com/visit/?bta=20848&brand=fp&campaign=2450589&landingPage=https%3A%2F%2Ffiverr.com%2Fskydesigner" target="_blank" rel="noreferrer">Read Story</a>
+          <p>How one self taught designer built a thriving agency in the heart of San Francisco.</p>
+          <a class="btn" href="#" target="_blank" rel="noreferrer">Read Story</a>
         </div>
         <div class="image-panel">
           <img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69eb0597f557c1cc2f58023a_Image%20Container%20(4).webp" alt="SkyDesigner story feature">
@@ -1134,7 +1168,7 @@
     <section class="section" id="blog">
       <div class="container blog-grid">
         <div>
-          <div class="eyebrow">Blog and articles</div>
+          <div class="eyebrow">Articles</div>
           <h2>Design Thinking. No Fluff.</h2>
           <p>Straight to the point insights on web design, branding, and what's actually working in the industry right now written by people who do this every day.</p>
         </div>
@@ -1179,7 +1213,7 @@
             <h2>Built by Humans. Made to Last.</h2>
             <p>Have a unique vision? We turn ideas into reality with strategic design that helps you achieve your online goals.</p>
             <div>
-              <a class="btn" href="https://go.fiverr.com/visit/?bta=20848&brand=fp&campaign=2450589&landingPage=https%3A%2F%2Ffiverr.com%2Fskydesigner" target="_blank" rel="noreferrer">Visit us on Freelance</a>
+              <a class="btn" href="#" target="_blank" rel="noreferrer">Visit us on Freelance</a>
             </div>
             <div class="users">
               <div class="avatars">
@@ -1209,13 +1243,13 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
-        <a href="#home"><img class="footer-logo" src="timothy-carey-evans-logo.svg" alt="Timothy Carey Evans logo"></a>
+        <a href="../index.html"><img class="footer-logo" src="timothy-carey-evans-logo.svg" alt="Timothy Carey Evans logo"></a>
         <div>
           <div class="footer-title">Nav</div>
-          <a href="#home">Home</a>
-          <a href="#about">About Us</a>
-          <a href="#blog">Blog</a>
-          <a href="https://go.fiverr.com/visit/?bta=20848&brand=fp&campaign=2450589&landingPage=https%3A%2F%2Ffiverr.com%2Fskydesigner" target="_blank" rel="noreferrer">Freelance</a>
+          <a href="../index.html">Home</a>
+          <a href="blog/">On theDaily blog</a>
+          <a href="initialup.html">Intializing / Updates</a>
+          <a href="#" target="_blank" rel="noreferrer">Portfolio work</a>
         </div>
         <div>
           <div class="footer-title">Pages</div>
@@ -1225,11 +1259,11 @@
         </div>
         <div>
           <div class="footer-title">Company</div>
-          <address>Mladena Stojanovica 1<br>78250 Laktasi<br>Bosna i Hercegovina</address>
-          <a href="https://www.linkedin.com/in/bojan-sandic-inkyy/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <address>Made with ❤️ in San Francisco, CA</address>
+          <a href="https://www.linkedin.com/in/timothy-e-a3b8324" target="_blank" rel="noreferrer">LinkedIn</a>
         </div>
       </div>
-      <div class="big-mark">timothycareyevans</div>
+      <div class="big-mark">timothycarey<br>evans</div>
     </div>
   </footer>
 
