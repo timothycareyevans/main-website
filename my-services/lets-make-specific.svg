@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1426 571" role="img" aria-labelledby="title desc">
+  <title id="title">Let's make something specific</title>
+  <desc id="desc">Bold black typography reading Let's make something specific, with specific highlighted in neon green.</desc>
+  <rect width="1426" height="571" fill="#f2f1ee"/>
+  <rect x="28" y="367" width="1058" height="173" fill="#b6ff00"/>
+  <g fill="#070806" font-family="Arial Black, Impact, sans-serif" font-weight="900" letter-spacing="-8">
+    <text x="34" y="181" font-size="194">LET'S MAKE</text>
+    <text x="33" y="354" font-size="194">SOMETHING</text>
+    <text x="49" y="530" font-size="194">SPECIFIC.</text>
+  </g>
+</svg>
