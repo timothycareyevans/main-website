@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Radial corner mark">
+  <g fill="none" stroke="#102006" stroke-width="4" stroke-linecap="square">
+    <path d="M100 0v100"/>
+    <path d="M100 100H0"/>
+    <path d="M100 100h100"/>
+    <path d="M100 100v100"/>
+    <path d="M89 1 100 100"/>
+    <path d="M77 3 100 100"/>
+    <path d="M65 7 100 100"/>
+    <path d="M54 12 100 100"/>
+    <path d="M43 18 100 100"/>
+    <path d="M33 26 100 100"/>
+    <path d="M24 35 100 100"/>
+    <path d="M16 45 100 100"/>
+    <path d="M10 56 100 100"/>
+    <path d="M5 68 100 100"/>
+    <path d="M2 80 100 100"/>
+    <path d="M111 199 100 100"/>
+    <path d="M123 197 100 100"/>
+    <path d="M135 193 100 100"/>
+    <path d="M146 188 100 100"/>
+    <path d="M157 182 100 100"/>
+    <path d="M167 174 100 100"/>
+    <path d="M176 165 100 100"/>
+    <path d="M184 155 100 100"/>
+    <path d="M190 144 100 100"/>
+    <path d="M195 132 100 100"/>
+    <path d="M198 120 100 100"/>
+  </g>
+</svg>

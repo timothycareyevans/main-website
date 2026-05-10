@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Stepped triangle mark">
+  <g fill="none" stroke="#102006" stroke-width="4" stroke-linejoin="miter">
+    <path d="M5 100 100 5v98H5Z"/>
+    <path d="M37 132 132 37v98H37Z"/>
+    <path d="M69 164 164 69v98H69Z"/>
+    <path d="M101 196 196 101v98h-95Z"/>
+  </g>
+</svg>

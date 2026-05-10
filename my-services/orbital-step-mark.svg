@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Orbital line mark">
+  <g fill="none" stroke="#102006" stroke-width="4">
+    <ellipse cx="100" cy="100" rx="58" ry="98" transform="rotate(36 100 100)"/>
+    <ellipse cx="100" cy="100" rx="58" ry="98" transform="rotate(72 100 100)"/>
+    <ellipse cx="100" cy="100" rx="58" ry="98" transform="rotate(108 100 100)"/>
+  </g>
+</svg>
