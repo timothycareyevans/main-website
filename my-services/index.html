@@ -532,6 +532,28 @@
       border-radius: 50%;
     }
 
+    .letter-icon {
+      width: 48px;
+      height: 48px;
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--neon);
+      color: var(--black);
+      font-family: "Inter", sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .letter-icon.blue {
+      background: #d7e7ff;
+    }
+
+    .letter-icon.rose {
+      background: #ffdee7;
+    }
+
     .testimonial-buttons {
       display: flex;
       justify-content: flex-end;
@@ -562,18 +584,29 @@
     }
 
     .success-card {
+      position: relative;
+      overflow: hidden;
       min-height: 390px;
       padding: 36px;
       border-radius: var(--radius);
-      background: var(--mint);
-      color: var(--black);
+      background:
+        linear-gradient(180deg, rgba(0, 0, 0, .42), rgba(0, 0, 0, .72)),
+        url("goldengatebridgeatnight.jpg") center / cover;
+      color: var(--white);
       box-shadow: var(--shadow);
+    }
+
+    .success-card h3,
+    .success-card p,
+    .success-card strong {
+      position: relative;
+      z-index: 1;
+      color: var(--white);
     }
 
     .success-card strong {
       display: block;
       margin-top: 76px;
-      color: var(--black);
       font-size: 96px;
       line-height: .86;
       font-weight: 600;
@@ -616,6 +649,7 @@
       width: 100%;
       height: 540px;
       object-fit: cover;
+      object-position: center;
     }
 
     .blog-grid {
@@ -941,7 +975,7 @@
         <a href="../portfolio-work/">Portfolio work</a>
         <a href="../my-services/">My services</a>
       </nav>
-      <a class="btn" href="#" target="_blank" rel="noreferrer">Request a Quote</a>
+      <a class="btn" href="#" target="_blank" rel="noreferrer">Sign In</a>
       <button class="menu-toggle" data-toggle aria-label="Toggle menu">
         <span></span>
         <span></span>
@@ -959,7 +993,7 @@
         <h1>We Build Digital Experiences That Win</h1>
         <p class="hero-copy">We craft premium websites, brands, and digital experiences that elevate your business and turn visitors into loyal customers.</p>
         <div class="actions">
-          <a class="btn outline" href="#" target="_blank" rel="noreferrer">Book a Call</a>
+          <a class="btn outline" href="#" target="_blank" rel="noreferrer">Hire Me</a>
           <a class="btn neon" href="#" target="_blank" rel="noreferrer">Request a Quote</a>
         </div>
       </div>
@@ -987,7 +1021,7 @@
               </div>
               <div>
                 <div class="stat-number">$4M+</div>
-                <div class="stat-label">Earned on Freelance</div>
+                <div class="stat-label">Earned</div>
               </div>
               <div>
                 <div class="stat-number">30K+</div>
@@ -1092,24 +1126,24 @@
       <div class="container">
         <div class="fiverr-grid">
           <div>
-            <div class="eyebrow">We are</div>
+            <div class="eyebrow">FEEDBACK</div>
             <div class="review-logo" aria-label="Google Reviews"><span class="google-g">G</span>Google Reviews</div>
             <div class="rating">
               <span>Rated 4.9/5 by 4,900+ clients</span>
               <img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69dde444e816f86478be81f5_Rating.svg" alt="Rating stars">
             </div>
           </div>
-          <p>Hand-picked by the Freelance Pro team, we represent a select group of top-tier professionals recognised for exceptional skills and expertise. With the backing of Freelance Pro, we bring quality and reliability to every project.</p>
+          <p>Hand-picked for a select group of top-tier professionals recognised for exceptional skills and expertise. We bring quality and reliability to every project.</p>
         </div>
         <div class="testimonial-wrap">
           <div class="testimonials" data-testimonials>
             <article class="quote-card">
               <p>Exceptional service and a very clean, professional design that aligned well with our branding needs. The visuals were strong, and the choice of color patterns was excellent.</p>
-              <div class="quote-user"><img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69e2120ac51e403baf39ee11_5295fffe-38e8-4386-8dfb-e4aa33818568.webp" alt="">duane_427 (US)</div>
+              <div class="quote-user"><span class="letter-icon blue">D</span>duane_427 (US)</div>
             </article>
             <article class="quote-card">
               <p>Bojan and his team truly deliver. It's clear they have a wealth of experience creating modern, functional, visually appealing websites.</p>
-              <div class="quote-user"><img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69e211a58241edc2e183e547_d72fae5f-6c8a-47b5-b107-fdb5a9a0bb0a%20(1).webp" alt="">pixeloutpost (UK)</div>
+              <div class="quote-user"><span class="letter-icon rose">P</span>pixeloutpost (UK)</div>
             </article>
             <article class="quote-card">
               <p>I'm so happy to work with this team. They continue to impress me with creativity and UX structure. I do believe they are number one.</p>
@@ -1136,7 +1170,7 @@
       <div class="container">
         <div class="about-grid">
           <div>
-            <div class="eyebrow">About us</div>
+            <div class="eyebrow">Quality</div>
             <h2>We Don't Just Design. We Build Brands That Last.</h2>
             <p>Based in San Francisco, operating globally, TCE is an in-house premium design studio with 10+ years of experience turning bold ideas into stunning digital realities for clients across 50+ countries.</p>
             <a class="btn neon" href="#" target="_blank" rel="noreferrer">Learn More</a>
@@ -1168,13 +1202,13 @@
     <section class="section story" id="story">
       <div class="container split">
         <div>
-          <div class="eyebrow">Featured on Freelance</div>
+          <div class="eyebrow">Agency</div>
           <h2>Scaling my freelance business to a global creative studio</h2>
           <p>How one self taught designer built a thriving agency in the heart of San Francisco.</p>
           <a class="btn" href="#" target="_blank" rel="noreferrer">Read Story</a>
         </div>
         <div class="image-panel">
-          <img src="https://cdn.prod.website-files.com/69cd96a6da39545f92e47d5f/69eb0597f557c1cc2f58023a_Image%20Container%20(4).webp" alt="SkyDesigner story feature">
+          <img src="cyberpunk-street-image-panel.jpg" alt="Neon city street at night">
         </div>
       </div>
     </section>
@@ -1182,7 +1216,7 @@
     <section class="section" id="blog">
       <div class="container blog-grid">
         <div>
-          <div class="eyebrow">Articles</div>
+          <div class="eyebrow">Current</div>
           <h2>Design Thinking. No Fluff.</h2>
           <p>Straight to the point insights on web design, branding, and what's actually working in the industry right now written by people who do this every day.</p>
         </div>
@@ -1205,7 +1239,7 @@
             <img src="https://cdn.prod.website-files.com/69cd96a8da39545f92e47e5c/69df2ab050ced68edf18f1b7_6967543d856431497198f516_Webflow%20fiverr%20(1).webp" alt="">
             <div>
               <div class="date">April 15, 2026</div>
-              <h3>How to Select the Right Webflow Designer for You on Freelance</h3>
+              <h3>How to Select the Right Webflow Designer for You</h3>
             </div>
           </a>
           <a class="blog-card" href="../blogs/fiverr-vs-upwork-where-should-you-order-as-a-buyer">
