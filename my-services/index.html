@@ -17,6 +17,7 @@
       --line: rgba(7, 8, 6, .12);
       --mint: #dff7bd;
       --neon: #b9ff36;
+      --yellow: #ccff00;
       --cream: #f6f1df;
       --paper: #f8f8f2;
       --white: #ffffff;
@@ -166,6 +167,148 @@
       background: rgba(255, 255, 255, .06);
       color: var(--white);
       backdrop-filter: blur(14px);
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 180ms ease;
+    }
+
+    .modal.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-backdrop {
+      position: absolute;
+      inset: 0;
+      border: 0;
+      background: rgba(0, 0, 0, .62);
+      cursor: pointer;
+    }
+
+    .modal-panel {
+      position: relative;
+      z-index: 1;
+      width: min(560px, 100%);
+      min-height: 360px;
+      max-height: calc(100vh - 48px);
+      overflow: auto;
+      padding: 4px;
+      background: var(--yellow);
+      color: var(--white);
+      clip-path: polygon(28px 0, calc(100% - 28px) 0, 100% 28px, 100% calc(100% - 28px), calc(100% - 28px) 100%, 28px 100%, 0 calc(100% - 28px), 0 28px);
+      box-shadow: 0 28px 90px rgba(0, 0, 0, .4);
+    }
+
+    .modal-panel:focus {
+      outline: 2px solid var(--yellow);
+      outline-offset: 4px;
+    }
+
+    .modal-frame {
+      position: relative;
+      min-height: 352px;
+      padding: 34px;
+      background: #000;
+      clip-path: polygon(25px 0, calc(100% - 25px) 0, 100% 25px, 100% calc(100% - 25px), calc(100% - 25px) 100%, 25px 100%, 0 calc(100% - 25px), 0 25px);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 18px;
+      z-index: 2;
+      border: 0;
+      background: transparent;
+      color: var(--yellow);
+      font-size: 36px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .modal-step {
+      display: none;
+    }
+
+    .modal-step.is-visible {
+      display: grid;
+      gap: 14px;
+    }
+
+    .modal h2 {
+      margin: 0 0 18px;
+      text-align: center;
+      color: var(--white);
+      font-size: 34px;
+      line-height: 1.1;
+    }
+
+    .modal a,
+    .modal-form button,
+    .modal-choice button {
+      display: block;
+      width: 100%;
+      padding: 15px 18px;
+      border: 2px solid var(--yellow);
+      border-radius: 8px;
+      background: var(--yellow);
+      color: #000;
+      font-family: "Inter", Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .modal-choice button,
+    .modal-choice .modal-secondary-link,
+    .modal-form button:first-child {
+      background: transparent;
+      color: var(--yellow);
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .modal input,
+    .modal select,
+    .modal textarea {
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, .24);
+      border-radius: 8px;
+      background: #000;
+      color: var(--white);
+      font-family: "Inter", Arial, sans-serif;
+      font-size: 15px;
+      padding: 12px 13px;
+      outline: none;
+    }
+
+    .modal textarea {
+      min-height: 132px;
+      resize: vertical;
+    }
+
+    .modal input:focus,
+    .modal select:focus,
+    .modal textarea:focus {
+      border-color: var(--yellow);
     }
 
     .nav {
@@ -986,6 +1129,14 @@
       .cta-grid {
         min-height: 0;
       }
+
+      .field-row {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-frame {
+        padding: 30px 18px;
+      }
     }
   </style>
 </head>
@@ -1021,7 +1172,7 @@
         <p class="hero-copy">I craft premium websites, brands, and digital experiences that elevate your business and turn visitors into loyal customers.</p>
         <div class="actions">
           <a class="btn outline" href="#" target="_blank" rel="noreferrer">Hire Me</a>
-          <a class="btn neon" href="#" target="_blank" rel="noreferrer">Request a Quote</a>
+          <a class="btn neon" href="#quote-modal" data-contact aria-haspopup="dialog">Request a Quote</a>
         </div>
       </div>
     </section>
@@ -1288,7 +1439,7 @@
             <h2>Built by Humans. Made to Last.</h2>
             <p>Have a unique vision? We turn ideas into reality with strategic design that helps you achieve your online goals.</p>
             <div>
-              <a class="btn" href="#" target="_blank" rel="noreferrer">Request a Quote</a>
+              <a class="btn" href="#quote-modal" data-contact aria-haspopup="dialog">Request a Quote</a>
             </div>
             <div class="users">
               <div class="avatars">
@@ -1346,6 +1497,41 @@
     </div>
   </footer>
 
+  <div class="modal" id="quote-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+    <button class="modal-backdrop" type="button" data-close aria-label="Close"></button>
+    <div class="modal-panel" tabindex="-1">
+      <div class="modal-frame">
+        <button class="modal-close" type="button" data-close aria-label="Close">&times;</button>
+        <div class="modal-step modal-choice is-visible">
+          <h2 id="modal-title">Let's Work Together</h2>
+          <a class="modal-secondary-link" href="https://calendly.com/timothycareyevans/30min" target="_blank" rel="noopener">Schedule a Meeting</a>
+          <button type="button" data-message>Send Us a Message</button>
+          <a class="modal-secondary-link" href="https://x.com/messages/compose?recipient_id=shinobi9982" target="_blank" rel="noopener">Contact Us on X</a>
+        </div>
+        <form class="modal-step modal-form" action="mailto:contact@timothycareyevans.com" method="POST" enctype="text/plain">
+          <h2>Send Us a Message</h2>
+          <div class="field-row">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="company" placeholder="Company" required>
+          </div>
+          <select name="interest" required>
+            <option value="">What are you interested in?</option>
+            <option>Web & App Development</option>
+            <option>System Integration & Cloud</option>
+            <option>Maintenance & Security</option>
+            <option>Custom AI Solutions</option>
+            <option>General Consultation</option>
+          </select>
+          <textarea name="message" placeholder="Tell us about your project..." required></textarea>
+          <div class="field-row">
+            <button type="button" data-back>Back</button>
+            <button type="submit">Send Message</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <script>
     const nav = document.querySelector("[data-nav]");
     const menu = document.querySelector("[data-menu]");
@@ -1353,7 +1539,27 @@
     const testimonials = document.querySelector("[data-testimonials]");
     const prev = document.querySelector("[data-prev]");
     const next = document.querySelector("[data-next]");
+    const modal = document.querySelector(".modal");
+    const modalPanel = modal?.querySelector(".modal-panel");
+    const choiceStep = document.querySelector(".modal-choice");
+    const formStep = document.querySelector(".modal-form");
     let index = 0;
+    let lastFocusedElement = null;
+
+    const setModal = (open) => {
+      if (!modal || !choiceStep || !formStep) return;
+      document.body.classList.toggle("modal-open", open);
+      modal.classList.toggle("is-open", open);
+      modal.setAttribute("aria-hidden", String(!open));
+      if (open) {
+        lastFocusedElement = document.activeElement;
+        choiceStep.classList.add("is-visible");
+        formStep.classList.remove("is-visible");
+        modalPanel?.focus();
+      } else if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+        lastFocusedElement.focus();
+      }
+    };
 
     window.addEventListener("scroll", () => {
       nav.classList.toggle("scrolled", window.scrollY > 24);
@@ -1365,6 +1571,45 @@
 
     menu.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => menu.classList.remove("open"));
+    });
+
+    document.querySelectorAll("[data-contact]").forEach((button) => {
+      button.addEventListener("click", (event) => {
+        event.preventDefault();
+        setModal(true);
+      });
+    });
+
+    document.querySelectorAll("[data-close]").forEach((button) => {
+      button.addEventListener("click", () => setModal(false));
+    });
+
+    document.querySelector("[data-message]")?.addEventListener("click", () => {
+      choiceStep?.classList.remove("is-visible");
+      formStep?.classList.add("is-visible");
+    });
+
+    document.querySelector("[data-back]")?.addEventListener("click", () => {
+      formStep?.classList.remove("is-visible");
+      choiceStep?.classList.add("is-visible");
+    });
+
+    formStep?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const formData = new FormData(formStep);
+      const email = formData.get("email") || "";
+      const company = formData.get("company") || "";
+      const interest = formData.get("interest") || "";
+      const message = formData.get("message") || "";
+      const body = [
+        `Email: ${email}`,
+        `Company: ${company}`,
+        `Interest: ${interest}`,
+        "",
+        String(message)
+      ].join("\n");
+
+      window.location.href = `mailto:contact@timothycareyevans.com?subject=${encodeURIComponent("Project inquiry from timothycareyevans.com")}&body=${encodeURIComponent(body)}`;
     });
 
     function updateTestimonials() {
