@@ -1,4 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#000000"/>
-  <text x="50%" y="50%" dy=".35em" text-anchor="middle" fill="#ccff00" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800" letter-spacing="1">TCE</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="TCE code mark">
+  <rect x="1.5" y="1.5" width="61" height="61" rx="8.5" fill="#000"/>
+  <g fill="#fff">
+    <path d="M16.75 17 3.75 32l13 15 4.15-4.1L11.45 32l9.45-10.9z"/>
+    <path d="M47.25 17 60.25 32l-13 15-4.15-4.1L52.55 32 43.1 21.1z"/>
+    <rect x="21" y="13" width="22" height="5.25"/>
+    <rect x="29.25" y="13" width="5.5" height="38"/>
+    <path fill-rule="evenodd" d="M42.15 24.5a14.25 14.25 0 1 0 0 15h-7.5a8.55 8.55 0 1 1 0-15z"/>
+    <rect x="34" y="29.3" width="18" height="5.2"/>
+    <rect x="34" y="39.1" width="18" height="5.2"/>
+    <path d="M48 39.1h4v5.2h-8.7z"/>
+  </g>
 </svg>
