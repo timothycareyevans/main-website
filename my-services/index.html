@@ -74,6 +74,10 @@
       overflow: hidden;
     }
 
+    .section.flush-top {
+      padding-top: 0;
+    }
+
     .eyebrow {
       display: inline-flex;
       align-items: center;
@@ -391,6 +395,8 @@
     }
 
     .service-card {
+      position: relative;
+      overflow: hidden;
       min-height: 370px;
       display: flex;
       flex-direction: column;
@@ -403,18 +409,34 @@
       transition: transform .2s ease, box-shadow .2s ease;
     }
 
+    .service-card.is-image-card {
+      border-color: rgba(255, 255, 255, .18);
+      background:
+        linear-gradient(180deg, rgba(7, 8, 6, .1) 0%, rgba(7, 8, 6, .82) 100%),
+        var(--service-card-image) center / cover;
+      color: var(--white);
+    }
+
+    .service-card.is-branding-card {
+      --service-card-image: url("service-card-branding.png");
+    }
+
+    .service-card.is-design-card {
+      --service-card-image: url("service-card-design.png");
+    }
+
+    .service-card.is-development-card {
+      --service-card-image: url("service-card-development.png");
+    }
+
+    .service-card.is-image-card p,
+    .service-card.is-image-card .learn {
+      color: var(--white);
+    }
+
     .service-card:hover {
       transform: translateY(-5px);
       box-shadow: var(--shadow);
-    }
-
-    .service-icon {
-      width: 58px;
-      height: 58px;
-      margin-bottom: auto;
-      padding: 15px;
-      border-radius: var(--radius);
-      background: var(--mint);
     }
 
     .learn {
@@ -995,8 +1017,8 @@
         <source src="sunrise_this_am_after_the_rain.mp4" type="video/mp4">
       </video>
       <div class="container hero-content">
-        <h1>We Build Digital Experiences That Win</h1>
-        <p class="hero-copy">We craft premium websites, brands, and digital experiences that elevate your business and turn visitors into loyal customers.</p>
+        <h1>I Build Digital Experiences That Win</h1>
+        <p class="hero-copy">I craft premium websites, brands, and digital experiences that elevate your business and turn visitors into loyal customers.</p>
         <div class="actions">
           <a class="btn outline" href="#" target="_blank" rel="noreferrer">Hire Me</a>
           <a class="btn neon" href="#" target="_blank" rel="noreferrer">Request a Quote</a>
@@ -1061,43 +1083,40 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <div class="eyebrow">Services</div>
+            <div class="eyebrow">Skills</div>
             <h2>Expertise built on insight & experience</h2>
           </div>
           <div>
             <p>We deliver strategic solutions grounded in research, experience, and industry best practices.</p>
-            <a class="btn" href="#" target="_blank" rel="noreferrer">View Services</a>
+            <a class="btn" href="../index.html">Profile</a>
           </div>
         </div>
         <div class="service-grid">
-          <article class="service-card">
-            <img class="service-icon" src="https://cdn.prod.website-files.com/69cd96a8da39545f92e47e5c/69cd96a8da39545f92e47fee_ai-fill-neon.svg" alt="">
+          <article class="service-card is-image-card is-branding-card">
             <h3>Branding</h3>
             <p>Through research driven insights, we create distinctive brand identities that resonate with your audience and set you apart in the market.</p>
             <a class="learn" href="#" target="_blank" rel="noreferrer">learn more</a>
           </article>
-          <article class="service-card">
-            <img class="service-icon" src="https://cdn.prod.website-files.com/69cd96a8da39545f92e47e5c/69cd96a8da39545f92e48031_phone-filled.svg" alt="">
-            <h3>Web Design</h3>
+          <article class="service-card is-image-card is-design-card">
+            <h3>Design</h3>
             <p>We combine user research with beautiful design in Figma, crafting interactive and animated experiences that engage and convert.</p>
             <a class="learn" href="#" target="_blank" rel="noreferrer">learn more</a>
           </article>
-          <article class="service-card">
-            <img class="service-icon" src="https://cdn.prod.website-files.com/69cd96a8da39545f92e47e5c/69cd96a8da39545f92e48063_box-fill.svg" alt="">
-            <h3>Web Development</h3>
-            <p>We build high performance websites and platforms using WordPress, Webflow, Shopify, React.js and HTML/CSS.</p>
+          <article class="service-card is-image-card is-development-card">
+            <h3>Development</h3>
+            <p>We build high performance websites and platforms using and Python, HTML/CSS, JS, and React.</p>
             <a class="learn" href="#" target="_blank" rel="noreferrer">learn more</a>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <section class="section flush-top">
       <div class="container">
         <div class="section-head">
           <div>
             <div class="eyebrow">How we work</div>
-            <h2>How we work</h2>
+            <h2>Process</h2>
           </div>
           <p>We take a structured, hands-on approach to drive measurable growth.</p>
         </div>
