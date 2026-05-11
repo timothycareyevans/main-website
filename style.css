@@ -151,8 +151,8 @@ html, body {
 
 .nav-links a:nth-child(1) { color: #fff; }
 .nav-links a:nth-child(2) { color: #2eb8b8; }
-.nav-links a:nth-child(3) { color: #8eb300; }
-.nav-links a:nth-child(4) { color: #a0005f; }
+.nav-links a:nth-child(3) { color: #a0005f; }
+.nav-links a:nth-child(4) { color: #8eb300; }
 
 .nav-status {
     display: flex;
@@ -1640,8 +1640,8 @@ body.modal-open {
 /* ---- Palette refresh ---- */
 .nav-links a:nth-child(1) { color: #fff; }
 .nav-links a:nth-child(2) { color: #2eb8b8; }
-.nav-links a:nth-child(3) { color: #8eb300; }
-.nav-links a:nth-child(4) { color: #a0005f; }
+.nav-links a:nth-child(3) { color: #a0005f; }
+.nav-links a:nth-child(4) { color: #8eb300; }
 
 .badge-dots span {
     background: linear-gradient(135deg, var(--yellow), #8eb300);
