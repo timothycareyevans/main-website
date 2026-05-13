@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 160" role="img" aria-labelledby="title desc">
+  <title id="title">Timothy Carey Evans logo</title>
+  <desc id="desc">White geometric TCE monogram with Timothy Carey Evans wordmark.</desc>
+  <defs>
+    <style>
+      .mark,
+      .word {
+        fill: #fff;
+      }
+
+      .word {
+        font-family: "Orbitron", "Eurostile", "Bank Gothic", "Arial Black", sans-serif;
+        font-weight: 600;
+        letter-spacing: 8px;
+      }
+    </style>
+  </defs>
+
+  <g class="mark">
+    <path d="M32 80 75 43v20L55 80l20 17v20L32 80Z"/>
+    <path d="M224 43 268 80l-44 37V97l21-17-21-17V43Z"/>
+
+    <path d="M86 34h104v12H86V34Z"/>
+    <path d="M113 46h12v80h-12V46Z"/>
+    <path d="M162 65c-28 0-48 15-48 38 0 23 20 38 48 38h40v-12h-39c-20 0-35-10-35-26s15-26 35-26h38V65h-39Z"/>
+    <path d="M163 84h48v12h-48V84Z"/>
+    <path d="M163 103h48v12h-48v-12Z"/>
+    <path d="M163 122h48v12h-48v-12Z"/>
+  </g>
+
+  <text class="word" x="302" y="57" font-size="42">TIMOTHY</text>
+  <text class="word" x="302" y="102" font-size="42">CAREY</text>
+  <text class="word" x="302" y="147" font-size="42">EVANS</text>
+</svg>

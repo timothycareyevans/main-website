@@ -1,218 +1,916 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <title>Portfolio work | Timothy Carey Evans</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PQCPMY514N"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+  <head>
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-N4GMQJKG');
+    </script>
+    <!-- End Google Tag Manager -->
 
-    gtag('config', 'G-PQCPMY514N');
-  </script>
-</head>
-<body>
-  <div class="mockup-page">
-    <header class="topbar">
-      <div class="shell topbar__inner">
-        <a class="topbar__brand" href="../">
-          <img class="topbar__brand-mark" src="svgs/archive_orbital.svg" alt="">
-          <span>Portfolio Work</span>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="TCE Co. helps B2B SaaS and tech companies fix websites that don't convert. Design and development from $2,499. Delivered in 3 weeks."
+    />
+    <title>Portfolio work</title>
+
+    <meta
+      property="og:title"
+      content="TCE Co.: Design & Development for B2B SaaS & Tech"
+    />
+    <meta
+      property="og:description"
+      content="TCE Co. helps B2B SaaS and tech companies fix websites that don't convert. Design and development from $2,499. Delivered in 3 weeks."
+    />
+    <meta
+      property="og:image"
+      content="https://wegems.co/assets/images/og-image.webp"
+    />
+    <meta property="og:url" content="https://wegems.co" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:image"
+      content="https://wegems.co/assets/images/og-image.webp"
+    />
+    <meta
+      name="twitter:title"
+      content="TCE Co.: Design & Development for B2B SaaS & Tech"
+    />
+    <meta
+      name="twitter:description"
+      content="TCE Co. helps B2B SaaS and tech companies fix websites that don't convert. Design and development from $2,499. Delivered in 3 weeks."
+    />
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-N4GMQJKG"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- ============================================================
+       NAVBAR (imported from my-services)
+       ============================================================ -->
+    <header class="nav" data-nav>
+      <div class="container nav-inner">
+        <a class="brand" href="../index.html" aria-label="Home">
+          <img src="timothy-carey-evans-logo.svg" alt="Timothy Carey Evans logo">
         </a>
-        <nav class="topbar__nav" aria-label="Portfolio work navigation">
-          <a href="#overview">Overview</a>
-          <a href="#systems">Systems</a>
-          <a href="#library">Library</a>
-          <a href="#deploy">Deploy</a>
-          <a href="../">Main site</a>
+        <nav class="links" data-menu>
+          <a href="../index.html">Home</a>
+          <a href="../blog/">On theDaily blog</a>
+          <a href="../initialup.html">Intializing / Updates</a>
+          <a href="../portfolio-work/">Portfolio work</a>
+          <a href="../my-services/">My services</a>
         </nav>
+        <a class="btn" href="#" target="_blank" rel="noreferrer">Sign In</a>
+        <button class="menu-toggle" data-toggle aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </header>
 
     <main>
-      <section class="hero" id="overview">
-        <div class="shell hero__inner">
-          <div class="hero__copy">
-            <div class="eyebrow">Portfolio Work</div>
-            <h1>Vector systems <span>for high-signal digital experiences.</span></h1>
-            <p class="hero__lede">
-              This page reframes the custom SVG studies as a usable design language for product storytelling,
-              technical branding, and editorial portfolio layouts. It is meant to feel like a living archive,
-              not a static asset dump.
-            </p>
-            <div class="hero__actions">
-              <a class="button button--primary" href="#systems">Explore Layout</a>
-              <a class="button button--ghost" href="../contact/">Request a Quote</a>
+      <!-- ============================================================
+         HERO
+         ============================================================ -->
+      <section class="hero section-padding is-hero">
+        <!-- Hero Content -->
+        <div class="container padding-global">
+          <div class="hero_content">
+            <!-- Group 1: Heading + Paragraph -->
+            <div class="hero_text-group">
+              <h1 class="hero_heading heading-1">
+                High-converting
+                <span class="hero_heading-highlight">
+                  <span class="text-accent">websites</span>
+                  <img
+                    src="assets/images/circle-hero-title.svg"
+                    alt=""
+                    aria-hidden="true"
+                    class="hero_heading-circle"
+                  />
+                </span>
+                that convert visitors into customers.
+              </h1>
+              <p class="hero_body text-body-large">
+                TCE Co. is a design and development studio for B2B
+                SaaS and tech companies. We take your underperforming website
+                and turn it into one that converts. Your new homepage. Live in 3
+                weeks.
+              </p>
             </div>
-            <div class="hero__stats">
-              <div class="stat">
-                <span class="stat__value">13</span>
-                <span class="stat__label">SVG modules</span>
-              </div>
-              <div class="stat">
-                <span class="stat__value">3</span>
-                <span class="stat__label">Reusable blocks</span>
-              </div>
-              <div class="stat">
-                <span class="stat__value">1</span>
-                <span class="stat__label">Integrated page</span>
-              </div>
+
+            <!-- Group 2: Button + Trust Bullets -->
+            <div class="hero_cta-group">
+              <a href="#pricing" class="btn-primary">
+                Let's fix your website
+                <span class="btn-primary_side-text">(3 spots left)</span>
+              </a>
+              <ul class="hero_bullets">
+                <li class="hero_bullet">
+                  <img
+                    src="assets/images/checkmark.svg"
+                    alt=""
+                    aria-hidden="true"
+                    class="hero_bullet-icon"
+                  />
+                  <span class="hero_bullet-text"
+                    >Homepage Sprint from $2,499</span
+                  >
+                </li>
+                <li class="hero_bullet opacity-70">
+                  <img
+                    src="assets/images/checkmark.svg"
+                    alt=""
+                    aria-hidden="true"
+                    class="hero_bullet-icon"
+                  />
+                  <span class="hero_bullet-text"
+                    >Live in 3 weeks, not months</span
+                  >
+                </li>
+                <li class="hero_bullet opacity-50">
+                  <img
+                    src="assets/images/checkmark.svg"
+                    alt=""
+                    aria-hidden="true"
+                    class="hero_bullet-icon"
+                  />
+                  <span class="hero_bullet-text">All done for you.</span>
+                </li>
+              </ul>
             </div>
           </div>
+        </div>
 
-          <div class="hero__display">
-            <div class="hero__display-header">
-              <span>Primary composition</span>
-              <strong>Portfolio module // active</strong>
+        <!-- Logo Bar -->
+        <div class="container padding-global">
+          <div class="hero_logobar">
+            <div class="hero_logo-wrapper">
+              <img src="assets/logos/imaginstudio.svg" alt="Imagin Studio" />
             </div>
-            <div class="hero__display-grid">
-              <div class="hero__display-main">
-                <img src="svgs/void_property_pass.svg" alt="Void property pass graphic">
-              </div>
-              <div class="hero__display-stack">
-                <article class="mini-card">
-                  <img src="svgs/online_panel.svg" alt="Online panel graphic">
-                  <div class="mini-card__label">Signal block / status</div>
-                </article>
-                <article class="mini-card">
-                  <img src="svgs/signal_node.svg" alt="Signal node graphic">
-                  <div class="mini-card__label">Radial node / navigation</div>
-                </article>
-              </div>
+            <div class="hero_logo-wrapper">
+              <img
+                src="assets/logos/Frontend Mentor.svg"
+                alt="Frontend Mentor"
+              />
+            </div>
+            <div class="hero_logo-wrapper">
+              <img
+                src="assets/logos/detroitenglish.svg"
+                alt="Detroit Technical English"
+              />
+            </div>
+            <div class="hero_logo-wrapper">
+              <img src="assets/logos/workmax.svg" alt="Workmax" />
+            </div>
+            <div class="hero_logo-wrapper">
+              <img src="assets/logos/cremedigital.svg" alt="Creme Digital" />
+            </div>
+            <div class="hero_logo-wrapper">
+              <img src="assets/logos/hackages.svg" alt="Hackages" />
+            </div>
+            <div class="hero_logo-wrapper">
+              <img src="assets/logos/techlingo.svg" alt="Techlingo" />
+            </div>
+            <div class="hero_logo-wrapper">
+              <img src="assets/logos/Kitchbath.svg" alt="KitchBath" />
+            </div>
+            <div class="hero_logo-wrapper">
+              <img src="assets/logos/brave.svg" alt="Brave" />
+            </div>
+            <div class="hero_logo-wrapper">
+              <img src="assets/logos/fassetislamic.svg" alt="Fasset Islamic" />
             </div>
           </div>
         </div>
       </section>
 
-      <section class="section" id="systems">
-        <div class="shell">
-          <div class="section__heading">
-            <div>
-              <div class="section__eyebrow">Section System</div>
-              <h2 class="section__title">A bold split layout for case studies, bios, or process storytelling.</h2>
-            </div>
-            <p class="section__summary">
-              The SVGs act like structural design anchors. The result is something you can use for featured portfolio
-              work, service narratives, or a visual thesis on how you think through systems and execution.
+      <!-- ============================================================
+         OUR WORKS
+         ============================================================ -->
+      <section class="section-padding is-large works" id="works">
+        <div class="container-large padding-global">
+          <!-- Section Title -->
+          <div class="section-title title-gap">
+            <h2 class="section-title_heading">Real projects. Real results.</h2>
+            <p class="section-title_body text-body-large">
+              Real client projects showing exactly how we think and what we fix.
             </p>
           </div>
 
-          <div class="systems-grid">
-            <div class="stack">
-              <article class="panel panel--wide">
-                <div class="panel__topline">
-                  <span>Featured module</span>
-                  <span>Archive tier 01</span>
-                </div>
-                <h3 class="panel__title">Creative systems, product thinking, and visual infrastructure.</h3>
-                <p class="panel__text">
-                  This lead panel is designed for portfolio framing. It gives a project enough atmosphere to feel
-                  authored, while still leaving room for real explanation, outcomes, and technical depth.
-                </p>
-                <div class="panel__media-grid">
-                  <img src="svgs/system_released_card.svg" alt="System released card graphic">
-                  <div class="panel__duo">
-                    <img src="svgs/analog_disc.svg" alt="Analog disc graphic">
-                    <img src="svgs/archive_orbital.svg" alt="Archive orbital graphic">
+          <!-- Projects List -->
+          <div class="works_list">
+            <!-- Single Project -->
+            <article class="works_project">
+              <!-- Left: Project Image — square -->
+              <div class="works_image-wrapper">
+                <img
+                  src="assets/images/imagin-project.avif"
+                  srcset="
+                    assets/images/imagin-project-800w.avif  800w,
+                    assets/images/imagin-project.avif      1496w
+                  "
+                  sizes="(max-width: 767px) 100vw, 700px"
+                  alt="IMAGIN.studio website redesign"
+                  class="works_image"
+                />
+                <!-- Stats Overlay -->
+                <div class="works_stats-overlay">
+                  <div class="works_stat">
+                    <span class="works_stat-value heading-3">171%</span>
+                    <span class="works_stat-label text-body-medium"
+                      >Lead growth</span
+                    >
+                  </div>
+                  <div class="works_stat">
+                    <span class="works_stat-value heading-3">3x</span>
+                    <span class="works_stat-label text-body-medium"
+                      >Conversion events</span
+                    >
+                  </div>
+                  <div class="works_stat">
+                    <span class="works_stat-value heading-3">+36%</span>
+                    <span class="works_stat-label text-body-medium"
+                      >Organic search growth</span
+                    >
                   </div>
                 </div>
-              </article>
-
-              <article class="panel panel--wide">
-                <div class="panel__topline">
-                  <span>Flow sequence</span>
-                  <span>Cause / condition / result</span>
-                </div>
-                <h3 class="panel__title">A process layer for explaining how the work actually gets built.</h3>
-                <p class="panel__text">
-                  This composition is a good fit for methodology, engagement structure, or a breakdown of how ideas
-                  move from direction to implementation to shipping.
-                </p>
-                <div class="panel__media-grid">
-                  <img src="svgs/cause_condition_result.svg" alt="Cause condition result graphic">
-                  <img src="svgs/alerting_branch.svg" alt="Alerting branch graphic">
-                </div>
-              </article>
-            </div>
-
-            <aside class="rail">
-              <article class="rail-card">
-                <img src="svgs/enlightenment_seal.svg" alt="Enlightenment seal graphic">
-                <span class="rail-card__label">Seal module / profile marker</span>
-              </article>
-              <article class="rail-card">
-                <img src="svgs/system_pill.svg" alt="System pill graphic">
-                <span class="rail-card__label">Pill module / CTA separator</span>
-              </article>
-              <article class="rail-card">
-                <img src="svgs/epoch_star.svg" alt="Epoch star graphic">
-                <span class="rail-card__label">Radial burst / anchor graphic</span>
-              </article>
-            </aside>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="library">
-        <div class="shell">
-          <div class="section__heading">
-            <div>
-              <div class="section__eyebrow">Module Library</div>
-              <h2 class="section__title">Graphics that can become case-study cards, service blocks, or category markers.</h2>
-            </div>
-            <p class="section__summary">
-              The aim here is repeatability. Each module is strong enough to stand alone, but consistent enough to
-              create a recognizable visual language across the site.
-            </p>
-          </div>
-
-          <div class="showcase">
-            <article class="showcase-card">
-              <img src="svgs/config_burst.svg" alt="Config burst graphic">
-              <h3>Configuration Story</h3>
-              <p>Ideal for systems design, architecture, custom builds, or technical direction work.</p>
-            </article>
-            <article class="showcase-card">
-              <img src="svgs/karma_stack_panel.svg" alt="Karma stack panel graphic">
-              <h3>Dense Information Card</h3>
-              <p>Useful for capability summaries, toolchain snapshots, or compact proof-point blocks.</p>
-            </article>
-            <article class="showcase-card">
-              <img src="svgs/online_panel.svg" alt="Online panel graphic">
-              <h3>Operational Badge</h3>
-              <p>Fits status markers, hero accents, or small interface moments throughout the main website.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="deploy">
-        <div class="shell">
-          <div class="cta-band">
-            <div class="cta-band__inner">
-              <div>
-                <h2>Need work that feels designed and engineered?</h2>
-                <p>
-                  This page shows one direction: technical visuals, modular storytelling, and a layout system that can
-                  scale from a single feature to a full case-study archive.
-                </p>
               </div>
-              <a class="button button--primary" href="../contact/">Start a project</a>
+
+              <!-- Right: Project Details -->
+              <div class="works_details">
+                <!-- Tag + Title + Description -->
+                <div class="works_info">
+                  <span class="tag">Tech – API Platform</span>
+                  <div class="works_title-row">
+                    <h3 class="heading-3">IMAGIN.studio</h3>
+                    <a
+                      href="https://imagin.studio"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="works_external-link"
+                      aria-label="Visit IMAGIN.studio website"
+                    >
+                      <img
+                        src="assets/icons/external-link.svg"
+                        alt=""
+                        aria-hidden="true"
+                      />
+                    </a>
+                  </div>
+                  <p class="works_description text-body-medium">
+                    IMAGIN.studio sells car imagery APIs in 150+ countries, but
+                    their outdated site wasn't converting despite strong product
+                    demand.
+                  </p>
+                </div>
+
+                <!-- What We Did -->
+                <div class="works_improvements">
+                  <p class="heading-6">What we did:</p>
+                  <ul class="works_improvements-list">
+                    <li class="works_improvement-item">
+                      <img
+                        src="assets/icons/check.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="works_check-icon"
+                      />
+                      <span class="text-body-medium">
+                        100+ pages designed in Figma and built</span>
+                    </li>
+                    <li class="works_improvement-item">
+                      <img
+                        src="assets/icons/check.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="works_check-icon"
+                      />
+                      <span class="text-body-medium">
+                        7 languages with global and US versions
+                      </span>
+                    </li>
+                    <li class="works_improvement-item">
+                      <img
+                        src="assets/icons/check.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="works_check-icon"
+                      />
+                      <span class="text-body-medium">
+                        Conversion-focused layout and structure
+                      </span>
+                    </li>
+                    <li class="works_improvement-item">
+                      <img
+                        src="assets/icons/check.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="works_check-icon"
+                      />
+                      <span class="text-body-medium">
+                        Fully SEO optimised across all pages
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Services -->
+                <div class="works_services">
+                  <p class="heading-6">Services:</p>
+                  <p class="works_services-text text-body-medium">
+                    Design / Development / Ongoing Support
+                  </p>
+                </div>
+
+                <!-- Testimonial -->
+                <div class="works_testimonial">
+                  <blockquote class="works_quote text-body-large">
+                    "Wegems revamped the site from design to launch.
+                    <mark class="works_highlight"
+                      >One team, end to end, no handoffs.</mark
+                    >
+                    The results?
+                    <mark class="works_highlight">171% lead growth</mark> and
+                    conversion events
+                    <mark class="works_highlight">tripled.</mark>"
+                  </blockquote>
+                  <div class="works_author">
+                    <img
+                      src="assets/images/reihaneh.webp"
+                      alt="Reihaneh Abuiemehrizi"
+                      class="works_avatar"
+                    />
+                    <div class="works_author-info">
+                      <span class="works_author-name text-body-medium">
+                        Reihaneh Abuiemehrizi
+                      </span>
+                      <span class="works_author-role text-body-small">
+                        Marketing Manager @ IMAGIN.studio
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Single Project — Workmax -->
+            <article class="works_project">
+              <!-- Left: Project Image — square -->
+              <div class="works_image-wrapper">
+                <img
+                  src="assets/images/workmax-project.avif"
+                  srcset="
+                    assets/images/workmax-project-800w.avif  800w,
+                    assets/images/workmax-project.avif      1496w
+                  "
+                  sizes="(max-width: 767px) 100vw, 700px"
+                  alt="Workmax website redesign"
+                  class="works_image"
+                />
+                <!-- No stats overlay for this project -->
+              </div>
+
+              <!-- Right: Project Details -->
+              <div class="works_details">
+                <div class="works_info">
+                  <span class="tag">SaaS – HR & Payroll</span>
+                  <div class="works_title-row">
+                    <h3 class="heading-3">Workmax</h3>
+                    <a
+                      href="https://workmax.co.uk/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="works_external-link"
+                      aria-label="Visit Workmax website"
+                    >
+                      <img
+                        src="assets/icons/external-link.svg"
+                        alt=""
+                        aria-hidden="true"
+                      />
+                    </a>
+                  </div>
+                  <p class="works_description text-body-medium">
+                    Workmax is a UK payroll platform built for business owners,
+                    struggling to stand out against established incumbents in a
+                    crowded market.
+                  </p>
+                </div>
+
+                <div class="works_improvements">
+                  <p class="heading-6">What we did:</p>
+                  <ul class="works_improvements-list">
+                    <li class="works_improvement-item">
+                      <img
+                        src="assets/icons/check.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="works_check-icon"
+                      />
+                      <span class="text-body-medium"
+                        >10+ pages of clean UI designed</span
+                      >
+                    </li>
+                    <li class="works_improvement-item">
+                      <img
+                        src="assets/icons/check.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="works_check-icon"
+                      />
+                      <span class="text-body-medium"
+                        >60+ custom visual illustrations</span
+                      >
+                    </li>
+                    <li class="works_improvement-item">
+                      <img
+                        src="assets/icons/check.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="works_check-icon"
+                      />
+                      <span class="text-body-medium"
+                        >Conversion-focused structure across key pages</span
+                      >
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="works_services">
+                  <p class="heading-6">Services:</p>
+                  <p class="works_services-text text-body-medium">
+                    UI Design / Visual Illustration
+                  </p>
+                </div>
+
+                <div class="works_testimonial">
+                  <blockquote class="works_quote text-body-large">
+                    "Wegems brought Workmax to life with a
+                    <mark class="works_highlight"
+                      >personality we hadn't imagined</mark
+                    >
+                    was possible for a SaaS website."
+                  </blockquote>
+                  <div class="works_author">
+                    <img
+                      src="assets/images/kuda.webp"
+                      alt="Kuda Nyamainashe"
+                      class="works_avatar"
+                    />
+                    <div class="works_author-info">
+                      <span class="works_author-name text-body-medium"
+                        >Kuda Nyamainashe</span
+                      >
+                      <span class="works_author-role text-body-small"
+                        >Founder @ Workmax</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Single Project — Frontend Mentor -->
+            <article class="works_project">
+              <!-- Left: Project Image — square -->
+              <div class="works_image-wrapper">
+                <img
+                  src="assets/images/frontend-project.avif"
+                  srcset="
+                    assets/images/frontend-project-800w.avif  800w,
+                    assets/images/frontend-project.avif      1496w
+                  "
+                  sizes="(max-width: 767px) 100vw, 700px"
+                  alt="Frontend Mentor website redesign"
+                  class="works_image"
+                />
+                <!-- Stats Overlay -->
+                <div class="works_stats-overlay">
+                  <div class="works_stat">
+                    <span class="works_stat-value heading-3">3</span>
+                    <span class="works_stat-label text-body-medium"
+                      >Platforms designed</span
+                    >
+                  </div>
+                  <div class="works_stat">
+                    <span class="works_stat-value heading-3">13</span>
+                    <span class="works_stat-label text-body-medium"
+                      >Challenges designed</span
+                    >
+                  </div>
+                  <div class="works_stat">
+                    <span class="works_stat-value heading-3">1.5yrs+</span>
+                    <span class="works_stat-label text-body-medium"
+                      >Ongoing collaboration</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: Project Details -->
+              <div class="works_details">
+                <div class="works_info">
+                  <span class="tag">EdTech – Developer Education</span>
+                  <div class="works_title-row">
+                    <h3 class="heading-3">Frontend Mentor</h3>
+                    <a
+                      href="https://www.frontendmentor.io/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="works_external-link"
+                      aria-label="Visit Frontend Mentor website"
+                    >
+                      <img
+                        src="assets/icons/external-link.svg"
+                        alt=""
+                        aria-hidden="true"
+                      />
+                    </a>
+                  </div>
+                  <p class="works_description text-body-medium">
+                    Frontend Mentor is a developer education platform used by
+                    1M+ developers globally, running three separate platforms
+                    that needed a unified UX.
+                  </p>
+                </div>
+
+                <div class="works_improvements">
+                  <p class="heading-6">What we did:</p>
+                  <ul class="works_improvements-list">
+                    <li class="works_improvement-item">
+                      <img
+                        src="assets/icons/check.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="works_check-icon"
+                      />
+                      <span class="text-body-medium"
+                        >UI design across 3 platforms (learning, teams,
+                        hiring)</span
+                      >
+                    </li>
+                    <li class="works_improvement-item">
+                      <img
+                        src="assets/icons/check.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="works_check-icon"
+                      />
+                      <span class="text-body-medium"
+                        >13 coding challenge designs used by 1M+
+                        developers</span
+                      >
+                    </li>
+                    <li class="works_improvement-item">
+                      <img
+                        src="assets/icons/check.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="works_check-icon"
+                      />
+                      <span class="text-body-medium"
+                        >Custom visual illustrations</span
+                      >
+                    </li>
+                    <li class="works_improvement-item">
+                      <img
+                        src="assets/icons/check.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="works_check-icon"
+                      />
+                      <span class="text-body-medium"
+                        >Ongoing collaboration for 1.5+ years</span
+                      >
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="works_services">
+                  <p class="heading-6">Services:</p>
+                  <p class="works_services-text text-body-medium">
+                    UI Design / Visual Illustration
+                  </p>
+                </div>
+
+                <div class="works_testimonial">
+                  <blockquote class="works_quote text-body-large">
+                    "Brilliant to work with. Strong UX/UI experience, designs
+                    that
+                    <mark class="works_highlight">always hit the mark,</mark>
+                    and
+                    <mark class="works_highlight">couldn't recommend</mark>
+                    them highly enough."
+                  </blockquote>
+                  <div class="works_author">
+                    <img
+                      src="assets/images/matt.webp"
+                      alt="Matt Studdert"
+                      class="works_avatar"
+                    />
+                    <div class="works_author-info">
+                      <span class="works_author-name text-body-medium"
+                        >Matt Studdert</span
+                      >
+                      <span class="works_author-role text-body-small"
+                        >Founder @ Frontend Mentor</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Single Project — Detroit English -->
+            <article class="works_project">
+              <div class="works_image-wrapper">
+                <img
+                  src="assets/images/detroit-project.avif"
+                  srcset="
+                    assets/images/detroit-project-800w.avif  800w,
+                    assets/images/detroit-project.avif      1496w
+                  "
+                  sizes="(max-width: 767px) 100vw, 700px"
+                  alt="Detroit English website redesign"
+                  class="works_image"
+                />
+              </div>
+
+              <div class="works_details">
+                <div class="works_info">
+                  <span class="tag">EdTech Platform</span>
+                  <div class="works_title-row">
+                    <h3 class="heading-3">Detroit English</h3>
+                    <a
+                      href="https://www.detroit-english.eu/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="works_external-link"
+                      aria-label="Visit Detroit English website"
+                    >
+                      <img
+                        src="assets/icons/external-link.svg"
+                        alt=""
+                        aria-hidden="true"
+                      />
+                    </a>
+                  </div>
+                  <p class="works_description text-body-medium">
+                    Detroit Technical English has trained engineers across
+                    Europe for 15+ years, yet their old website didn't reflect
+                    their professional reputation.
+                  </p>
+                </div>
+
+                <div class="works_improvements">
+                  <p class="heading-6">What we did:</p>
+                  <ul class="works_improvements-list">
+                    <li class="works_improvement-item">
+                      <img
+                        src="assets/icons/check.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="works_check-icon"
+                      />
+                      <span class="text-body-medium"
+                        >Full homepage redesign in Figma</span
+                      >
+                    </li>
+                    <li class="works_improvement-item">
+                      <img
+                        src="assets/icons/check.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="works_check-icon"
+                      />
+                      <span class="text-body-medium"
+                        >Designed and launched on custom platform</span
+                      >
+                    </li>
+                    <li class="works_improvement-item">
+                      <img
+                        src="assets/icons/check.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="works_check-icon"
+                      />
+                      <span class="text-body-medium"
+                        >Conversion-focused and fully SEO optimised</span
+                      >
+                    </li>
+                    <li class="works_improvement-item">
+                      <img
+                        src="assets/icons/check.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="works_check-icon"
+                      />
+                      <span class="text-body-medium"
+                        >Mobile and tablet responsive on all devices</span
+                      >
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="works_services">
+                  <p class="heading-6">Services:</p>
+                  <p class="works_services-text text-body-medium">
+                    Design / Development
+                  </p>
+                </div>
+
+                <div class="works_testimonial">
+                  <blockquote class="works_quote text-body-large">
+                    "Wegems delivered a
+                    <mark class="works_highlight">fast, professional site</mark>
+                    and solved technical challenges along the way. Would
+                    recommend."
+                  </blockquote>
+                  <div class="works_author">
+                    <img
+                      src="assets/images/dave.webp"
+                      alt="Dave Willenberg"
+                      class="works_avatar"
+                    />
+                    <div class="works_author-info">
+                      <span class="works_author-name text-body-medium"
+                        >Dave Willenberg</span
+                      >
+                      <span class="works_author-role text-body-small"
+                        >Founder @ Detroit Technical English</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+         CONCEPT REDESIGNS / BEFORE & AFTER MARQUEE
+         ============================================================ -->
+      <section
+        class="section-padding is-large padding-top-0 padding-bottom-0 redesigns"
+      >
+        <div
+          class="redesigns_header container padding-global text-align-center title-gap"
+        >
+          <p class="text-subheadline text-accent">Concept Redesigns</p>
+          <h2 class="heading-2">We redesign a lot of websites.</h2>
+        </div>
+
+        <div class="redesigns_marquee-wrapper">
+          <div class="redesigns_marquee-track">
+            <!-- 6 images, duplicated for seamless loop -->
+            <div class="redesigns_card">
+              <img
+                src="assets/images/micaai-beforeafter.avif"
+                alt="MicaAI concept redesign"
+                class="redesigns_image"
+              />
+            </div>
+            <div class="redesigns_card">
+              <img
+                src="assets/images/camelai-beforeafter.avif"
+                alt="CamelAI concept redesign"
+                class="redesigns_image"
+              />
+            </div>
+            <div class="redesigns_card">
+              <img
+                src="assets/images/laudable-beforeafter.avif"
+                alt="Laudable concept redesign"
+                class="redesigns_image"
+              />
+            </div>
+            <div class="redesigns_card">
+              <img
+                src="assets/images/wegopro-beforeafter.avif"
+                alt="WegoPro concept redesign"
+                class="redesigns_image"
+              />
+            </div>
+            <div class="redesigns_card">
+              <img
+                src="assets/images/centralize-beforeafter.avif"
+                alt="Centralize concept redesign"
+                class="redesigns_image"
+              />
+            </div>
+            <div class="redesigns_card">
+              <img
+                src="assets/images/crewwork-beforeafter.avif"
+                alt="CrewWork concept redesign"
+                class="redesigns_image"
+              />
+            </div>
+            <!-- Duplicate set for seamless loop -->
+            <div class="redesigns_card">
+              <img
+                src="assets/images/micaai-beforeafter.avif"
+                alt="MicaAI concept redesign"
+                class="redesigns_image"
+              />
+            </div>
+            <div class="redesigns_card">
+              <img
+                src="assets/images/camelai-beforeafter.avif"
+                alt="CamelAI concept redesign"
+                class="redesigns_image"
+              />
+            </div>
+            <div class="redesigns_card">
+              <img
+                src="assets/images/laudable-beforeafter.avif"
+                alt="Laudable concept redesign"
+                class="redesigns_image"
+              />
+            </div>
+            <div class="redesigns_card">
+              <img
+                src="assets/images/wegopro-beforeafter.avif"
+                alt="WegoPro concept redesign"
+                class="redesigns_image"
+              />
+            </div>
+            <div class="redesigns_card">
+              <img
+                src="assets/images/centralize-beforeafter.avif"
+                alt="Centralize concept redesign"
+                class="redesigns_image"
+              />
+            </div>
+            <div class="redesigns_card">
+              <img
+                src="assets/images/crewwork-beforeafter.avif"
+                alt="CrewWork concept redesign"
+                class="redesigns_image"
+              />
             </div>
           </div>
         </div>
+
       </section>
     </main>
 
-    <div class="shell footer-note">Portfolio work page integrated into the main website.</div>
-  </div>
-</body>
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <a href="../index.html"><img class="footer-logo" src="timothy-carey-evans-logo.svg" alt="Timothy Carey Evans logo"></a>
+          <div>
+            <div class="footer-title">Nav</div>
+            <a href="../index.html">Home</a>
+            <a href="../blog/">On theDaily blog</a>
+            <a href="../initialup.html">Intializing / Updates</a>
+            <a href="../portfolio-work/">Portfolio work</a>
+            <a href="../my-services/">My services</a>
+          </div>
+          <div>
+            <div class="footer-title">Pages</div>
+            <a href="../legal/terms-of-service">Terms</a>
+            <a href="../legal/privacy-policy">Privacy</a>
+            <a href="../legal/refund-policy">Refund</a>
+          </div>
+          <div>
+            <div class="footer-title">Company</div>
+            <address>Made with ❤️<br> in San Francisco, CA</address>
+            <a href="https://www.linkedin.com/in/timothy-e-a3b8324" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://github.com/timothycareyevans" target="_blank" rel="noreferrer">GitHub</a>
+            <a href="https://www.instagram.com/timothycareyevans" target="_blank" rel="noreferrer">Instagram</a>
+            <a href="https://x.com/shinobi9982/" target="_blank" rel="noreferrer">X</a>
+          </div>
+        </div>
+        <div class="big-mark">timothycarey<br>evans</div>
+      </div>
+    </footer>
+
+    <script src="js/main.js" defer></script>
+  </body>
 </html>
