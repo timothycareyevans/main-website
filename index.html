@@ -178,38 +178,54 @@
                 </div>
 
                 <div class="glyph-feature-grid">
-                    <article class="glyph-feature-card glyph-feature-card-highlight">
-                        <div class="glyph-feature-icon">
-                            <img src="strategy_icon.png" alt="">
+                    <details class="glyph-feature-card glyph-feature-card-highlight" data-glyph-feature-card open>
+                        <summary class="glyph-feature-summary">
+                            <span class="glyph-feature-icon">
+                                <img src="strategy_icon.png" alt="">
+                            </span>
+                            <h3>Strategy</h3>
+                        </summary>
+                        <div class="glyph-feature-content">
+                            <p>We begin by understanding your business inside and out. Through in-depth conversations and research, we’ll uncover your organization’s unique value proposition, target audiences, and competitive landscape.</p>
+                            <span>Initialize and Kick-Off</span>
                         </div>
-                        <h3>Strategy</h3>
-                        <p>We begin by understanding your business inside and out. Through in-depth conversations and research, we’ll uncover your organization’s unique value proposition, target audiences, and competitive landscape.</p>
-                        <span>Initialize and Kick-Off</span>
-                    </article>
-                    <article class="glyph-feature-card">
-                        <div class="glyph-feature-icon">
-                            <img src="design_development_icon.png" alt="">
+                    </details>
+                    <details class="glyph-feature-card" data-glyph-feature-card open>
+                        <summary class="glyph-feature-summary">
+                            <span class="glyph-feature-icon">
+                                <img src="design_development_icon.png" alt="">
+                            </span>
+                            <h3>Design & Development</h3>
+                        </summary>
+                        <div class="glyph-feature-content">
+                            <p>We build your site with meticulous attention to both visible design and invisible performance. We’ll integrate essential tools, implement best practices, and build a robust digital platform.</p>
+                            <span>Creation Phase</span>
                         </div>
-                        <h3>Design & Development</h3>
-                        <p>We build your site with meticulous attention to both visible design and invisible performance. We’ll integrate essential tools, implement best practices, and build a robust digital platform.</p>
-                        <span>Creation Phase</span>
-                    </article>
-                    <article class="glyph-feature-card">
-                        <div class="glyph-feature-icon">
-                            <img src="launch_icon.png" alt="">
+                    </details>
+                    <details class="glyph-feature-card" data-glyph-feature-card open>
+                        <summary class="glyph-feature-summary">
+                            <span class="glyph-feature-icon">
+                                <img src="launch_icon.png" alt="">
+                            </span>
+                            <h3>Launch</h3>
+                        </summary>
+                        <div class="glyph-feature-content">
+                            <p>As we approach your site’s debut, our team ensures every detail is perfect. Extensive testing across browsers and devices, performance optimization, refined content, analytics setup, and a smooth transition plan.</p>
+                            <span>Marketplace Ready</span>
                         </div>
-                        <h3>Launch</h3>
-                        <p>As we approach your site’s debut, our team ensures every detail is perfect. Extensive testing across browsers and devices, performance optimization, refined content, analytics setup, and a smooth transition plan.</p>
-                        <span>Marketplace Ready</span>
-                    </article>
-                    <article class="glyph-feature-card">
-                        <div class="glyph-feature-icon">
-                            <img src="growth_icon.png" alt="">
+                    </details>
+                    <details class="glyph-feature-card" data-glyph-feature-card open>
+                        <summary class="glyph-feature-summary">
+                            <span class="glyph-feature-icon">
+                                <img src="growth_icon.png" alt="">
+                            </span>
+                            <h3>Growth</h3>
+                        </summary>
+                        <div class="glyph-feature-content">
+                            <p>Our partnership extends well beyond launch. We’ll keep your site secure and current with evolving web standards, and provide optional services to help your site continue delivering results.</p>
+                            <span>Exponential<br> and Real-time</span>
                         </div>
-                        <h3>Growth</h3>
-                        <p>Our partnership extends well beyond launch. We’ll keep your site secure and current with evolving web standards, and provide optional services to help your site continue delivering results.</p>
-                        <span><br>Exponential<br> and Real-time</span>
-                    </article>
+                    </details>
                 </div>
                 <figure class="glyph-feature-showcase" aria-hidden="true">
                     <img
@@ -749,6 +765,16 @@
         }
 
         document.querySelectorAll('[data-hero-slider]').forEach(initHeroSlider)
+
+        const glyphFeatureCards = [...document.querySelectorAll('[data-glyph-feature-card]')]
+        const glyphFeatureMedia = window.matchMedia('(max-width: 768px)')
+        const syncGlyphFeatureCards = () => {
+            glyphFeatureCards.forEach((card) => {
+                card.open = !glyphFeatureMedia.matches
+            })
+        }
+        syncGlyphFeatureCards()
+        glyphFeatureMedia.addEventListener?.('change', syncGlyphFeatureCards)
 
         const faqFilters = [...document.querySelectorAll('[data-faq-filter]')]
         const faqItems = [...document.querySelectorAll('[data-faq-category]')]
