@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="stylesheet" href="style.css?v=engineering-profile">
+    <link rel="stylesheet" href="style.css?v=hero-slider">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace:wght@400;500;600;700&family=Fraunces:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -65,9 +65,24 @@
         </div>
     </div>
 
-        <figure class="about-intro-banner" aria-hidden="true">
-            <img src="about-intro-banner.png" alt="">
-        </figure>
+        <section class="about-intro-banner hero-slider" aria-label="Featured identity artwork" data-hero-slider>
+            <div class="hero-slider-viewport">
+                <div class="hero-slider-track" data-hero-slider-track>
+                    <figure class="hero-slide" data-hero-slide>
+                        <img src="about-intro-banner.png" alt="Artist, builder, coder identity collage for Timothy Carey Evans">
+                    </figure>
+                </div>
+            </div>
+            <div class="hero-slider-controls" aria-label="Hero slider controls">
+                <button class="hero-slider-button" type="button" data-hero-slider-prev aria-label="Previous slide">
+                    <span aria-hidden="true">&larr;</span>
+                </button>
+                <button class="hero-slider-button" type="button" data-hero-slider-next aria-label="Next slide">
+                    <span aria-hidden="true">&rarr;</span>
+                </button>
+            </div>
+            <div class="hero-slider-dots" data-hero-slider-dots aria-label="Hero slider pagination"></div>
+        </section>
 
         <section class="engineering-profile" id="engineering-profile" aria-labelledby="engineering-profile-title">
             <div class="engineering-profile-inner">
@@ -145,34 +160,6 @@
                 <p class="lede">
                     I bring intelligence, integrity, and innovation to help solve problems and take on new challenges.  I wholeheartedly believe in continuous improvement in delivering quality and service in my work.
                 </p>
-            </div>
-        </section>
-
-        <section class="glyph-hero-section" aria-labelledby="glyph-hero-title">
-            <div class="glyph-hero-shell">
-                <div class="glyph-hero-copy">
-                    <div class="glyph-kicker">Introduction</div>
-                    <h2 class="glyph-hero-title" id="glyph-hero-title">
-                        Transform<br> ideas into experiences
-                    </h2>
-                    <p class="glyph-hero-text">
-                        A Creative web agency, who has partnered with a variety of innovative
-                    startups across tech and healthcare&mdash; where good design and engineering meets good taste.
-                    </p>
-                    <div class="glyph-hero-actions">
-                        <a href="contact/" class="glyph-pill glyph-pill-primary">My Projects</a>
-                        <a href="#glyph-discover" class="glyph-pill glyph-pill-ghost">The Process</a>
-                    </div>
-                </div>
-
-                <figure class="glyph-phone-cluster glyph-hero-image-frame" aria-hidden="true">
-                    <img
-                        class="glyph-hero-image"
-                        src="glyph-trade-hero.png"
-                        alt=""
-                        loading="eager"
-                        decoding="async">
-                </figure>
             </div>
         </section>
 
@@ -300,6 +287,34 @@
             </div>
         </section>
 
+        <section class="glyph-hero-section" aria-labelledby="glyph-hero-title">
+            <div class="glyph-hero-shell">
+                <div class="glyph-hero-copy">
+                    <div class="glyph-kicker">Applications</div>
+                    <h2 class="glyph-hero-title" id="glyph-hero-title">
+                        Transform<br> ideas into experiences
+                    </h2>
+                    <p class="glyph-hero-text">
+                        A Creative web agency, who has partnered with a variety of innovative
+                    startups across tech and healthcare&mdash; where good design and engineering meets good taste.
+                    </p>
+                    <div class="glyph-hero-actions">
+                        <a href="portfolio-work/" class="glyph-pill glyph-pill-primary">Portfolio work</a>
+                        <a href="my-services/" class="glyph-pill glyph-pill-ghost">My services</a>
+                    </div>
+                </div>
+
+                <figure class="glyph-phone-cluster glyph-hero-image-frame" aria-hidden="true">
+                    <img
+                        class="glyph-hero-image"
+                        src="glyph-trade-hero.png"
+                        alt=""
+                        loading="eager"
+                        decoding="async">
+                </figure>
+            </div>
+        </section>
+
         <section class="hero">
             <div class="hero-left">
                 <div class="badge">
@@ -316,10 +331,10 @@
                     I build at the intersection of information systems, web development, and artificial intelligence &mdash;
                     turning bold ideas into shipped, resilient systems.
                 </p>
-                <a href="https://timothycareyevans.com/startyourday/index.html" class="cta-yellow">
+                <!-- <a href="https://timothycareyevans.com/startyourday/index.html" class="cta-yellow">
                     <span>Check it out</span>
                     <span class="arrow-dark">&rarr;</span>
-                </a>
+                </a> -->
             </div>
 
             <div class="hero-right">
@@ -443,7 +458,7 @@
             </div>
         </section>
 
-        <section class="why" id="services">
+        <!-- <section class="why" id="services">
             <div class="eyebrow">Why me</div>
             <h2 class="section-headline">
                 Why settle for less when<br>
@@ -485,7 +500,7 @@
                     </article>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <section class="pricing-section" aria-labelledby="pricing-title">
             <div class="pricing-header">
@@ -692,6 +707,48 @@
         updateCurrentDateTime()
         setInterval(updateCurrentDateTime, 1000)
         document.querySelectorAll('.video-desktop, .video-tablet, .video-mobile').forEach(playVideo)
+
+        const initHeroSlider = (slider) => {
+            const track = slider.querySelector('[data-hero-slider-track]')
+            const slides = [...slider.querySelectorAll('[data-hero-slide]')]
+            const prev = slider.querySelector('[data-hero-slider-prev]')
+            const next = slider.querySelector('[data-hero-slider-next]')
+            const dots = slider.querySelector('[data-hero-slider-dots]')
+            if (!track || slides.length === 0) return
+
+            let currentSlide = 0
+            slider.classList.toggle('is-single-slide', slides.length <= 1)
+
+            const dotButtons = slides.map((_, index) => {
+                if (!dots) return null
+                const dot = document.createElement('button')
+                dot.className = 'hero-slider-dot'
+                dot.type = 'button'
+                dot.setAttribute('aria-label', `Show slide ${index + 1}`)
+                dot.addEventListener('click', () => goToSlide(index))
+                dots.appendChild(dot)
+                return dot
+            })
+
+            const renderSlider = () => {
+                track.style.transform = `translateX(${-currentSlide * 100}%)`
+                dotButtons.forEach((dot, index) => {
+                    if (!dot) return
+                    dot.setAttribute('aria-current', String(index === currentSlide))
+                })
+            }
+
+            const goToSlide = (index) => {
+                currentSlide = (index + slides.length) % slides.length
+                renderSlider()
+            }
+
+            prev?.addEventListener('click', () => goToSlide(currentSlide - 1))
+            next?.addEventListener('click', () => goToSlide(currentSlide + 1))
+            renderSlider()
+        }
+
+        document.querySelectorAll('[data-hero-slider]').forEach(initHeroSlider)
 
         const faqFilters = [...document.querySelectorAll('[data-faq-filter]')]
         const faqItems = [...document.querySelectorAll('[data-faq-category]')]
