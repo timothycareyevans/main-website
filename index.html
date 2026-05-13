@@ -227,22 +227,22 @@
                         </div>
                     </details>
                 </div>
-                <!-- <figure class="glyph-feature-showcase" aria-hidden="true">
+                <figure class="glyph-feature-showcase" aria-hidden="true">
                     <img
                         class="glyph-feature-showcase-image"
                         src="glyph-feature-laptop.png"
                         alt=""
                         loading="lazy"
                         decoding="async">
-                </figure> -->
+                </figure>
             </div>
         </section>
 
-        <section class="storyboard-video-section" aria-label="Storyboard animation">
+        <!-- <section class="storyboard-video-section" aria-label="Storyboard animation">
             <div class="storyboard-video-shell">
                 <video class="storyboard-video" src="dreamina-storyboard.mp4" autoplay loop muted playsinline aria-label="Generated storyboard animation"></video>
             </div>
-        </section>
+        </section> -->
 
         <section class="faq-section" aria-labelledby="faq-title">
             <div class="faq-inner">
@@ -728,7 +728,7 @@
         }
         updateCurrentDateTime()
         setInterval(updateCurrentDateTime, 1000)
-        document.querySelectorAll('.video-desktop, .video-tablet, .video-mobile, .storyboard-video').forEach(playVideo)
+        document.querySelectorAll('.video-desktop, .video-tablet, .video-mobile').forEach(playVideo)
 
         const initHeroSlider = (slider) => {
             const track = slider.querySelector('[data-hero-slider-track]')
