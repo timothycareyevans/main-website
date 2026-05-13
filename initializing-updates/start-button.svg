@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="468" height="145" viewBox="0 0 468 145" role="img" aria-labelledby="title">
+  <title>Windows-style Start button</title>
+  <rect x="0" y="0" width="468" height="145" fill="#0b0b0b"/>
+  <rect x="9" y="7" width="451" height="133" fill="#bfbfbf"/>
+  <rect x="9" y="7" width="451" height="6" fill="#f3f3f3"/>
+  <rect x="9" y="7" width="6" height="133" fill="#f3f3f3"/>
+  <rect x="460" y="7" width="8" height="133" fill="#6f6f6f"/>
+  <rect x="9" y="140" width="459" height="5" fill="#6f6f6f"/>
+
+  <g transform="translate(37 28)" shape-rendering="crispEdges">
+    <rect x="0" y="0" width="39" height="39" fill="#f25022"/>
+    <rect x="49" y="0" width="39" height="39" fill="#7fba00"/>
+    <rect x="0" y="49" width="39" height="39" fill="#00a4ef"/>
+    <rect x="49" y="49" width="39" height="39" fill="#ffb900"/>
+  </g>
+
+  <text x="186" y="104" font-family="Arial, Helvetica, sans-serif" font-size="88" font-weight="400" fill="#000">Start</text>
+</svg>

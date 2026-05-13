@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 16px;
+            vertical-align: middle;
+        }
+        .bevel-raised {
+            box-shadow: inset 1px 1px 0px 0px #ffffff, inset -1px -1px 0px 0px #1b1c1c, inset -2px -2px 0px 0px #6e7979;
+        }
+        .bevel-recessed {
+            box-shadow: inset 1px 1px 0px 0px #1b1c1c, inset 2px 2px 0px 0px #6e7979, inset -1px -1px 0px 0px #ffffff;
+        }
+        .window-frame {
+            border: 1px solid #ffffff;
+            box-shadow: 1px 1px 0px 0px #1b1c1c, -1px -1px 0px 0px #efeded, inset -1px -1px 0px 0px #6e7979, inset 1px 1px 0px 0px #ffffff;
+        }
+        .tree-line {
+            position: relative;
+        }
+        .tree-line::before {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: -8px;
+            bottom: 10px;
+            width: 1px;
+            border-left: 1px dotted #6e7979;
+        }
+        .tree-line::after {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: 10px;
+            width: 10px;
+            border-top: 1px dotted #6e7979;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "primary": "#006565",
+                        "on-secondary": "#ffffff",
+                        "surface": "#faf9f9",
+                        "surface-container": "#efeded",
+                        "on-surface": "#1b1c1c",
+                        "on-surface-variant": "#3e4949",
+                        "secondary": "#4b53bc",
+                        "surface-container-high": "#e9e8e8",
+                        "surface-container-highest": "#e3e2e2",
+                        "surface-container-low": "#f5f3f3"
+                    },
+                    "spacing": {
+                        "margin-window": "16px",
+                        "gutter": "4px",
+                        "bevel-width": "2px",
+                        "padding-xs": "2px",
+                        "padding-sm": "4px",
+                        "padding-md": "8px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Arimo"],
+                        "headline-lg": ["Arimo"],
+                        "headline-md": ["Arimo"],
+                        "body-md": ["Arimo"],
+                        "button-text": ["Arimo"]
+                    },
+                    "fontSize": {
+                        "label-md": ["11px", {"lineHeight": "14px", "fontWeight": "400"}],
+                        "headline-lg": ["18px", {"lineHeight": "24px", "fontWeight": "700"}],
+                        "headline-md": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                        "body-md": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                        "button-text": ["12px", {"lineHeight": "12px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#008080] font-body-md text-on-surface min-h-screen flex flex-col overflow-y-auto pb-[28px]">
+<!-- Top Navigation Placeholder (TopAppBar Logic) -->
+<header class="bg-secondary text-on-secondary font-headline-md text-headline-md flex justify-between items-center h-[18px] px-1 w-full border-b-2 border-surface-container-highest">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]">desktop_windows</span>
+<span class="font-headline-md">My Computer</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] hover:bg-primary-fixed-dim px-1 cursor-pointer">help</span>
+<span class="material-symbols-outlined text-[14px] hover:bg-primary-fixed-dim px-1 cursor-pointer">close</span>
+</div>
+</header>
+<!-- Main Desktop Area -->
+<main class="flex-grow relative p-4 flex items-center justify-center">
+<!-- About Me Window -->
+<div class="window-frame bg-surface-container w-full max-w-4xl flex flex-col min-h-[500px]">
+<!-- Window Title Bar -->
+<div class="bg-secondary text-on-secondary px-1 py-0.5 flex justify-between items-center h-[22px]">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">description</span>
+<span class="font-bold text-label-md">C:\USER\ABOUT_ME.TXT</span>
+</div>
+<div class="flex gap-0.5">
+<button class="bevel-raised bg-surface-container text-on-surface w-4 h-4 flex items-center justify-center active:translate-x-[1px] active:translate-y-[1px]">
+<span class="material-symbols-outlined text-[12px]">remove</span>
+</button>
+<button class="bevel-raised bg-surface-container text-on-surface w-4 h-4 flex items-center justify-center active:translate-x-[1px] active:translate-y-[1px]">
+<span class="material-symbols-outlined text-[12px]">check_box_outline_blank</span>
+</button>
+<button class="bevel-raised bg-surface-container text-on-surface w-4 h-4 flex items-center justify-center active:translate-x-[1px] active:translate-y-[1px]">
+<span class="material-symbols-outlined text-[12px]">close</span>
+</button>
+</div>
+</div>
+<!-- Toolbar/Menu -->
+<div class="flex gap-4 px-2 py-1 text-label-md border-b-2 border-white shadow-[0_1px_0_0_#6e7979]">
+<span class="hover:bg-secondary hover:text-on-secondary px-1 cursor-default">File</span>
+<span class="hover:bg-secondary hover:text-on-secondary px-1 cursor-default">Edit</span>
+<span class="hover:bg-secondary hover:text-on-secondary px-1 cursor-default">View</span>
+<span class="hover:bg-secondary hover:text-on-secondary px-1 cursor-default">Help</span>
+</div>
+<!-- Explorer Content Area -->
+<div class="flex flex-grow p-1 gap-1 overflow-hidden">
+<!-- Left Sidebar: Directory Tree -->
+<aside class="w-64 bevel-recessed bg-white overflow-y-auto p-4 flex flex-col gap-2">
+<div class="flex items-center gap-1 font-bold">
+<span class="material-symbols-outlined text-primary">folder_open</span>
+<span>C:\</span>
+</div>
+<div class="ml-6 flex flex-col gap-2">
+<div class="tree-line flex items-center gap-1">
+<span class="material-symbols-outlined text-primary">folder</span>
+<span>System</span>
+</div>
+<div class="tree-line flex items-center gap-1">
+<span class="material-symbols-outlined text-primary">folder_open</span>
+<span>User</span>
+</div>
+<div class="ml-6 flex flex-col gap-2">
+<div class="tree-line flex items-center gap-1 bg-secondary text-on-secondary px-1">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
+<span>ABOUT_ME.TXT</span>
+</div>
+<div class="tree-line flex items-center gap-1 opacity-60">
+<span class="material-symbols-outlined">description</span>
+<span>RESUME.DOC</span>
+</div>
+<div class="tree-line flex items-center gap-1 opacity-60">
+<span class="material-symbols-outlined">folder</span>
+<span>PROJECTS</span>
+</div>
+</div>
+<div class="tree-line flex items-center gap-1">
+<span class="material-symbols-outlined text-primary">folder</span>
+<span>Temp</span>
+</div>
+<a class="tree-line flex items-center gap-1 hover:bg-secondary hover:text-on-secondary px-1" href="../index.html">
+<span class="material-symbols-outlined text-primary">home</span>
+<span>Return Home</span>
+</a>
+</div>
+</aside>
+<!-- Right Content Area: Text Content -->
+<section class="flex-grow bevel-recessed bg-white overflow-y-auto p-8 font-mono text-body-md leading-relaxed selection:bg-secondary selection:text-on-secondary">
+<div class="max-w-prose mx-auto">
+<h1 class="font-bold text-headline-md mb-6 border-b border-surface-container-highest pb-2 uppercase tracking-widest">User Profile: Personal Statement</h1>
+<p class="mb-4">
+                            NAME: TIMOTHY CAREY EVANS<br/>
+                            OCCUPATION: AI ENGINEER &amp; STARTUP FOUNDER<br/>
+                            LOCATION: SAN FRANCISCO, CA [GMT-8]
+                        </p>
+<div class="border-2 border-dotted border-surface-container-highest p-4 mb-6 bg-surface-container-low">
+<p>
+                                I am a multidisciplinary professional focused on the intersection of vintage aesthetics and modern functional engineering. My design philosophy centers on tactile digital experiences—reclaiming the weight and presence that pixels used to have.
+                            </p>
+</div>
+<h2 class="font-bold mb-2">CORE COMPETENCIES:</h2>
+<ul class="list-none mb-6">
+<li>&gt; UI/UX Architecture (Low-Fidelity &amp; High-Fidelity)</li>
+<li>&gt; Full-stack Development (Focus on modular systems)</li>
+<li>&gt; Brand Identity &amp; Narrative Design</li>
+<li>&gt; Retro-Computing Preservation</li>
+</ul>
+<h2 class="font-bold mb-2">MISSION LOG:</h2>
+<p class="mb-4 italic text-on-surface-variant">
+                            "The future of computing isn't just faster—it's more intentional. We must build tools that feel like tools, not like magic tricks."
+                        </p>
+<div class="mt-8 flex justify-center">
+<img alt="Retro technology" class="bevel-recessed p-1 w-full grayscale contrast-125" data-alt="A highly detailed close-up shot of an authentic 1990s desktop computer setup featuring a beige CRT monitor displaying lines of code. The room is dimly lit with a cool blue ambient light, highlighting the yellowed plastic texture of the monitor frame and the coiled keyboard cable. The overall aesthetic is nostalgic and technical, utilizing a high-contrast palette of ivory, slate gray, and deep shadows to emphasize the industrial design of late-century personal computing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3vMfuIVsfB-NqqbFvUFS13R_f7WcVRxRK-tHkiS98i7EsJ9zZr2l-DszauzNkxmjrgrcDT18TsZYQpOm3J77yciqrKXelx8-F9IVr3E1AwebwrlVLBWAt1TpJUa74gn_RUJjG6Fj-jvFAUuqwJirBVTGRcuEXYAT1xcrxcafhhxXud9QbkMA7lHxihvJVuW0MJt1Db92ZKLcp5kj068jCUT-o7nWKKC4_yrGlgg5Fuj_TRJJKQTW-kqGoloTYUBH4WJcDihzKQAE"/>
+</div>
+<div class="mt-12 flex justify-end gap-2">
+<button class="bevel-raised bg-surface-container px-6 py-1 text-button-text active:translate-x-[1px] active:translate-y-[1px]">OK</button>
+<button class="bevel-raised bg-surface-container px-6 py-1 text-button-text active:translate-x-[1px] active:translate-y-[1px]">CANCEL</button>
+</div>
+</div>
+</section>
+</div>
+<!-- Window Status Bar -->
+<div class="h-[22px] flex items-center px-1 gap-1 text-[10px] border-t-2 border-white">
+<div class="bevel-recessed flex-grow px-1 truncate">1 object(s) selected</div>
+<div class="bevel-recessed w-32 px-1 text-right">4.21 KB</div>
+<div class="bevel-recessed w-32 px-1">My Computer</div>
+</div>
+</div>
+</main>
+<!-- Bottom Taskbar (BottomNavBar Logic) -->
+<nav class="fixed bottom-0 left-0 w-full h-[28px] z-50 flex justify-start items-center gap-1 px-1 py-1 bg-surface-container border-t-2 border-white shadow-[0_-1px_0_0_#1b1c1c]">
+<!-- Start Button -->
+<button class="flex h-full items-center justify-center active:translate-x-[1px] active:translate-y-[1px]" aria-label="Start">
+<img alt="Start" class="h-[22px] w-auto" src="start-button.svg"/>
+</button>
+<div class="w-[1px] h-[18px] bg-white border-r border-on-surface-variant mx-1"></div>
+<!-- Taskbar Items -->
+<div class="flex flex-row items-center justify-center bg-surface-container-low border-2 border-t-on-surface-variant border-l-on-surface-variant border-r-white border-b-white px-2 h-full gap-1">
+<span class="material-symbols-outlined text-[14px]">description</span>
+<span class="text-label-md">ABOUT_ME.TXT</span>
+</div>
+<div class="flex flex-row items-center justify-center border-2 border-t-white border-l-white border-r-on-surface-variant border-b-on-surface-variant px-2 h-full gap-1 opacity-60">
+<span class="material-symbols-outlined text-[14px]">mail</span>
+<span class="text-label-md">Inbox</span>
+</div>
+<div class="flex-grow"></div>
+<!-- Clock Area -->
+<div class="bevel-recessed px-2 h-full flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span class="text-label-md">12:00 PM</span>
+</div>
+</nav>
+</body></html>
