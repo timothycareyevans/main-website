@@ -1068,6 +1068,26 @@ body.modal-open {
     text-transform: uppercase;
 }
 
+.storyboard-video-section {
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    background: #050505;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.storyboard-video-shell {
+    width: 100%;
+    overflow: hidden;
+    background: #000000;
+}
+
+.storyboard-video {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
 .faq-section {
     margin-top: 0;
     margin-left: calc(50% - 50vw);
