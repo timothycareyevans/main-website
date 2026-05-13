@@ -360,6 +360,118 @@ body.modal-open {
     height: auto;
 }
 
+.engineering-profile {
+    margin-top: 8px;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    background: #050505;
+    border: 1px solid var(--border);
+    color: #ffffff;
+    overflow: hidden;
+}
+
+.engineering-profile-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 58px 32px 42px;
+}
+
+.engineering-profile-header {
+    display: grid;
+    grid-template-columns: 0.9fr 1.25fr;
+    gap: 34px;
+    align-items: end;
+    margin-bottom: 32px;
+}
+
+.engineering-kicker,
+.engineering-card-label {
+    color: var(--yellow);
+    font-family: 'Bruno Ace', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+.engineering-kicker {
+    font-size: 18px;
+}
+
+.engineering-card-label {
+    font-size: 18px;
+}
+
+.engineering-profile-header h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(42px, 5vw, 76px);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    max-width: 820px;
+}
+
+.engineering-profile-header p {
+    color: #c9c4b8;
+    font-size: 17px;
+    line-height: 1.75;
+    max-width: 620px;
+}
+
+.engineering-profile-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.engineering-card {
+    min-height: 270px;
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 8px;
+    background:
+        linear-gradient(135deg, rgba(204, 255, 0, 0.08), transparent 42%),
+        #0b0b0d;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.engineering-card h3 {
+    color: #ffffff;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 34px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-top: 32px;
+}
+
+.engineering-card p {
+    color: #b7b1a3;
+    font-size: 15px;
+    line-height: 1.75;
+    margin-top: 20px;
+}
+
+.engineering-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.engineering-stack span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+    padding: 0 14px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    color: #ececec;
+    font-size: 13px;
+    font-weight: 700;
+}
+
 .about-banner {
     display: grid;
     grid-template-columns: 1fr 1.1fr;
@@ -993,6 +1105,17 @@ body.modal-open {
     }
     .nav-status {
         padding: 6px 16px 12px;
+    }
+    .engineering-profile-header {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        align-items: start;
+    }
+    .engineering-profile-grid {
+        grid-template-columns: 1fr;
+    }
+    .engineering-card {
+        min-height: 220px;
     }
     .about-banner { grid-template-columns: 1fr; max-height: none; }
     .about-left { min-height: 320px; }
@@ -2097,6 +2220,27 @@ body.modal-open {
     }
     .modal-frame {
         padding: 30px 18px;
+    }
+
+    .engineering-profile-inner {
+        padding: 42px 20px 34px;
+    }
+    .engineering-profile-header h2 {
+        font-size: 38px;
+    }
+    .engineering-profile-header p {
+        font-size: 15px;
+    }
+    .engineering-card {
+        padding: 20px;
+    }
+    .engineering-card h3 {
+        font-size: 30px;
+    }
+    .engineering-stack span {
+        min-height: 34px;
+        font-size: 12px;
+        padding: 0 12px;
     }
 
     .hero-left { padding: 28px; }
