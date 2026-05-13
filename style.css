@@ -571,7 +571,7 @@ body.modal-open {
     background: #b3b3b8;
     border: 1px solid var(--border);
     overflow: hidden;
-    max-height: 520px;
+    height: 740px;
 }
 
 .about-left {
@@ -1234,7 +1234,7 @@ body.modal-open {
     .engineering-card {
         min-height: 220px;
     }
-    .about-banner { grid-template-columns: 1fr; max-height: none; }
+    .about-banner { grid-template-columns: 1fr; height: auto; max-height: none; }
     .about-left { min-height: 320px; }
     .about-right { padding: 32px; }
     .glyph-hero-shell { grid-template-columns: 1fr; padding: 54px 24px; }
@@ -2337,6 +2337,11 @@ body.modal-open {
     }
     .modal-frame {
         padding: 30px 18px;
+    }
+
+    .hero-slider-controls,
+    .hero-slider-dots {
+        display: none;
     }
 
     .engineering-profile-inner {
