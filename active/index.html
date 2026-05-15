@@ -1837,8 +1837,8 @@ footer {
   .topbar-inner .mid { display: none; }
 }
 /* nav: between 1080 and 1180 the brand tail + 5 nav links + 2 CTAs + dot
- * crowd the row. Drop the brand sub-meta first, then tighten link spacing,
- * so the Star CTA never has to compress. */
+ * crowd the row. Drop the brand sub-meta first, then tighten link spacing
+ * so the primary CTAs never have to compress. */
 @media (max-width: 1180px) {
   .nav-inner { gap: 18px; }
   .brand-meta { display: none; }
@@ -1867,7 +1867,27 @@ footer {
   .work { margin: 0 12px; padding: 60px 24px; }
   .work-grid { grid-template-columns: 1fr; }
   .partners { grid-template-columns: repeat(3, 1fr); gap: 18px; }
-  .nav-links, .brand-meta, .nav-cta { display: none; }
+  .nav-inner {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px 20px;
+  }
+  .nav-inner nav {
+    order: 3;
+    width: 100%;
+  }
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 28px;
+  }
+  .brand-meta { display: none; }
+  .nav-side {
+    margin-left: auto;
+  }
+  .nav-cta {
+    display: inline-flex;
+  }
   /* wire — stack the field label above the marquee rows */
   .wire-inner { grid-template-columns: 1fr; gap: 14px; }
   .wire-left {
@@ -1884,6 +1904,24 @@ footer {
   .labs-grid { grid-template-columns: 1fr; }
   .cards { grid-template-columns: 1fr; }
   .pills { justify-content: flex-start; }
+  .nav-inner {
+    gap: 14px;
+  }
+  .brand {
+    width: 100%;
+  }
+  .nav-side {
+    order: 2;
+    width: 100%;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+  .nav-links {
+    gap: 12px 18px;
+  }
+  .nav-links a {
+    font-size: 13px;
+  }
   section { padding: 80px 0; }
   .topbar-inner { font-size: 9px; }
 }
@@ -1968,8 +2006,8 @@ footer {
           My services
           <span class='arrow'><svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg></span>
         </a>
-        <a class='btn btn-ghost' href='#' target='_blank' rel='noreferrer noopener'>
-          Download desktop
+        <a class='btn btn-ghost' href='/portfolio-work' target='_blank' rel='noreferrer noopener'>
+          Portfolio work
           <span class='arrow'><svg viewBox='0 0 24 24'><circle cx='12' cy='12' r='9'/><path d='M9 12h6M12 9v6'/></svg></span>
         </a>
       </div>
