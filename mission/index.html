@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timothy Carey Evans — Eerie Aesthetics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;700;900&family=Dela+Gothic+One&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f2ed;
+    --grey: #888;
+    --accent: #1a1a1a;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+    --font-jp: 'Noto Sans JP', sans-serif;
+    --font-gothic: 'Dela Gothic One', sans-serif;
+  }
+
+  html {
+    font-size: 24px;
+    scroll-behavior: smooth;
+    cursor: crosshair;
+  }
+
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: var(--font-mono);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--black);
+    color: var(--white);
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px;
+  }
+
+  /* ── REGISTRATION MARKS ── */
+  .reg-mark {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    opacity: 0.4;
+    z-index: 10;
+  }
+
+  .reg-mark::before, .reg-mark::after {
+    content: '';
+    position: absolute;
+    background: var(--black);
+  }
+
+  .reg-mark::before {
+    width: 1px;
+    height: 100%;
+    left: 50%;
+  }
+
+  .reg-mark::after {
+    width: 100%;
+    height: 1px;
+    top: 50%;
+  }
+
+  .reg-mark .circle {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: 1px solid var(--black);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* ── PAGE BORDER ── */
+  .page-border {
+    position: fixed;
+    inset: 12px;
+    border: 1px solid rgba(0,0,0,0.12);
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  /* ── TOP HEADER BAR ── */
+  .header-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 40px 48px 24px;
+    border-bottom: 1px solid var(--black);
+    position: relative;
+  }
+
+  .header-bar .label-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .header-bar .label-group:nth-child(2) {
+    text-align: center;
+  }
+
+  .header-bar .label-group:nth-child(3) {
+    text-align: right;
+  }
+
+  .label-en {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .label-jp {
+    font-family: var(--font-jp);
+    font-size: 0.75rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── HERO SECTION ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 48px 1fr 48px;
+    grid-template-rows: auto 1fr auto;
+    overflow: hidden;
+  }
+
+  .hero-side-left {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    border-right: 1px solid rgba(0,0,0,0.12);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .hero-side-right {
+    grid-column: 3;
+    grid-row: 1 / -1;
+    border-left: 1px solid rgba(0,0,0,0.12);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-family: var(--font-jp);
+    font-size: 0.7rem;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    color: var(--grey);
+  }
+
+  .hero-sub-label {
+    grid-column: 2;
+    padding: 24px 40px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .hero-sub-label .tag {
+    font-family: var(--font-jp);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── MAIN TITLE ── */
+  .hero-center {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    position: relative;
+  }
+
+  .title-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+  }
+
+  .title-image {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    mix-blend-mode: multiply;
+  }
+
+
+  /* ── HERO BOTTOM ── */
+  .hero-bottom {
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    padding: 24px 40px 40px;
+    align-items: end;
+    border-top: 1px solid rgba(0,0,0,0.12);
+  }
+
+  .hero-bottom .info-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .hero-bottom .info-center {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+    opacity: 0.3;
+  }
+
+  .hero-bottom .info-right {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .info-num {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    letter-spacing: 0.05em;
+  }
+
+  .info-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .info-jp {
+    font-family: var(--font-jp);
+    font-size: 0.7rem;
+    font-weight: 300;
+  }
+
+  /* ── DIVIDER SECTION ── */
+  .section-divider {
+    border-top: 1px solid var(--black);
+    border-bottom: 1px solid var(--black);
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  .section-divider .cell {
+    padding: 32px 40px;
+    border-right: 1px solid rgba(0,0,0,0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-divider .cell:last-child {
+    border-right: none;
+  }
+
+  .cell-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 8px;
+  }
+
+  .cell .label-en {
+    font-size: 0.6rem;
+    color: var(--grey);
+  }
+
+  .cell .value {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  .cell .value-jp {
+    font-family: var(--font-jp);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  .cell .value-large {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* Globe SVG */
+  .globe-svg {
+    width: 64px;
+    height: 64px;
+    stroke: var(--black);
+    fill: none;
+    stroke-width: 1;
+    animation: globeSpin 20s linear infinite;
+  }
+
+  @keyframes globeSpin {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
+  }
+
+  /* Star */
+  .star-4 {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+  }
+
+  /* ── EERIE AESTHETICS SECTION ── */
+  .eerie-section {
+    padding: 120px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    position: relative;
+  }
+
+  .eerie-section::before {
+    content: '';
+    position: absolute;
+    top: 60px;
+    left: 48px;
+    right: 48px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--black), transparent);
+    opacity: 0.1;
+  }
+
+  .eerie-left {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .eerie-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    border: 1.5px solid var(--black);
+    padding: 16px 28px;
+    width: fit-content;
+  }
+
+  .eerie-badge .jp {
+    font-family: var(--font-jp);
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+  }
+
+  .eerie-badge .en {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .eerie-description {
+    font-family: var(--font-jp);
+    font-size: 1rem;
+    line-height: 2;
+    font-weight: 300;
+    max-width: 420px;
+    opacity: 0;
+    animation: slideUp 0.8s ease 1.5s forwards;
+  }
+
+  @keyframes slideUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    from {
+      transform: translateY(20px);
+    }
+  }
+
+  .eerie-year {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    opacity: 0.4;
+  }
+
+  .eerie-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 60px;
+  }
+
+  .eerie-right .coords {
+    text-align: right;
+  }
+
+  .coords .num {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    line-height: 1.8;
+  }
+
+  .coords .place {
+    font-family: var(--font-jp);
+    font-size: 0.8rem;
+    font-weight: 300;
+    margin-top: 4px;
+    color: var(--grey);
+  }
+
+  .limited-badge {
+    text-align: right;
+  }
+
+  .limited-badge .jp {
+    font-family: var(--font-jp);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+  }
+
+  .limited-badge .sub {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-top: 4px;
+  }
+
+  /* ── MANIFESTO SECTION ── */
+  .manifesto {
+    border-top: 1px solid var(--black);
+    padding: 100px 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 48px;
+    position: relative;
+    background: var(--black);
+    color: var(--white);
+  }
+
+  .manifesto .section-num {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0.4;
+  }
+
+  .manifesto-title {
+    font-family: var(--font-gothic);
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+  }
+
+  .manifesto-subtitle {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 3vw, 2.5rem);
+    letter-spacing: 0.15em;
+    opacity: 0.5;
+    margin-top: -24px;
+  }
+
+  .manifesto-text {
+    font-family: var(--font-jp);
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 2.2;
+    max-width: 500px;
+    opacity: 0.7;
+  }
+
+  .manifesto .decorative-line {
+    width: 60px;
+    height: 1px;
+    background: rgba(255,255,255,0.2);
+  }
+
+  /* ── GRID GALLERY ── */
+  .grid-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--black);
+  }
+
+  .grid-cell {
+    aspect-ratio: 1;
+    border-right: 1px solid rgba(0,0,0,0.12);
+    border-bottom: 1px solid rgba(0,0,0,0.12);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s ease;
+  }
+
+  .grid-cell:hover {
+    background: var(--black);
+    color: var(--white);
+  }
+
+  .grid-cell:nth-child(3n) {
+    border-right: none;
+  }
+
+  .grid-cell .cell-num {
+    position: absolute;
+    top: 16px;
+    left: 20px;
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    opacity: 0.3;
+  }
+
+  .grid-cell .cell-title {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    letter-spacing: 0.1em;
+  }
+
+  .grid-cell .cell-jp {
+    font-family: var(--font-jp);
+    font-size: 0.9rem;
+    font-weight: 300;
+    opacity: 0.6;
+  }
+
+  .grid-cell .cell-line {
+    width: 24px;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.2;
+  }
+
+  /* ── SCROLL SECTION ── */
+  .scroll-text {
+    overflow: hidden;
+    padding: 48px 0;
+    border-top: 1px solid var(--black);
+    border-bottom: 1px solid var(--black);
+    white-space: nowrap;
+  }
+
+  .scroll-inner {
+    display: inline-flex;
+    gap: 80px;
+    animation: scrollLeft 25s linear infinite;
+  }
+
+  .scroll-inner span {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 6vw, 5rem);
+    letter-spacing: 0.1em;
+    opacity: 0.08;
+  }
+
+  @keyframes scrollLeft {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── PHILOSOPHY SECTION ── */
+  .philosophy {
+    padding: 120px 48px;
+    display: grid;
+    grid-template-columns: 200px 1fr 200px;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .philosophy .side-text {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--grey);
+    line-height: 2;
+  }
+
+  .philosophy .center-text {
+    text-align: center;
+  }
+
+  .philosophy .big-jp {
+    font-family: var(--font-gothic);
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    letter-spacing: 0.15em;
+    line-height: 1.6;
+  }
+
+  .philosophy .translation {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-top: 24px;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    border-top: 1px solid var(--black);
+    padding: 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer .footer-left {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .footer .footer-center {
+    font-family: var(--font-jp);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+  }
+
+  .footer .footer-right {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--grey);
+  }
+
+  /* ── FLOATING ELEMENTS ── */
+  .float-crosshair {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .float-crosshair.visible {
+    opacity: 0.15;
+  }
+
+  .float-crosshair::before, .float-crosshair::after {
+    content: '';
+    position: absolute;
+    background: var(--black);
+  }
+
+  .float-crosshair::before {
+    width: 1px;
+    height: 100%;
+    left: 50%;
+  }
+
+  .float-crosshair::after {
+    width: 100%;
+    height: 1px;
+    top: 50%;
+  }
+
+  /* ── SCROLL INDICATOR ── */
+  .scroll-indicator {
+    position: fixed;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .scroll-dot {
+    width: 4px;
+    height: 4px;
+    background: var(--black);
+    border-radius: 50%;
+    opacity: 0.15;
+    transition: all 0.3s;
+  }
+
+  .scroll-dot.active {
+    opacity: 1;
+    height: 20px;
+    border-radius: 2px;
+  }
+
+  /* ── REVEAL ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .header-bar {
+      padding: 24px 24px 16px;
+    }
+
+    .hero {
+      grid-template-columns: 32px 1fr 32px;
+    }
+
+    .hero-center {
+      padding: 24px;
+    }
+
+    .hero-bottom {
+      padding: 16px 24px 24px;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .hero-bottom .info-center {
+      display: none;
+    }
+
+    .section-divider {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .section-divider .cell:nth-child(2) {
+      border-right: none;
+    }
+
+    .eerie-section {
+      grid-template-columns: 1fr;
+      padding: 60px 24px;
+      gap: 60px;
+    }
+
+    .eerie-right {
+      align-items: flex-start;
+    }
+
+    .eerie-right .coords {
+      text-align: left;
+    }
+
+    .limited-badge {
+      text-align: left;
+    }
+
+    .grid-gallery {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .philosophy {
+      grid-template-columns: 1fr;
+      padding: 60px 24px;
+    }
+
+    .philosophy .side-text:last-child {
+      display: none;
+    }
+
+    .footer {
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+      padding: 24px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .section-divider {
+      grid-template-columns: 1fr;
+    }
+
+    .section-divider .cell {
+      border-right: none;
+      border-bottom: 1px solid rgba(0,0,0,0.12);
+    }
+
+    .grid-gallery {
+      grid-template-columns: 1fr;
+    }
+
+    .grid-cell {
+      border-right: none;
+    }
+
+    .manifesto {
+      padding: 60px 24px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Page border -->
+<div class="page-border"></div>
+
+<!-- Registration marks -->
+<div class="reg-mark" style="top:20px;left:20px"><div class="circle"></div></div>
+<div class="reg-mark" style="top:20px;right:20px"><div class="circle"></div></div>
+<div class="reg-mark" style="bottom:20px;left:20px;position:fixed"><div class="circle"></div></div>
+<div class="reg-mark" style="bottom:20px;right:20px;position:fixed"><div class="circle"></div></div>
+
+<!-- Floating crosshair -->
+<div class="float-crosshair" id="floatCross"></div>
+
+<!-- Scroll indicator -->
+<div class="scroll-indicator" id="scrollIndicator">
+  <div class="scroll-dot active"></div>
+  <div class="scroll-dot"></div>
+  <div class="scroll-dot"></div>
+  <div class="scroll-dot"></div>
+  <div class="scroll-dot"></div>
+</div>
+
+<!-- ── HEADER BAR ── -->
+<header class="header-bar">
+  <div class="label-group">
+    <span class="label-en">Word</span>
+    <span class="label-jp">ティモシー・ケアリー・エヴァンス</span>
+  </div>
+  <div class="label-group">
+    <span class="label-en">Eerie</span>
+    <span class="label-jp">不気味</span>
+  </div>
+  <div class="label-group">
+    <span class="label-en">Type Interpretation</span>
+    <span class="label-jp">解釈</span>
+  </div>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero" data-section="0">
+  <div class="hero-side-left">
+    <span class="vertical-text">未来は静かに見ている</span>
+  </div>
+
+  <div class="hero-sub-label">
+    <span class="tag">オナーコード</span>
+    <span class="label-en" style="opacity:0.3">HONORCODE</span>
+  </div>
+
+  <div class="hero-center">
+    <div class="title-container">
+      <img src="hero.png" alt="Timothy Carey Evans" class="title-image">
+    </div>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="info-left">
+      <span class="info-num">01</span>
+      <span class="info-label">Bekfudo</span>
+      <span class="info-jp">ベクフド</span>
+    </div>
+    <div class="info-center">&times;</div>
+    <div class="info-right">
+      <span class="info-num">2026</span>
+      <span class="info-label">Posterkraft</span>
+      <span class="info-jp">ポスタークラフト</span>
+    </div>
+  </div>
+
+  <div class="hero-side-right">
+    <span class="vertical-text">すべての影には名前がある</span>
+  </div>
+</section>
+
+<!-- ── SCROLLING TEXT ── -->
+<div class="scroll-text" data-section="1">
+  <div class="scroll-inner">
+    <span>EERIE</span>
+    <span>不気味</span>
+    <span>HONORCODE</span>
+    <span>オナーコード</span>
+    <span>POSTERKRAFT</span>
+    <span>ポスタークラフト</span>
+    <span>EERIE</span>
+    <span>不気味</span>
+    <span>HONORCODE</span>
+    <span>オナーコード</span>
+    <span>POSTERKRAFT</span>
+    <span>ポスタークラフト</span>
+  </div>
+</div>
+
+<!-- ── INFO CELLS ── -->
+<section class="section-divider" data-section="2">
+  <div class="cell reveal">
+    <svg class="globe-svg" viewBox="0 0 64 64">
+      <ellipse cx="32" cy="32" rx="30" ry="30"/>
+      <ellipse cx="32" cy="32" rx="12" ry="30"/>
+      <line x1="2" y1="32" x2="62" y2="32"/>
+      <line x1="32" y1="2" x2="32" y2="62"/>
+      <ellipse cx="32" cy="32" rx="30" ry="10"/>
+      <ellipse cx="32" cy="32" rx="30" ry="20"/>
+    </svg>
+    <span class="label-en">Coordinates</span>
+    <span class="value">35.6895&deg; N<br>139.6917&deg; E</span>
+    <span class="info-jp">東京、日本</span>
+  </div>
+
+  <div class="cell reveal reveal-delay-1">
+    <div class="eerie-badge" style="border:none;padding:0;">
+      <span class="jp" style="font-size:1.4rem;">不気味な美学</span>
+    </div>
+    <span class="label-en">Eerie Aesthetics</span>
+    <span class="value" style="line-height:1.8;">The intersection of honor and design.<br>An attempt to give form to the invisible.</span>
+  </div>
+
+  <div class="cell reveal reveal-delay-2">
+    <svg class="star-4" viewBox="0 0 28 28">
+      <path d="M14 0 L16.5 11.5 L28 14 L16.5 16.5 L14 28 L11.5 16.5 L0 14 L11.5 11.5 Z" fill="currentColor"/>
+    </svg>
+    <span class="label-en">Edition</span>
+    <span class="value-jp">ポスタークラフト製</span>
+    <span class="value-jp">限定版</span>
+  </div>
+
+  <div class="cell reveal reveal-delay-3">
+    <span class="value-large">MMXXVI</span>
+    <span class="label-en">Year of Creation</span>
+    <span class="info-jp">タイポグラフィは感情である。</span>
+  </div>
+</section>
+
+<!-- ── EERIE AESTHETICS ── -->
+<section class="eerie-section" data-section="3">
+  <div class="eerie-left">
+    <div class="eerie-badge reveal">
+      <span class="jp">不気味な美学</span>
+      <span class="en">Eerie Aesthetics</span>
+    </div>
+
+    <p class="eerie-description reveal reveal-delay-1">
+      オナーとデザインの交差点。<br>
+      見えないものを形にする試み。<br>
+      タイポグラフィは感情である。
+    </p>
+
+    <p class="eerie-description reveal reveal-delay-2" style="font-family:var(--font-mono);font-size:0.75rem;line-height:1.8;opacity:0.5;">
+      The intersection of honor and design.<br>
+      An attempt to give form to the invisible.<br>
+      Typography is emotion.
+    </p>
+
+    <span class="eerie-year reveal reveal-delay-3">MMXXVI &mdash; BEKFUDO &times; POSTERKRAFT</span>
+  </div>
+
+  <div class="eerie-right">
+    <div class="coords reveal">
+      <p class="num">35.6895&deg; N, 139.6917&deg; E</p>
+      <p class="place">東京、日本</p>
+    </div>
+
+    <svg class="star-4 reveal reveal-delay-1" viewBox="0 0 28 28" style="width:40px;height:40px;">
+      <path d="M14 0 L16.5 11.5 L28 14 L16.5 16.5 L14 28 L11.5 16.5 L0 14 L11.5 11.5 Z" fill="currentColor"/>
+    </svg>
+
+    <div class="limited-badge reveal reveal-delay-2">
+      <p class="jp">ポスタークラフト製<br>限定版</p>
+      <p class="sub">Limited Edition &mdash; Posterkraft</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── MANIFESTO ── -->
+<section class="manifesto" data-section="4">
+  <span class="section-num reveal">02 &mdash; Manifesto</span>
+  <div class="decorative-line reveal reveal-delay-1"></div>
+
+  <h2 class="manifesto-title reveal reveal-delay-1">すべての影には名前がある</h2>
+  <p class="manifesto-subtitle reveal reveal-delay-2">EVERY SHADOW HAS A NAME</p>
+
+  <p class="manifesto-text reveal reveal-delay-3">
+    見えるものを信じるな。<br>
+    形なきものに美を見出し、<br>
+    闇の中にこそ真の表現が宿る。<br>
+    タイポグラフィは叫びであり、<br>
+    沈黙でもある。
+  </p>
+
+  <div class="decorative-line reveal reveal-delay-4"></div>
+
+  <p class="reveal reveal-delay-4" style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.2em;opacity:0.3;text-transform:uppercase;">
+    Do not trust what you can see
+  </p>
+</section>
+
+<!-- ── GRID ── -->
+<section class="grid-gallery">
+  <div class="grid-cell reveal">
+    <span class="cell-num">001</span>
+    <span class="cell-title">FORM</span>
+    <span class="cell-jp">形態</span>
+    <span class="cell-line"></span>
+  </div>
+  <div class="grid-cell reveal reveal-delay-1">
+    <span class="cell-num">002</span>
+    <span class="cell-title">SHADOW</span>
+    <span class="cell-jp">影</span>
+    <span class="cell-line"></span>
+  </div>
+  <div class="grid-cell reveal reveal-delay-2">
+    <span class="cell-num">003</span>
+    <span class="cell-title">VOID</span>
+    <span class="cell-jp">虚無</span>
+    <span class="cell-line"></span>
+  </div>
+  <div class="grid-cell reveal reveal-delay-1">
+    <span class="cell-num">004</span>
+    <span class="cell-title">ECHO</span>
+    <span class="cell-jp">反響</span>
+    <span class="cell-line"></span>
+  </div>
+  <div class="grid-cell reveal reveal-delay-2">
+    <span class="cell-num">005</span>
+    <span class="cell-title">NERVE</span>
+    <span class="cell-jp">神経</span>
+    <span class="cell-line"></span>
+  </div>
+  <div class="grid-cell reveal reveal-delay-3">
+    <span class="cell-num">006</span>
+    <span class="cell-title">DREAD</span>
+    <span class="cell-jp">恐怖</span>
+    <span class="cell-line"></span>
+  </div>
+</section>
+
+<!-- ── PHILOSOPHY ── -->
+<section class="philosophy">
+  <div class="side-text reveal">
+    Bekfudo<br>
+    Est. 2026<br>
+    Tokyo, JP
+  </div>
+
+  <div class="center-text reveal reveal-delay-1">
+    <p class="big-jp">見えるものを信じるな</p>
+    <p class="translation">Do not trust what you can see</p>
+  </div>
+
+  <div class="side-text reveal reveal-delay-2" style="text-align:right;">
+    Posterkraft<br>
+    Limited Run<br>
+    MMXXVI
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <span class="footer-left">Bekfudo &times; Posterkraft &mdash; 2026</span>
+  <span class="footer-center">見えるものを信じるな</span>
+  <span class="footer-right">35.6895&deg; N, 139.6917&deg; E</span>
+</footer>
+
+<script>
+  // Intersection Observer for reveal animations
+  const reveals = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  reveals.forEach(el => revealObserver.observe(el));
+
+  // Floating crosshair follows cursor
+  const cross = document.getElementById('floatCross');
+  let mouseTimer;
+
+  document.addEventListener('mousemove', (e) => {
+    cross.style.left = (e.clientX - 10) + 'px';
+    cross.style.top = (e.clientY - 10) + 'px';
+    cross.classList.add('visible');
+
+    clearTimeout(mouseTimer);
+    mouseTimer = setTimeout(() => {
+      cross.classList.remove('visible');
+    }, 2000);
+  });
+
+  // Scroll indicator
+  const dots = document.querySelectorAll('.scroll-dot');
+  const sections = document.querySelectorAll('[data-section]');
+
+  window.addEventListener('scroll', () => {
+    const scrollPos = window.scrollY + window.innerHeight / 2;
+
+    sections.forEach((section, i) => {
+      const top = section.offsetTop;
+      const bottom = top + section.offsetHeight;
+
+      if (scrollPos >= top && scrollPos < bottom && dots[i]) {
+        dots.forEach(d => d.classList.remove('active'));
+        dots[i].classList.add('active');
+      }
+    });
+  });
+
+  // Manifesto section - invert scroll indicator
+  const manifesto = document.querySelector('.manifesto');
+
+  const manifestoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const indicator = document.getElementById('scrollIndicator');
+      if (entry.isIntersecting) {
+        indicator.style.filter = 'invert(1)';
+      } else {
+        indicator.style.filter = 'none';
+      }
+    });
+  }, { threshold: 0.5 });
+
+  manifestoObserver.observe(manifesto);
+</script>
+
+</body>
+</html>
