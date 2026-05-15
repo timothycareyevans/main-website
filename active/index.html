@@ -536,6 +536,9 @@ body::before {
 
 .hero-art {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: calc(100vh - 160px);
   max-height: 860px;
   margin-left: auto;
@@ -544,9 +547,9 @@ body::before {
   overflow: visible;
 }
 .hero-art img {
-  width: 100%; height: 100%;
-  object-fit: contain;
-  object-position: right center;
+  width: 96%; height: 100%;
+  object-fit: cover;
+  object-position: center;
   display: block;
 }
 /* image annotations */
@@ -839,7 +842,7 @@ section.tight { padding: 90px 0; }
   max-width: 620px;
   margin-left: auto;
 }
-.about-art img { width: 100%; height: 100%; object-fit: contain; }
+.about-art img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.05); }
 .about-side-note {
   position: absolute;
   right: -8px;
@@ -2105,8 +2108,8 @@ footer {
     <div class='about-grid'>
       <div class='about-copy' data-reveal>
         <span class='label'>About the studio <span class='ix'>· Nº 02</span></span>
-        <h2 class='display'>We treat <em>your agent</em> as a creative <em>collaborator,</em> not a black box<span class='dot'>.</span></h2>
-        <p class='lead'>The strongest coding agents already live on your laptop. We don't ship one — we wire them into a skill-driven design workflow that runs locally with <code class='code-inline'>pnpm tools-dev</code>, deploys the web layer to Vercel, and stays BYOK at every layer.</p>
+        <h2 class='display'>A creative studio for <em>innovative ideas,</em> sharp systems, and memorable <em>digital work</em><span class='dot'>.</span></h2>
+        <p class='lead'>We shape early sparks into polished web experiences, visual identities, and creative tools. The practice moves between research, design, and engineering so every project feels intentional, useful, and unmistakably its own.</p>
         <a class='btn btn-ghost' href='#' target='_blank' rel='noreferrer noopener'>
           Read our approach
           <span class='arrow'><svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg></span>
@@ -2121,7 +2124,7 @@ footer {
         </div>
       </div>
       <div class='about-art' data-reveal='right'>
-        <img src='/api/skills/open-design-landing/assets/about.png' alt='' />
+        <img src='about.png' alt='' />
         <div class='about-side-note'>
           <b></b>
           From model behavior<br/>to visual taste, we<br/>prototype the full<br/>stack of creative<br/>systems.
@@ -2150,7 +2153,7 @@ footer {
       <div class='capabilities-art' data-reveal='left'>
         <span class='corner tl'></span>
         <span class='corner br'></span>
-        <img src='/api/skills/open-design-landing/assets/capabilities.png' alt='' />
+        <img src='capabilities.png' alt='' />
         <div class='ribbon'><b>OPEN DESIGN</b> &nbsp;·&nbsp; CAPABILITIES MATRIX &nbsp;·&nbsp; OD/26</div>
       </div>
       <div class='capabilities-copy' data-reveal>
