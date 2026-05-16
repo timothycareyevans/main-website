@@ -14,19 +14,18 @@
             position: relative;
             display: inline-block;
             text-decoration: none;
+            z-index: 0;
         }
 
         .headline-link::after {
             content: "";
             position: absolute;
-            left: 0;
-            right: 0;
-            bottom: -0.08em;
-            height: 5px;
-            background: currentColor;
+            inset: 0 -0.08em;
+            z-index: -1;
+            background: #000;
             transform: scaleX(0);
             transform-origin: left;
-            transition: transform 0.18s ease;
+            transition: transform 0.24s ease;
         }
 
         .headline-link:hover::after,
