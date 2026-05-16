@@ -9,6 +9,31 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace:wght@400;500;600;700&family=Fraunces:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
     <title>Timothy Carey Evans</title>
+    <style>
+        .headline-link {
+            position: relative;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .headline-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -0.08em;
+            height: 5px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.18s ease;
+        }
+
+        .headline-link:hover::after,
+        .headline-link:focus-visible::after {
+            transform: scaleX(1);
+        }
+    </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PQCPMY514N"></script>
     <script>
@@ -159,7 +184,7 @@
                     <span class="badge-text">Who I Am</span>
                 </div>
                 <h2 class="headline">
-                    <a href="/active/">Curiosity. Craft. Connection.</a><br>
+                    <a class="headline-link" href="/active/">Curiosity. Craft. Connection.</a><br>
                     <em>Art + Tech = My Life</em>
                 </h2>
                 <p class="lede">
