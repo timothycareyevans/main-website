@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 80" role="img" aria-labelledby="title desc">
+  <title id="title">Two Row Racing Checker Stripe</title>
+  <desc id="desc">A long white-and-transparent checker stripe with slanted squares.</desc>
+  <g fill="#fff" transform="skewX(-24)">
+    <rect x="24" y="11" width="28" height="22"/>
+    <rect x="80" y="11" width="28" height="22"/>
+    <rect x="136" y="11" width="28" height="22"/>
+    <rect x="192" y="11" width="28" height="22"/>
+    <rect x="248" y="11" width="28" height="22"/>
+    <rect x="304" y="11" width="28" height="22"/>
+    <rect x="360" y="11" width="28" height="22"/>
+    <rect x="416" y="11" width="28" height="22"/>
+    <rect x="472" y="11" width="28" height="22"/>
+    <rect x="528" y="11" width="28" height="22"/>
+    <rect x="584" y="11" width="28" height="22"/>
+    <rect x="640" y="11" width="28" height="22"/>
+    <rect x="696" y="11" width="28" height="22"/>
+    <rect x="752" y="11" width="28" height="22"/>
+    <rect x="808" y="11" width="28" height="22"/>
+    <rect x="52" y="39" width="28" height="22"/>
+    <rect x="108" y="39" width="28" height="22"/>
+    <rect x="164" y="39" width="28" height="22"/>
+    <rect x="220" y="39" width="28" height="22"/>
+    <rect x="276" y="39" width="28" height="22"/>
+    <rect x="332" y="39" width="28" height="22"/>
+    <rect x="388" y="39" width="28" height="22"/>
+    <rect x="444" y="39" width="28" height="22"/>
+    <rect x="500" y="39" width="28" height="22"/>
+    <rect x="556" y="39" width="28" height="22"/>
+    <rect x="612" y="39" width="28" height="22"/>
+    <rect x="668" y="39" width="28" height="22"/>
+    <rect x="724" y="39" width="28" height="22"/>
+    <rect x="780" y="39" width="28" height="22"/>
+    <rect x="836" y="39" width="28" height="22"/>
+  </g>
+</svg>

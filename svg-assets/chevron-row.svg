@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 100" role="img" aria-labelledby="title desc">
+  <title id="title">Chevron Arrow Row</title>
+  <desc id="desc">A row of alternating solid and outlined right-pointing chevrons.</desc>
+  <g stroke="#fff" stroke-width="5" stroke-linejoin="miter">
+    <path d="M10 18h40l34 32-34 32H10l34-32z" fill="#fff"/>
+    <path d="M74 18h40l34 32-34 32H74l34-32z" fill="none"/>
+    <path d="M138 18h40l34 32-34 32h-40l34-32z" fill="none"/>
+    <path d="M202 18h40l34 32-34 32h-40l34-32z" fill="#fff"/>
+    <path d="M266 18h40l34 32-34 32h-40l34-32z" fill="#fff"/>
+    <path d="M330 18h40l34 32-34 32h-40l34-32z" fill="none"/>
+    <path d="M394 18h40l34 32-34 32h-40l34-32z" fill="none"/>
+    <path d="M458 18h40l34 32-34 32h-40l34-32z" fill="#fff"/>
+    <path d="M514 24h22l28 26-28 26h-22l28-26z" fill="none"/>
+  </g>
+</svg>

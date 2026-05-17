@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 140" role="img" aria-labelledby="title desc">
+  <title id="title">My Own World Mode Pill</title>
+  <desc id="desc">A rounded white pill label with curved repeated world mode text and a small globe icon.</desc>
+  <defs>
+    <path id="topText" d="M72 23H368"/>
+    <path id="bottomText" d="M368 117H72"/>
+  </defs>
+  <rect x="24" y="31" width="424" height="78" rx="39" fill="#fff"/>
+  <circle cx="395" cy="70" r="36" fill="#fff" stroke="#000" stroke-width="4"/>
+  <g fill="none" stroke="#000" stroke-width="2.5">
+    <ellipse cx="395" cy="70" rx="16" ry="36"/>
+    <ellipse cx="395" cy="70" rx="27" ry="36"/>
+    <path d="M359 70h72M366 54h58M366 86h58M395 34v72"/>
+  </g>
+  <g fill="#fff" font-family="Arial Black, Impact, sans-serif" font-size="14" letter-spacing="2">
+    <text><textPath href="#topText">MY OWN WORLD MODE  MY OWN WORLD MODE</textPath></text>
+    <text><textPath href="#bottomText">MY OWN WORLD MODE  MY OWN WORLD MODE</textPath></text>
+    <text transform="translate(11 100) rotate(-70)">MY OWN WORLD MODE</text>
+    <text transform="translate(470 31) rotate(70)">MY OWN WORLD MODE</text>
+  </g>
+</svg>

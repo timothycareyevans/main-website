@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-labelledby="title desc">
+  <title id="title">Wireframe Globe With Americas Silhouette</title>
+  <desc id="desc">White vector globe with latitude and longitude lines and abstract Americas land shapes.</desc>
+  <g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="150" cy="150" r="118"/>
+    <ellipse cx="150" cy="150" rx="50" ry="118"/>
+    <ellipse cx="150" cy="150" rx="88" ry="118"/>
+    <path d="M32 150h236M49 98h202M49 202h202M86 48c29 17 99 17 128 0M86 252c29-17 99-17 128 0M150 32v236"/>
+  </g>
+  <g fill="#fff">
+    <path d="M48 101c18-40 58-69 105-69 26 0 51 8 70 23l-19 20-33-2-17 26-31 8-4 33-28 14-17-27-27-7z"/>
+    <path d="M120 156l28 19 4 35 31 11-9 31c-45-9-81-44-94-88zM44 142l23 17-13 23c-7-11-11-25-12-40zM200 83l38 7 20 29-11 26-46-8-24-21z"/>
+  </g>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-labelledby="title desc">
+  <title id="title">Globe W Mark</title>
+  <desc id="desc">A wireframe globe containing a bold W monogram.</desc>
+  <g fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="150" cy="150" r="116"/>
+    <ellipse cx="150" cy="150" rx="48" ry="116"/>
+    <ellipse cx="150" cy="150" rx="84" ry="116"/>
+    <path d="M34 150h232M52 96h196M52 204h196M88 50c30 16 94 16 124 0M88 250c30-16 94-16 124 0M150 34v232"/>
+  </g>
+  <path d="M63 86h42l25 88 20-88h34l20 88 25-88h42l-47 128h-39l-18-68-18 68h-39z" fill="#fff"/>
+</svg>

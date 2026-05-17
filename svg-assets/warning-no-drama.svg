@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 260" role="img" aria-labelledby="title desc">
+  <title id="title">Warning No Drama Label</title>
+  <desc id="desc">A white warning label with outlined title text, no drama text, alert icon, and diagonal hazard stripes.</desc>
+  <rect width="460" height="260" fill="#fff"/>
+  <rect x="12" y="12" width="436" height="236" fill="none" stroke="#000" stroke-width="8"/>
+  <g fill="none" stroke="#000" stroke-linejoin="round" stroke-width="4">
+    <path d="M31 65V20h13l11 29 10-29h13v45H66V39L57 65h-6L43 39v26z"/>
+    <path d="M86 65V20h33v10h-20v7h17v10H99v8h21v10z"/>
+    <path d="M126 65V20h25c12 0 18 6 18 17 0 7-3 12-9 14l11 14h-16l-9-13h-7v13zM139 42h10c5 0 7-2 7-6s-2-6-7-6h-10z"/>
+    <path d="M177 65V20h14l19 24V20h13v45h-13l-20-25v25z"/>
+    <path d="M233 65V20h13v45z"/>
+    <path d="M257 65V20h14l19 24V20h13v45h-13l-20-25v25z"/>
+    <path d="M335 66c-18 0-29-10-29-24s11-23 28-23c10 0 18 3 24 9l-8 9c-4-4-9-6-15-6-9 0-15 4-15 11 0 8 6 12 16 12 4 0 8-1 11-3v-5h-14v-9h27v21c-7 5-15 8-25 8z"/>
+  </g>
+  <g fill="#000">
+    <text x="31" y="98" font-family="Arial Black, Impact, sans-serif" font-size="24" letter-spacing="2">NO DRAMA</text>
+    <path d="M340 38 301 108h78zm0 18 22 39h-44z"/>
+    <rect x="335" y="68" width="10" height="21"/>
+    <rect x="335" y="94" width="10" height="9"/>
+  </g>
+  <defs>
+    <pattern id="hazard" width="52" height="52" patternUnits="userSpaceOnUse" patternTransform="rotate(36)">
+      <rect width="26" height="60" fill="#000"/>
+    </pattern>
+  </defs>
+  <rect x="28" y="122" width="404" height="104" fill="url(#hazard)"/>
+</svg>
