@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reality.Not.Found — Interactive Glitch Site</title>
+  <style>
+    :root{
+      --black:#020202;
+      --white:#f4f4ef;
+      --lime:#8eb300;
+      --violet:#3515d6;
+      --purple:#7958ff;
+      --mono:"Courier New", Courier, monospace;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:#000;color:var(--white);font-family:var(--mono);overflow-x:hidden;cursor:crosshair}
+    a{color:inherit;text-decoration:none}
+    button,input{font:inherit}
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:999;background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 4px);mix-blend-mode:screen;opacity:.5}
+    .noise{position:fixed;inset:-20%;pointer-events:none;z-index:998;opacity:.04;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:5px 5px;animation:noise 1s steps(2) infinite}
+    @keyframes noise{50%{transform:translate(2%,-1%)}}
+    .site{width:100%;max-width:none;margin:0;background:#000;position:relative;isolation:isolate}
+    .nav{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;border-bottom:1px solid rgba(255,255,255,.15);position:sticky;top:0;background:rgba(0,0,0,.92);backdrop-filter:blur(10px);z-index:50}
+    .brand{font-size:20px;letter-spacing:-1px;text-transform:uppercase}.brand span,.lime{color:var(--lime)}
+    .nav-links{display:flex;gap:34px;font-size:13px;text-transform:uppercase}.nav-links a{position:relative;padding:8px 0}.nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:3px;background:var(--lime);transition:.2s}.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+    .login{background:transparent;color:var(--lime);border:2px solid var(--lime);padding:8px 22px;text-transform:uppercase;cursor:pointer;transition:.2s}.login:hover,.btn:hover,.subscribe button:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--purple)}
+    .section{position:relative;overflow:hidden;padding:56px 64px}
+    .hero{min-height:372px;display:grid;grid-template-columns:300px 1fr 54px;align-items:center;gap:16px;background:#000}
+    h1,h2,h3,p{margin:0}h1,h2,h3{text-transform:uppercase;line-height:.95}
+    h1{font-size:46px;letter-spacing:-3px;text-shadow:3px 0 0 rgba(255,255,255,.12)}h2{font-size:32px;letter-spacing:-1px}h3{font-size:24px}
+    p{line-height:1.4}.hero-copy{font-size:18px;line-height:1.25;max-width:300px;margin:28px 0}.btn{display:inline-flex;align-items:center;gap:10px;border:2px solid var(--lime);padding:10px 16px;background:rgba(0,0,0,.45);color:#fff;text-transform:uppercase;transition:.2s}
+    .stat{font-size:29px;line-height:1.45;text-align:right}.stat .g{color:var(--lime)}.stat .p{color:var(--purple)}
+    .asset-panel{position:relative;background-size:cover;background-position:center;min-height:100%;filter:contrast(1.03)}
+    .hero-art{height:368px;background-image:url("assets/hero-statue-bg.png")}
+    .flowers-art{height:276px;background-image:url("assets/flowers-band.png");background-position:center top}
+    .eye-art{height:292px;background-image:url("assets/eye-band.png")}
+    .asset-panel::after{content:"";position:absolute;inset:0;background-image:radial-gradient(#000 1px,transparent 1.4px);background-size:6px 6px;mix-blend-mode:multiply;opacity:.18;pointer-events:none}
+    .x{position:absolute;width:24px;height:24px;background:var(--lime);clip-path:polygon(35% 0,65% 0,65% 35%,100% 35%,100% 65%,65% 65%,65% 100%,35% 100%,35% 65%,0 65%,0 35%,35% 35%);animation:blink 1.1s steps(2) infinite}.x.p{background:var(--purple)}.x.b{background:#000}.x.w{background:#fff}@keyframes blink{50%{opacity:.3}}
+    .collection{min-height:276px;background:var(--white);color:#000;border-top:3px solid #000;border-bottom:3px solid #000;display:grid;grid-template-columns:260px 1fr 172px;align-items:center;gap:24px;padding-top:28px;padding-bottom:28px}.tag{display:inline-block;background:var(--violet);color:#fff;padding:6px 10px}.tag.black{background:#000}.collection-copy{font-size:16px;margin:26px 0;max-width:250px}
+    .loader{font-size:18px;color:var(--violet);align-self:end;margin-bottom:14px}.bar{display:flex;gap:3px;margin-top:8px}.bar i{display:block;width:18px;height:18px;border:2px solid var(--violet)}.bar i:nth-child(n+6){background:var(--lime)}
+    .about-section{min-height:292px;background:#000;display:grid;grid-template-columns:250px 1fr 70px;gap:28px;align-items:center}.about-section .kicker{background:var(--violet);display:inline-block;padding:7px 12px;font-size:24px;margin-bottom:14px}.about-section p{margin:22px 0;font-size:14px}
+    .projects{background:var(--white);color:#000;min-height:376px;padding-top:28px}.project-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:26px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card{height:276px;background:#050505;color:#fff;padding:14px;position:relative;overflow:hidden;display:flex;align-items:flex-end;transition:.25s;cursor:pointer;background-size:cover;background-position:center}.card:hover{transform:translateY(-8px);box-shadow:10px 10px 0 var(--violet)}.card::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.92));z-index:1}.card-content{position:relative;z-index:2}.card .title{color:var(--lime);font-size:18px}.card small{color:var(--purple);display:block;margin-top:7px;font-size:14px}.num{margin-right:8px}
+    .c1{background-image:url("assets/card-computer.png")}.c2{background-image:url("assets/card-hand.png")}.c3{background-image:url("assets/card-globe.png")}.c4{background-image:url("assets/card-plant.png")}
+    .newsletter{min-height:104px;display:grid;grid-template-columns:200px 1fr 428px;gap:36px;align-items:center;padding:28px 64px;border-top:2px solid #111;border-bottom:1px solid #111}.newsletter h2{font-size:26px}.subscribe{display:grid;grid-template-columns:1fr 140px;gap:16px}input{background:#080808;border:1px solid #eee;color:#fff;padding:14px 16px;font-size:16px}button{background:var(--lime);border:none;color:#000;text-transform:uppercase;cursor:pointer;transition:.2s}
+    footer{height:74px;display:flex;justify-content:space-between;align-items:center;padding:0 64px;font-size:12px;color:var(--lime)}footer .copy{color:#fff}.mark{width:36px;height:36px;background:url("assets/logo-mark.png") center/contain no-repeat;display:inline-block;vertical-align:middle;margin-right:24px}
+    .modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.78);z-index:200}.modal:target{display:grid}.modal-box{width:min(520px,90vw);background:#efefef;color:#000;border:3px solid #000;box-shadow:12px 12px 0 var(--violet)}.modal-title{background:var(--violet);color:#fff;padding:10px 14px;display:flex;justify-content:space-between}.modal-body{padding:28px}.modal-body a{display:inline-block;margin-top:20px;border:2px solid #000;padding:8px 14px}
+    @media(max-width:1200px){.hero{grid-template-columns:340px 1fr 70px}.collection{grid-template-columns:280px 1fr 190px}.about-section{grid-template-columns:280px 1fr 90px}.newsletter{grid-template-columns:240px 1fr 420px}.cards{grid-template-columns:repeat(4,1fr)}}
+    @media(max-width:900px){.nav-links{display:none}.hero,.collection,.about-section,.newsletter{grid-template-columns:1fr}.hero-art,.flowers-art,.eye-art{height:300px}.stat{text-align:left}.cards{grid-template-columns:repeat(2,1fr)}.newsletter{padding:30px}.subscribe{grid-template-columns:1fr}}
+    @media(max-width:620px){.login{display:none}.cards{grid-template-columns:1fr}.section{padding:34px 22px}.hero-copy{font-size:16px}h1{font-size:40px}.newsletter,footer{padding-left:22px;padding-right:22px}}
+  </style>
+</head>
+<body>
+  <div class="noise"></div>
+  <main class="site" id="home">
+    <header class="nav">
+      <a class="brand" href="#home">Reality.<span>Not</span>.Found</a>
+      <nav class="nav-links">
+        <a class="active" href="../index.html">Home</a><a href="#about">About</a><a href="#projects">Projects</a><a href="#archive">Archive</a><a href="#contact">Contact</a>
+      </nav>
+      <a class="login" href="#login">Log In</a>
+    </header>
+
+    <section class="section hero">
+      <i class="x" style="left:2%;top:14%"></i><i class="x p" style="left:42%;top:26%"></i><i class="x" style="right:8%;top:30%"></i><i class="x w" style="right:12%;bottom:10%"></i>
+      <div>
+        <h1>System Error:<br><span class="lime">Self Not</span><br>Recognized.</h1>
+        <p class="hero-copy">Exploring the glitches between identity and simulation.</p>
+        <a class="btn" href="#archive">Enter the void →</a>
+      </div>
+      <div class="asset-panel hero-art"></div>
+      <div class="stat">4<br>04<br><span class="g">404</span><br><span class="p">444</span></div>
+    </section>
+
+    <section class="section collection" id="archive">
+      <i class="x p" style="left:24%;top:12%"></i><i class="x b" style="left:29%;bottom:24%"></i><i class="x" style="right:4%;top:16%"></i>
+      <div>
+        <h2><span class="tag">Missing</span><br><span class="tag black">Something Real.</span></h2>
+        <p class="collection-copy">A collection of fragments from a world that feels just out of reach.</p>
+        <a class="lime" href="#projects">View collection →</a>
+      </div>
+      <div class="asset-panel flowers-art"></div>
+      <div class="loader">Searching...<div class="bar"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+    </section>
+
+    <section class="section about-section" id="about">
+      <i class="x" style="left:35%;top:12%"></i><i class="x p" style="right:18%;top:12%"></i><i class="x w" style="left:31%;bottom:36%"></i>
+      <div>
+        <span class="kicker">About</span>
+        <h2>Not A Glitch.<br><span class="lime">A Feature</span><br>Of Existence.</h2>
+        <p>We’re not broken. We’re just built different. This is our interface.</p>
+        <a class="lime" href="#manifesto">Read manifesto →</a>
+      </div>
+      <div class="asset-panel eye-art"></div>
+      <div class="stat">4<br>04<br><span class="g">404</span><br><span class="p">444</span></div>
+    </section>
+
+    <section class="section projects" id="projects">
+      <i class="x p" style="left:42%;top:12%"></i><i class="x" style="right:29%;top:11%"></i>
+      <div class="project-top">
+        <div><h2><span class="tag">Projects</span><br>Digital Souls In<br>An Analog World.</h2></div>
+        <a href="#all-projects">View all →</a>
+      </div>
+      <div class="cards">
+        <a class="card c1" href="#project-1"><div class="card-content"><span class="num">01</span><span class="title">Remnant.exe</span><small>Experiment</small></div></a>
+        <a class="card c2" href="#project-2"><div class="card-content"><span class="num">02</span><span class="title">Haptic Dreams</span><small>Interactive</small></div></a>
+        <a class="card c3" href="#project-3"><div class="card-content"><span class="num">03</span><span class="title">Void Protocol</span><small>Installation</small></div></a>
+        <a class="card c4" href="#project-4"><div class="card-content"><span class="num">04</span><span class="title">Natural_Data</span><small>Archive</small></div></a>
+      </div>
+    </section>
+
+    <section class="newsletter" id="contact">
+      <h2><span class="tag">Stay Unreal.</span></h2>
+      <p>Updates from the edge of the system.</p>
+      <form class="subscribe" onsubmit="event.preventDefault();location.hash='subscribed';">
+        <input type="email" placeholder="your.email@unknown" aria-label="Email" />
+        <button>Subscribe</button>
+      </form>
+    </section>
+
+    <footer>
+      <span><i class="mark"></i>Terms &nbsp;&nbsp; Privacy &nbsp;&nbsp; Accessibility</span>
+      <span class="copy">© 2026 Reality.Not.Found</span>
+    </footer>
+  </main>
+
+  <aside id="login" class="modal"><div class="modal-box"><div class="modal-title">LOGIN.EXE <a href="#">×</a></div><div class="modal-body"><h3>Access Denied</h3><p>Identity token missing. Try again from another timeline.</p><a href="#">OK</a></div></div></aside>
+  <aside id="manifesto" class="modal"><div class="modal-box"><div class="modal-title">MANIFESTO.TXT <a href="#about">×</a></div><div class="modal-body"><h3>Not A Glitch</h3><p>The interface is alive. The errors are signals. The broken pixels are proof that something real is still trying to render.</p><a href="#about">Return</a></div></div></aside>
+  <aside id="subscribed" class="modal"><div class="modal-box"><div class="modal-title">SUBSCRIBE.OK <a href="#contact">×</a></div><div class="modal-body"><h3>Signal Received</h3><p>You have been added to the edge of the system.</p><a href="#contact">Close</a></div></div></aside>
+  <aside id="project-1" class="modal"><div class="modal-box"><div class="modal-title">REMNANT.EXE <a href="#projects">×</a></div><div class="modal-body"><h3>Experiment</h3><p>A corrupted archive of memory, identity, and analog ghosts.</p><a href="#projects">Back</a></div></div></aside>
+  <aside id="project-2" class="modal"><div class="modal-box"><div class="modal-title">HAPTIC DREAMS <a href="#projects">×</a></div><div class="modal-body"><h3>Interactive</h3><p>A tactile interface for dreams that almost finished loading.</p><a href="#projects">Back</a></div></div></aside>
+  <aside id="project-3" class="modal"><div class="modal-box"><div class="modal-title">VOID PROTOCOL <a href="#projects">×</a></div><div class="modal-body"><h3>Installation</h3><p>A world-grid error window floating in a simulated dark room.</p><a href="#projects">Back</a></div></div></aside>
+  <aside id="project-4" class="modal"><div class="modal-box"><div class="modal-title">NATURAL_DATA <a href="#projects">×</a></div><div class="modal-body"><h3>Archive</h3><p>Botanical fragments indexed as evidence that reality still exists.</p><a href="#projects">Back</a></div></div></aside>
+</body>
+</html>
