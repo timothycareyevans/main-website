@@ -268,6 +268,34 @@ body::before {
 }
 .brand-meta b { display: block; color: var(--ink); font-weight: 600; }
 
+.home-link {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+  text-decoration: none;
+  flex: 0 0 auto;
+  transition: border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+.home-link:hover {
+  color: var(--coral);
+  border-color: var(--coral);
+  transform: translateY(-1px);
+}
+.home-link svg {
+  width: 15px;
+  height: 15px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .nav-links {
   display: flex;
   gap: 38px;
@@ -1962,10 +1990,17 @@ footer {
 
 <header class='nav' data-od-id='nav'>
   <div class='container nav-inner'>
-    <a href='/index.html' class='brand'>
+    <a href='/active/' class='brand'>
       <span class='brand-mark'>Ø</span>
       <span>Curiosity. Craft. Connection.</span>
       <span class='brand-meta'><b>Studio Nº 01</b>San Francisco / Open / Earth</span>
+    </a>
+    <a class='home-link' href='/index.html' aria-label='Home'>
+      <svg viewBox='0 0 24 24' aria-hidden='true'>
+        <path d='M3 11.5L12 4l9 7.5' />
+        <path d='M5.5 10.5V20h13v-9.5' />
+        <path d='M9.5 20v-6h5v6' />
+      </svg>
     </a>
     <nav>
       <ul class='nav-links'>
