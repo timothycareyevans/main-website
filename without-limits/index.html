@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neobrutalism UI Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --lime:#c8ff00;--pink:#ff6bb5;--yellow:#ffd700;--peach:#fde8d0;
+  --purple:#7c3aed;--purple-win:#6d3fc4;--purple-dark:#2d1b4e;
+  --purple-deep:#1a0e30;--black:#000;--white:#fff;--green:#7cd420;
+  --orange:#ff9f43;--border:3px solid #000;--shadow:4px 4px 0 #000;
+  --shadow-sm:2px 2px 0 #000;
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--peach);color:var(--black);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.page{max-width:1440px;margin:0 auto;background:var(--peach);min-height:100vh;position:relative}
+
+/* ===== HEADER ===== */
+.header{background:var(--lime);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:var(--border);gap:16px}
+.logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.logo-smiley{width:44px;height:44px;background:var(--yellow);border:3px solid var(--black);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.logo-text{display:flex;flex-direction:column;line-height:1.15}
+.logo-title{font-family:'Outfit',sans-serif;font-weight:900;font-size:15px;letter-spacing:.01em}
+.logo-subtitle{font-family:'Outfit',sans-serif;font-weight:800;font-size:13px;color:var(--purple)}
+.nav{display:flex;align-items:center;background:var(--white);border:var(--border);border-radius:100px;padding:4px;gap:2px}
+.nav-item{padding:8px 16px;font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;text-decoration:none;color:var(--black);border-radius:100px;cursor:pointer;transition:background .2s;letter-spacing:.03em;white-space:nowrap}
+.nav-item.active{background:var(--lime)}
+.nav-item:hover:not(.active){background:#f5f5f5}
+.header-right{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.cta-btn{background:var(--lime);border:var(--border);border-radius:100px;padding:10px 22px;font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;cursor:pointer;box-shadow:var(--shadow-sm);transition:all .15s;letter-spacing:.02em;white-space:nowrap}
+.cta-btn:hover{transform:translate(2px,2px);box-shadow:none}
+.win-ctrls{display:flex;gap:6px;align-items:center}
+.wc{width:26px;height:26px;display:flex;align-items:center;justify-content:center;border:2px solid var(--black);font-size:12px;cursor:pointer;background:var(--white);font-weight:700;line-height:1}
+.wc-close{background:var(--pink);border-radius:50%;color:var(--white)}
+
+/* ===== HERO ===== */
+.hero{display:flex;padding:40px 30px 30px 40px;min-height:580px;position:relative;overflow:hidden}
+.hero-left{flex:0 0 330px;display:flex;flex-direction:column;justify-content:center;gap:22px;z-index:5;padding-right:10px}
+.welcome-badge{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--black);border-radius:100px;padding:6px 14px;font-family:'Outfit',sans-serif;font-weight:600;font-size:11px;letter-spacing:.04em;width:fit-content;background:var(--white)}
+.welcome-badge .sparkle{color:var(--purple);font-size:10px}
+.hero-heading{font-family:'Outfit',sans-serif;font-weight:900;font-size:58px;line-height:.95;letter-spacing:-.03em;position:relative}
+.hero-heading .pink{color:var(--pink)}
+.hero-star{position:absolute;right:-70px;top:5px}
+.hero-desc{font-size:15px;line-height:1.6;color:#444;max-width:330px}
+.hero-buttons{display:flex;gap:12px;align-items:center}
+.btn-primary{background:var(--lime);border:var(--border);border-radius:100px;padding:14px 22px;font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;cursor:pointer;box-shadow:var(--shadow);transition:all .15s;display:flex;align-items:center;gap:8px;letter-spacing:.03em}
+.btn-primary:hover{transform:translate(2px,2px);box-shadow:var(--shadow-sm)}
+.btn-secondary{background:var(--white);border:var(--border);border-radius:100px;padding:14px 22px;font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;cursor:pointer;box-shadow:var(--shadow);transition:all .15s;letter-spacing:.03em}
+.btn-secondary:hover{transform:translate(2px,2px);box-shadow:var(--shadow-sm)}
+.social-proof{display:flex;align-items:center;gap:12px}
+.avatars{display:flex;align-items:center}
+.avatar{width:32px;height:32px;border-radius:50%;border:2px solid var(--black);margin-left:-8px;display:flex;align-items:center;justify-content:center;font-size:14px;overflow:hidden}
+.avatar:first-child{margin-left:0}
+.avatar-1{background:#ffb3d9}.avatar-2{background:#b3e0ff}.avatar-3{background:#ffe0b3}.avatar-4{background:#d4b3ff}
+.avatar-count{width:34px;height:34px;border-radius:50%;background:var(--lime);border:2px solid var(--black);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;margin-left:-8px;font-family:'Outfit',sans-serif}
+.social-text{font-size:12.5px;color:#555;max-width:200px;line-height:1.4}
+
+/* ===== HERO RIGHT ===== */
+.hero-right{flex:1;position:relative;min-height:640px}
+
+/* Shared neo-window */
+.neo-win{background:var(--white);border:var(--border);border-radius:12px;box-shadow:var(--shadow);overflow:hidden;position:absolute}
+.neo-tb{padding:8px 12px;display:flex;align-items:center;justify-content:space-between;font-family:'Outfit',sans-serif;font-size:12px;font-weight:600}
+.neo-tb.purple{background:var(--purple-win);color:var(--white)}
+.neo-tb.light{background:var(--peach);border-bottom:2px solid #e5d5c5}
+.neo-dots{display:flex;gap:5px}
+.neo-dots span{width:11px;height:11px;border-radius:50%;border:2px solid rgba(0,0,0,.4)}
+.neo-dots span:nth-child(1){background:#ff6b6b}
+.neo-dots span:nth-child(2){background:var(--yellow)}
+.neo-dots span:nth-child(3){background:#4ade80}
+
+/* ===== DESKTOP ICONS ===== */
+.desktop-icons{position:absolute;left:0;top:30px;display:flex;flex-direction:column;gap:16px;z-index:12;width:80px}
+.d-icon{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;transition:opacity .2s}
+.d-icon:hover{opacity:.7}
+.d-icon-img{width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-size:26px}
+.d-icon span{font-size:9.5px;font-weight:500;text-align:center;line-height:1.2}
+
+/* ===== WELCOME WINDOW ===== */
+.welcome-win{left:11%;top:25px;width:27%;min-width:220px;z-index:6}
+.w-menu{display:flex;gap:14px;padding:6px 12px;border-bottom:2px solid #eee;font-size:12px;font-family:'Outfit',sans-serif}
+.w-menu span{cursor:pointer;font-weight:500}
+.w-body{padding:12px 14px;font-size:12.5px;line-height:1.6;color:#444}
+.w-body .read-more{display:inline-block;margin-top:10px;font-weight:600;font-size:12px;color:var(--black);text-decoration:none;font-family:'Outfit',sans-serif}
+.w-body .read-more:hover{text-decoration:underline}
+
+/* ===== NOW PLAYING ===== */
+.now-playing{left:40%;top:20px;width:26%;min-width:220px;z-index:7;background:var(--purple-dark);border-radius:12px}
+.np-head{padding:10px 14px 0;display:flex;justify-content:space-between;align-items:center}
+.np-head-title{font-family:'Outfit',sans-serif;font-weight:600;font-size:12px;color:var(--white)}
+.np-content{padding:10px 14px 14px;display:flex;gap:12px;align-items:flex-start}
+.np-art{width:60px;height:60px;border-radius:8px;border:2px solid rgba(255,255,255,.2);flex-shrink:0;position:relative;overflow:hidden;background:linear-gradient(180deg,#ff6b35 0%,#d4445c 40%,#6b2fa0 70%,#2d1b4e 100%)}
+.np-art::after{content:'';position:absolute;bottom:20%;left:0;right:0;height:30%;background:linear-gradient(to top,rgba(45,27,78,.5),transparent);border-radius:0 0 0 40%}
+.np-art .mountain{position:absolute;bottom:0;left:0;right:0;height:40%;background:#2d1b4e;clip-path:polygon(0 60%,25% 20%,45% 50%,65% 10%,85% 40%,100% 30%,100% 100%,0 100%)}
+.np-info{color:var(--white);flex:1}
+.np-title{font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;margin-bottom:1px}
+.np-artist{font-size:11px;opacity:.6;margin-bottom:6px}
+.np-controls{display:flex;gap:8px;align-items:center;margin-bottom:6px}
+.np-ctrl{cursor:pointer;opacity:.7;font-size:14px;color:var(--white);transition:opacity .2s}
+.np-ctrl:hover{opacity:1}
+.np-play{width:28px;height:28px;background:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.np-play svg{margin-left:2px}
+.np-progress{display:flex;align-items:center;gap:6px;font-size:10px;color:rgba(255,255,255,.5)}
+.np-bar{flex:1;height:3px;background:rgba(255,255,255,.15);border-radius:2px;position:relative}
+.np-bar-fill{position:absolute;left:0;top:0;height:100%;width:38%;background:var(--pink);border-radius:2px}
+
+/* ===== ACTIVITY ===== */
+.activity{position:absolute;right:14%;top:0;width:22%;min-width:180px;background:var(--purple-deep);border:var(--border);border-radius:12px;box-shadow:var(--shadow);z-index:6;padding:14px;overflow:hidden}
+.act-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:2px}
+.act-title{font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:var(--white);display:flex;align-items:center;gap:4px}
+.act-dd{font-size:9px;color:rgba(255,255,255,.5);background:rgba(255,255,255,.08);padding:3px 8px;border-radius:6px;font-family:'Outfit',sans-serif;display:flex;align-items:center;gap:3px}
+.act-gain{font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;color:#4ade80;margin-bottom:6px}
+
+/* ===== SYSTEM STATUS ===== */
+.sys-status{left:11%;top:285px;width:27%;min-width:220px;z-index:8}
+.ss-body{padding:14px}
+.ss-label{font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;margin-bottom:10px}
+.ss-row{display:flex;align-items:center;gap:10px}
+.ss-bar{flex:1;height:22px;background:#e8e8e8;border:2px solid var(--black);border-radius:4px;overflow:hidden}
+.ss-fill{height:100%;width:72%;background:repeating-linear-gradient(90deg,var(--green),var(--green) 10px,#6ab818 10px,#6ab818 12px);border-right:2px solid var(--black)}
+.ss-pct{font-family:'Outfit',sans-serif;font-weight:700;font-size:15px}
+
+/* ===== SAVE DIALOG ===== */
+.save-dlg{position:absolute;left:17%;top:410px;width:21%;min-width:180px;background:var(--white);border:var(--border);border-radius:12px;box-shadow:var(--shadow);z-index:10;padding:16px;text-align:center}
+.save-x{position:absolute;top:10px;right:10px;width:20px;height:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-weight:700;font-size:16px}
+.save-emoji{font-size:34px;margin-bottom:6px}
+.save-msg{font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;margin-bottom:14px;line-height:1.4}
+.save-btns{display:flex;gap:8px;justify-content:center}
+.save-btn{padding:8px 22px;border:2px solid var(--black);border-radius:8px;font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;cursor:pointer;background:var(--white);box-shadow:var(--shadow-sm);transition:all .15s}
+.save-btn.yes{background:var(--lime)}
+.save-btn:hover{transform:translate(1px,1px);box-shadow:1px 1px 0 #000}
+
+/* ===== MY FILES ===== */
+.my-files{left:40%;top:285px;width:26%;min-width:210px;z-index:7}
+.mf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:10px 12px}
+.mf-item{display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px;border-radius:6px;cursor:pointer}
+.mf-item:hover{background:#f5f5f5}
+.mf-folder{width:40px;height:30px;background:var(--yellow);border:2px solid var(--black);border-radius:2px 5px 5px 5px;position:relative}
+.mf-folder::before{content:'';position:absolute;top:-8px;left:0;width:16px;height:8px;background:var(--yellow);border:2px solid var(--black);border-bottom:none;border-radius:3px 3px 0 0}
+.mf-file{width:32px;height:40px;background:var(--white);border:2px solid var(--black);border-radius:2px;position:relative}
+.mf-file::after{content:'';position:absolute;top:0;right:0;width:10px;height:10px;background:linear-gradient(225deg,var(--white) 40%,#ccc 40%,#ccc 50%,var(--peach) 50%)}
+.mf-name{font-size:9px;font-weight:500;text-align:center}
+.mf-foot{padding:7px 12px;border-top:2px solid #eee;display:flex;align-items:center;justify-content:space-between;font-size:10px;color:#999}
+.mf-mini{width:55px;height:5px;background:#e5e5e5;border-radius:3px;overflow:hidden}
+.mf-mini-fill{height:100%;width:60%;background:#5b9aff;border-radius:3px}
+
+/* ===== CRT MONITOR ===== */
+.crt-wrap{position:absolute;right:-2%;top:100px;z-index:5;width:34%;min-width:270px}
+.crt{background:linear-gradient(155deg,#e8a0c0 0%,#d080c8 30%,#a868c0 60%,#9060b0 100%);border:var(--border);border-radius:22px;padding:16px;box-shadow:var(--shadow);position:relative}
+.crt-screen{background:#18082e;border:2px solid #000;border-radius:10px;height:220px;position:relative;overflow:hidden}
+.crt-screen::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.06) 2px,rgba(0,0,0,.06) 4px);pointer-events:none;z-index:2}
+.crt-grid{position:absolute;inset:0;background:linear-gradient(rgba(128,0,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(128,0,255,.04) 1px,transparent 1px);background-size:28px 28px}
+.crt-folders{position:absolute;top:14px;left:14px;display:flex;flex-direction:column;gap:12px;z-index:1}
+.crt-f{width:26px;height:20px;background:var(--yellow);border:1.5px solid #000;border-radius:1px 3px 3px 3px;position:relative}
+.crt-f::before{content:'';position:absolute;top:-5px;left:0;width:10px;height:5px;background:var(--yellow);border:1.5px solid #000;border-bottom:none;border-radius:2px 2px 0 0}
+.crt-win{position:absolute;top:12px;right:14px;width:100px;height:70px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.15);border-radius:6px;overflow:hidden;z-index:1}
+.crt-win-bar{height:12px;background:rgba(128,0,255,.3);border-bottom:1px solid rgba(255,255,255,.1)}
+.crt-burger{position:absolute;bottom:18px;right:25px;font-size:28px;z-index:1}
+.crt-stand{width:70px;height:16px;background:linear-gradient(to bottom,#c070d0,#a060b0);border:2px solid #000;margin:0 auto;border-radius:0 0 6px 6px;border-top:none}
+.crt-base{width:110px;height:8px;background:linear-gradient(to bottom,#b060c0,#9050a0);border:2px solid #000;margin:-2px auto 0;border-radius:0 0 4px 4px}
+
+/* ===== QUICK NOTE ===== */
+.quick-note{position:absolute;right:2%;bottom:0px;width:18%;min-width:150px;background:#fffde8;border:var(--border);border-radius:8px;box-shadow:var(--shadow);padding:14px;z-index:9}
+.qn-title{font-family:'Outfit',sans-serif;font-weight:700;font-size:11px;margin-bottom:6px;color:#888}
+.qn-text{font-size:12px;line-height:1.55;color:#555}
+.qn-text strong{color:var(--black);font-weight:600}
+
+/* ===== SPARKLE DECORATIONS ===== */
+.sparkle-d{position:absolute;pointer-events:none;z-index:15}
+.s-star{color:var(--yellow);font-weight:700}
+
+/* ===== TICKER ===== */
+.ticker{border-top:var(--border);border-bottom:var(--border);background:var(--white);padding:14px 0;overflow:hidden;position:relative}
+.ticker-track{display:flex;animation:ticker-scroll 30s linear infinite;width:max-content}
+.ticker-group{display:flex;align-items:center}
+.ticker-item{display:flex;align-items:center;gap:8px;padding:0 16px;white-space:nowrap;font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:.04em}
+.ticker-item .t-icon{font-size:14px}
+.ticker-sep{color:#ccc;padding:0 4px;font-size:18px}
+@keyframes ticker-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ===== CREATORS ===== */
+.creators{padding:40px 40px 44px;display:flex;gap:28px;align-items:flex-start}
+.creators-left{flex:0 0 230px}
+.creators-h{font-family:'Outfit',sans-serif;font-weight:900;font-size:42px;line-height:.97;letter-spacing:-.025em;margin-bottom:14px}
+.creators-desc{font-size:14px;line-height:1.5;color:#555;margin-bottom:20px}
+.browse-btn{background:var(--lime);border:var(--border);border-radius:8px;padding:12px 18px;font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;cursor:pointer;box-shadow:var(--shadow);transition:all .15s;letter-spacing:.04em;display:inline-block}
+.browse-btn:hover{transform:translate(2px,2px);box-shadow:var(--shadow-sm)}
+.cards{display:flex;flex:1;gap:16px}
+.card{flex:1;border:var(--border);border-radius:16px;padding:20px;box-shadow:var(--shadow);position:relative;min-height:220px;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-4px)}
+.c-yellow{background:var(--yellow)}.c-pink{background:var(--pink)}.c-peach{background:#ffb574}.c-lime{background:var(--lime)}
+.card-icon{font-size:28px;margin-bottom:10px}
+.card-title{font-family:'Outfit',sans-serif;font-weight:900;font-size:18px;line-height:1.1;margin-bottom:8px}
+.card-desc{font-size:12.5px;line-height:1.5;color:rgba(0,0,0,.65);flex:1}
+.card-arrow{position:absolute;bottom:14px;right:14px;width:32px;height:32px;border:2px solid var(--black);border-radius:8px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.3);cursor:pointer;transition:background .2s}
+.card-arrow:hover{background:rgba(255,255,255,.6)}
+.card-arrow svg{width:16px;height:16px}
+
+/* ===== TASKBAR ===== */
+.taskbar{display:flex;align-items:center;padding:8px 16px;border-top:var(--border);background:var(--peach);gap:10px}
+.start-btn{display:flex;align-items:center;gap:8px;background:var(--white);border:var(--border);border-radius:8px;padding:8px 16px;font-family:'Outfit',sans-serif;font-weight:800;font-size:13px;cursor:pointer;box-shadow:var(--shadow-sm);transition:all .15s;flex-shrink:0}
+.start-btn:hover{transform:translate(1px,1px);box-shadow:1px 1px 0 #000}
+.start-logo{width:18px;height:18px;display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.start-logo span{border-radius:1px}
+.start-logo .s1{background:#ff4444}.start-logo .s2{background:#44cc44}.start-logo .s3{background:#4488ff}.start-logo .s4{background:var(--yellow)}
+.tb-items{display:flex;gap:8px;flex:1;overflow:hidden}
+.tb-item{display:flex;align-items:center;gap:6px;background:var(--white);border:2px solid var(--black);border-radius:8px;padding:6px 14px;font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap;transition:background .2s}
+.tb-item:hover{background:#f5f5f5}
+.tb-icon{font-size:13px}
+.sys-tray{display:flex;align-items:center;gap:10px;flex-shrink:0;margin-left:auto}
+.tray-icons{display:flex;gap:8px;font-size:14px;opacity:.6}
+.tray-time{text-align:right;font-family:'Outfit',sans-serif;font-weight:600;font-size:11px;line-height:1.3;color:#555}
+.tray-chat{font-size:16px;cursor:pointer;opacity:.6}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">
+      <div class="logo-smiley">
+        <svg width="26" height="26" viewBox="0 0 26 26"><circle cx="9" cy="10" r="2.2" fill="#000"/><circle cx="17" cy="10" r="2.2" fill="#000"/><path d="M7.5 16 Q13 21 18.5 16" stroke="#000" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>
+      </div>
+      <div class="logo-text">
+        <span class="logo-title">WITHOUT LIMITS</span>
+        <span class="logo-subtitle">UI KIT</span>
+      </div>
+    </div>
+    <nav class="nav">
+      <a class="nav-item active">HOME</a>
+      <a class="nav-item">COMPONENTS</a>
+      <a class="nav-item">TEMPLATES</a>
+      <a class="nav-item">UI KIT</a>
+      <a class="nav-item">PRICING</a>
+      <a class="nav-item">ABOUT</a>
+    </nav>
+    <div class="header-right">
+      <button class="cta-btn">GET STARTED</button>
+      <div class="win-ctrls">
+        <span class="wc">&mdash;</span>
+        <span class="wc">&#9633;</span>
+        <span class="wc wc-close">&times;</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="welcome-badge">
+        <span class="sparkle">&#10022;</span>
+        WELCOME TO WITHOUT LIMITS
+        <span class="sparkle">&#10022;</span>
+      </div>
+
+      <h1 class="hero-heading">
+        WITHOUT<br><span class="pink">LIMITS</span>
+        <!-- Big Star -->
+        <span class="hero-star">
+          <svg width="75" height="75" viewBox="0 0 100 100">
+            <defs><linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ffd700"/><stop offset="100%" stop-color="#ff8c00"/></linearGradient></defs>
+            <polygon points="50,2 60,34 94,14 68,40 100,50 68,60 94,86 60,66 50,98 40,66 6,86 32,60 0,50 32,40 6,14 40,34" fill="url(#sg)"/>
+          </svg>
+        </span>
+      </h1>
+
+      <p class="hero-desc">A retro inspired UI kit and design system packed with bold components, playful elements, and endless possibilities.</p>
+
+      <div class="hero-buttons">
+        <button class="btn-primary">
+          <svg width="14" height="18" viewBox="0 0 14 18" fill="none"><path d="M1 1L1 14L4.5 10.5L8 17L10.5 15.5L7 9L12 9L1 1Z" fill="#000"/></svg>
+          EXPLORE UI KIT
+        </button>
+        <button class="btn-secondary">VIEW DEMO</button>
+      </div>
+
+      <div class="social-proof">
+        <div class="avatars">
+          <div class="avatar avatar-1"><svg width="18" height="18" viewBox="0 0 18 18"><circle cx="6" cy="7" r="1.3" fill="#000"/><circle cx="12" cy="7" r="1.3" fill="#000"/><path d="M5.5 11Q9 14 12.5 11" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+          <div class="avatar avatar-2"><svg width="18" height="18" viewBox="0 0 18 18"><circle cx="6" cy="7" r="1.3" fill="#000"/><circle cx="12" cy="7" r="1.3" fill="#000"/><path d="M5.5 11Q9 14 12.5 11" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+          <div class="avatar avatar-3"><svg width="18" height="18" viewBox="0 0 18 18"><circle cx="6" cy="7" r="1.3" fill="#000"/><circle cx="12" cy="7" r="1.3" fill="#000"/><path d="M5.5 11Q9 14 12.5 11" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+          <div class="avatar avatar-4"><svg width="18" height="18" viewBox="0 0 18 18"><circle cx="6" cy="7" r="1.3" fill="#000"/><circle cx="12" cy="7" r="1.3" fill="#000"/><path d="M5.5 11Q9 14 12.5 11" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+          <div class="avatar-count">+2K</div>
+        </div>
+        <span class="social-text">Join 2,000+ creators building amazing products</span>
+      </div>
+    </div>
+
+    <!-- RIGHT: Windows & Elements -->
+    <div class="hero-right">
+
+      <!-- Decorative Sparkles -->
+      <span class="sparkle-d s-star" style="left:40px;top:8px;font-size:18px">&#10038;</span>
+      <span class="sparkle-d s-star" style="right:90px;top:175px;font-size:14px">&#10022;</span>
+      <span class="sparkle-d s-star" style="left:340px;top:240px;font-size:12px">&#10038;</span>
+      <span class="sparkle-d s-star" style="right:300px;bottom:40px;font-size:16px">&#10022;</span>
+
+      <!-- Desktop Icons -->
+      <div class="desktop-icons">
+        <div class="d-icon">
+          <div class="d-icon-img">
+            <svg width="32" height="28" viewBox="0 0 32 28"><rect x="2" y="2" width="28" height="18" rx="2" fill="#a5d8ff" stroke="#000" stroke-width="2"/><rect x="8" y="5" width="16" height="11" fill="#228be6" rx="1"/><rect x="12" y="20" width="8" height="3" fill="#868e96" stroke="#000" stroke-width="1.5"/><rect x="9" y="23" width="14" height="3" rx="1" fill="#adb5bd" stroke="#000" stroke-width="1.5"/></svg>
+          </div>
+          <span>My Computer</span>
+        </div>
+        <div class="d-icon">
+          <div class="d-icon-img">
+            <svg width="32" height="28" viewBox="0 0 32 28"><rect x="2" y="8" width="28" height="18" rx="3" fill="#ffd700" stroke="#000" stroke-width="2"/><rect x="2" y="3" width="14" height="8" rx="2" fill="#ffd700" stroke="#000" stroke-width="2"/></svg>
+          </div>
+          <span>Projects</span>
+        </div>
+        <div class="d-icon">
+          <div class="d-icon-img">
+            <svg width="30" height="30" viewBox="0 0 30 30"><rect x="3" y="6" width="24" height="20" rx="3" fill="#8b5cf6" stroke="#000" stroke-width="2"/><rect x="8" y="3" width="14" height="6" rx="2" fill="#a78bfa" stroke="#000" stroke-width="2"/><circle cx="15" cy="18" r="3" fill="#fff" opacity=".5"/></svg>
+          </div>
+          <span>UI Kit</span>
+        </div>
+        <div class="d-icon">
+          <div class="d-icon-img">
+            <svg width="30" height="26" viewBox="0 0 30 26"><path d="M2 8 L15 2 L28 8 L28 20 Q15 26 2 20 Z" fill="#c084fc" stroke="#000" stroke-width="2"/><line x1="15" y1="12" x2="15" y2="2" stroke="#000" stroke-width="1.5"/></svg>
+          </div>
+          <span>Messages</span>
+        </div>
+        <div class="d-icon">
+          <div class="d-icon-img">
+            <svg width="30" height="30" viewBox="0 0 30 30"><circle cx="15" cy="15" r="12" fill="#38bdf8" stroke="#000" stroke-width="2"/><ellipse cx="15" cy="15" rx="12" ry="5" fill="none" stroke="#000" stroke-width="1.5"/><line x1="15" y1="3" x2="15" y2="27" stroke="#000" stroke-width="1.5"/></svg>
+          </div>
+          <span>Internet</span>
+        </div>
+        <div class="d-icon">
+          <div class="d-icon-img">
+            <svg width="28" height="30" viewBox="0 0 28 30"><path d="M5 8 L3 26 Q3 28 5 28 L23 28 Q25 28 25 26 L23 8" fill="#d4d4d8" stroke="#000" stroke-width="2"/><rect x="2" y="5" width="24" height="4" rx="1" fill="#a1a1aa" stroke="#000" stroke-width="2"/><line x1="10" y1="13" x2="10" y2="23" stroke="#000" stroke-width="1.5"/><line x1="18" y1="13" x2="18" y2="23" stroke="#000" stroke-width="1.5"/></svg>
+          </div>
+          <span>Trash</span>
+        </div>
+      </div>
+
+      <!-- Welcome.txt Window -->
+      <div class="neo-win welcome-win">
+        <div class="neo-tb purple">
+          <span>Welcome.txt</span>
+          <div class="neo-dots"><span></span><span></span><span></span></div>
+        </div>
+        <div class="w-menu">
+          <span>File</span><span>Edit</span><span>View</span><span>Help</span>
+        </div>
+        <div class="w-body">
+          <p>Neobrutalism UI Kit is a collection of bold UI components and layouts inspired by retro interfaces, designed for modern creators.</p>
+          <a class="read-more" href="#">Read more &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Now Playing -->
+      <div class="neo-win now-playing" style="background:var(--purple-dark)">
+        <div class="np-head">
+          <span class="np-head-title">Now Playing</span>
+        </div>
+        <div class="np-content">
+          <div class="np-art"><div class="mountain"></div></div>
+          <div class="np-info">
+            <div class="np-title">Neon Sky &ndash; Magic</div>
+            <div class="np-controls">
+              <span class="np-ctrl">&#9664;&#9664;</span>
+              <div class="np-play"><svg width="12" height="14" viewBox="0 0 12 14"><polygon points="1,1 11,7 1,13" fill="#000"/></svg></div>
+              <span class="np-ctrl">&#9654;&#9654;</span>
+              <span class="np-ctrl">&#9654;&#9654;</span>
+            </div>
+            <div class="np-progress">
+              <span>1:24</span>
+              <div class="np-bar"><div class="np-bar-fill"></div></div>
+              <span>3:45</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activity Chart -->
+      <div class="activity">
+        <div class="act-head">
+          <span class="act-title">Activity</span>
+          <span class="act-dd">This Week &#9662;</span>
+        </div>
+        <div class="act-gain">+25.6%</div>
+        <svg width="180" height="65" viewBox="0 0 180 65">
+          <defs>
+            <linearGradient id="ag" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#ff6bb5" stop-opacity=".3"/>
+              <stop offset="100%" stop-color="#ff6bb5" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path d="M0 55 Q20 50 35 42 Q50 34 65 38 Q80 42 95 30 Q110 18 125 22 Q140 26 155 12 Q170 2 180 8" stroke="#ff6bb5" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M0 55 Q20 50 35 42 Q50 34 65 38 Q80 42 95 30 Q110 18 125 22 Q140 26 155 12 Q170 2 180 8 L180 65 L0 65 Z" fill="url(#ag)"/>
+          <circle cx="180" cy="8" r="3.5" fill="#ff6bb5"/>
+        </svg>
+      </div>
+
+      <!-- System Status -->
+      <div class="neo-win sys-status">
+        <div class="neo-tb light">
+          <span>System Status</span>
+          <div class="neo-dots"><span></span><span></span><span></span></div>
+        </div>
+        <div class="ss-body">
+          <div class="ss-label">Loading Assets...</div>
+          <div class="ss-row">
+            <div class="ss-bar"><div class="ss-fill"></div></div>
+            <span class="ss-pct">72%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Save Dialog -->
+      <div class="save-dlg">
+        <span class="save-x">&times;</span>
+        <div class="save-emoji">&#128578;</div>
+        <div class="save-msg">Do you want<br>to save changes?</div>
+        <div class="save-btns">
+          <button class="save-btn yes">Yes</button>
+          <button class="save-btn">No</button>
+        </div>
+      </div>
+
+      <!-- My Files -->
+      <div class="neo-win my-files">
+        <div class="neo-tb light">
+          <span>My Files</span>
+          <div class="neo-dots"><span></span><span></span><span></span></div>
+        </div>
+        <div class="mf-grid">
+          <div class="mf-item"><div class="mf-folder"></div><span class="mf-name">Components</span></div>
+          <div class="mf-item"><div class="mf-folder"></div><span class="mf-name">Templates</span></div>
+          <div class="mf-item"><div class="mf-folder"></div><span class="mf-name">Layouts</span></div>
+          <div class="mf-item"><div class="mf-file"></div><span class="mf-name">Colors.txt</span></div>
+          <div class="mf-item"><div class="mf-file"></div><span class="mf-name">Grid.sys</span></div>
+          <div class="mf-item"><div class="mf-file"></div><span class="mf-name">README.md</span></div>
+        </div>
+        <div class="mf-foot">
+          <span>6 items</span>
+          <div class="mf-mini"><div class="mf-mini-fill"></div></div>
+        </div>
+      </div>
+
+      <!-- CRT Monitor -->
+      <div class="crt-wrap">
+        <div class="crt">
+          <div class="crt-screen">
+            <div class="crt-grid"></div>
+            <div class="crt-folders">
+              <div class="crt-f"></div>
+              <div class="crt-f"></div>
+              <div class="crt-f"></div>
+            </div>
+            <div class="crt-win"><div class="crt-win-bar"></div></div>
+            <div class="crt-burger">&#127354;</div>
+          </div>
+        </div>
+        <div class="crt-stand"></div>
+        <div class="crt-base"></div>
+      </div>
+
+      <!-- Quick Note -->
+      <div class="quick-note">
+        <div class="qn-title">Quick Note</div>
+        <div class="qn-text"><strong>Bold ideas.</strong><br>Playful interfaces.<br>Limitless creativity.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-track">
+      <div class="ticker-group">
+        <div class="ticker-item"><span class="t-icon">&#10038;</span> 100+ COMPONENTS</div><span class="ticker-sep">&bull;</span>
+        <div class="ticker-item"><span class="t-icon">&#10038;</span> FULLY CUSTOMIZABLE</div><span class="ticker-sep">&bull;</span>
+        <div class="ticker-item"><span class="t-icon">&#128293;</span> RETRO &amp; MODERN</div><span class="ticker-sep">&bull;</span>
+        <div class="ticker-item"><span class="t-icon">&#127919;</span> DRAG &amp; DROP READY</div><span class="ticker-sep">&bull;</span>
+        <div class="ticker-item"><span class="t-icon">&#11088;</span> SAVE HOURS OF WORK</div><span class="ticker-sep">&bull;</span>
+      </div>
+      <div class="ticker-group">
+        <div class="ticker-item"><span class="t-icon">&#10038;</span> 100+ COMPONENTS</div><span class="ticker-sep">&bull;</span>
+        <div class="ticker-item"><span class="t-icon">&#10038;</span> FULLY CUSTOMIZABLE</div><span class="ticker-sep">&bull;</span>
+        <div class="ticker-item"><span class="t-icon">&#128293;</span> RETRO &amp; MODERN</div><span class="ticker-sep">&bull;</span>
+        <div class="ticker-item"><span class="t-icon">&#127919;</span> DRAG &amp; DROP READY</div><span class="ticker-sep">&bull;</span>
+        <div class="ticker-item"><span class="t-icon">&#11088;</span> SAVE HOURS OF WORK</div><span class="ticker-sep">&bull;</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUILT FOR CREATORS -->
+  <section class="creators">
+    <div class="creators-left">
+      <h2 class="creators-h">BUILT FOR CREATORS</h2>
+      <p class="creators-desc">Everything you need to build stunning interfaces faster.</p>
+      <button class="browse-btn">BROWSE COMPONENTS</button>
+    </div>
+    <div class="cards">
+      <div class="card c-yellow">
+        <div class="card-icon">&#128193;</div>
+        <div class="card-title">MODULAR COMPONENTS</div>
+        <div class="card-desc">Ready to use and easy to customize for any project.</div>
+        <div class="card-arrow"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="card c-pink">
+        <div class="card-icon">&#10084;&#65039;</div>
+        <div class="card-title">PLAYFUL DESIGN</div>
+        <div class="card-desc">Fun colors, bold shapes, and quirky details that stand out.</div>
+        <div class="card-arrow"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="card c-peach">
+        <div class="card-icon">&#10024;</div>
+        <div class="card-title">RETRO VIBES</div>
+        <div class="card-desc">Nostalgic UI elements in a modern and usable way.</div>
+        <div class="card-arrow"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="card c-lime">
+        <div class="card-icon">&#9889;</div>
+        <div class="card-title">PERFECT FOR ANYONE</div>
+        <div class="card-desc">Designers, developers, freelancers, and indie hackers.</div>
+        <div class="card-arrow"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TASKBAR -->
+  <footer class="taskbar">
+    <button class="start-btn">
+      START
+    </button>
+    <div class="tb-items">
+      <div class="tb-item"><span class="tb-icon">&#128187;</span> Neobrutalism UI Kit</div>
+      <div class="tb-item"><span class="tb-icon">&#127925;</span> Neon Sky &ndash; Magic</div>
+      <div class="tb-item"><span class="tb-icon">&#128578;</span> System Status</div>
+    </div>
+    <div class="sys-tray">
+      <div class="tray-icons">
+        <span>&#128264;</span>
+        <span>&#128246;</span>
+        <span>&#128187;</span>
+      </div>
+      <div class="tray-time">10:45 AM<br>05/20/2024</div>
+      <span class="tray-chat">&#128172;</span>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
