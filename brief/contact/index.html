@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Brief | TCE Studio</title>
+<link rel="stylesheet" href="/styles.css"/>
+</head>
+<body class="background-color-yellow-ish">
+<div class="nav_wrapper">
+<div class="navbar">
+<div class="nav_wrap">
+<a href="/" class="nav_brand">
+<div class="nav_logo-mask">
+<div class="nav_full-logo">
+<img src="../brand-mark-black-text.svg" loading="lazy" alt="Timothy Carey Evans" class="nav_brand-logo"/>
+<img src="../studio-nav-brand-text.png" loading="lazy" alt="Studio" class="nav_brand-text"/>
+</div>
+</div>
+</a>
+<div class="nav_menu-items">
+<div class="nav_menu-times">
+<div class="time_block"><div class="dot is-black"></div><p class="text-size-mono-tiny text-style-allcaps"><span class="js-time-sanfrancisco"></span> PT<br/>San Francisco<br/>California</p></div>
+<div class="time_block"><div class="dot is-black"></div><p class="text-size-mono-tiny text-style-allcaps"><span class="js-time-tokyo"></span> JST<br/>Tokyo<br/>Japan</p></div>
+</div>
+<div class="nav_menu-links">
+<div class="nav_menu-links-inner">
+<a href="../#projects" class="menu_link">Projects</a>
+<a href="#" class="menu_link">Research</a>
+<a href="#" class="menu_link">About</a>
+<a href="#" class="menu_link">Contact</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<main class="main-wrapper is-short">
+
+<section class="section_contact-content">
+<div class="padding-block contact_main">
+<div class="contact_content-container">
+<h5 class="heading-style-h1">Contact</h5>
+<div class="about_right-column">
+<p class="heading-style-h5 is-h4-tablet">If you're interested in working together, or learning more about <span class="text-span">Progress</span> the best thing to do is send an email and tell me a little bit about you and your project. If you have a project in mind that you think I'd be a good fit for, let's talk!</p>
+<a href="mailto:hello@progress.studio" class="contact_link">
+<div class="link-arrow">
+<div class="icon-embed-medium">
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="29" viewBox="0 0 30 29" fill="currentColor">
+<path d="M23.3787 13.0001L12.9393 2.56077L15.0607 0.439453L29.1213 14.5001L15.0607 28.5608L12.9393 26.4395L23.3787 16.0001H0V13.0001H23.3787Z"/>
+</svg>
+</div>
+</div>
+<p class="heading-style-h5 is-h4-tablet">hello@progress.studio</p>
+</a>
+</div>
+</div>
+</div>
+</section>
+
+<footer class="section_footer">
+<div class="footer_top">
+<div class="footer_block is-clocks">
+<div class="time_block"><div class="dot"></div><p class="text-size-mono-regular text-style-allcaps"><span class="js-time-sanfrancisco"></span> PT<br/>San Francisco<br/>California</p></div>
+<div class="time_block"><div class="dot"></div><p class="text-size-mono-regular text-style-allcaps"><span class="js-time-tokyo"></span> JST<br/>Tokyo<br/>Japan</p></div>
+</div>
+<div class="footer_block is-menu">
+<a href="/" class="footer_link">Projects</a>
+<a href="/research/mycelium-research" class="footer_link">Research</a>
+<a href="/about" class="footer_link">About</a>
+<a href="/contact" class="footer_link">Contact</a>
+</div>
+</div>
+<div class="footer_bottom">
+<div class="footer_block is-logo"><a href="/"><div class="footer_logo big-mark">timothycarey<br>evans</div></a></div>
+<div class="footer_block is-corner">
+
+<div><a href="/mission/">&copy; 2026 Timothy Carey Evans</a></div>
+</div>
+</div>
+</footer>
+
+</main>
+
+<script>
+function getCurrentTimeWithTimezone(timezone) {
+  const date = new Date();
+  const options = { hour12: true, hour: 'numeric', minute: 'numeric', timeZone: timezone };
+  return date.toLocaleString('en-US', options).replace(/\s/g, '');
+}
+function updateTimes() {
+  const currentTimePT = getCurrentTimeWithTimezone('America/Los_Angeles');
+  const currentTimeTokyo = getCurrentTimeWithTimezone('Asia/Tokyo');
+  document.querySelectorAll('.js-time-sanfrancisco').forEach(el => { el.textContent = currentTimePT; });
+  document.querySelectorAll('.js-time-tokyo').forEach(el => { el.textContent = currentTimeTokyo; });
+}
+updateTimes();
+setInterval(updateTimes, 1000);
+</script>
+</body>
+</html>

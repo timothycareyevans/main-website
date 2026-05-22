@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Brief | TCE Studio</title>
+<link rel="stylesheet" href="/styles.css"/>
+</head>
+<body>
+<div class="page-wrapper"><div class="global-wrap">
+<div class="nav_wrapper"><div class="navbar"><div class="nav_wrap">
+<a href="/" class="nav_brand"><div class="nav_logo-mask"><div class="nav_full-logo">
+<img src="../../brand-mark-black-text.svg" loading="lazy" alt="Timothy Carey Evans" class="nav_brand-logo"/>
+<img src="../../studio-nav-brand-text.png" loading="lazy" alt="Studio" class="nav_brand-text"/>
+</div></div></a>
+<div class="nav_menu-items">
+<div class="nav_menu-times">
+<div class="time_block"><div class="dot is-black"></div><p class="text-size-mono-tiny text-style-allcaps"><span class="js-time-sanfrancisco"></span> PT<br/>San Francisco<br/>California</p></div>
+<div class="time_block"><div class="dot is-black"></div><p class="text-size-mono-tiny text-style-allcaps"><span class="js-time-tokyo"></span> JST<br/>Tokyo<br/>Japan</p></div>
+</div>
+<div class="nav_menu-links"><div class="nav_menu-links-inner">
+<a href="../../#projects" class="menu_link">Projects</a><a href="#" class="menu_link">Research</a>
+<a href="#" class="menu_link">About</a><a href="#" class="menu_link">Contact</a>
+</div></div></div></div></div></div>
+<main class="main-wrapper is-short">
+<section class="section_project-header background-color-green-light">
+<div class="padding-block project_head">
+<div class="project_header-container">
+<h5 class="heading-style-h1">Ronan</h5>
+<div class="project_header-details">
+<div>
+<div class="divider-dotted"></div>
+<div class="project_header-detail"><p class="text-size-mono-small text-style-allcaps">Type</p><p class="text-size-mono-regular">Restaurant</p><div class="divider-dotted"></div></div>
+<div class="project_header-detail"><p class="text-size-mono-small text-style-allcaps">Location</p><p class="text-size-mono-regular">Los Angeles California</p><div class="divider-dotted"></div></div>
+<div class="project_header-detail"><p class="text-size-mono-small text-style-allcaps">Status</p><p class="text-size-mono-regular">Completed 2018</p><div class="divider-dotted"></div></div>
+</div>
+<div>
+<div class="divider-dotted"></div>
+<div class="project_header-detail"><p class="text-size-mono-small text-style-allcaps">Area</p><p class="text-size-mono-regular">2200 square feet</p><div class="divider-dotted"></div></div>
+<div class="project_header-detail"><p class="text-size-mono-small text-style-allcaps">Scope</p><p class="text-size-mono-regular">Interior architecture FF&E</p><div class="divider-dotted"></div></div>
+</div>
+</div>
+<div class="max-width-full"><img src="https://cdn.prod.website-files.com/6632bf67ec9f77f3c8147f67/6801829d7395f7e1599140e0_e97b1dcfe006ae1dfa480b88aca3e5f3_ronan%20cover-p-1080.jpg" loading="lazy" alt="" class="project_header-cover-img is-rounded"/></div>
+<img src="https://cdn.prod.website-files.com/6632bf67ec9f77f3c8147f67/67c24dde29e7e58aa56f0c5e_Ronan_Overall.svg" loading="lazy" alt="" class="project_header-diagram"/>
+<div class="project_header-intro">
+<p class="heading-style-h5 is-h4-tablet">Ronan is a pioneering wood-fired pizza destination in the heart of Los Angeles where Hollywood elegance meets raw, honest forms.</p>
+<p class="text-size-medium">The design celebrates the intersection of refined and rustic, with custom-designed elements throughout. Exposed materials and thoughtful spatial planning create an inviting atmosphere that reflects the restaurant's commitment to quality ingredients and craft.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="section_project-block">
+<div class="padding-block">
+<div class="project_content-container">
+<img src="https://cdn.prod.website-files.com/6632bf67ec9f77f3c8147f67/664756e48f493b7723071b74_project-ronan-image-01%402x-p-800.jpg" loading="lazy" alt="" class="is-rounded"/>
+<img src="https://cdn.prod.website-files.com/6632bf67ec9f77f3c8147f67/664756e4a63003b6e3068ac0_project-ronan-image-02%402x-p-800.jpg" loading="lazy" alt="" class="is-rounded"/>
+</div>
+</div>
+</section>
+<footer class="section_footer"><div class="footer_top"><div class="footer_block is-clocks">
+<div class="time_block"><div class="dot"></div><p class="text-size-mono-regular text-style-allcaps"><span class="js-time-sanfrancisco"></span> PT<br/>San Francisco<br/>California</p></div>
+<div class="time_block"><div class="dot"></div><p class="text-size-mono-regular text-style-allcaps"><span class="js-time-tokyo"></span> JST<br/>Tokyo<br/>Japan</p></div>
+</div><div class="footer_block is-menu">
+<a href="/" class="footer_link">Projects</a><a href="/research/mycelium-research" class="footer_link">Research</a>
+<a href="/about" class="footer_link">About</a><a href="/contact" class="footer_link">Contact</a>
+</div></div><div class="footer_bottom"><div class="footer_block is-logo">
+<a href="/"><div class="footer_logo big-mark">timothycarey<br>evans</div></a>
+</div><div class="footer_block is-corner">
+
+<div><a href="/mission/">&copy; 2026 Timothy Carey Evans</a></div>
+</div></div></footer>
+</main>
+</div></div>
+<script>
+function getCurrentTimeWithTimezone(timezone) {
+  const date = new Date();
+  const options = { hour12: true, hour: 'numeric', minute: 'numeric', timeZone: timezone };
+  return date.toLocaleString('en-US', options).replace(/\s/g, '');
+}
+function updateTimes() {
+  const currentTimePT = getCurrentTimeWithTimezone('America/Los_Angeles');
+  const currentTimeTokyo = getCurrentTimeWithTimezone('Asia/Tokyo');
+  document.querySelectorAll('.js-time-sanfrancisco').forEach(el => { el.textContent = currentTimePT; });
+  document.querySelectorAll('.js-time-tokyo').forEach(el => { el.textContent = currentTimeTokyo; });
+}
+updateTimes();
+setInterval(updateTimes, 1000);
+</script>
+</body>
+</html>

@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Brief | TCE Studio</title>
+<meta content="An architectural and product design studio crafting narrative-driven interiors for hotels, restaurants, and homes in Barcelona and NYC." name="description"/>
+
+<style>
+@font-face {
+  font-family: 'PP Neue Montreal';
+  src: url("https://cdn.prod.website-files.com/6632bf67ec9f77f3c8147f67/6633519dbcfcb0aa4582cb91_PPNeueMontreal-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'PP Neue Montreal';
+  src: url("https://cdn.prod.website-files.com/6632bf67ec9f77f3c8147f67/6633519d61ad3c813c15d988_PPNeueMontreal-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'GT America Mono LCG';
+  src: url("https://cdn.prod.website-files.com/6632bf67ec9f77f3c8147f67/6633519de3a693e0a4a0ac05_GT-America-Mono-LCG-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'GT America Mono LCG';
+  src: url("https://cdn.prod.website-files.com/6632bf67ec9f77f3c8147f67/6633519ddffcafc9882ccbc9_GT-America-Mono-LCG-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'PP Object Sans';
+  src: url("https://cdn.prod.website-files.com/6632bf67ec9f77f3c8147f67/66341b3ada3884d4863c58e0_PPObjectSans-Heavy.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --black: black;
+  --light-grey: #f4f4f4;
+  --white: white;
+  --red: #bf551a;
+  --greygreen: #595546;
+  --light-yellow: #fcfaf2;
+  --yellow-ish: #d7caa9;
+  --green-light: #e0ddc5;
+}
+
+html {
+  font-size: calc(0.00006250000000007638rem + 0.694375vw);
+}
+@media screen and (max-width:1920px) {
+  html { font-size: calc(0.00006249999999985434rem + 0.6943750000000002vw); }
+}
+@media screen and (max-width:1440px) {
+  html { font-size: calc(-0.00038975501113586164rem + 0.6948775055679287vw); }
+}
+@media screen and (max-width:991px) {
+  html { font-size: 0.625rem; }
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--black);
+  font-family: 'PP Neue Montreal', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 1.5;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  background-color: #fff;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+  font-size: inherit;
+  background-color: transparent;
+}
+a:active, a:hover { outline: 0; }
+
+h1, h2, h3, h4, h5, h6, p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+img {
+  border: 0;
+  max-width: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* NAV */
+.nav_wrapper {
+  z-index: 1000;
+  background-color: var(--white);
+  position: sticky;
+  top: 0;
+}
+
+.navbar {
+  background-color: transparent;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  min-height: 7.4rem;
+  line-height: 1.5;
+  display: flex;
+}
+
+.nav_wrap {
+  justify-content: space-between;
+  align-items: stretch;
+  width: 100%;
+  display: flex;
+}
+
+.nav_brand {
+  grid-column-gap: 1.2rem;
+  grid-row-gap: 1.2rem;
+  color: var(--black);
+  flex-direction: row;
+  align-items: center;
+  padding-left: 0;
+  font-size: 2rem;
+  line-height: 1.3;
+  display: flex;
+  text-decoration: none;
+  width: 36%;
+}
+
+.nav_logo-mask {
+  align-items: center;
+  padding-left: 4.8rem;
+  display: flex;
+  overflow: hidden;
+}
+
+.nav_full-logo {
+  grid-column-gap: 0.4rem;
+  grid-row-gap: 0.4rem;
+  align-items: center;
+  display: flex;
+}
+
+.nav_wide-logo {
+  display: none;
+}
+
+.nav_brand-logo {
+  width: 18.5rem;
+}
+
+.nav_brand-text {
+  width: 26.3rem;
+}
+
+.nav_menu-items {
+  flex: 1;
+  align-self: stretch;
+  align-items: stretch;
+  display: flex;
+}
+
+.nav_menu-times {
+  grid-column-gap: 2.4rem;
+  grid-row-gap: 2.4rem;
+  border-left: 1px solid #000;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1.6rem 3.6rem 1.6rem 2.4rem;
+  display: flex;
+  font-family: 'GT America Mono LCG', sans-serif;
+}
+
+.nav_menu-links {
+  grid-column-gap: 2.4rem;
+  grid-row-gap: 2.4rem;
+  border-left: 1px solid #000;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
+  padding-left: 4.8rem;
+  padding-right: 4.8rem;
+  display: flex;
+}
+
+.nav_menu-links-inner {
+  grid-column-gap: 2.4rem;
+  grid-row-gap: 2.4rem;
+  display: flex;
+  align-items: center;
+}
+
+.menu_link {
+  border-bottom: 1px solid transparent;
+  font-weight: 500;
+  transition: border-color .3s cubic-bezier(.215, .61, .355, 1);
+  display: block;
+}
+.menu_link:hover {
+  border-bottom: 1px solid var(--black);
+}
+
+.time_block {
+  grid-column-gap: 1.2rem;
+  grid-row-gap: 1.2rem;
+  font-family: 'GT America Mono LCG', sans-serif;
+  display: flex;
+}
+
+.dot {
+  background-color: var(--light-yellow);
+  border-radius: 999px;
+  flex: none;
+  width: 1.4rem;
+  height: 1.4rem;
+}
+.dot.is-black {
+  background-color: var(--black);
+}
+
+.text-size-mono-tiny {
+  font-family: 'GT America Mono LCG', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.text-size-mono-regular {
+  font-family: 'GT America Mono LCG', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 1.14;
+}
+
+.text-style-allcaps {
+  text-transform: uppercase;
+}
+
+/* LAYOUT */
+.hp_page-container {
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  grid-template-rows: auto auto 1fr;
+  grid-template-columns: 72% 28%;
+  grid-auto-columns: 1fr;
+  display: grid;
+}
+
+/* HERO */
+.section_hp-hero {
+  border-bottom: 1px solid #000;
+}
+
+.padding-block {
+  padding: 4.8rem;
+}
+.padding-block.hp_hero {
+  grid-column-gap: 4.4rem;
+  grid-row-gap: 4.4rem;
+  flex-flow: column;
+  display: flex;
+}
+
+.hp-hero_logo {
+  width: 100%;
+}
+
+.hp-hero_bottom {
+  grid-column-gap: 6.4rem;
+  grid-row-gap: 6.4rem;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 19.8rem;
+  margin-top: -1.2rem;
+  margin-bottom: -1.2rem;
+  display: flex;
+}
+
+.max-width-medium {
+  width: 100%;
+  max-width: 58rem;
+}
+
+.heading-style-h3 {
+  letter-spacing: -.02em;
+  font-size: 6.8rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.heading-style-h4 {
+  pointer-events: auto;
+  letter-spacing: -.02em;
+  font-size: 5.2rem;
+  font-weight: 500;
+  line-height: 1.07;
+}
+
+.heading-style-h5 {
+  letter-spacing: 0;
+  font-size: 3rem;
+  font-weight: 500;
+  line-height: 1.06;
+}
+
+.text-span {
+  letter-spacing: -.03em;
+  font-family: 'PP Object Sans', sans-serif;
+  font-weight: 900;
+}
+
+.text-size-large {
+  font-size: 2rem;
+  line-height: 1.3;
+}
+
+.text-size-regular {
+  font-size: 1.6rem;
+  line-height: 1.125;
+}
+
+.text-size-small {
+  font-size: 1.4rem;
+  line-height: 1.28;
+}
+
+.text-weight-semibold {
+  font-weight: 600;
+}
+
+.hp-hero_illu {
+  width: 19.2rem;
+}
+
+/* PROJECTS */
+.section_hp-projects {
+  background-color: #dfddc7;
+}
+
+.hp_projects-head {
+  grid-column-gap: 6.4rem;
+  grid-row-gap: 6.4rem;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: stretch;
+  padding-bottom: 4.8rem;
+  display: flex;
+}
+
+.hp_project-head-title-container {
+  position: relative;
+}
+
+.hp_projects-counter {
+  border: 1px solid #000;
+  border-radius: .4em;
+  padding-left: .4rem;
+  padding-right: .4rem;
+  display: flex;
+  position: absolute;
+  inset: 0% auto auto 100%;
+}
+
+.hp_project-head-desc-container {
+  width: 50.5rem;
+}
+
+.divider-dotted {
+  background-image: url("https://cdn.prod.website-files.com/6632bf67ec9f77f3c8147f67/663420b7c63cdf484a256250_dotted-line.svg");
+  background-position: 0%;
+  background-size: auto;
+  width: 100%;
+  height: 2px;
+}
+
+.hp_project-item-container:last-child .divider-dotted {
+  display: none;
+}
+
+.hp_projects-item {
+  grid-column-gap: 6.4rem;
+  grid-row-gap: 6.4rem;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 5.6rem;
+  padding-bottom: 5.6rem;
+  display: flex;
+}
+
+.hp_project-image {
+  aspect-ratio: 506 / 608;
+  flex: none;
+  width: 50.5rem;
+  overflow: hidden;
+}
+.hp_project-image.is-rounded {
+  mix-blend-mode: multiply;
+  aspect-ratio: auto;
+  object-fit: cover;
+  border-radius: .8rem;
+  height: auto;
+  min-height: 0;
+}
+
+.hp_project-item-bio {
+  grid-column-gap: 5.2rem;
+  grid-row-gap: 5.2rem;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 34.3rem;
+  display: flex;
+}
+
+.hp_progress_project-item-bio {
+  grid-column-gap: 1.4rem;
+  grid-row-gap: 1.4rem;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 34.3rem;
+  display: flex;
+}
+
+.hp_project-illu {
+  width: 26rem;
+}
+
+.hp_projects-desc {
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+}
+
+.in_progress_tag {
+  background-color: var(--white);
+  text-transform: uppercase;
+  border: 1px solid #000;
+  border-radius: 4px;
+  justify-content: center;
+  align-items: center;
+  height: 2.4rem;
+  padding: .6rem;
+  display: flex;
+}
+
+.margin-bottom.margin-16 {
+  margin: 0 0 1.6rem 0;
+}
+.margin-bottom.margin-12 {
+  margin: 0 0 1.2rem 0;
+}
+.margin-bottom.margin-6 {
+  margin: 0 0 .6rem 0;
+}
+
+/* BUTTONS */
+.button.is-link {
+  color: var(--black);
+  text-align: left;
+  background-color: transparent;
+  border-style: none;
+  padding: 0;
+  line-height: 1;
+  text-decoration: none;
+  display: inline-flex;
+}
+.button.is-link.is-icon,
+.button.is-icon {
+  grid-column-gap: .8rem;
+  grid-row-gap: .8rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.link-arrow {
+  flex: none;
+  transition-property: transform;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(.215, .61, .355, 1);
+}
+a:hover .link-arrow {
+  transform: translateX(0.25rem);
+}
+
+.icon-embed-xxsmall {
+  flex-direction: column;
+  flex: none;
+  justify-content: center;
+  align-items: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  display: flex;
+}
+
+/* Button hover underline */
+@media screen and (min-width: 992px) {
+  .button .text-size-large {
+    padding: 0.4rem 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color 300ms cubic-bezier(.215, .61, .355, 1);
+  }
+  .button .text-size-small {
+    padding: 0.2rem 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color 300ms cubic-bezier(.215, .61, .355, 1);
+  }
+  .button:hover .text-size-large,
+  .button:hover .text-size-small {
+    border-bottom: 1px solid black;
+  }
+}
+
+/* SIDEBAR */
+.hp_sidebar {
+  background-color: var(--red);
+  border-top: 1px solid #000;
+  border-left: 1px solid #000;
+  width: 100%;
+  height: 100dvh;
+  padding: 0 4.8rem 6.4rem;
+  position: sticky;
+  top: 0;
+  overflow: auto;
+  grid-row: 1 / -1;
+  grid-column: 2;
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+}
+.hp_sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+.hp_sidebar-heading {
+  grid-column-gap: 1.6rem;
+  grid-row-gap: 1.6rem;
+  justify-content: flex-start;
+  align-items: center;
+  height: 7.6rem;
+  display: flex;
+}
+
+.research_dot {
+  background-color: #000;
+  border-radius: 4px;
+  flex: none;
+  width: 2.4rem;
+  height: 2.4rem;
+}
+.research_dot.is-home {
+  background-color: #000;
+}
+
+.hp_sidebar-items {
+  grid-column-gap: 4.8rem;
+  grid-row-gap: 4.8rem;
+  flex-flow: column;
+  display: flex;
+}
+
+.hp_sidebar-item {
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+}
+
+.hp_sidebar-image-container {
+  aspect-ratio: 1;
+  width: 100%;
+  margin-bottom: 2rem;
+  display: block;
+}
+.hp_sidebar-image-container.is-rounded {
+  border-radius: .8rem;
+  overflow: hidden;
+}
+
+.hp_sidebar-image {
+  aspect-ratio: 1;
+  opacity: .7;
+  width: 100%;
+  max-width: none;
+  display: block;
+  object-fit: cover;
+}
+
+.hp_sidebar-link-arrow-hack {
+  display: none;
+}
+
+.flex-first {
+  flex-direction: column;
+  align-items: flex-start;
+  display: flex;
+}
+
+/* FOOTER */
+.section_footer {
+  background-color: var(--greygreen);
+  color: var(--light-yellow);
+}
+
+.footer_top {
+  border-bottom: 1px solid var(--light-yellow);
+  display: flex;
+}
+
+.footer_block {
+  grid-column-gap: 3.2rem;
+  grid-row-gap: 3.2rem;
+  width: 100%;
+  padding: 3rem 4.8rem;
+  display: flex;
+}
+.footer_block.is-clocks {
+  border-right: 1px solid var(--light-yellow);
+  max-width: 32%;
+  font-family: 'GT America Mono LCG', sans-serif;
+  font-weight: 400;
+}
+.footer_block.is-menu {
+  grid-column-gap: 2.4rem;
+  grid-row-gap: 2.4rem;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
+  max-width: 68%;
+}
+.footer_block.is-logo {
+  border-right: 1px solid var(--light-yellow);
+  justify-content: flex-start;
+  align-items: flex-end;
+  max-width: 63%;
+  height: 32.8rem;
+  padding-top: 4.8rem;
+  padding-bottom: 4.8rem;
+}
+.footer_block.is-corner {
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  max-width: 37%;
+  padding-top: 4.8rem;
+  padding-bottom: 4.8rem;
+}
+
+.footer_bottom {
+  display: flex;
+}
+
+.footer_link {
+  border-bottom: 1px solid transparent;
+  font-weight: 500;
+  transition: border-color .3s cubic-bezier(.215, .61, .355, 1);
+  display: block;
+}
+.footer_link:hover {
+  border-bottom-color: var(--white);
+}
+
+.footer-title {
+  margin-bottom: 1.2rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  opacity: .7;
+}
+.footer_company {
+  text-align: right;
+}
+.footer_company address {
+  margin-bottom: 1.2rem;
+  font-style: normal;
+}
+.footer_company .footer_link {
+  margin-top: .6rem;
+}
+
+.footer_logo {
+  width: 58.2rem;
+}
+.big-mark {
+  margin-top: 62px;
+  color: var(--white);
+  font-size: clamp(25px, 6.25vw, 93.75px);
+  line-height: .85;
+  font-weight: 700;
+  letter-spacing: 0;
+  opacity: .16;
+  overflow-wrap: anywhere;
+}
+.footer_logo.big-mark {
+  width: auto;
+  margin-top: 0;
+}
+
+.footer_icon {
+  width: 13.7rem;
+}
+
+/* ANCHOR */
+.is-anchor {
+  scroll-margin-top: 7.4rem;
+}
+
+/* NAV BUTTON (MOBILE) */
+.nav_button {
+  display: none;
+}
+
+/* MOBILE LOGO */
+.nav_logo-block {
+  display: none;
+}
+
+/* TABLET */
+@media screen and (max-width: 991px) {
+  .hp_page-container {
+    grid-template-columns: 1fr;
+  }
+  .hp_sidebar {
+    position: relative;
+    height: auto;
+    border-left: none;
+    grid-row: auto;
+    grid-column: auto;
+  }
+  .nav_menu-times {
+    display: none;
+  }
+  .nav_menu-links {
+    display: none;
+  }
+  .nav_brand {
+    width: auto;
+  }
+  .nav_button {
+    display: flex;
+  }
+  .hp_projects-item {
+    flex-flow: column;
+    align-items: flex-start;
+  }
+  .hp_project-image {
+    width: 100%;
+  }
+  .hp_project-head-desc-container {
+    width: auto;
+  }
+  .hp_projects-head {
+    flex-flow: column;
+  }
+  .heading-style-h4 {
+    font-size: 3.6rem;
+  }
+  .text-size-large {
+    font-size: 1.8rem;
+  }
+  .padding-block {
+    padding: 2.4rem;
+  }
+  .footer_block.is-logo {
+    height: auto;
+  }
+  .footer_top, .footer_bottom {
+    flex-direction: column;
+  }
+  .footer_block.is-clocks,
+  .footer_block.is-menu,
+  .footer_block.is-logo,
+  .footer_block.is-corner {
+    max-width: 100%;
+    border-right: none;
+  }
+}
+</style>
+</head>
+<body>
+<div class="page-wrapper">
+<div class="global-wrap">
+<main class="main-wrapper">
+<div class="hp_page-container">
+
+<!-- NAV -->
+<nav class="nav_wrapper" style="grid-column: 1 / -1; grid-row: 1;">
+<div class="navbar">
+<div class="nav_wrap">
+<a href="/" class="nav_brand">
+<div class="nav_logo-mask">
+<div class="nav_full-logo">
+<img src="brand-mark-black-text.svg" loading="lazy" alt="Timothy Carey Evans" class="nav_brand-logo"/>
+<img src="studio-nav-brand-text.png" loading="lazy" alt="Studio" class="nav_brand-text"/>
+</div>
+</div>
+</a>
+<div class="nav_menu-items">
+<div class="nav_menu-times">
+<div class="time_block">
+<div class="dot is-black"></div>
+<p class="text-size-mono-tiny text-style-allcaps"><span class="js-time-sanfrancisco"></span> PT<br/>San Francisco<br/>California</p>
+</div>
+<div class="time_block">
+<div class="dot is-black"></div>
+<p class="text-size-mono-tiny text-style-allcaps"><span class="js-time-tokyo"></span> JST<br/>Tokyo<br/>Japan</p>
+</div>
+</div>
+<div class="nav_menu-links">
+<div class="nav_menu-links-inner">
+<a href="#projects" class="menu_link">Projects</a>
+<a href="#" class="menu_link">Research</a>
+<a href="#" class="menu_link">About</a>
+<a href="#" class="menu_link">Contact</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+
+<!-- HERO -->
+<section class="section_hp-hero">
+<div class="padding-block hp_hero">
+<img src="progress.png" loading="lazy" alt="Progress" class="hp-hero_logo"/>
+<div class="hp-hero_bottom">
+<div class="max-width-medium">
+<p class="heading-style-h5">TCE is a creative studio specializing in consciously designed software, products, and environments for businesses, non-profits, and people.</p>
+</div>
+<div class="hp-hero_illu">
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 256 256" fill="none"><path d="M 64 192 L 256 192 L 256 256 L 0 256 L 0 0 L 64 0 Z M 256 160 L 96 160 L 96 0 L 256 0 Z M 176 48 C 158.327 48 144 62.327 144 80 C 144 97.673 158.327 112 176 112 C 193.673 112 208 97.673 208 80 C 208 62.327 193.673 48 176 48 Z" fill="#000000"></path></svg>
+</div>
+</div>
+</div>
+</section>
+
+<!-- PROJECTS -->
+<div id="projects" class="is-anchor">
+<section class="section_hp-projects">
+<div class="padding-block">
+<div>
+<div class="hp_projects-head">
+<div class="hp_project-head-title-container">
+<h5 class="heading-style-h3">Projects</h5>
+<div class="hp_projects-counter"><div class="text-size-mono-tiny">9</div></div>
+</div>
+<div class="hp_project-head-desc-container">
+<p class="text-size-large">A selection of interior design projects across hospitality, residential, and retail, weaving together brand narrative, artisan craft, and natural, regenerative material selections.</p>
+</div>
+</div>
+<div class="divider-dotted"></div>
+</div>
+
+<!-- Project 1: Catskills Residence (in progress) -->
+<div class="hp_project-item-container">
+<div class="hp_projects-item">
+<div class="hp_progress_project-item-bio">
+<div class="in_progress_tag"><div class="text-size-mono-regular">in progress</div></div>
+<div class="hp_projects-desc">
+<div class="margin-bottom margin-16"><h5 class="heading-style-h4">Catskills Residence</h5></div>
+<div class="margin-bottom margin-16"><p class="text-size-large">An 1880s farmhouse thoughtfully transformed into a design-forward, energy-efficient, and restorative creative retreat in the heart of the Catskills, featuring custom built-ins and healthy materials. Launching spring 2026.</p></div>
+</div>
+</div>
+<div><img src="https://cdn.prod.website-files.com/6632bf67ec9f77f3c8147f67/69067215597b1fed5d098682_Catskills%20kitchen%20teaser%20image%2002-p-800.jpg" loading="lazy" alt="" class="hp_project-image is-rounded"/></div>
+</div>
+<div class="divider-dotted"></div>
+</div>
+
+<!-- Project 2: Chebeague Island Retreat (in progress) -->
+<div class="hp_project-item-container">
+<div class="hp_projects-item">
+<div class="hp_progress_project-item-bio">
+<div class="in_progress_tag"><div class="text-size-mono-regular">in progress</div></div>
+<div class="hp_projects-desc">
+<div class="margin-bottom margin-16"><h5 class="heading-style-h4">Chebeague Island Retreat</h5></div>
+<div class="margin-bottom margin-16"><p class="text-size-large">A reimagining of a 1950s cabin set on a secluded island bay in coastal Maine. Coming spring 2026.</p></div>
+</div>
+</div>
+<div><img src="https://cdn.prod.website-files.com/6632bf67ec9f77f3c8147f67/6913902d8581ee71973e79b9_251111%20site%20preview-p-800.jpg" loading="lazy" alt="" class="hp_project-image is-rounded"/></div>
+</div>
+<div class="divider-dotted"></div>
+</div>
+
+<!-- Project 3: Apartamento Enric Granados (in progress) -->
+<div class="hp_project-item-container">
+<div class="hp_projects-item">
+<div class="hp_progress_project-item-bio">
+<div class="in_progress_tag"><div class="text-size-mono-regular">in progress</div></div>
+<div class="hp_projects-desc">
+<div class="margin-bottom margin-16"><h5 class="heading-style-h4">Apartamento Enric Granados</h5></div>
+<div class="margin-bottom margin-16"><p class="text-size-large">Elevated design meets a young family's dynamic lifestyle in this historic Eixample flat renovation, updated with respect to historic details through a modern lens. Completed fall 2025.</p></div>
+</div>
+</div>
+<div><img src="https://cdn.prod.website-files.com/6632bf67ec9f77f3c8147f67/6914b36a46780c221d13fd24_251112%20site%20preview%20render-p-800.jpg" loading="lazy" alt="" class="hp_project-image is-rounded"/></div>
+</div>
+<div class="divider-dotted"></div>
+</div>
+
+<!-- Project 4: Corners -->
+<div class="hp_project-item-container">
+<div class="hp_projects-item">
+<div class="hp_project-item-bio">
+<img src="https://cdn.prod.website-files.com/6632bf67ec9f77f3c8147f67/68019eda954e09849e4ffa79_a2be53c1a21eda71d8e704861a0cb2c9_CORNERS%20COVER.svg" loading="lazy" width="260" alt="" class="hp_project-illu"/>
+<div class="hp_projects-desc">
+<div class="margin-bottom margin-16"><a href="/project/corners"><h5 class="heading-style-h4">Corners</h5></a></div>
+<div class="margin-bottom margin-16"><p class="text-size-large">A thoughtful blend of natural materials, modular design, and unexpected repurposed objects come together in a harmonious whole for this unique art and design shop in the Catskills.</p></div>
+<a href="#" class="button is-link is-icon">
+<div class="text-size-large">View Project</div>
+<div class="link-arrow"><div class="icon-embed-xxsmall"><svg width="100%" height="100%" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5186 6.85199L6.98997 13.536L5.63004 12.2077L9.9328 7.8025L0.150142 7.8025L0.150142 5.90149L9.9328 5.90149L5.63004 1.49628L6.98997 0.167968L13.5186 6.85199Z" fill="currentColor"/></svg></div></div>
+</a>
+</div>
+</div>
+<a href="/project/corners"><img src="https://cdn.prod.website-files.com/6632bf67ec9f77f3c8147f67/663b30790c90ec4d3ee9390a_corners-cover%402x-p-800.jpg" loading="lazy" alt="" class="hp_project-image is-rounded"/></a>
+</div>
+<div class="divider-dotted"></div>
+</div>
+
+<!-- Project 5: Ernesto's -->
+<div class="hp_project-item-container">
+<div class="hp_projects-item">
+<div class="hp_project-item-bio">
+<img src="https://cdn.prod.website-files.com/6632bf67ec9f77f3c8147f67/6801a65da6f72e46735f82b4_b282ccc50aff21301612d3494ce04e53_ERNESTOS%20COVER.svg" loading="lazy" width="260" alt="" class="hp_project-illu"/>
+<div class="hp_projects-desc">
+<div class="margin-bottom margin-16"><a href="/project/ernestos"><h5 class="heading-style-h4">Ernesto's</h5></a></div>
+<div class="margin-bottom margin-16"><p class="text-size-large">An elevated space channeling art nouveau architecture through a Basque lens, featuring custom lighting throughout.</p></div>
+<a href="#" class="button is-link is-icon">
+<div class="text-size-large">View Project</div>
+<div class="link-arrow"><div class="icon-embed-xxsmall"><svg width="100%" height="100%" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5186 6.85199L6.98997 13.536L5.63004 12.2077L9.9328 7.8025L0.150142 7.8025L0.150142 5.90149L9.9328 5.90149L5.63004 1.49628L6.98997 0.167968L13.5186 6.85199Z" fill="currentColor"/></svg></div></div>
+</a>
+</div>
+</div>
+<a href="/project/ernestos"><img src="https://cdn.prod.website-files.com/6632bf67ec9f77f3c8147f67/680182948c4be08929f9d9a4_ernestos%20cover-p-800.jpg" loading="lazy" alt="" class="hp_project-image is-rounded"/></a>
+</div>
+<div class="divider-dotted"></div>
+</div>
+
+<!-- Project 6: Donna -->
+<div class="hp_project-item-container">
+<div class="hp_projects-item">
+<div class="hp_project-item-bio">
+<img src="https://cdn.prod.website-files.com/6632bf67ec9f77f3c8147f67/6802dfda45b909da33240b1f_a754f31e959a415111936ad41bca7cf7_DONNA%20COVER.svg" loading="lazy" width="260" alt="" class="hp_project-illu"/>
+<div class="hp_projects-desc">
+<div class="margin-bottom margin-16"><a href="/project/donna"><h5 class="heading-style-h4">Donna</h5></a></div>
+<div class="margin-bottom margin-16"><p class="text-size-large">A new West Village home for a beloved cocktail bar, inspired by forward-thinking art movements of the 20th century that reflect Donna's groundbreaking co-operative ownership structure.</p></div>
+<a href="#" class="button is-link is-icon">
+<div class="text-size-large">View Project</div>
+<div class="link-arrow"><div class="icon-embed-xxsmall"><svg width="100%" height="100%" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5186 6.85199L6.98997 13.536L5.63004 12.2077L9.9328 7.8025L0.150142 7.8025L0.150142 5.90149L9.9328 5.90149L5.63004 1.49628L6.98997 0.167968L13.5186 6.85199Z" fill="currentColor"/></svg></div></div>
+</a>
+</div>
+</div>
+<a href="/project/donna"><img src="https://cdn.prod.website-files.com/6632bf67ec9f77f3c8147f67/6801828bd19a962963590ddd_donna%20cover-p-800.jpg" loading="lazy" alt="" class="hp_project-image is-rounded"/></a>
+</div>
+<div class="divider-dotted"></div>
+</div>
+
+<!-- Project 7: Ronan -->
+<div class="hp_project-item-container">
+<div class="hp_projects-item">
+<div class="hp_project-item-bio">
+<img src="https://cdn.prod.website-files.com/6632bf67ec9f77f3c8147f67/68019c917556345332017821_a265f25b9c30058db1e13485752eb57f_RONAN_COVER.svg" loading="lazy" width="260" alt="" class="hp_project-illu"/>
+<div class="hp_projects-desc">
+<div class="margin-bottom margin-16"><a href="/project/ronan"><h5 class="heading-style-h4">Ronan</h5></a></div>
+<div class="margin-bottom margin-16"><p class="text-size-large">Hollywood elegance and raw forms collide in this pioneering wood-fired pizza destination in the heart of Los Angeles.</p></div>
+<a href="#" class="button is-link is-icon">
+<div class="text-size-large">View Project</div>
+<div class="link-arrow"><div class="icon-embed-xxsmall"><svg width="100%" height="100%" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5186 6.85199L6.98997 13.536L5.63004 12.2077L9.9328 7.8025L0.150142 7.8025L0.150142 5.90149L9.9328 5.90149L5.63004 1.49628L6.98997 0.167968L13.5186 6.85199Z" fill="currentColor"/></svg></div></div>
+</a>
+</div>
+</div>
+<a href="/project/ronan"><img src="https://cdn.prod.website-files.com/6632bf67ec9f77f3c8147f67/6801829d7395f7e1599140e0_e97b1dcfe006ae1dfa480b88aca3e5f3_ronan%20cover-p-800.jpg" loading="lazy" alt="" class="hp_project-image is-rounded"/></a>
+</div>
+<div class="divider-dotted"></div>
+</div>
+
+<!-- Project 8: Ernesto's Cafe -->
+<div class="hp_project-item-container">
+<div class="hp_projects-item">
+<div class="hp_project-item-bio">
+<img src="https://cdn.prod.website-files.com/6632bf67ec9f77f3c8147f67/6802dfd49c927a1f7515da32_7818f5cd36960135dc707ab407a0a857_ERNESTOS%20CAFE%20COVER.svg" loading="lazy" width="260" alt="" class="hp_project-illu"/>
+<div class="hp_projects-desc">
+<div class="margin-bottom margin-16"><a href="/project/ernestos-cafe"><h5 class="heading-style-h4">Ernesto's Cafe</h5></a></div>
+<div class="margin-bottom margin-16"><p class="text-size-large">A more casual, modern take on Basque architectural influences for the daytime space accompanying Ernesto's.</p></div>
+<a href="#" class="button is-link is-icon">
+<div class="text-size-large">View Project</div>
+<div class="link-arrow"><div class="icon-embed-xxsmall"><svg width="100%" height="100%" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5186 6.85199L6.98997 13.536L5.63004 12.2077L9.9328 7.8025L0.150142 7.8025L0.150142 5.90149L9.9328 5.90149L5.63004 1.49628L6.98997 0.167968L13.5186 6.85199Z" fill="currentColor"/></svg></div></div>
+</a>
+</div>
+</div>
+<a href="/project/ernestos-cafe"><img src="https://cdn.prod.website-files.com/6632bf67ec9f77f3c8147f67/680182796127289b15c23de7_ernestos%20cafe%20cover-p-800.jpg" loading="lazy" alt="" class="hp_project-image is-rounded"/></a>
+</div>
+<div class="divider-dotted"></div>
+</div>
+
+<!-- Project 9: Balkan Streat -->
+<div class="hp_project-item-container">
+<div class="hp_projects-item">
+<div class="hp_project-item-bio">
+<img src="https://cdn.prod.website-files.com/6632bf67ec9f77f3c8147f67/6803006073b33c22b69e1015_BALKAN%20COVER.svg" loading="lazy" width="260" alt="" class="hp_project-illu"/>
+<div class="hp_projects-desc">
+<div class="margin-bottom margin-16"><a href="/project/balkan-streat"><h5 class="heading-style-h4">Balkan Streat</h5></a></div>
+<div class="margin-bottom margin-16"><p class="text-size-large">Belgrade nightlife and Yugoslavian-era Brutalist architecture inspire this trend setting West Village fast casual restaurant.</p></div>
+<a href="#" class="button is-link is-icon">
+<div class="text-size-large">View Project</div>
+<div class="link-arrow"><div class="icon-embed-xxsmall"><svg width="100%" height="100%" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5186 6.85199L6.98997 13.536L5.63004 12.2077L9.9328 7.8025L0.150142 7.8025L0.150142 5.90149L9.9328 5.90149L5.63004 1.49628L6.98997 0.167968L13.5186 6.85199Z" fill="currentColor"/></svg></div></div>
+</a>
+</div>
+</div>
+<a href="/project/balkan-streat"><img src="https://cdn.prod.website-files.com/6632bf67ec9f77f3c8147f67/68018282e63fa5cdc45dc0fd_balkan%20cover-p-800.jpg" loading="lazy" alt="" class="hp_project-image is-rounded"/></a>
+</div>
+<div class="divider-dotted"></div>
+</div>
+
+</div>
+</section>
+</div>
+
+<!-- SIDEBAR -->
+<div class="hp_sidebar">
+<div class="hp_sidebar-heading">
+<div class="research_dot is-home"></div>
+<h2 class="heading-style-h5">Research &amp; Design</h2>
+</div>
+<div class="hp_sidebar-items">
+
+<!-- Sidebar Item 1: Mycelium -->
+<div class="hp_sidebar-item">
+<a href="/research/mycelium-research" class="hp_sidebar-image-container is-rounded">
+<img src="https://cdn.prod.website-files.com/664749db25c0b56a1e09b501/680bf1633a0f0d1c4c06db37_mycelium%20main-p-800.jpg" loading="lazy" alt="" class="hp_sidebar-image"/>
+</a>
+<div class="margin-bottom margin-6">
+<a href="/research/mycelium-research" class="button is-link is-icon">
+<h5 class="text-size-regular text-weight-semibold">Mycelium and Cork Composite Material Development in Catalonia</h5>
+</a>
+</div>
+<div>
+<div class="margin-bottom margin-12"><p class="text-size-small">Exploring the acoustic properties and construction possibilities of upcycled cork waste, hemp hurd, and mycelium.</p></div>
+<div class="flex-first">
+<a href="#" class="button is-link is-icon">
+<div class="text-size-small">View Project</div>
+<div class="icon-embed-xxsmall link-arrow"><svg width="100%" height="100%" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5186 6.85199L6.98997 13.536L5.63004 12.2077L9.9328 7.8025L0.150142 7.8025L0.150142 5.90149L9.9328 5.90149L5.63004 1.49628L6.98997 0.167968L13.5186 6.85199Z" fill="currentColor"/></svg></div>
+</a>
+</div>
+</div>
+</div>
+
+<!-- Sidebar Item 2: Skatepark -->
+<div class="hp_sidebar-item">
+<a href="/research/recycled-skatepark" class="hp_sidebar-image-container is-rounded">
+<img src="https://cdn.prod.website-files.com/664749db25c0b56a1e09b501/680bf0b6caf9bde73c6e25f9_Copy%20of%20E50%20camilo%20crooked%20grind-Recovered-p-500.jpg" loading="lazy" alt="" class="hp_sidebar-image"/>
+</a>
+<div class="margin-bottom margin-6">
+<a href="/research/recycled-skatepark" class="button is-link is-icon">
+<h5 class="text-size-regular text-weight-semibold">Designing a Skatepark from Recovered Ocean Plastic in Havana</h5>
+</a>
+</div>
+<div>
+<div class="margin-bottom margin-12"><p class="text-size-small">A concept proposal for utilizing plastic pollution recovered from beaches in Cuba to build a community skate park.</p></div>
+<div class="flex-first">
+<a href="#" class="button is-link is-icon">
+<div class="text-size-small">View Project</div>
+<div class="icon-embed-xxsmall link-arrow"><svg width="100%" height="100%" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5186 6.85199L6.98997 13.536L5.63004 12.2077L9.9328 7.8025L0.150142 7.8025L0.150142 5.90149L9.9328 5.90149L5.63004 1.49628L6.98997 0.167968L13.5186 6.85199Z" fill="currentColor"/></svg></div>
+</a>
+</div>
+</div>
+</div>
+
+<!-- Sidebar Item 3: Bentwood -->
+<div class="hp_sidebar-item">
+<a href="/research/bentwood-research" class="hp_sidebar-image-container is-rounded">
+<img src="https://cdn.prod.website-files.com/664749db25c0b56a1e09b501/67ee0ce917480c20a804206f_bentwood%20concept%20render%2001%20bw-p-800.jpg" loading="lazy" alt="" class="hp_sidebar-image"/>
+</a>
+<div class="margin-bottom margin-6">
+<a href="/research/bentwood-research" class="button is-link is-icon">
+<h5 class="text-size-regular text-weight-semibold">Structural Bentwood Observation Tower in Barcelona</h5>
+</a>
+</div>
+<div>
+<div class="margin-bottom margin-12"><p class="text-size-small">Research project exploring the possibilities of glue-less dowel lamination to achieve complex curved geometries while maintaining material integrity.</p></div>
+<div class="flex-first">
+<a href="#" class="button is-link is-icon">
+<div class="text-size-small">View Project</div>
+<div class="icon-embed-xxsmall link-arrow"><svg width="100%" height="100%" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5186 6.85199L6.98997 13.536L5.63004 12.2077L9.9328 7.8025L0.150142 7.8025L0.150142 5.90149L9.9328 5.90149L5.63004 1.49628L6.98997 0.167968L13.5186 6.85199Z" fill="currentColor"/></svg></div>
+</a>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+</main>
+
+<!-- FOOTER -->
+<footer class="section_footer">
+<div class="footer_top">
+<div class="footer_block is-clocks">
+<div class="time_block">
+<div class="dot"></div>
+<p class="text-size-mono-regular text-style-allcaps"><span class="js-time-sanfrancisco"></span> PT<br/>San Francisco<br/>California</p>
+</div>
+<div class="time_block">
+<div class="dot"></div>
+<p class="text-size-mono-regular text-style-allcaps"><span class="js-time-tokyo"></span> JST<br/>Tokyo<br/>Japan</p>
+</div>
+</div>
+<div class="footer_block is-menu">
+<a href="/" class="footer_link">Projects</a>
+<a href="/research/mycelium-research" class="footer_link">Research</a>
+<a href="/about" class="footer_link">About</a>
+<a href="/contact" class="footer_link">Contact</a>
+</div>
+</div>
+<div class="footer_bottom">
+<div class="footer_block is-logo">
+<a href="/"><div class="footer_logo big-mark">timothycarey<br>evans</div></a>
+</div>
+<div class="footer_block is-corner">
+
+<div class="footer_company">
+<div class="footer-title">Company</div>
+<address>Made with ❤️<br/>in San Francisco, CA</address>
+<a href="https://www.linkedin.com/in/timothy-e-a3b8324" target="_blank" rel="noreferrer" class="footer_link">LinkedIn</a>
+<a href="https://github.com/timothycareyevans" target="_blank" rel="noreferrer" class="footer_link">GitHub</a>
+<a href="https://www.instagram.com/timothycareyevans" target="_blank" rel="noreferrer" class="footer_link">Instagram</a>
+<a href="https://x.com/shinobi9982/" target="_blank" rel="noreferrer" class="footer_link">X</a>
+</div>
+<div><a href="/mission/">&copy; 2026 Timothy Carey Evans</a></div>
+</div>
+</div>
+</footer>
+
+</div>
+</div>
+
+<script>
+function getCurrentTimeWithTimezone(timezone) {
+  const date = new Date();
+  const options = { hour12: true, hour: 'numeric', minute: 'numeric', timeZone: timezone };
+  return date.toLocaleString('en-US', options).replace(/\s/g, '');
+}
+
+function updateTimes() {
+  const currentTimePT = getCurrentTimeWithTimezone('America/Los_Angeles');
+  const currentTimeTokyo = getCurrentTimeWithTimezone('Asia/Tokyo');
+  document.querySelectorAll('.js-time-sanfrancisco').forEach(el => { el.textContent = currentTimePT; });
+  document.querySelectorAll('.js-time-tokyo').forEach(el => { el.textContent = currentTimeTokyo; });
+}
+
+updateTimes();
+setInterval(updateTimes, 1000);
+</script>
+</body>
+</html>

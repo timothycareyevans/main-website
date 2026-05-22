@@ -169,6 +169,12 @@ html, body {
     text-align: right;
 }
 
+.nav-status-version {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
 .nav-status a {
     color: inherit;
     text-decoration: none;
