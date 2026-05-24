@@ -113,147 +113,6 @@
         }
         .badge--dark .badge-dot { background: #000; }
 
-        /* ── HERO ── */
-        .hero {
-            position: relative;
-            min-height: 70vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 5rem 3rem 2rem;
-            overflow: hidden;
-        }
-
-        .hero-code {
-            position: absolute;
-            font-family: 'DM Mono', monospace;
-            font-size: 0.62rem;
-            line-height: 1.9;
-            color: var(--green);
-            opacity: 0.09;
-            white-space: pre;
-            pointer-events: none;
-            z-index: 0;
-            user-select: none;
-        }
-
-        .hero-code--left {
-            top: 10%;
-            left: 2rem;
-        }
-
-        .hero-code--right {
-            top: 20%;
-            right: 2rem;
-            text-align: right;
-        }
-
-        .hero-code--bottom {
-            bottom: 12%;
-            left: 6%;
-        }
-
-        .hero-inner, .hero-label, .hero-crosses, .hero-corner, .hero-scroll {
-            z-index: 2;
-            position: relative;
-        }
-
-        .hero-label {
-            position: absolute;
-            top: 80px;
-            left: 3rem;
-            font-size: 0.68rem;
-            letter-spacing: 0.1em;
-            opacity: 0.7;
-        }
-
-        .hero-crosses {
-            position: absolute;
-            top: 80px;
-            right: 3rem;
-            display: flex;
-            gap: 12px;
-            font-size: 0.9rem;
-            opacity: 0.5;
-        }
-        .hero-crosses span { animation: floatCross 4s ease-in-out infinite; }
-        .hero-crosses span:nth-child(2) { animation-delay: -1s; }
-        .hero-crosses span:nth-child(3) { animation-delay: -2s; }
-        .hero-crosses span:nth-child(4) { animation-delay: -3s; }
-
-        .hero-inner {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            gap: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .hero-text h1 {
-            font-size: clamp(3.5rem, 8vw, 7.5rem);
-            color: var(--green);
-        }
-
-        .hero-barcode {
-            margin: 1.5rem 0 1rem;
-            font-size: 1.6rem;
-            letter-spacing: -0.05em;
-            opacity: 0.5;
-            line-height: 1;
-            overflow: hidden;
-            max-width: 280px;
-        }
-
-        .hero-sub {
-            font-size: 0.78rem;
-            line-height: 1.8;
-            opacity: 0.7;
-        }
-
-        .hero-visual {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1;
-            max-width: 500px;
-            justify-self: center;
-        }
-
-        .hero-visual canvas {
-            width: 100%;
-            height: 100%;
-        }
-
-        .hero-corner {
-            position: absolute;
-            bottom: 2rem;
-            right: 3rem;
-            font-size: 0.7rem;
-            opacity: 0.4;
-        }
-
-        .hero-scroll {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.6rem;
-            letter-spacing: 0.15em;
-            opacity: 0.4;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .hero-scroll-line {
-            width: 1px;
-            height: 40px;
-            background: var(--green);
-            animation: scrollPulse 2s ease-in-out infinite;
-        }
-
         /* ── TICKER ── */
         .ticker {
             border-top: 1px solid rgba(0,255,65,0.15);
@@ -588,16 +447,6 @@
             50% { opacity: 0.15; }
         }
 
-        @keyframes floatCross {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-4px); }
-        }
-
-        @keyframes scrollPulse {
-            0%, 100% { opacity: 0.2; transform: scaleY(1); }
-            50% { opacity: 0.6; transform: scaleY(1.3); }
-        }
-
         @keyframes tickerScroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
@@ -614,17 +463,6 @@
             100% { transform: scaleX(0.3); transform-origin: right; opacity: 0.3; }
         }
 
-        @keyframes heroFadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .hero-text h1 { animation: heroFadeIn 1s ease-out 0.2s both; }
-        .hero-barcode { animation: heroFadeIn 1s ease-out 0.5s both; }
-        .hero-sub { animation: heroFadeIn 1s ease-out 0.7s both; }
-        .hero-label { animation: heroFadeIn 1s ease-out 0.1s both; }
-        .hero-visual { animation: heroFadeIn 1.2s ease-out 0.4s both; }
-
         /* ── RESPONSIVE ── */
         @media (max-width: 1100px) {
             .card-grid { grid-template-columns: repeat(2, 1fr); }
@@ -632,12 +470,6 @@
         }
 
         @media (max-width: 768px) {
-            .hero { padding: 5rem 1.5rem 2rem; }
-            .hero-inner { grid-template-columns: 1fr; }
-            .hero-visual { max-width: 300px; margin: 2rem auto 0; }
-            .hero-label { left: 1.5rem; }
-            .hero-crosses { right: 1.5rem; }
-            .hero-corner { right: 1.5rem; }
             .nav { padding: 0 1.2rem; }
             .nav-links { gap: 1rem; }
             .nav-links a:not(.badge-link) { display: none; }
@@ -650,16 +482,13 @@
             .card { padding: 1.4rem; }
         }
 
-        @media (max-width: 480px) {
-            .hero-text h1 { font-size: 3rem; }
-        }
     </style>
 </head>
 <body>
 
     <!-- NAV -->
     <nav class="nav">
-        <div class="nav-brand">[ TCE Studio ]</div>
+        <div class="nav-brand">[ Unified Tomorrow ]</div>
         <div class="nav-links">
             <a href="#">Protocol</a>
             <a href="#">Docs</a>
@@ -667,150 +496,6 @@
             <a href="#" class="badge-link"><span class="badge"><span class="badge-dot"></span>LIVE SOON</span></a>
         </div>
     </nav>
-
-    <!-- HERO -->
-    <section class="hero">
-        <div class="hero-code hero-code--left">import { Network } from '@eternis/core';
-import { LiquidityPool } from '@eternis/defi';
-
-const network = new Network({
-  chains: ['ethereum', 'arbitrum', 'solana'],
-  mode: 'omnichain',
-  consensus: 'unified',
-});
-
-await network.initialize();
-const pool = new LiquidityPool({
-  protocol: 'eternis-v2',
-  slippage: 0.005,
-});
-
-pool.on('swap', (event) => {
-  console.log(`Route: ${event.path}`);
-  console.log(`Latency: ${event.ms}ms`);
-});</div>
-        <div class="hero-code hero-code--right">async function executeSettlement() {
-  const batch = await tx.bundle([
-    bridge('ETH', '1.5', 'arbitrum'),
-    swap('USDC', 'ETH', optimum),
-    stake('ETH', vault.address),
-  ]);
-
-  const proof = batch.generateProof();
-  await batch.settle({ proof });
-  return batch.receipt;
-}
-
-// verify cross-chain state
-const state = await network.sync();
-assert(state.finality === true);
-assert(state.latency < 200);</div>
-        <div class="hero-code hero-code--bottom">struct InfraConfig {
-    chains: Vec&lt;Chain&gt;,
-    validators: u32,
-    throughput: u64,
-    finality_ms: u16,
-}
-
-fn deploy(config: InfraConfig) -&gt; Result&lt;()&gt; {
-    let mesh = Mesh::new(config.chains);
-    mesh.connect_validators(config.validators)?;
-    mesh.set_throughput(config.throughput);
-    Ok(())
-}</div>
-        <div class="hero-crosses"><span>+</span><span>+</span><span>+</span><span>+</span></div>
-
-        <div class="hero-inner">
-            <div class="hero-text">
-                <h1>HELLO, WORLD!</h1>
-                <div class="hero-barcode">||||||||||||||||||||||||||||||||</div>
-                <p class="hero-sub">The omnichain infrastructure layer.<br>Built for speed, trust, and simplicity.<br>One network to connect every chain.</p>
-            </div>
-            <div class="hero-visual">
-                <svg viewBox="0 0 520 340" fill="none" xmlns="http://www.w3.org/2000/svg" class="computer-svg">
-                    <!-- Monitor body -->
-                    <rect x="20" y="20" width="300" height="200" rx="6" stroke="#00ff41" stroke-width="1.5" opacity="0.8"/>
-                    <!-- Screen inner -->
-                    <rect x="31" y="31" width="278" height="178" rx="2" stroke="#00ff41" stroke-width="0.8" opacity="0.4"/>
-                    <!-- Screen glow -->
-                    <rect x="31" y="31" width="278" height="178" rx="2" fill="#00ff41" opacity="0.03"/>
-                    <!-- Code lines on screen -->
-                    <line x1="46" y1="52" x2="155" y2="52" stroke="#00ff41" stroke-width="1.5" opacity="0.5"/>
-                    <line x1="46" y1="66" x2="205" y2="66" stroke="#00ff41" stroke-width="1.5" opacity="0.35"/>
-                    <line x1="60" y1="80" x2="175" y2="80" stroke="#00ff41" stroke-width="1.5" opacity="0.45"/>
-                    <line x1="60" y1="94" x2="140" y2="94" stroke="#00ff41" stroke-width="1.5" opacity="0.3"/>
-                    <line x1="60" y1="108" x2="215" y2="108" stroke="#00ff41" stroke-width="1.5" opacity="0.4"/>
-                    <line x1="46" y1="122" x2="165" y2="122" stroke="#00ff41" stroke-width="1.5" opacity="0.35"/>
-                    <line x1="46" y1="136" x2="120" y2="136" stroke="#00ff41" stroke-width="1.5" opacity="0.5"/>
-                    <line x1="60" y1="150" x2="185" y2="150" stroke="#00ff41" stroke-width="1.5" opacity="0.3"/>
-                    <line x1="46" y1="164" x2="145" y2="164" stroke="#00ff41" stroke-width="1.5" opacity="0.25"/>
-                    <line x1="46" y1="178" x2="100" y2="178" stroke="#00ff41" stroke-width="1.5" opacity="0.4"/>
-                    <!-- Cursor blink -->
-                    <rect x="104" y="174" width="7" height="11" fill="#00ff41" opacity="0.7">
-                        <animate attributeName="opacity" values="0.7;0;0.7" dur="1.2s" repeatCount="indefinite"/>
-                    </rect>
-                    <!-- Monitor chin -->
-                    <line x1="20" y1="220" x2="320" y2="220" stroke="#00ff41" stroke-width="1.5" opacity="0.8"/>
-                    <!-- Webcam dot -->
-                    <circle cx="170" cy="25" r="2.5" stroke="#00ff41" stroke-width="0.8" opacity="0.4"/>
-                    <!-- Power indicator -->
-                    <circle cx="170" cy="227" r="2" fill="#00ff41" opacity="0.6">
-                        <animate attributeName="opacity" values="0.6;0.2;0.6" dur="3s" repeatCount="indefinite"/>
-                    </circle>
-                    <!-- Stand neck -->
-                    <path d="M150 236 L150 265 L190 265 L190 236" stroke="#00ff41" stroke-width="1.2" opacity="0.6"/>
-                    <line x1="150" y1="236" x2="190" y2="236" stroke="#00ff41" stroke-width="1.2" opacity="0.6"/>
-                    <!-- Stand base -->
-                    <path d="M115 265 L225 265 L235 278 L105 278 Z" stroke="#00ff41" stroke-width="1.2" opacity="0.6"/>
-                    <!-- Screen scan line -->
-                    <rect x="31" y="31" width="278" height="3" fill="#00ff41" opacity="0.06">
-                        <animate attributeName="y" values="31;206;31" dur="4s" repeatCount="indefinite"/>
-                    </rect>
-
-                    <!-- ── MOBILE PHONE ── -->
-                    <!-- Phone body -->
-                    <rect x="370" y="115" width="100" height="200" rx="12" stroke="#00ff41" stroke-width="1.5" opacity="0.8"/>
-                    <!-- Phone screen -->
-                    <rect x="378" y="132" width="84" height="166" rx="4" stroke="#00ff41" stroke-width="0.8" opacity="0.4"/>
-                    <!-- Phone screen glow -->
-                    <rect x="378" y="132" width="84" height="166" rx="4" fill="#00ff41" opacity="0.03"/>
-                    <!-- Notch -->
-                    <rect x="403" y="118" width="34" height="8" rx="4" stroke="#00ff41" stroke-width="0.7" opacity="0.35"/>
-                    <!-- Front camera -->
-                    <circle cx="430" cy="122" r="2" stroke="#00ff41" stroke-width="0.6" opacity="0.3"/>
-                    <!-- Status bar items -->
-                    <line x1="386" y1="140" x2="400" y2="140" stroke="#00ff41" stroke-width="1" opacity="0.3"/>
-                    <line x1="440" y1="140" x2="454" y2="140" stroke="#00ff41" stroke-width="1" opacity="0.3"/>
-                    <!-- App content lines -->
-                    <line x1="390" y1="158" x2="445" y2="158" stroke="#00ff41" stroke-width="1.5" opacity="0.45"/>
-                    <line x1="390" y1="172" x2="430" y2="172" stroke="#00ff41" stroke-width="1.5" opacity="0.3"/>
-                    <line x1="390" y1="186" x2="450" y2="186" stroke="#00ff41" stroke-width="1.5" opacity="0.4"/>
-                    <line x1="390" y1="200" x2="420" y2="200" stroke="#00ff41" stroke-width="1.5" opacity="0.25"/>
-                    <!-- App blocks -->
-                    <rect x="390" y="218" width="24" height="24" rx="3" stroke="#00ff41" stroke-width="0.8" opacity="0.3"/>
-                    <rect x="420" y="218" width="24" height="24" rx="3" stroke="#00ff41" stroke-width="0.8" opacity="0.3"/>
-                    <rect x="390" y="248" width="24" height="24" rx="3" stroke="#00ff41" stroke-width="0.8" opacity="0.3"/>
-                    <rect x="420" y="248" width="24" height="24" rx="3" stroke="#00ff41" stroke-width="0.8" opacity="0.3"/>
-                    <!-- Notification dot -->
-                    <circle cx="441" cy="221" r="3" fill="#00ff41" opacity="0.6">
-                        <animate attributeName="opacity" values="0.6;0.15;0.6" dur="2.5s" repeatCount="indefinite"/>
-                    </circle>
-                    <!-- Home indicator -->
-                    <line x1="405" y1="306" x2="435" y2="306" stroke="#00ff41" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
-                    <!-- Phone scan line -->
-                    <rect x="378" y="132" width="84" height="2" fill="#00ff41" opacity="0.05">
-                        <animate attributeName="y" values="132;296;132" dur="3.5s" repeatCount="indefinite"/>
-                    </rect>
-                </svg>
-            </div>
-        </div>
-
-        <div class="hero-corner">[ + ]</div>
-        <div class="hero-scroll">
-            <span>SCROLL</span>
-            <div class="hero-scroll-line"></div>
-        </div>
-    </section>
 
     <!-- TICKER -->
     <div class="ticker">
@@ -953,7 +638,7 @@ fn deploy(config: InfraConfig) -&gt; Result&lt;()&gt; {
 
     <!-- FOOTER -->
     <footer class="footer">
-        <div>[ TCE Studio ] &copy; 2026</div>
+        <div>[ Unified Tomorrow ] &copy; 2026</div>
         <div class="footer-links">
             <a href="#">Protocol</a>
             <a href="#">Docs</a>
