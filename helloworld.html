@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 9 — Omnichain Infrastructure</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Saira+Extra+Condensed:wght@400;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green: #00ff41;
+            --green-dim: #00cc34;
+            --green-glow: rgba(0, 255, 65, 0.25);
+            --black: #000000;
+            --dark: #050505;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--black);
+            color: var(--green);
+            font-family: 'DM Mono', monospace;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg, transparent, transparent 2px,
+                rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px
+            );
+            pointer-events: none;
+            z-index: 10000;
+        }
+
+        h1, h2, h3, .headline {
+            font-family: 'Saira Extra Condensed', sans-serif;
+            font-weight: 800;
+            text-transform: uppercase;
+            line-height: 0.92;
+            letter-spacing: -0.01em;
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        /* ── NAV ── */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            height: 56px;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,255,65,0.1);
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+        }
+
+        .nav-brand {
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            opacity: 0.6;
+            transition: opacity 0.3s;
+            text-transform: uppercase;
+        }
+
+        .nav-links a:hover { opacity: 1; }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border: 1px solid var(--green);
+            font-size: 0.6rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .badge-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--green);
+            animation: blink 1.5s ease-in-out infinite;
+        }
+
+        .badge--dark {
+            border-color: #000;
+            color: #000;
+        }
+        .badge--dark .badge-dot { background: #000; }
+
+        /* ── HERO ── */
+        .hero {
+            position: relative;
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 5rem 3rem 2rem;
+            overflow: hidden;
+        }
+
+        .hero-code {
+            position: absolute;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.62rem;
+            line-height: 1.9;
+            color: var(--green);
+            opacity: 0.09;
+            white-space: pre;
+            pointer-events: none;
+            z-index: 0;
+            user-select: none;
+        }
+
+        .hero-code--left {
+            top: 10%;
+            left: 2rem;
+        }
+
+        .hero-code--right {
+            top: 20%;
+            right: 2rem;
+            text-align: right;
+        }
+
+        .hero-code--bottom {
+            bottom: 12%;
+            left: 6%;
+        }
+
+        .hero-inner, .hero-label, .hero-crosses, .hero-corner, .hero-scroll {
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero-label {
+            position: absolute;
+            top: 80px;
+            left: 3rem;
+            font-size: 0.68rem;
+            letter-spacing: 0.1em;
+            opacity: 0.7;
+        }
+
+        .hero-crosses {
+            position: absolute;
+            top: 80px;
+            right: 3rem;
+            display: flex;
+            gap: 12px;
+            font-size: 0.9rem;
+            opacity: 0.5;
+        }
+        .hero-crosses span { animation: floatCross 4s ease-in-out infinite; }
+        .hero-crosses span:nth-child(2) { animation-delay: -1s; }
+        .hero-crosses span:nth-child(3) { animation-delay: -2s; }
+        .hero-crosses span:nth-child(4) { animation-delay: -3s; }
+
+        .hero-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(3.5rem, 8vw, 7.5rem);
+            color: var(--green);
+        }
+
+        .hero-barcode {
+            margin: 1.5rem 0 1rem;
+            font-size: 1.6rem;
+            letter-spacing: -0.05em;
+            opacity: 0.5;
+            line-height: 1;
+            overflow: hidden;
+            max-width: 280px;
+        }
+
+        .hero-sub {
+            font-size: 0.78rem;
+            line-height: 1.8;
+            opacity: 0.7;
+        }
+
+        .hero-visual {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            max-width: 500px;
+            justify-self: center;
+        }
+
+        .hero-visual canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-corner {
+            position: absolute;
+            bottom: 2rem;
+            right: 3rem;
+            font-size: 0.7rem;
+            opacity: 0.4;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.6rem;
+            letter-spacing: 0.15em;
+            opacity: 0.4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero-scroll-line {
+            width: 1px;
+            height: 40px;
+            background: var(--green);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        /* ── TICKER ── */
+        .ticker {
+            border-top: 1px solid rgba(0,255,65,0.15);
+            border-bottom: 1px solid rgba(0,255,65,0.15);
+            padding: 14px 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .ticker-track {
+            display: inline-block;
+            animation: tickerScroll 30s linear infinite;
+            font-size: 0.72rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            opacity: 0.5;
+        }
+
+        /* ── GRID ── */
+        .grid-section {
+            padding: 3px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3px;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        .card {
+            position: relative;
+            aspect-ratio: 4 / 3;
+            padding: 1.8rem;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease, box-shadow 0.4s ease;
+        }
+
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card:nth-child(2) { transition-delay: 0.08s; }
+        .card:nth-child(3) { transition-delay: 0.16s; }
+        .card:nth-child(4) { transition-delay: 0.05s; }
+        .card:nth-child(5) { transition-delay: 0.13s; }
+        .card:nth-child(6) { transition-delay: 0.21s; }
+        .card:nth-child(7) { transition-delay: 0.1s; }
+        .card:nth-child(8) { transition-delay: 0.18s; }
+        .card:nth-child(9) { transition-delay: 0.26s; }
+
+        .card--dark {
+            background: var(--black);
+            color: var(--green);
+        }
+
+        .card--dark:hover {
+            box-shadow: inset 0 0 60px rgba(0,255,65,0.04), 0 0 30px rgba(0,255,65,0.06);
+        }
+
+        .card--light {
+            background: var(--green);
+            color: var(--black);
+        }
+
+        .card--light:hover {
+            box-shadow: inset 0 0 60px rgba(0,0,0,0.05);
+        }
+
+        .card-label {
+            font-size: 0.58rem;
+            letter-spacing: 0.1em;
+            opacity: 0.6;
+            text-transform: uppercase;
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .card-headline {
+            font-family: 'Saira Extra Condensed', sans-serif;
+            font-weight: 800;
+            font-size: clamp(1.6rem, 2.5vw, 2.8rem);
+            text-transform: uppercase;
+            line-height: 0.95;
+            z-index: 2;
+            position: relative;
+        }
+
+        .card-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 2;
+            position: relative;
+        }
+
+        .card-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            z-index: 2;
+            position: relative;
+        }
+
+        .card-sub {
+            font-size: 0.65rem;
+            line-height: 1.7;
+            opacity: 0.7;
+        }
+
+        .card-barcode {
+            font-size: 1.2rem;
+            letter-spacing: -0.05em;
+            opacity: 0.35;
+            line-height: 1;
+        }
+
+        .card canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .card-crosses {
+            display: flex;
+            gap: 10px;
+            font-size: 0.75rem;
+            opacity: 0.5;
+        }
+
+        .card-arrow {
+            width: 36px;
+            height: 36px;
+            border: 2px solid currentColor;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .card-icon-grid {
+            position: absolute;
+            right: 1.5rem;
+            bottom: 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+            opacity: 0.5;
+            z-index: 2;
+        }
+        .card-icon-grid span {
+            font-size: 0.6rem;
+        }
+
+        .card-stripes {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 60px;
+            height: 100%;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        .card-stripes span {
+            display: block;
+            height: 3px;
+            margin-bottom: 2px;
+            background: currentColor;
+            opacity: 0.25;
+        }
+
+        .card-divider {
+            display: flex;
+            gap: 0;
+            font-size: 0.6rem;
+            border-top: 1px solid rgba(0,0,0,0.2);
+            padding-top: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .card-divider div {
+            flex: 1;
+            padding-right: 0.5rem;
+        }
+
+        .card-divider div:not(:last-child) {
+            border-right: 1px solid rgba(0,0,0,0.15);
+            margin-right: 0.5rem;
+        }
+
+        .card-divider strong {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 2px;
+            font-size: 0.62rem;
+        }
+
+        .card-divider span {
+            opacity: 0.6;
+            font-size: 0.55rem;
+        }
+
+        /* Pixel dissolve pattern */
+        .pixel-pattern {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 55%;
+            height: 70%;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(20, 1fr);
+            grid-template-rows: repeat(14, 1fr);
+            gap: 2px;
+        }
+
+        .pixel-pattern span {
+            background: var(--green);
+            opacity: 0;
+            animation: pixelFade 4s ease-in-out infinite;
+        }
+
+        /* Speed lines */
+        .speed-lines {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50%;
+            height: 40%;
+            z-index: 1;
+        }
+        .speed-lines span {
+            display: block;
+            height: 2px;
+            background: var(--green);
+            margin-bottom: 3px;
+            animation: speedLine 2s ease-in-out infinite;
+        }
+
+        /* ── CTA ── */
+        .cta-section {
+            position: relative;
+            padding: 6rem 3rem;
+            text-align: center;
+            overflow: hidden;
+            min-height: 50vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(2.5rem, 6vw, 5.5rem);
+            z-index: 2;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .cta-section canvas {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            z-index: 1;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            border: 1px solid var(--green);
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--black);
+            background: var(--green);
+            cursor: pointer;
+            z-index: 2;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .cta-btn:hover {
+            background: transparent;
+            color: var(--green);
+            box-shadow: 0 0 30px var(--green-glow);
+        }
+
+        /* ── FOOTER ── */
+        .footer {
+            border-top: 1px solid rgba(0,255,65,0.1);
+            padding: 2.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.6rem;
+            letter-spacing: 0.08em;
+            opacity: 0.5;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a:hover { opacity: 0.7; }
+
+        /* ── ANIMATIONS ── */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.15; }
+        }
+
+        @keyframes floatCross {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.2; transform: scaleY(1); }
+            50% { opacity: 0.6; transform: scaleY(1.3); }
+        }
+
+        @keyframes tickerScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        @keyframes pixelFade {
+            0%, 100% { opacity: 0; }
+            50% { opacity: var(--o, 0.6); }
+        }
+
+        @keyframes speedLine {
+            0% { transform: scaleX(0.3); transform-origin: left; opacity: 0.3; }
+            50% { transform: scaleX(1); opacity: 0.8; }
+            100% { transform: scaleX(0.3); transform-origin: right; opacity: 0.3; }
+        }
+
+        @keyframes heroFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-text h1 { animation: heroFadeIn 1s ease-out 0.2s both; }
+        .hero-barcode { animation: heroFadeIn 1s ease-out 0.5s both; }
+        .hero-sub { animation: heroFadeIn 1s ease-out 0.7s both; }
+        .hero-label { animation: heroFadeIn 1s ease-out 0.1s both; }
+        .hero-visual { animation: heroFadeIn 1.2s ease-out 0.4s both; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1100px) {
+            .card-grid { grid-template-columns: repeat(2, 1fr); }
+            .card:nth-child(9) { grid-column: span 2; aspect-ratio: 8/3; }
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding: 5rem 1.5rem 2rem; }
+            .hero-inner { grid-template-columns: 1fr; }
+            .hero-visual { max-width: 300px; margin: 2rem auto 0; }
+            .hero-label { left: 1.5rem; }
+            .hero-crosses { right: 1.5rem; }
+            .hero-corner { right: 1.5rem; }
+            .nav { padding: 0 1.2rem; }
+            .nav-links { gap: 1rem; }
+            .nav-links a:not(.badge-link) { display: none; }
+            .card-grid { grid-template-columns: 1fr; }
+            .card { aspect-ratio: 3/2; }
+            .card:nth-child(9) { grid-column: span 1; aspect-ratio: 3/2; }
+            .card-headline { font-size: clamp(1.8rem, 7vw, 2.5rem); }
+            .footer { flex-direction: column; gap: 1rem; text-align: center; }
+            .grid-section { padding: 2px; }
+            .card { padding: 1.4rem; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text h1 { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav class="nav">
+        <div class="nav-brand">[ Section 9 ]</div>
+        <div class="nav-links">
+            <a href="#">Protocol</a>
+            <a href="#">Docs</a>
+            <a href="#">Community</a>
+            <a href="#" class="badge-link"><span class="badge"><span class="badge-dot"></span>LIVE SOON</span></a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-code hero-code--left">import { Network } from '@eternis/core';
+import { LiquidityPool } from '@eternis/defi';
+
+const network = new Network({
+  chains: ['ethereum', 'arbitrum', 'solana'],
+  mode: 'omnichain',
+  consensus: 'unified',
+});
+
+await network.initialize();
+const pool = new LiquidityPool({
+  protocol: 'eternis-v2',
+  slippage: 0.005,
+});
+
+pool.on('swap', (event) => {
+  console.log(`Route: ${event.path}`);
+  console.log(`Latency: ${event.ms}ms`);
+});</div>
+        <div class="hero-code hero-code--right">async function executeSettlement() {
+  const batch = await tx.bundle([
+    bridge('ETH', '1.5', 'arbitrum'),
+    swap('USDC', 'ETH', optimum),
+    stake('ETH', vault.address),
+  ]);
+
+  const proof = batch.generateProof();
+  await batch.settle({ proof });
+  return batch.receipt;
+}
+
+// verify cross-chain state
+const state = await network.sync();
+assert(state.finality === true);
+assert(state.latency < 200);</div>
+        <div class="hero-code hero-code--bottom">struct InfraConfig {
+    chains: Vec&lt;Chain&gt;,
+    validators: u32,
+    throughput: u64,
+    finality_ms: u16,
+}
+
+fn deploy(config: InfraConfig) -&gt; Result&lt;()&gt; {
+    let mesh = Mesh::new(config.chains);
+    mesh.connect_validators(config.validators)?;
+    mesh.set_throughput(config.throughput);
+    Ok(())
+}</div>
+        <div class="hero-crosses"><span>+</span><span>+</span><span>+</span><span>+</span></div>
+
+        <div class="hero-inner">
+            <div class="hero-text">
+                <h1>HELLO, WORLD!</h1>
+                <div class="hero-barcode">||||||||||||||||||||||||||||||||</div>
+                <p class="hero-sub">The omnichain infrastructure layer.<br>Built for speed, trust, and simplicity.<br>One network to connect every chain.</p>
+            </div>
+            <div class="hero-visual">
+                <svg viewBox="0 0 520 340" fill="none" xmlns="http://www.w3.org/2000/svg" class="computer-svg">
+                    <!-- Monitor body -->
+                    <rect x="20" y="20" width="300" height="200" rx="6" stroke="#00ff41" stroke-width="1.5" opacity="0.8"/>
+                    <!-- Screen inner -->
+                    <rect x="31" y="31" width="278" height="178" rx="2" stroke="#00ff41" stroke-width="0.8" opacity="0.4"/>
+                    <!-- Screen glow -->
+                    <rect x="31" y="31" width="278" height="178" rx="2" fill="#00ff41" opacity="0.03"/>
+                    <!-- Code lines on screen -->
+                    <line x1="46" y1="52" x2="155" y2="52" stroke="#00ff41" stroke-width="1.5" opacity="0.5"/>
+                    <line x1="46" y1="66" x2="205" y2="66" stroke="#00ff41" stroke-width="1.5" opacity="0.35"/>
+                    <line x1="60" y1="80" x2="175" y2="80" stroke="#00ff41" stroke-width="1.5" opacity="0.45"/>
+                    <line x1="60" y1="94" x2="140" y2="94" stroke="#00ff41" stroke-width="1.5" opacity="0.3"/>
+                    <line x1="60" y1="108" x2="215" y2="108" stroke="#00ff41" stroke-width="1.5" opacity="0.4"/>
+                    <line x1="46" y1="122" x2="165" y2="122" stroke="#00ff41" stroke-width="1.5" opacity="0.35"/>
+                    <line x1="46" y1="136" x2="120" y2="136" stroke="#00ff41" stroke-width="1.5" opacity="0.5"/>
+                    <line x1="60" y1="150" x2="185" y2="150" stroke="#00ff41" stroke-width="1.5" opacity="0.3"/>
+                    <line x1="46" y1="164" x2="145" y2="164" stroke="#00ff41" stroke-width="1.5" opacity="0.25"/>
+                    <line x1="46" y1="178" x2="100" y2="178" stroke="#00ff41" stroke-width="1.5" opacity="0.4"/>
+                    <!-- Cursor blink -->
+                    <rect x="104" y="174" width="7" height="11" fill="#00ff41" opacity="0.7">
+                        <animate attributeName="opacity" values="0.7;0;0.7" dur="1.2s" repeatCount="indefinite"/>
+                    </rect>
+                    <!-- Monitor chin -->
+                    <line x1="20" y1="220" x2="320" y2="220" stroke="#00ff41" stroke-width="1.5" opacity="0.8"/>
+                    <!-- Webcam dot -->
+                    <circle cx="170" cy="25" r="2.5" stroke="#00ff41" stroke-width="0.8" opacity="0.4"/>
+                    <!-- Power indicator -->
+                    <circle cx="170" cy="227" r="2" fill="#00ff41" opacity="0.6">
+                        <animate attributeName="opacity" values="0.6;0.2;0.6" dur="3s" repeatCount="indefinite"/>
+                    </circle>
+                    <!-- Stand neck -->
+                    <path d="M150 236 L150 265 L190 265 L190 236" stroke="#00ff41" stroke-width="1.2" opacity="0.6"/>
+                    <line x1="150" y1="236" x2="190" y2="236" stroke="#00ff41" stroke-width="1.2" opacity="0.6"/>
+                    <!-- Stand base -->
+                    <path d="M115 265 L225 265 L235 278 L105 278 Z" stroke="#00ff41" stroke-width="1.2" opacity="0.6"/>
+                    <!-- Keyboard -->
+                    <rect x="55" y="290" width="230" height="26" rx="3" stroke="#00ff41" stroke-width="1" opacity="0.5"/>
+                    <line x1="66" y1="298" x2="274" y2="298" stroke="#00ff41" stroke-width="0.5" opacity="0.2"/>
+                    <line x1="66" y1="306" x2="274" y2="306" stroke="#00ff41" stroke-width="0.5" opacity="0.2"/>
+                    <line x1="85" y1="293" x2="85" y2="313" stroke="#00ff41" stroke-width="0.3" opacity="0.15"/>
+                    <line x1="105" y1="293" x2="105" y2="313" stroke="#00ff41" stroke-width="0.3" opacity="0.15"/>
+                    <line x1="125" y1="293" x2="125" y2="313" stroke="#00ff41" stroke-width="0.3" opacity="0.15"/>
+                    <line x1="145" y1="293" x2="145" y2="313" stroke="#00ff41" stroke-width="0.3" opacity="0.15"/>
+                    <line x1="165" y1="293" x2="165" y2="313" stroke="#00ff41" stroke-width="0.3" opacity="0.15"/>
+                    <line x1="185" y1="293" x2="185" y2="313" stroke="#00ff41" stroke-width="0.3" opacity="0.15"/>
+                    <line x1="205" y1="293" x2="205" y2="313" stroke="#00ff41" stroke-width="0.3" opacity="0.15"/>
+                    <line x1="225" y1="293" x2="225" y2="313" stroke="#00ff41" stroke-width="0.3" opacity="0.15"/>
+                    <line x1="245" y1="293" x2="245" y2="313" stroke="#00ff41" stroke-width="0.3" opacity="0.15"/>
+                    <line x1="265" y1="293" x2="265" y2="313" stroke="#00ff41" stroke-width="0.3" opacity="0.15"/>
+                    <!-- Screen scan line -->
+                    <rect x="31" y="31" width="278" height="3" fill="#00ff41" opacity="0.06">
+                        <animate attributeName="y" values="31;206;31" dur="4s" repeatCount="indefinite"/>
+                    </rect>
+
+                    <!-- ── MOBILE PHONE ── -->
+                    <!-- Phone body -->
+                    <rect x="370" y="115" width="100" height="200" rx="12" stroke="#00ff41" stroke-width="1.5" opacity="0.8"/>
+                    <!-- Phone screen -->
+                    <rect x="378" y="132" width="84" height="166" rx="4" stroke="#00ff41" stroke-width="0.8" opacity="0.4"/>
+                    <!-- Phone screen glow -->
+                    <rect x="378" y="132" width="84" height="166" rx="4" fill="#00ff41" opacity="0.03"/>
+                    <!-- Notch -->
+                    <rect x="403" y="118" width="34" height="8" rx="4" stroke="#00ff41" stroke-width="0.7" opacity="0.35"/>
+                    <!-- Front camera -->
+                    <circle cx="430" cy="122" r="2" stroke="#00ff41" stroke-width="0.6" opacity="0.3"/>
+                    <!-- Status bar items -->
+                    <line x1="386" y1="140" x2="400" y2="140" stroke="#00ff41" stroke-width="1" opacity="0.3"/>
+                    <line x1="440" y1="140" x2="454" y2="140" stroke="#00ff41" stroke-width="1" opacity="0.3"/>
+                    <!-- App content lines -->
+                    <line x1="390" y1="158" x2="445" y2="158" stroke="#00ff41" stroke-width="1.5" opacity="0.45"/>
+                    <line x1="390" y1="172" x2="430" y2="172" stroke="#00ff41" stroke-width="1.5" opacity="0.3"/>
+                    <line x1="390" y1="186" x2="450" y2="186" stroke="#00ff41" stroke-width="1.5" opacity="0.4"/>
+                    <line x1="390" y1="200" x2="420" y2="200" stroke="#00ff41" stroke-width="1.5" opacity="0.25"/>
+                    <!-- App blocks -->
+                    <rect x="390" y="218" width="24" height="24" rx="3" stroke="#00ff41" stroke-width="0.8" opacity="0.3"/>
+                    <rect x="420" y="218" width="24" height="24" rx="3" stroke="#00ff41" stroke-width="0.8" opacity="0.3"/>
+                    <rect x="390" y="248" width="24" height="24" rx="3" stroke="#00ff41" stroke-width="0.8" opacity="0.3"/>
+                    <rect x="420" y="248" width="24" height="24" rx="3" stroke="#00ff41" stroke-width="0.8" opacity="0.3"/>
+                    <!-- Notification dot -->
+                    <circle cx="441" cy="221" r="3" fill="#00ff41" opacity="0.6">
+                        <animate attributeName="opacity" values="0.6;0.15;0.6" dur="2.5s" repeatCount="indefinite"/>
+                    </circle>
+                    <!-- Home indicator -->
+                    <line x1="405" y1="306" x2="435" y2="306" stroke="#00ff41" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+                    <!-- Phone scan line -->
+                    <rect x="378" y="132" width="84" height="2" fill="#00ff41" opacity="0.05">
+                        <animate attributeName="y" values="132;296;132" dur="3.5s" repeatCount="indefinite"/>
+                    </rect>
+                    <!-- Connection line between devices -->
+                    <line x1="320" y1="200" x2="370" y2="200" stroke="#00ff41" stroke-width="0.6" opacity="0.2" stroke-dasharray="4 4">
+                        <animate attributeName="stroke-dashoffset" values="0;-8" dur="1s" repeatCount="indefinite"/>
+                    </line>
+                    <circle cx="345" cy="200" r="2" fill="#00ff41" opacity="0.4">
+                        <animate attributeName="cx" values="322;368;322" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                </svg>
+            </div>
+        </div>
+
+        <div class="hero-corner">[ + ]</div>
+        <div class="hero-scroll">
+            <span>SCROLL</span>
+            <div class="hero-scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- TICKER -->
+    <div class="ticker">
+        <div class="ticker-track">
+            UNIFIED EXECUTION &nbsp;+&nbsp; SHARED LIQUIDITY &nbsp;+&nbsp; LIMITLESS SCALE &nbsp;+&nbsp; MODULAR &nbsp;+&nbsp; COMPOSABLE &nbsp;+&nbsp; OMNICHAIN &nbsp;+&nbsp; EXECUTE &nbsp;+&nbsp; SETTLE &nbsp;+&nbsp; SCALE &nbsp;+&nbsp; INFRASTRUCTURE IS THE PRODUCT &nbsp;+&nbsp; UNIFIED EXECUTION &nbsp;+&nbsp; SHARED LIQUIDITY &nbsp;+&nbsp; LIMITLESS SCALE &nbsp;+&nbsp; MODULAR &nbsp;+&nbsp; COMPOSABLE &nbsp;+&nbsp; OMNICHAIN &nbsp;+&nbsp; EXECUTE &nbsp;+&nbsp; SETTLE &nbsp;+&nbsp; SCALE &nbsp;+&nbsp; INFRASTRUCTURE IS THE PRODUCT &nbsp;+&nbsp;
+        </div>
+    </div>
+
+    <!-- GRID -->
+    <section class="grid-section">
+        <div class="card-grid">
+
+            <!-- Card 1: ONE NETWORK (dark + globe) -->
+            <div class="card card--dark">
+                <div class="card-top">
+                    <span class="card-label">[ Section 9 ]</span>
+                    <div class="card-crosses"><span>+</span></div>
+                </div>
+                <div class="card-body">
+                    <div class="card-headline">ONE NETWORK.<br>EVERY CHAIN.<br>REAL INFRA.</div>
+                </div>
+                <div class="card-bottom">
+                    <div>
+                        <div class="card-barcode">||||||||||||||||||||||||</div>
+                        <div class="card-sub" style="margin-top:6px">Unified execution.<br>Shared liquidity.<br>Limitless scale.</div>
+                    </div>
+                    <div class="card-crosses"><span>+</span></div>
+                </div>
+                <canvas id="card-globe"></canvas>
+            </div>
+
+            <!-- Card 2: BUILT FOR (light + grid) -->
+            <div class="card card--light">
+                <div class="card-top">
+                    <div></div>
+                    <span class="card-label" style="opacity:0.5">[ Section 9 ]</span>
+                </div>
+                <div class="card-body">
+                    <div class="card-headline">BUILT FOR<br>WHAT'S NEXT.</div>
+                </div>
+                <div class="card-bottom">
+                    <div class="card-sub">Modular.<br>Composable.<br>Omnichain.</div>
+                    <div class="card-crosses"><span>+</span><span>+</span></div>
+                </div>
+                <canvas id="card-grid"></canvas>
+            </div>
+
+            <!-- Card 4: FRAGMENTED (dark + pixels) -->
+            <div class="card card--dark">
+                <div class="card-top">
+                    <span class="card-label">[ Section 9 ]</span>
+                    <div class="card-arrow">&#8599;</div>
+                </div>
+                <div class="card-body">
+                    <div class="card-headline">FRAGMENTED TODAY.<br>UNIFIED TOMORROW.</div>
+                </div>
+                <div class="card-bottom">
+                    <div class="card-barcode">||||||||||||||||</div>
+                    <div></div>
+                </div>
+                <div class="pixel-pattern" id="pixel-grid"></div>
+            </div>
+
+            <!-- Card 5: EXECUTE (light + vortex)
+            <div class="card card--light">
+                <div class="card-top">
+                    <span class="badge badge--dark"><span class="badge-dot" style="background:#000"></span>LIVE SOON</span>
+                    <div></div>
+                </div>
+                <div class="card-body">
+                    <div class="card-headline">EXECUTE.<br>SETTLE.<br>SCALE.</div>
+                </div>
+                <div class="card-bottom">
+                    <div></div>
+                    <div class="card-crosses" style="opacity:0.3"><span>+</span><span>+</span><span>+</span></div>
+                </div>
+                <canvas id="card-vortex"></canvas>
+            </div>
+            -->
+
+            <!-- Card 7: MORE CHAINS (dark + network) -->
+            <div class="card card--dark">
+                <div class="card-top">
+                    <span class="card-label">[ Section 9 ]</span>
+                    <div></div>
+                </div>
+                <div class="card-body">
+                    <div class="card-headline">MORE CHAINS.<br>ONE PLACE.<br>TRUE INFRA.</div>
+                </div>
+                <div class="card-bottom">
+                    <div class="card-barcode">||||||||||||||||</div>
+                    <div></div>
+                </div>
+                <canvas id="card-network"></canvas>
+            </div>
+
+            <!-- Card 8: SPEED TRUST (dark + speed lines) -->
+            <div class="card card--dark">
+                <div class="card-top">
+                    <span class="badge"><span class="badge-dot"></span>LIVE SOON</span>
+                    <div class="card-crosses"><span>+</span><span>+</span><span>+</span></div>
+                </div>
+                <div class="card-body">
+                    <div class="card-headline">SPEED<br>TRUST<br>SIMPLICITY</div>
+                </div>
+                <div class="card-bottom" style="width:100%">
+                    <div class="card-divider" style="width:100%">
+                        <div><strong>Speed</strong><span>Instant execution</span></div>
+                        <div><strong>Trust</strong><span>Provable & verifiable</span></div>
+                        <div><strong>Simplicity</strong><span>One infra, all chains</span></div>
+                    </div>
+                </div>
+                <div class="speed-lines" id="speed-lines"></div>
+            </div>
+
+            <!-- Card 9: INFRA LAYER (dark + terrain) -->
+            <div class="card card--dark">
+                <div class="card-top">
+                    <div></div>
+                    <span class="card-label">[ Section 9 ]</span>
+                </div>
+                <div class="card-body">
+                    <div class="card-headline">THE INFRA LAYER<br>OMNICHAIN DESERVES.</div>
+                </div>
+                <div class="card-bottom">
+                    <div class="card-barcode">||||||||||||||||||||||||</div>
+                    <div class="card-crosses"><span>+</span></div>
+                </div>
+                <canvas id="card-terrain"></canvas>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <h2>ENTER THE<br>NETWORK.</h2>
+        <button class="cta-btn">LAUNCH APP &nbsp;&#8599;</button>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div>[ Section 9 ] &copy; 2026</div>
+        <div class="footer-links">
+            <a href="#">Protocol</a>
+            <a href="#">Docs</a>
+            <a href="#">X</a>
+            <a href="#">Discord</a>
+            <a href="#">GitHub</a>
+        </div>
+    </footer>
+
+    <script>
+        /* ── Canvas Utilities ── */
+        function initCanvas(canvas) {
+            if (!canvas) return null;
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            if (rect.width === 0 || rect.height === 0) return null;
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            const ctx = canvas.getContext('2d');
+            ctx.scale(dpr, dpr);
+            canvas._w = rect.width;
+            canvas._h = rect.height;
+            return ctx;
+        }
+
+        /* ── Globe ── */
+        function drawGlobe(ctx, w, h, t) {
+            ctx.clearRect(0, 0, w, h);
+            const cx = w * 0.5, cy = h * 0.48, r = Math.min(w, h) * 0.34;
+
+            ctx.strokeStyle = '#00ff41';
+
+            // Outer circle
+            ctx.lineWidth = 1.2;
+            ctx.globalAlpha = 0.7;
+            ctx.beginPath();
+            ctx.arc(cx, cy, r, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Latitude lines
+            for (let i = -3; i <= 3; i++) {
+                const lat = (i / 4) * (Math.PI / 2);
+                const y = cy - r * Math.sin(lat);
+                const rLat = r * Math.cos(lat);
+                ctx.lineWidth = 0.7;
+                ctx.globalAlpha = i === 0 ? 0.5 : 0.25;
+                ctx.beginPath();
+                ctx.ellipse(cx, y, rLat, rLat * 0.12, 0, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+
+            // Longitude lines (rotating)
+            for (let i = 0; i < 8; i++) {
+                const angle = (i / 8) * Math.PI + t * 0.25;
+                const rx = Math.abs(r * Math.sin(angle));
+                ctx.lineWidth = 0.6;
+                ctx.globalAlpha = 0.2 + Math.abs(Math.sin(angle)) * 0.25;
+                ctx.beginPath();
+                ctx.ellipse(cx, cy, rx, r, 0, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+
+            // Dots at intersections
+            ctx.fillStyle = '#00ff41';
+            for (let lon = 0; lon < 8; lon++) {
+                const lonAngle = (lon / 8) * Math.PI + t * 0.25;
+                for (let lat = -3; lat <= 3; lat++) {
+                    const latAngle = (lat / 4) * (Math.PI / 2);
+                    const x3d = r * Math.cos(latAngle) * Math.sin(lonAngle);
+                    const y3d = r * Math.sin(latAngle);
+                    const z3d = r * Math.cos(latAngle) * Math.cos(lonAngle);
+                    if (z3d < 0) continue;
+                    ctx.globalAlpha = 0.3 + (z3d / r) * 0.5;
+                    ctx.beginPath();
+                    ctx.arc(cx + x3d, cy - y3d, 1.5, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            // Orbital ring
+            ctx.globalAlpha = 0.45;
+            ctx.lineWidth = 1;
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.rotate(-0.45);
+            ctx.beginPath();
+            ctx.ellipse(0, 0, r * 1.35, r * 0.28, 0, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Orbital dot
+            const dA = t * 1.2;
+            const dx = r * 1.35 * Math.cos(dA);
+            const dy = r * 0.28 * Math.sin(dA);
+            ctx.fillStyle = '#00ff41';
+            ctx.globalAlpha = 1;
+            ctx.beginPath();
+            ctx.arc(dx, dy, 3, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.globalAlpha = 0.2;
+            ctx.beginPath();
+            ctx.arc(dx, dy, 8, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        }
+
+        /* ── Perspective Grid ── */
+        function drawPerspGrid(ctx, w, h, t) {
+            ctx.clearRect(0, 0, w, h);
+            const horizon = h * 0.38;
+            const vx = w * 0.5;
+
+            ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
+
+            // Vertical converging lines
+            for (let i = -18; i <= 18; i++) {
+                const x = vx + i * (w * 0.07);
+                ctx.lineWidth = 0.8;
+                ctx.globalAlpha = Math.max(0.05, 1 - Math.abs(i) / 18);
+                ctx.beginPath();
+                ctx.moveTo(x, h + 10);
+                ctx.lineTo(vx, horizon);
+                ctx.stroke();
+            }
+
+            // Horizontal lines with perspective
+            for (let i = 0; i < 30; i++) {
+                const raw = (i / 30 + t * 0.04) % 1;
+                const y = horizon + (h - horizon) * raw * raw;
+                ctx.lineWidth = 0.8;
+                ctx.globalAlpha = raw * 0.4;
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(w, y);
+                ctx.stroke();
+            }
+            ctx.globalAlpha = 1;
+        }
+
+        /* ── Vortex ── */
+        function drawVortex(ctx, w, h, t) {
+            ctx.clearRect(0, 0, w, h);
+            const cx = w * 0.62, cy = h * 0.52;
+            const maxR = Math.min(w, h) * 0.38;
+
+            for (let i = 0; i < 35; i++) {
+                const ratio = i / 35;
+                const r = maxR * (1 - ratio * 0.92);
+                const squeeze = 0.28 + ratio * 0.12;
+                const rot = ratio * 2.2 + t * 0.12;
+
+                const brightness = Math.max(0, 1 - ratio * 3);
+                const g = Math.floor(255 * brightness);
+                const b = Math.floor(65 * brightness);
+                ctx.strokeStyle = ratio > 0.33 ? `rgba(0,0,0,${0.4 + ratio * 0.4})` : `rgba(0,${g},${b},0.7)`;
+                ctx.lineWidth = 1.8 - ratio * 1.2;
+                ctx.globalAlpha = 1;
+
+                ctx.beginPath();
+                ctx.ellipse(cx, cy, r, r * squeeze, rot, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+
+            // Center glow
+            const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, maxR * 0.12);
+            grd.addColorStop(0, 'rgba(0,255,65,0.15)');
+            grd.addColorStop(1, 'transparent');
+            ctx.fillStyle = grd;
+            ctx.globalAlpha = 0.6 + Math.sin(t * 2) * 0.15;
+            ctx.beginPath();
+            ctx.arc(cx, cy, maxR * 0.12, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.globalAlpha = 1;
+        }
+
+        /* ── Network ── */
+        function drawNetwork(ctx, w, h, t) {
+            const nodes = [
+                {x:0.22,y:0.35},{x:0.5,y:0.22},{x:0.78,y:0.38},
+                {x:0.32,y:0.6},{x:0.58,y:0.52},{x:0.72,y:0.7},
+                {x:0.45,y:0.78},{x:0.18,y:0.72},{x:0.85,y:0.55}
+            ];
+            const edges = [[0,1],[1,2],[0,3],[1,4],[2,4],[2,8],[3,4],[4,5],[3,6],[3,7],[5,6],[4,8],[5,8],[0,7],[6,7]];
+
+            ctx.clearRect(0, 0, w, h);
+
+            // Draw edges
+            ctx.strokeStyle = '#00ff41';
+            ctx.lineWidth = 0.8;
+            ctx.globalAlpha = 0.3;
+            edges.forEach(([a, b]) => {
+                ctx.beginPath();
+                ctx.moveTo(nodes[a].x * w, nodes[a].y * h);
+                ctx.lineTo(nodes[b].x * w, nodes[b].y * h);
+                ctx.stroke();
+            });
+
+            // Draw nodes
+            ctx.fillStyle = '#00ff41';
+            nodes.forEach((n, i) => {
+                const pulse = Math.sin(t * 1.8 + i * 0.9) * 2;
+                const r = 3.5 + pulse;
+                const x = n.x * w, y = n.y * h;
+
+                // Glow
+                ctx.globalAlpha = 0.1;
+                ctx.beginPath();
+                ctx.arc(x, y, r * 4, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Node
+                ctx.globalAlpha = 0.8;
+                ctx.beginPath();
+                ctx.arc(x, y, r, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Center bright dot
+                ctx.globalAlpha = 1;
+                ctx.beginPath();
+                ctx.arc(x, y, 1.5, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // Traveling dot along edges
+            const edgeIdx = Math.floor(t * 0.8) % edges.length;
+            const progress = (t * 0.8) % 1;
+            const [ea, eb] = edges[edgeIdx];
+            const dx = nodes[ea].x * w + (nodes[eb].x * w - nodes[ea].x * w) * progress;
+            const dy = nodes[ea].y * h + (nodes[eb].y * h - nodes[ea].y * h) * progress;
+            ctx.globalAlpha = 1;
+            ctx.beginPath();
+            ctx.arc(dx, dy, 2.5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.globalAlpha = 1;
+        }
+
+        /* ── Terrain ── */
+        function drawTerrain(ctx, w, h, t) {
+            ctx.clearRect(0, 0, w, h);
+            ctx.strokeStyle = '#00ff41';
+            ctx.lineWidth = 0.7;
+
+            const rows = 28;
+            const cols = 60;
+            const baseY = h * 0.3;
+            const depth = h * 0.65;
+            const maxH = h * 0.35;
+
+            for (let row = 0; row < rows; row++) {
+                const rr = row / rows;
+                const y = baseY + rr * depth;
+                const ps = 1 - rr * 0.4;
+                ctx.globalAlpha = 0.15 + rr * 0.55;
+                ctx.beginPath();
+                for (let col = 0; col <= cols; col++) {
+                    const cr = col / cols;
+                    const x = cr * w;
+
+                    const m1 = Math.max(0, 1 - Math.abs(cr - 0.3) * 4) * 0.45;
+                    const m2 = Math.max(0, 1 - Math.abs(cr - 0.55) * 3) * 0.7;
+                    const m3 = Math.max(0, 1 - Math.abs(cr - 0.8) * 5) * 0.35;
+                    const wave = Math.sin(cr * 10 + t * 0.6 + rr * 3) * Math.cos(rr * 6 + t * 0.4) * 0.08;
+                    const height = (m1 + m2 + m3 + wave) * maxH * ps;
+
+                    const py = y - height;
+                    if (col === 0) ctx.moveTo(x, py); else ctx.lineTo(x, py);
+                }
+                ctx.stroke();
+            }
+            ctx.globalAlpha = 1;
+        }
+
+        /* ── Pixel Pattern ── */
+        function buildPixels() {
+            const grid = document.getElementById('pixel-grid');
+            if (!grid) return;
+            for (let i = 0; i < 280; i++) {
+                const span = document.createElement('span');
+                const opacity = Math.random();
+                const delay = Math.random() * 4;
+                const shouldShow = Math.random() > 0.45;
+                span.style.setProperty('--o', shouldShow ? (0.2 + opacity * 0.6).toFixed(2) : '0');
+                span.style.animationDelay = delay.toFixed(2) + 's';
+                grid.appendChild(span);
+            }
+        }
+
+        /* ── Speed Lines ── */
+        function buildSpeedLines() {
+            const container = document.getElementById('speed-lines');
+            if (!container) return;
+            for (let i = 0; i < 25; i++) {
+                const span = document.createElement('span');
+                const w = 30 + Math.random() * 70;
+                span.style.width = w + '%';
+                span.style.animationDelay = (Math.random() * 2).toFixed(2) + 's';
+                span.style.animationDuration = (1 + Math.random() * 2).toFixed(2) + 's';
+                span.style.opacity = (0.15 + Math.random() * 0.5).toFixed(2);
+                container.appendChild(span);
+            }
+        }
+
+        /* ── Animation Loop ── */
+        const animations = [];
+
+        function registerCanvas(id, drawFn) {
+            const canvas = document.getElementById(id);
+            if (!canvas) return;
+            const ctx = initCanvas(canvas);
+            if (!ctx) return;
+            animations.push({ canvas, ctx, draw: drawFn, visible: false, w: canvas._w, h: canvas._h });
+        }
+
+        function animationLoop(time) {
+            const t = time / 1000;
+            animations.forEach(anim => {
+                if (anim.visible) {
+                    anim.draw(anim.ctx, anim.w, anim.h, t);
+                }
+            });
+            requestAnimationFrame(animationLoop);
+        }
+
+        /* ── Scroll Observer ── */
+        function setupObservers() {
+            // Canvas visibility
+            const canvasObs = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const anim = animations.find(a => a.canvas === entry.target);
+                    if (anim) anim.visible = entry.isIntersecting;
+                });
+            }, { threshold: 0.05 });
+
+            animations.forEach(a => canvasObs.observe(a.canvas));
+
+            // Card entrance
+            const cardObs = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+            document.querySelectorAll('.card').forEach(card => cardObs.observe(card));
+        }
+
+        /* ── Resize Handler ── */
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                animations.forEach(anim => {
+                    const ctx = initCanvas(anim.canvas);
+                    if (ctx) {
+                        anim.ctx = ctx;
+                        anim.w = anim.canvas._w;
+                        anim.h = anim.canvas._h;
+                    }
+                });
+            }, 250);
+        });
+
+        /* ── Init ── */
+        function init() {
+            buildPixels();
+            buildSpeedLines();
+
+            registerCanvas('globe-canvas', drawGlobe);
+            registerCanvas('card-globe', drawGlobe);
+            registerCanvas('card-grid', drawPerspGrid);
+            registerCanvas('card-vortex', drawVortex);
+            registerCanvas('card-network', drawNetwork);
+            registerCanvas('card-terrain', drawTerrain);
+            registerCanvas('cta-terrain', drawTerrain);
+
+            setupObservers();
+            requestAnimationFrame(animationLoop);
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+</body>
+</html>
