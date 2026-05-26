@@ -736,7 +736,17 @@ a:hover .link-arrow {
 /* TABLET */
 @media screen and (max-width: 991px) {
   .hp_page-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  .nav_wrapper,
+  .section_hp-hero,
+  .is-anchor,
+  .section_hp-projects,
+  .section_hp-footer {
+    min-width: 0;
+    max-width: 100%;
   }
   .hp_sidebar {
     position: relative;
@@ -745,14 +755,52 @@ a:hover .link-arrow {
     grid-row: auto;
     grid-column: auto;
   }
-  .nav_menu-times {
-    display: none;
+  .navbar {
+    min-height: auto;
   }
-  .nav_menu-links {
-    display: none;
+  .nav_wrap {
+    flex-direction: column;
   }
   .nav_brand {
-    width: auto;
+    width: 100%;
+    border-bottom: 1px solid #000;
+  }
+  .nav_logo-mask {
+    padding: 1.8rem 2.4rem;
+  }
+  .nav_brand-logo {
+    width: min(18.5rem, 42vw);
+  }
+  .nav_brand-text {
+    width: min(26.3rem, 42vw);
+  }
+  .nav_menu-items {
+    width: 100%;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .nav_menu-times {
+    border-left: none;
+    border-bottom: 1px solid #000;
+    flex-wrap: wrap;
+    padding: 1.6rem 2.4rem;
+    width: 100%;
+    min-width: 0;
+    display: flex;
+  }
+  .nav_menu-links {
+    border-left: none;
+    justify-content: flex-start;
+    padding: 1.6rem 2.4rem;
+    width: 100%;
+    min-width: 0;
+    display: flex;
+  }
+  .nav_menu-links-inner {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: 100%;
+    min-width: 0;
   }
   .nav_button {
     display: flex;
@@ -792,6 +840,30 @@ a:hover .link-arrow {
     max-width: 100%;
     border-right: none;
   }
+  .footer_block.is-clocks,
+  .footer_block.is-menu {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .nav_logo-mask {
+    padding: 1.6rem;
+  }
+  .nav_menu-times,
+  .nav_menu-links {
+    grid-column-gap: 1.6rem;
+    grid-row-gap: 1.2rem;
+    padding: 1.6rem;
+  }
+  .nav_menu-links-inner {
+    grid-column-gap: 1.6rem;
+    grid-row-gap: 1.2rem;
+  }
+  .time_block {
+    min-width: 0;
+  }
 }
 </style>
 </head>
@@ -826,10 +898,11 @@ a:hover .link-arrow {
 </div>
 <div class="nav_menu-links">
 <div class="nav_menu-links-inner">
+<a href="/" class="menu_link">Home</a>
 <a href="/portfolio-work/" class="menu_link">Projects</a>
 <a href="/blog/" class="menu_link">Research</a>
 <a href="/initializing-updates/" class="menu_link">About</a>
-<a href="#" class="menu_link">Contact</a>
+<a href="/my-services/" class="menu_link">My services</a>
 </div>
 </div>
 </div>
@@ -1123,10 +1196,11 @@ a:hover .link-arrow {
 </div>
 </div>
 <div class="footer_block is-menu">
+<a href="/" class="footer_link">Home</a>
 <a href="/portfolio-work/" class="footer_link">Projects</a>
 <a href="/blog/" class="footer_link">Research</a>
 <a href="/initializing-updates/" class="footer_link">About</a>
-<a href="/contact" class="footer_link">Contact</a>
+<a href="/my-services/" class="footer_link">My services</a>
 </div>
 </div>
 <div class="footer_bottom">
