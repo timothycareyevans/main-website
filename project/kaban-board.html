@@ -1,0 +1,795 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Growth Squad — Sprint 14 Board</title>
+  <style>
+    /* ─── Design tokens — modern minimal ─────────────────────────────────── */
+    :root {
+      --bg:      oklch(99% 0.002 240);
+      --surface: oklch(100% 0 0);
+      --fg:      oklch(18% 0.012 250);
+      --muted:   oklch(54% 0.012 250);
+      --border:  oklch(92% 0.005 250);
+      --accent:  oklch(58% 0.18 255);
+
+      --font: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', system-ui, sans-serif;
+
+      /* Column status chromas */
+      --col-backlog: oklch(58% 0.008 250);
+      --col-doing:   oklch(58% 0.18 255);
+      --col-review:  oklch(64% 0.16 65);
+      --col-done:    oklch(58% 0.14 145);
+
+      /* Priority */
+      --p-critical-bg: oklch(95% 0.06 25);  --p-critical: oklch(50% 0.22 25);
+      --p-high-bg:     oklch(96% 0.06 48);  --p-high:     oklch(58% 0.20 48);
+      --p-medium-bg:   oklch(97% 0.05 88);  --p-medium:   oklch(52% 0.16 80);
+      --p-low-bg:      oklch(96% 0.003 250); --p-low:      oklch(56% 0.008 250);
+
+      /* Epic hues */
+      --e-referral:  oklch(60% 0.18 255);
+      --e-analytics: oklch(58% 0.18 290);
+      --e-onboard:   oklch(56% 0.14 155);
+      --e-infra:     oklch(62% 0.18 48);
+      --e-growth:    oklch(58% 0.16 185);
+      --e-strategy:  oklch(54% 0.18 308);
+      --e-exp:       oklch(60% 0.20 340);
+      --e-bugfix:    oklch(50% 0.22 25);
+
+      /* Avatar colors */
+      --av-ac: oklch(58% 0.18 255);
+      --av-pr: oklch(56% 0.18 300);
+      --av-mw: oklch(58% 0.14 170);
+      --av-st: oklch(60% 0.20 340);
+      --av-jl: oklch(62% 0.18 48);
+
+      --r-card: 8px;
+      --r-pill: 100px;
+      --nav-h:  52px;
+      --bar-h:  46px;
+    }
+
+    /* ─── Reset ──────────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font);
+      font-size: 13px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+    }
+
+    /* ─── Nav ─────────────────────────────────────────────────────────────── */
+    .nav {
+      height: var(--nav-h);
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      gap: 8px;
+      position: relative;
+      z-index: 10;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+      text-decoration: none;
+    }
+    .nav-mark {
+      width: 26px; height: 26px;
+      background: var(--accent);
+      border-radius: 7px;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      flex-shrink: 0;
+    }
+    .nav-divider {
+      width: 1px; height: 18px;
+      background: var(--border);
+      margin: 0 2px;
+    }
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .breadcrumb a { color: var(--muted); text-decoration: none; transition: color 80ms; }
+    .breadcrumb a:hover { color: var(--fg); }
+    .breadcrumb-sep { color: var(--border); }
+    .breadcrumb-current { color: var(--fg); font-weight: 500; letter-spacing: -0.01em; }
+    .nav-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn {
+      height: 30px;
+      padding: 0 11px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--fg);
+      font: 12px/1 var(--font);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: background 80ms, border-color 80ms;
+    }
+    .btn:hover { background: var(--bg); border-color: oklch(87% 0.006 250); }
+    .btn-primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+    .btn-primary:hover { background: oklch(54% 0.18 255); border-color: oklch(54% 0.18 255); }
+
+    /* ─── Sprint bar ──────────────────────────────────────────────────────── */
+    .sprint-bar {
+      height: var(--bar-h);
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      gap: 16px;
+    }
+    .sprint-name {
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: -0.02em;
+    }
+    .sprint-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+    }
+    .meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border); }
+    .sprint-badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: var(--r-pill);
+      background: oklch(94% 0.05 145);
+      color: oklch(42% 0.14 145);
+      letter-spacing: 0.01em;
+    }
+    .team-strip {
+      display: flex;
+      align-items: center;
+      margin-left: 4px;
+    }
+    .team-strip .avatar {
+      margin-left: -6px;
+      border: 2px solid var(--surface);
+      width: 26px;
+      height: 26px;
+      font-size: 9px;
+    }
+    .team-strip .avatar:first-child { margin-left: 0; }
+    .sprint-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .progress-label {
+      font-size: 12px;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+    }
+    .progress-track {
+      width: 90px;
+      height: 3px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--col-done);
+      border-radius: 3px;
+      transition: width 300ms ease;
+    }
+
+    /* ─── Board wrapper (scroll) ─────────────────────────────────────────── */
+    .board-wrap {
+      height: calc(100vh - var(--nav-h) - var(--bar-h));
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+    .board-wrap::-webkit-scrollbar { height: 6px; }
+    .board-wrap::-webkit-scrollbar-track { background: transparent; }
+    .board-wrap::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(4, 272px);
+      gap: 10px;
+      padding: 16px 20px;
+      height: 100%;
+      min-width: max-content;
+    }
+
+    /* ─── Column ─────────────────────────────────────────────────────────── */
+    .col {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+    .col-header {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0 2px 10px;
+      flex-shrink: 0;
+    }
+    .col-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .col-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+      flex: 1;
+    }
+    .col-count {
+      font-size: 11px;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      color: var(--muted);
+      background: oklch(95% 0.004 250);
+      border-radius: 10px;
+      padding: 1px 6px;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    #col-backlog .col-dot { background: var(--col-backlog); }
+    #col-doing   .col-dot { background: var(--col-doing); }
+    #col-review  .col-dot { background: var(--col-review); }
+    #col-done    .col-dot { background: var(--col-done); }
+
+    #col-doing  .col-title { color: var(--col-doing); }
+    #col-review .col-title { color: var(--col-review); }
+    #col-done   .col-title { color: var(--col-done); }
+
+    /* ─── Card list ──────────────────────────────────────────────────────── */
+    .col-cards {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 2px;
+      padding-bottom: 40px;
+      border-radius: var(--r-card);
+      transition: outline 100ms, background 100ms;
+    }
+    .col-cards::-webkit-scrollbar { width: 0; }
+    .col-cards.drag-over {
+      outline: 2px dashed oklch(78% 0.10 255);
+      outline-offset: 1px;
+      background: oklch(98% 0.008 255);
+    }
+
+    /* ─── Card ───────────────────────────────────────────────────────────── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      padding: 10px 12px 9px;
+      cursor: grab;
+      user-select: none;
+      transition: box-shadow 100ms, border-color 100ms, opacity 100ms;
+    }
+    .card:hover {
+      border-color: oklch(87% 0.008 250);
+      box-shadow: 0 1px 6px oklch(0% 0 0 / 0.07);
+    }
+    .card:active { cursor: grabbing; }
+    .card.dragging {
+      opacity: 0.35;
+      box-shadow: none;
+    }
+
+    #col-done .card { opacity: 0.65; }
+    #col-done .card:hover { opacity: 0.9; }
+
+    .epic {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--epic-color, var(--accent));
+      margin-bottom: 5px;
+    }
+    .epic::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--epic-color, var(--accent));
+      flex-shrink: 0;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 450;
+      line-height: 1.42;
+      color: var(--fg);
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+    }
+    #col-done .card-title {
+      text-decoration: line-through;
+      text-decoration-color: oklch(80% 0.005 250);
+    }
+
+    .card-foot {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .priority {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: var(--r-pill);
+      letter-spacing: 0.02em;
+    }
+    .p-critical { background: var(--p-critical-bg); color: var(--p-critical); }
+    .p-high     { background: var(--p-high-bg);     color: var(--p-high); }
+    .p-medium   { background: var(--p-medium-bg);   color: var(--p-medium); }
+    .p-low      { background: var(--p-low-bg);       color: var(--p-low); }
+
+    .card-due {
+      font-size: 11px;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.01em;
+    }
+
+    .avatar {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: white;
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+    .av-ac { background: var(--av-ac); }
+    .av-pr { background: var(--av-pr); }
+    .av-mw { background: var(--av-mw); }
+    .av-st { background: var(--av-st); }
+    .av-jl { background: var(--av-jl); }
+
+    /* ─── Add task button ────────────────────────────────────────────────── */
+    .add-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 4px;
+      margin-top: 4px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font: 12px var(--font);
+      cursor: pointer;
+      border-radius: 6px;
+      width: 100%;
+      flex-shrink: 0;
+      transition: color 80ms, background 80ms;
+    }
+    .add-btn:hover { color: var(--fg); background: oklch(97% 0.003 240); }
+
+    /* ─── Responsive ─────────────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .board { grid-template-columns: repeat(4, 256px); padding: 12px 16px; }
+      .nav { padding: 0 16px; }
+      .sprint-bar { padding: 0 16px; }
+      .hide-sm { display: none; }
+    }
+    @media (max-width: 600px) {
+      .board { grid-template-columns: repeat(4, 240px); gap: 8px; padding: 10px 12px; }
+      .sprint-right { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <a class="nav-brand" href="#">
+    <span class="nav-mark">GS</span>
+    Growth Squad
+  </a>
+  <span class="nav-divider"></span>
+  <nav class="breadcrumb" aria-label="Location">
+    <a href="#">Projects</a>
+    <span class="breadcrumb-sep" aria-hidden="true">/</span>
+    <a href="#">Growth Squad</a>
+    <span class="breadcrumb-sep" aria-hidden="true">/</span>
+    <span class="breadcrumb-current">Sprint 14</span>
+  </nav>
+  <div class="nav-right">
+    <button class="btn hide-sm">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+        <path d="M1 3h11M3 6.5h7M5.5 10h2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      Filter
+    </button>
+    <button class="btn hide-sm">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+        <rect x="1" y="2" width="5" height="3.5" rx="1" stroke="currentColor" stroke-width="1.3"/>
+        <rect x="1" y="7.5" width="5" height="3.5" rx="1" stroke="currentColor" stroke-width="1.3"/>
+        <rect x="7" y="2" width="5" height="9" rx="1" stroke="currentColor" stroke-width="1.3"/>
+      </svg>
+      Group
+    </button>
+    <button class="btn btn-primary">
+      <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
+        <path d="M5.5 1v9M1 5.5h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      New task
+    </button>
+  </div>
+</header>
+
+<div class="sprint-bar" role="status" aria-label="Sprint 14 status">
+  <span class="sprint-name">Sprint 14</span>
+  <div class="sprint-meta">
+    <span>Week 2 of 2</span>
+    <span class="meta-dot" aria-hidden="true"></span>
+    <span>Ends Jun 6</span>
+    <span class="meta-dot hide-sm" aria-hidden="true"></span>
+    <span class="hide-sm">14 tasks</span>
+  </div>
+  <span class="sprint-badge">Active</span>
+  <div class="team-strip" aria-label="Team members">
+    <div class="avatar av-ac" title="Alex Chen">AC</div>
+    <div class="avatar av-pr" title="Priya Rajan">PR</div>
+    <div class="avatar av-mw" title="Marcus Webb">MW</div>
+    <div class="avatar av-st" title="Sofia Torres">ST</div>
+    <div class="avatar av-jl" title="James Liu">JL</div>
+  </div>
+  <div class="sprint-right">
+    <span class="progress-label" id="progress-label">3 of 14 done</span>
+    <div class="progress-track" aria-hidden="true">
+      <div class="progress-fill" id="progress-fill" style="width:21.4%"></div>
+    </div>
+  </div>
+</div>
+
+<div class="board-wrap">
+  <div class="board" role="main" aria-label="Kanban board">
+
+    <!-- BACKLOG -->
+    <section class="col" id="col-backlog" data-od-id="col-backlog" aria-label="Backlog column">
+      <div class="col-header">
+        <span class="col-dot" aria-hidden="true"></span>
+        <h2 class="col-title">Backlog</h2>
+        <span class="col-count">4</span>
+      </div>
+      <div class="col-cards" data-col="backlog" role="list">
+        <article class="card" draggable="true" role="listitem">
+          <div class="epic" style="--epic-color:var(--e-analytics)">Analytics</div>
+          <p class="card-title">Segment activation cohorts by lifecycle tier</p>
+          <div class="card-foot">
+            <span class="priority p-medium">Medium</span>
+            <span class="card-due">Jun 12</span>
+            <div class="avatar av-pr" title="Priya Rajan">PR</div>
+          </div>
+        </article>
+        <article class="card" draggable="true" role="listitem">
+          <div class="epic" style="--epic-color:var(--e-referral)">Referral</div>
+          <p class="card-title">Add invite modal to main dashboard</p>
+          <div class="card-foot">
+            <span class="priority p-high">High</span>
+            <span class="card-due">Jun 10</span>
+            <div class="avatar av-jl" title="James Liu">JL</div>
+          </div>
+        </article>
+        <article class="card" draggable="true" role="listitem">
+          <div class="epic" style="--epic-color:var(--e-onboard)">Onboarding</div>
+          <p class="card-title">Audit mobile onboarding funnel drop-offs</p>
+          <div class="card-foot">
+            <span class="priority p-low">Low</span>
+            <span class="card-due">Jun 18</span>
+            <div class="avatar av-st" title="Sofia Torres">ST</div>
+          </div>
+        </article>
+        <article class="card" draggable="true" role="listitem">
+          <div class="epic" style="--epic-color:var(--e-strategy)">Strategy</div>
+          <p class="card-title">Define Q3 growth KPIs with leadership</p>
+          <div class="card-foot">
+            <span class="priority p-medium">Medium</span>
+            <span class="card-due">Jun 16</span>
+            <div class="avatar av-pr" title="Priya Rajan">PR</div>
+          </div>
+        </article>
+      </div>
+      <button class="add-btn" onclick="addCard(this)">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Add task
+      </button>
+    </section>
+
+    <!-- IN PROGRESS -->
+    <section class="col" id="col-doing" data-od-id="col-doing" aria-label="In Progress column">
+      <div class="col-header">
+        <span class="col-dot" aria-hidden="true"></span>
+        <h2 class="col-title">In Progress</h2>
+        <span class="col-count">4</span>
+      </div>
+      <div class="col-cards" data-col="doing" role="list">
+        <article class="card" draggable="true" role="listitem">
+          <div class="epic" style="--epic-color:var(--e-referral)">Referral</div>
+          <p class="card-title">Referral link generator v2 with custom slugs</p>
+          <div class="card-foot">
+            <span class="priority p-high">High</span>
+            <span class="card-due">Jun 5</span>
+            <div class="avatar av-ac" title="Alex Chen">AC</div>
+          </div>
+        </article>
+        <article class="card" draggable="true" role="listitem">
+          <div class="epic" style="--epic-color:var(--e-infra)">Infra</div>
+          <p class="card-title">Build A/B test variant assignment service</p>
+          <div class="card-foot">
+            <span class="priority p-high">High</span>
+            <span class="card-due">Jun 6</span>
+            <div class="avatar av-jl" title="James Liu">JL</div>
+          </div>
+        </article>
+        <article class="card" draggable="true" role="listitem">
+          <div class="epic" style="--epic-color:var(--e-onboard)">Onboarding</div>
+          <p class="card-title">Redesign activation checklist UI</p>
+          <div class="card-foot">
+            <span class="priority p-medium">Medium</span>
+            <span class="card-due">Jun 6</span>
+            <div class="avatar av-st" title="Sofia Torres">ST</div>
+          </div>
+        </article>
+        <article class="card" draggable="true" role="listitem">
+          <div class="epic" style="--epic-color:var(--e-analytics)">Analytics</div>
+          <p class="card-title">Experiment results dashboard prototype</p>
+          <div class="card-foot">
+            <span class="priority p-medium">Medium</span>
+            <span class="card-due">Jun 6</span>
+            <div class="avatar av-mw" title="Marcus Webb">MW</div>
+          </div>
+        </article>
+      </div>
+      <button class="add-btn" onclick="addCard(this)">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Add task
+      </button>
+    </section>
+
+    <!-- REVIEW -->
+    <section class="col" id="col-review" data-od-id="col-review" aria-label="Review column">
+      <div class="col-header">
+        <span class="col-dot" aria-hidden="true"></span>
+        <h2 class="col-title">Review</h2>
+        <span class="col-count">3</span>
+      </div>
+      <div class="col-cards" data-col="review" role="list">
+        <article class="card" draggable="true" role="listitem">
+          <div class="epic" style="--epic-color:var(--e-growth)">Growth</div>
+          <p class="card-title">Email drip sequence for free-to-paid conversion</p>
+          <div class="card-foot">
+            <span class="priority p-high">High</span>
+            <span class="card-due">Jun 2</span>
+            <div class="avatar av-pr" title="Priya Rajan">PR</div>
+          </div>
+        </article>
+        <article class="card" draggable="true" role="listitem">
+          <div class="epic" style="--epic-color:var(--e-analytics)">Analytics</div>
+          <p class="card-title">Cohort analysis query performance refactor</p>
+          <div class="card-foot">
+            <span class="priority p-low">Low</span>
+            <span class="card-due">Jun 3</span>
+            <div class="avatar av-mw" title="Marcus Webb">MW</div>
+          </div>
+        </article>
+        <article class="card" draggable="true" role="listitem">
+          <div class="epic" style="--epic-color:var(--e-exp)">Experiments</div>
+          <p class="card-title">Hero section A/B test copy variants</p>
+          <div class="card-foot">
+            <span class="priority p-medium">Medium</span>
+            <span class="card-due">Jun 2</span>
+            <div class="avatar av-st" title="Sofia Torres">ST</div>
+          </div>
+        </article>
+      </div>
+      <button class="add-btn" onclick="addCard(this)">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Add task
+      </button>
+    </section>
+
+    <!-- DONE -->
+    <section class="col" id="col-done" data-od-id="col-done" aria-label="Done column">
+      <div class="col-header">
+        <span class="col-dot" aria-hidden="true"></span>
+        <h2 class="col-title">Done</h2>
+        <span class="col-count">3</span>
+      </div>
+      <div class="col-cards" data-col="done" role="list">
+        <article class="card" draggable="true" role="listitem">
+          <div class="epic" style="--epic-color:var(--e-bugfix)">Bug Fix</div>
+          <p class="card-title">Fix signup conversion drop on mobile Safari</p>
+          <div class="card-foot">
+            <span class="priority p-critical">Critical</span>
+            <span class="card-due">May 28</span>
+            <div class="avatar av-ac" title="Alex Chen">AC</div>
+          </div>
+        </article>
+        <article class="card" draggable="true" role="listitem">
+          <div class="epic" style="--epic-color:var(--e-onboard)">Onboarding</div>
+          <p class="card-title">Onboarding survey v2 launch</p>
+          <div class="card-foot">
+            <span class="priority p-medium">Medium</span>
+            <span class="card-due">May 29</span>
+            <div class="avatar av-pr" title="Priya Rajan">PR</div>
+          </div>
+        </article>
+        <article class="card" draggable="true" role="listitem">
+          <div class="epic" style="--epic-color:var(--e-analytics)">Analytics</div>
+          <p class="card-title">UTM parameter tracking for paid channels</p>
+          <div class="card-foot">
+            <span class="priority p-low">Low</span>
+            <span class="card-due">May 30</span>
+            <div class="avatar av-jl" title="James Liu">JL</div>
+          </div>
+        </article>
+      </div>
+      <button class="add-btn" onclick="addCard(this)">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Add task
+      </button>
+    </section>
+
+  </div>
+</div>
+
+<script>
+  (function () {
+    'use strict';
+    let dragCard = null;
+
+    function attachCard(card) {
+      card.addEventListener('dragstart', e => {
+        dragCard = card;
+        requestAnimationFrame(() => card.classList.add('dragging'));
+        e.dataTransfer.effectAllowed = 'move';
+      });
+      card.addEventListener('dragend', () => {
+        card.classList.remove('dragging');
+        document.querySelectorAll('.col-cards').forEach(c => c.classList.remove('drag-over'));
+        updateProgress();
+        dragCard = null;
+      });
+    }
+
+    function attachColumn(colCards) {
+      colCards.addEventListener('dragover', e => {
+        e.preventDefault();
+        if (!dragCard) return;
+        e.dataTransfer.dropEffect = 'move';
+        colCards.classList.add('drag-over');
+        const after = insertionTarget(colCards, e.clientY);
+        if (after === null) colCards.appendChild(dragCard);
+        else colCards.insertBefore(dragCard, after);
+      });
+      colCards.addEventListener('dragleave', e => {
+        if (!colCards.contains(e.relatedTarget)) colCards.classList.remove('drag-over');
+      });
+      colCards.addEventListener('drop', e => {
+        e.preventDefault();
+        colCards.classList.remove('drag-over');
+        updateProgress();
+      });
+    }
+
+    function insertionTarget(container, pointerY) {
+      const cards = [...container.querySelectorAll('.card:not(.dragging)')];
+      return cards.reduce((closest, card) => {
+        const rect = card.getBoundingClientRect();
+        const offset = pointerY - rect.top - rect.height / 2;
+        if (offset < 0 && offset > closest.offset) return { offset, el: card };
+        return closest;
+      }, { offset: -Infinity, el: null }).el;
+    }
+
+    function updateProgress() {
+      let total = 0, done = 0;
+      document.querySelectorAll('.col').forEach(col => {
+        const count = col.querySelectorAll('.card').length;
+        col.querySelector('.col-count').textContent = count;
+        total += count;
+        if (col.id === 'col-done') done = count;
+      });
+      const pct = total > 0 ? (done / total) * 100 : 0;
+      document.getElementById('progress-fill').style.width = pct.toFixed(1) + '%';
+      document.getElementById('progress-label').textContent = done + ' of ' + total + ' done';
+    }
+
+    function addCard(btn) {
+      const colCards = btn.previousElementSibling;
+      const epicMap = {
+        backlog: ['var(--e-strategy)', 'Strategy'],
+        doing:   ['var(--e-referral)', 'Referral'],
+        review:  ['var(--e-growth)',   'Growth'],
+        done:    ['var(--e-analytics)','Analytics'],
+      };
+      const colId = btn.closest('.col').id.replace('col-', '');
+      const [color, name] = epicMap[colId] || ['var(--accent)', 'New'];
+
+      const card = document.createElement('article');
+      card.className = 'card';
+      card.draggable = true;
+      card.setAttribute('role', 'listitem');
+      card.innerHTML =
+        '<div class="epic" style="--epic-color:' + color + '">' + name + '</div>' +
+        '<p class="card-title" contenteditable="true" style="outline:none;min-height:1.3em;"' +
+        ' onblur="if(!this.textContent.trim())this.textContent=\'Untitled task\'">Untitled task</p>' +
+        '<div class="card-foot"><span class="priority p-medium">Medium</span></div>';
+
+      colCards.appendChild(card);
+      attachCard(card);
+      updateProgress();
+
+      const title = card.querySelector('.card-title');
+      title.focus();
+      const range = document.createRange();
+      range.selectNodeContents(title);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    }
+
+    window.addCard = addCard;
+    document.querySelectorAll('.card').forEach(attachCard);
+    document.querySelectorAll('.col-cards').forEach(attachColumn);
+  })();
+</script>
+</body>
+</html>
