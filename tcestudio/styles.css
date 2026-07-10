@@ -175,6 +175,10 @@ img { display: block; max-width: 100%; }
   font-size: 19px;
   clip-path: polygon(14% 0, 86% 0, 100% 50%, 86% 100%, 14% 100%, 0 50%);
 }
+.subscribe-button {
+  color: var(--white);
+  background: #0b141c;
+}
 
 .hero {
   padding: 24px 36px 88px;
