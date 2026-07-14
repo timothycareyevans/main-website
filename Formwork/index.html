@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formwork — A human-centered design consultancy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #111111;
+    --paper: #ffffff;
+    --grey-1: #f4f4f2;
+    --grey-2: #e6e6e2;
+    --grey-3: #8a8a86;
+    --accent: #0f3cff;
+    --maxw: 1320px;
+    --pad: clamp(20px, 4vw, 56px);
+    --font-sans: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+    --font-serif: "Newsreader", Georgia, serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding-left: var(--pad); padding-right: var(--pad); }
+
+  /* ---------- header ---------- */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--grey-2);
+  }
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+  }
+  .logo {
+    font-weight: 800; font-size: 26px; letter-spacing: -0.03em;
+  }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 34px; align-items: center; font-size: 15px; font-weight: 500; }
+  .nav-links a { position: relative; padding: 4px 0; }
+  .nav-links a::after {
+    content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: 0;
+    background: var(--ink); transition: width .25s ease;
+  }
+  .nav-links a:hover::after { width: 100%; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--ink); color: var(--paper);
+    padding: 12px 24px; border-radius: 999px;
+    font-weight: 600; font-size: 15px;
+    transition: background .2s ease, transform .2s ease;
+  }
+  .btn:hover { background: var(--accent); transform: translateY(-1px); }
+  .btn .arrow { transition: transform .2s ease; }
+  .btn:hover .arrow { transform: translateX(4px); }
+  .btn.ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+  .btn.ghost:hover { background: var(--ink); color: var(--paper); }
+  .nav-links .btn { padding: 16px 34px; font-size: 16px; }
+  .nav-links .btn::after { display: none; }
+  .burger { display: none; }
+
+  /* ---------- hero ---------- */
+  .hero { padding: clamp(72px, 10vw, 140px) 0 clamp(56px, 7vw, 100px); }
+  .hero h1 {
+    font-size: clamp(44px, 7.4vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+    font-weight: 700;
+    max-width: 18ch;
+  }
+  .hero h1 em {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: -0.02em;
+  }
+  .hero-row {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    gap: 48px; margin-top: 44px; flex-wrap: wrap;
+  }
+  .hero-sub {
+    font-size: clamp(18px, 1.6vw, 22px);
+    color: var(--ink); max-width: 46ch; font-weight: 400;
+  }
+  .rotator { color: var(--accent); }
+
+  /* staggered load */
+  .reveal { opacity: 0; transform: translateY(24px); animation: rise .8s cubic-bezier(.2,.7,.2,1) forwards; }
+  .reveal.d1 { animation-delay: .1s; } .reveal.d2 { animation-delay: .25s; } .reveal.d3 { animation-delay: .4s; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+
+  /* scroll reveal */
+  .sr { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+  .sr.in { opacity: 1; transform: none; }
+
+  /* ---------- latest strip ---------- */
+  .latest { border-top: 1px solid var(--grey-2); padding: 56px 0; }
+  .eyebrow {
+    font-size: 13px; text-transform: uppercase; letter-spacing: .14em;
+    font-weight: 700; color: var(--grey-3); margin-bottom: 28px;
+  }
+  .latest-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .card {
+    border: 1px solid var(--grey-2); border-radius: 16px; overflow: hidden;
+    display: flex; flex-direction: column;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(17,17,17,.08); }
+  .card .thumb { aspect-ratio: 16/9; }
+  .card-body { padding: 22px 24px 26px; }
+  .tag {
+    display: inline-block; font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .1em;
+    color: var(--accent); margin-bottom: 10px;
+  }
+  .card h3 { font-size: 20px; letter-spacing: -0.02em; line-height: 1.25; font-weight: 700; }
+  .card p { margin-top: 8px; font-size: 15px; color: #444; }
+
+  /* placeholder art */
+  .art { position: relative; overflow: hidden; background: var(--grey-1); }
+  .art::after {
+    content: ""; position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(17,17,17,.16) 1px, transparent 1.4px);
+    background-size: 7px 7px; opacity: .25; mix-blend-mode: multiply;
+  }
+  .art-1 { background: linear-gradient(135deg, #ffd76a 0%, #ff8b5e 60%, #e5482f 100%); }
+  .art-2 { background: linear-gradient(150deg, #bfe3ff 0%, #4f8cff 55%, #0f3cff 100%); }
+  .art-3 { background: linear-gradient(140deg, #d8f3d0 0%, #63c98a 55%, #0d7a4f 100%); }
+  .art-4 { background: linear-gradient(150deg, #f5d9ff 0%, #c06ae0 55%, #6a1fa0 100%); }
+  .art-5 { background: linear-gradient(140deg, #ffe1d6 0%, #ff9d7e 55%, #cf4a1f 100%); }
+  .art-6 { background: linear-gradient(150deg, #e8e8e4 0%, #b9b9b2 55%, #6c6c66 100%); }
+  .art .glyph {
+    position: absolute; inset: 0; display: grid; place-items: center;
+    font-weight: 800; color: rgba(255,255,255,.9);
+    font-size: clamp(40px, 6vw, 84px); letter-spacing: -0.04em;
+    text-shadow: 0 2px 24px rgba(0,0,0,.18);
+  }
+
+  /* ---------- work ---------- */
+  section.work { padding: clamp(64px, 8vw, 120px) 0; border-top: 1px solid var(--grey-2); }
+  .section-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; gap: 24px; flex-wrap: wrap; }
+  .section-head h2 { font-size: clamp(34px, 4.4vw, 60px); letter-spacing: -0.035em; line-height: 1.05; font-weight: 700; }
+  .section-head .more { font-weight: 600; font-size: 16px; border-bottom: 2px solid var(--ink); padding-bottom: 2px; white-space: nowrap; }
+  .feature { display: grid; grid-template-columns: 7fr 5fr; gap: clamp(28px, 4vw, 64px); align-items: center; padding: 44px 0; border-top: 1px solid var(--grey-2); }
+  .feature:first-of-type { border-top: none; padding-top: 0; }
+  .feature:nth-child(even) .f-media { order: 2; }
+  .f-media { border-radius: 18px; aspect-ratio: 4/3; }
+  .f-copy .client { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--grey-3); margin-bottom: 14px; }
+  .f-copy h3 { font-size: clamp(24px, 2.6vw, 36px); letter-spacing: -0.03em; line-height: 1.15; font-weight: 700; margin-bottom: 14px; }
+  .f-copy p { color: #3d3d3a; font-size: 17px; max-width: 44ch; }
+  .f-copy .link { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; font-weight: 600; }
+  .f-copy .link .arrow { transition: transform .2s ease; }
+  .f-copy .link:hover .arrow { transform: translateX(5px); }
+
+  /* ---------- services ---------- */
+  section.services { background: var(--ink); color: var(--paper); padding: clamp(72px, 9vw, 130px) 0; }
+  section.services .eyebrow { color: #9a9a94; }
+  section.services h2 { font-size: clamp(34px, 4.4vw, 60px); letter-spacing: -0.035em; line-height: 1.08; font-weight: 700; max-width: 22ch; }
+  .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #333; margin-top: 64px; border: 1px solid #333; border-radius: 18px; overflow: hidden; }
+  .tier { background: var(--ink); padding: 40px 34px 44px; transition: background .25s ease; }
+  .tier:hover { background: #1c1c1a; }
+  .tier .num { font-family: var(--font-serif); font-style: italic; font-size: 20px; color: #8f8f89; }
+  .tier h3 { font-size: 24px; letter-spacing: -0.02em; line-height: 1.2; margin: 16px 0 20px; font-weight: 700; }
+  .tier ul { list-style: none; }
+  .tier li { padding: 11px 0; border-top: 1px solid #2c2c2a; font-size: 15px; color: #cfcfc9; }
+  .tier li::before { content: "→  "; color: var(--accent); font-weight: 700; }
+  .services-cta { margin-top: 56px; }
+  .services-cta .btn { background: var(--paper); color: var(--ink); }
+  .services-cta .btn:hover { background: var(--accent); color: var(--paper); }
+
+  /* ---------- quotes ---------- */
+  section.quotes { padding: clamp(64px, 8vw, 120px) 0; }
+  .quote-rail { display: grid; grid-auto-flow: column; grid-auto-columns: min(420px, 82vw); gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; scrollbar-width: none; }
+  .quote-rail::-webkit-scrollbar { display: none; }
+  .quote { scroll-snap-align: start; border: 1px solid var(--grey-2); border-radius: 16px; padding: 34px 32px; display: flex; flex-direction: column; justify-content: space-between; min-height: 300px; background: var(--grey-1); }
+  .quote blockquote { font-family: var(--font-serif); font-size: 22px; line-height: 1.4; letter-spacing: -0.01em; }
+  .quote .who { margin-top: 26px; font-size: 14px; }
+  .quote .who strong { display: block; font-weight: 700; }
+  .quote .who span { color: var(--grey-3); }
+
+  /* ---------- labs ---------- */
+  section.labs { border-top: 1px solid var(--grey-2); padding: clamp(64px, 8vw, 120px) 0; }
+  .labs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 48px; }
+  .lab { border-radius: 18px; padding: 36px 32px; min-height: 280px; display: flex; flex-direction: column; justify-content: flex-end; color: var(--paper); position: relative; overflow: hidden; transition: transform .25s ease; }
+  .lab:hover { transform: translateY(-4px); }
+  .lab h3 { font-size: 26px; letter-spacing: -0.02em; font-weight: 700; position: relative; }
+  .lab p { font-size: 15px; margin-top: 8px; opacity: .92; position: relative; max-width: 34ch; }
+
+  /* ---------- FAQ ---------- */
+  section.faq { border-top: 1px solid var(--grey-2); padding: clamp(64px, 8vw, 120px) 0; }
+  .faq-inner { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 5vw, 80px); }
+  .faq h2 { font-size: clamp(30px, 3.6vw, 48px); letter-spacing: -0.03em; line-height: 1.1; font-weight: 700; }
+  details { border-top: 1px solid var(--grey-2); }
+  details:last-child { border-bottom: 1px solid var(--grey-2); }
+  summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 24px 0; font-size: 19px; font-weight: 600; letter-spacing: -0.01em; }
+  summary::-webkit-details-marker { display: none; }
+  summary .plus { font-size: 26px; font-weight: 400; color: var(--grey-3); transition: transform .25s ease; flex-shrink: 0; }
+  details[open] summary .plus { transform: rotate(45deg); }
+  details .a { padding: 0 0 26px; color: #3d3d3a; font-size: 16px; max-width: 58ch; }
+
+  /* ---------- big CTA ---------- */
+  section.big-cta { background: var(--accent); color: var(--paper); padding: clamp(80px, 10vw, 150px) 0; text-align: center; }
+  section.big-cta h2 { font-size: clamp(40px, 6.4vw, 92px); letter-spacing: -0.04em; line-height: 1.02; font-weight: 700; }
+  section.big-cta h2 em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
+  section.big-cta .btn { background: var(--paper); color: var(--ink); margin-top: 44px; font-size: 17px; padding: 16px 32px; }
+  section.big-cta .btn:hover { background: var(--ink); color: var(--paper); }
+
+  /* ---------- footer ---------- */
+  footer { background: var(--ink); color: #cfcfc9; padding: 72px 0 40px; }
+  .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+  .foot-grid .logo { color: var(--paper); }
+  .foot-note { margin-top: 18px; font-size: 14px; max-width: 34ch; color: #8f8f89; }
+  .foot-col h4 { color: var(--paper); font-size: 13px; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 18px; }
+  .foot-col a { display: block; padding: 6px 0; font-size: 15px; transition: color .2s ease; }
+  .foot-col a:hover { color: var(--paper); }
+  .foot-bottom { border-top: 1px solid #2c2c2a; margin-top: 56px; padding-top: 28px; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; font-size: 13px; color: #8f8f89; }
+  .foot-bottom .legal { display: flex; gap: 24px; }
+  .foot-bottom .legal a:hover { color: var(--paper); }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 960px) {
+    .nav-links { display: none; }
+    .burger { display: block; background: none; border: none; font-size: 26px; cursor: pointer; color: var(--ink); }
+    .latest-grid, .tiers, .labs-grid { grid-template-columns: 1fr; }
+    .feature { grid-template-columns: 1fr; }
+    .feature:nth-child(even) .f-media { order: 0; }
+    .faq-inner { grid-template-columns: 1fr; }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#">Form<span>work</span></a>
+    <nav class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#labs">Labs</a>
+      <a href="#">Thinking</a>
+      <a href="#">About</a>
+      <a href="#contact" class="btn">Say hello <span class="arrow">→</span></a>
+    </nav>
+    <button class="burger" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <h1 class="reveal">Design that puts <em>people</em> at the center of what's next.</h1>
+      <div class="hero-row">
+        <p class="hero-sub reveal d1">We imagine new ventures and brands, then design the products, services, and capabilities that make them real — <span class="rotator" id="rotator">breakthroughs</span>.</p>
+        <a href="#contact" class="btn reveal d2">Start a conversation <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="latest">
+    <div class="wrap">
+      <div class="eyebrow sr">Latest from the studio</div>
+      <div class="latest-grid">
+        <a class="card sr" href="#">
+          <div class="thumb art art-2"><div class="glyph">IQ</div></div>
+          <div class="card-body">
+            <span class="tag">Report</span>
+            <h3>The 2026 Signals Report: how growing companies actually behave</h3>
+            <p>Twelve behaviors we observed across 200 organizations outpacing their markets.</p>
+          </div>
+        </a>
+        <a class="card sr" href="#">
+          <div class="thumb art art-1"><div class="glyph">AI</div></div>
+          <div class="card-body">
+            <span class="tag">Perspective</span>
+            <h3>What stays human when the machines get creative</h3>
+            <p>Why judgment, taste, and empathy compound in value as AI accelerates output.</p>
+          </div>
+        </a>
+        <a class="card sr" href="#">
+          <div class="thumb art art-3"><div class="glyph">✳</div></div>
+          <div class="card-body">
+            <span class="tag">Learning</span>
+            <h3>AI × Design Thinking certificate — enrollment now open</h3>
+            <p>A six-week cohort on pairing creative method with generative tools.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="work" id="work">
+    <div class="wrap">
+      <div class="section-head sr">
+        <h2>Selected work</h2>
+        <a class="more" href="#">All case studies →</a>
+      </div>
+
+      <div class="feature sr">
+        <div class="f-media art art-4"><div class="glyph">Lumière</div></div>
+        <div class="f-copy">
+          <div class="client">Lumière · Retail</div>
+          <h3>Reinventing the beauty counter for a generation that shops everywhere</h3>
+          <p>We redesigned the in-store journey around discovery and play, blending physical fixtures with digital try-on to lift dwell time and repeat visits.</p>
+          <a class="link" href="#">Read the case study <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="feature sr">
+        <div class="f-media art art-2"><div class="glyph">Meridian</div></div>
+        <div class="f-copy">
+          <div class="client">Meridian Apparel · Operations</div>
+          <h3>Turning inventory from a liability into a demand-sensing engine</h3>
+          <p>A service blueprint and forecasting toolkit that helped merchandisers cut overstock while keeping shelves full where it mattered.</p>
+          <a class="link" href="#">Read the case study <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="feature sr">
+        <div class="f-media art art-5"><div class="glyph">Northstar</div></div>
+        <div class="f-copy">
+          <div class="client">Northstar Motors · Culture</div>
+          <h3>Building an innovation culture inside a century-old manufacturer</h3>
+          <p>We coached cross-functional teams through live pilots, leaving behind rituals and tools that made experimentation the default.</p>
+          <a class="link" href="#">Read the case study <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="feature sr">
+        <div class="f-media art art-6"><div class="glyph">Aero</div></div>
+        <div class="f-copy">
+          <div class="client">Aerova · Industrial design</div>
+          <h3>Designing the cabin experience for a new class of supersonic travel</h3>
+          <p>From seat ergonomics to acoustic atmosphere, we prototyped the passenger experience years before first flight.</p>
+          <a class="link" href="#">Read the case study <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="wrap">
+      <div class="eyebrow sr">What we do</div>
+      <h2 class="sr">Three ways in — wherever you are on the journey.</h2>
+      <div class="tiers">
+        <div class="tier sr">
+          <div class="num">No. 1</div>
+          <h3>Find your next frontier of growth</h3>
+          <ul>
+            <li>Purpose &amp; north-star articulation</li>
+            <li>Organizational transformation</li>
+            <li>Vision activation</li>
+            <li>Experiential prototypes</li>
+          </ul>
+        </div>
+        <div class="tier sr">
+          <div class="num">No. 2</div>
+          <h3>Strategy built on humans, not hype</h3>
+          <ul>
+            <li>Customer &amp; employee research</li>
+            <li>Emerging-tech audits</li>
+            <li>Futuring &amp; scenario design</li>
+            <li>Change management</li>
+          </ul>
+        </div>
+        <div class="tier sr">
+          <div class="num">No. 3</div>
+          <h3>Get to market with confidence</h3>
+          <ul>
+            <li>Rapid prototyping &amp; research</li>
+            <li>Industrial design</li>
+            <li>Digital product design</li>
+            <li>Go-to-market strategy</li>
+          </ul>
+        </div>
+      </div>
+      <div class="services-cta sr">
+        <a href="#contact" class="btn">Explore our services <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="quotes">
+    <div class="wrap">
+      <div class="eyebrow sr">What partners say</div>
+      <div class="quote-rail sr">
+        <div class="quote">
+          <blockquote>"They didn't hand us a deck — they left us a different way of working. Two years on, the rituals still hold."</blockquote>
+          <div class="who"><strong>Elena Vasquez</strong><span>Chief Innovation Officer, Northstar Motors</span></div>
+        </div>
+        <div class="quote">
+          <blockquote>"The research reframed our entire roadmap. We were solving the wrong problem, beautifully."</blockquote>
+          <div class="who"><strong>James Okonkwo</strong><span>VP Product, Meridian Apparel</span></div>
+        </div>
+        <div class="quote">
+          <blockquote>"Fastest path from insight to prototype I've seen in twenty years of building products."</blockquote>
+          <div class="who"><strong>Priya Raman</strong><span>CEO, Halcyon Health</span></div>
+        </div>
+        <div class="quote">
+          <blockquote>"They made our own people the heroes of the transformation. That's why it stuck."</blockquote>
+          <div class="who"><strong>Marcus Feld</strong><span>Managing Director, Intervale Group</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="labs" id="labs">
+    <div class="wrap">
+      <div class="section-head sr">
+        <h2>Specialized labs</h2>
+      </div>
+      <div class="labs-grid">
+        <a class="lab art art-3 sr" href="#">
+          <h3>Formwork Health</h3>
+          <p>Care experiences, med-tech, and the systems around them.</p>
+        </a>
+        <a class="lab art art-2 sr" href="#">
+          <h3>Formwork AI</h3>
+          <p>Human-centered applications of machine intelligence.</p>
+        </a>
+        <a class="lab art art-1 sr" href="#">
+          <h3>Formwork Play</h3>
+          <p>Learning, toys, and the serious business of delight.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq">
+    <div class="wrap faq-inner">
+      <h2 class="sr">Questions we hear a lot</h2>
+      <div class="sr">
+        <details open>
+          <summary>What is human-centered design? <span class="plus">+</span></summary>
+          <div class="a">A method that starts with the people you're designing for — their behaviors, needs, and contexts — and iterates toward solutions through observation, prototyping, and testing rather than assumption.</div>
+        </details>
+        <details>
+          <summary>Which industries do you work in? <span class="plus">+</span></summary>
+          <div class="a">Health, mobility, retail, financial services, consumer products, education, and the public sector. The method travels; the domain expertise comes from pairing our teams with yours.</div>
+        </details>
+        <details>
+          <summary>How is this different from a strategy firm? <span class="plus">+</span></summary>
+          <div class="a">We prototype. Strategy here isn't a document — it's something you can touch, test with real customers, and revise before you commit capital to it.</div>
+        </details>
+        <details>
+          <summary>How do engagements usually start? <span class="plus">+</span></summary>
+          <div class="a">A conversation about the outcome you're after, then a scoped first phase — typically 6–12 weeks — with a working prototype or validated direction at the end.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="big-cta" id="contact">
+    <div class="wrap">
+      <h2 class="sr">Let's design what <em>happens next.</em></h2>
+      <a href="mailto:hello@example.com" class="btn sr">Say hello <span class="arrow">→</span></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="#">Form<span>work</span></a>
+        <p class="foot-note">A global design consultancy. This page is a structural homage built with placeholder content.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Studios</h4>
+        <a href="#">Cambridge</a>
+        <a href="#">Chicago</a>
+        <a href="#">London</a>
+        <a href="#">San Francisco</a>
+        <a href="#">Shanghai</a>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Leaders</a>
+        <a href="#">Careers</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="foot-col">
+        <h4>Follow</h4>
+        <a href="#">LinkedIn</a>
+        <a href="#">Instagram</a>
+        <a href="#">Newsletter</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>© 2026 Formwork (fictional). All placeholder rights reserved.</div>
+      <div class="legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.sr').forEach(el => io.observe(el));
+
+  // hero word rotator
+  const words = ['breakthroughs', 'new ventures', 'better services', 'bolder futures'];
+  let wi = 0;
+  const rotator = document.getElementById('rotator');
+  setInterval(() => {
+    wi = (wi + 1) % words.length;
+    rotator.style.opacity = 0;
+    setTimeout(() => { rotator.textContent = words[wi]; rotator.style.opacity = 1; }, 250);
+  }, 2800);
+  rotator.style.transition = 'opacity .25s ease';
+</script>
+
+</body>
+</html>
