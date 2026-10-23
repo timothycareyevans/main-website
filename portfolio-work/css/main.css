@@ -3,7 +3,7 @@
    ============================================================ */
 
 /* ============================================================
-   WEGEMS STUDIO — reset.css
+   TCE STUDIO — reset.css
    Modern CSS reset for consistent cross-browser rendering.
    Includes all @font-face declarations.
    ============================================================ */
@@ -171,7 +171,7 @@ mark {
    ============================================================ */
 
 /* ============================================================
-   WEGEMS STUDIO — tokens.css
+   TCE STUDIO — tokens.css
    Design tokens as CSS custom properties. Single source of truth
    for colors, fonts, spacing, layout, and all shared values.
    ============================================================ */
@@ -2797,3 +2797,115 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================
+   Anchor Line Gauage Timeline 
+   ============================================ */
+#meter {
+  display: flex;
+  height: 1em;
+  div {
+    background: var(--color);
+    border: 1pt solid var(--color-border);
+    &:not(:last-child) {
+      border-inline-end: 0pt;
+    }
+  corner-shape: squircle;
+
+    flex-grow: attr(value type(<number>));
+    transition: flex-grow 400ms linear;
+    position: relative;
+
+    anchor-name: attr(from type(<custom-ident>));
+/* Line from meter's center up */
+    &::before{
+      display: block;
+      content: '';
+      block-size: calc(var(--space-between) / 2);
+      inline-size: 1px;
+      background: var(--color-border);
+      inset-inline: 50%;
+      position: absolute;
+      bottom: 100%;
+    }
+    &:first-child{
+          border-radius: 1em 0 0 1em;
+    }
+    &:last-child{
+          border-radius: 0 1em 1em 0;
+    }
+  }
+}
+#values {
+  display: grid;
+  margin-block: 2em;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  div {
+    inline-size: fit-content;
+    background: var(--color);
+    border: 1pt solid var(--color-border);
+    padding: .3em;
+    font-size: .8em;
+    border-radius: .3em;
+    color: contast-color(var(--color));
+    anchor-name: --label;
+    anchor-scope: --label;
+    &::after {
+      content: "";
+      display: block;
+      border: 0 solid var(--color-border);
+      border-top-width: 1px;
+      position: absolute;
+      position-anchor: attr(for type(<custom-ident>));
+      position-visibility: anchors-visible;
+      inset-inline-start: calc(min(anchor(--label center), anchor(center)) + 1px);
+      inset-inline-end: calc(min(anchor(--label center), anchor(center)) - 1px);
+      inset-block-end: anchor(start);
+      inset-block-start: calc(
+        (anchor(start) - anchor(--label end)) / 2 + anchor(--label end)
+      );
+    }
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      border-inline-start: 1pt solid var(--color-border);
+      position-anchor: attr(for type(<custom-ident>));
+      inset-inline-start: anchor(--label center);
+      inset-block-start: anchor(--label end);
+      inset-block-end: calc(
+        (anchor(--label end) - anchor(start)) / 2 + anchor(start)
+      );
+    }
+  }
+}
+
+datalist{
+  display: flex;
+}
+
+@layer setup {
+  body {
+    font-family: Lora;
+    --border-before: 1px 0 0 1px;
+    --border-after: 1px 1px 0 0;
+    --count: 3;
+    --space-between: 2em;
+  }
+  #meter, #values{
+    div:nth-child(1){
+    --color: oklch(0.88 0.1 calc(1 / var(--count) * 1turn));
+    --color-border: oklch(from var(--color) 0.7 0.2 h);
+  }
+  div:nth-child(2){
+    --color: oklch(0.88 0.1 calc(2 / var(--count) * 1turn));
+    --color-border: oklch(from var(--color) 0.7 0.2 h);
+  }
+  div:nth-child(3){
+    --color: oklch(0.88 0.1 calc(3 / var(--count) * 1turn));
+    --color-border: oklch(from var(--color) 0.7 0.2 h);
+  }
+  }
+}
+
