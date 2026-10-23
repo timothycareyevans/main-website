@@ -55,6 +55,143 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
     <link rel="stylesheet" href="css/main.css" />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&display=swap');
+
+      /* Scoped timeline styles: keeps the rest of the portfolio untouched. */
+      .status-timeline {
+        --timeline-open: #8bb900;
+        --timeline-open-fill: #d5e69b;
+        --timeline-pending: #00a8ff;
+        --timeline-pending-fill: #9de2f8;
+        --timeline-approved: #ff4f91;
+        --timeline-approved-fill: #f8b8d0;
+        box-sizing: border-box;
+        position: relative;
+        width: calc(100% - 28px);
+        max-width: none;
+        margin: 54px auto 76px;
+        color: #111;
+        font-family: "Lora", Georgia, serif;
+        font-size: 25px;
+      }
+      .status-timeline * { box-sizing: border-box; }
+      .timeline-time-control {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        width: max-content;
+        max-width: 100%;
+        margin: 0 0 70px;
+      }
+      .timeline-time-control > label {
+        padding-top: 0;
+        font: inherit;
+        line-height: 1.25;
+      }
+      .timeline-time-input { width: 256px; max-width: calc(100vw - 150px); }
+      .timeline-time-input input[type="range"] {
+        display: block;
+        width: 100%;
+        height: 18px;
+        margin: 3px 0 5px;
+        accent-color: #087cf0;
+        cursor: pointer;
+      }
+      .timeline-time-ticks {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 1px;
+        font: inherit;
+        line-height: 1.25;
+        white-space: nowrap;
+      }
+      .timeline-status-area { position: relative; width: 100%; padding-top: 0; }
+      .timeline-status-labels {
+        display: grid;
+        grid-template-columns: 23.08% 30.77% 46.15%;
+        align-items: start;
+        position: relative;
+        z-index: 2;
+        height: 52px;
+      }
+      .timeline-status-label {
+        justify-self: start;
+        position: relative;
+        padding: 8px 9px 7px;
+        border: 2px solid;
+        border-radius: 9px;
+        line-height: 1.25;
+        white-space: nowrap;
+        background: #fff;
+      }
+      .timeline-status-label.is-open {
+        color: #111; border-color: var(--timeline-open); background: var(--timeline-open-fill);
+      }
+      .timeline-status-label.is-pending {
+        justify-self: center;
+        color: #111; border-color: var(--timeline-pending); background: var(--timeline-pending-fill);
+      }
+      .timeline-status-label.is-approved {
+        justify-self: end;
+        color: #111; border-color: var(--timeline-approved); background: var(--timeline-approved-fill);
+      }
+      .timeline-connectors {
+        position: relative;
+        height: 64px;
+        margin-top: -1px;
+      }
+      .timeline-connector {
+        position: absolute;
+        top: 0;
+        height: 64px;
+        border-left: 1.5px solid;
+      }
+      .timeline-connector::after {
+        content: "";
+        position: absolute;
+        top: 34px;
+        width: 87px;
+        border-top: 1.5px solid;
+      }
+      .connector-open { left: 3.85%; color: var(--timeline-open); }
+      .connector-open::after { left: 0; }
+      .connector-pending { left: 48.08%; color: var(--timeline-pending); }
+      .connector-pending::after { right: 0; width: 100px; }
+      .connector-approved { left: 93.85%; color: var(--timeline-approved); }
+      .connector-approved::after { right: 0; width: 100px; }
+      .timeline-meter {
+        display: flex;
+        width: 100%;
+        height: 32px;
+        overflow: hidden;
+        border: 2px solid var(--timeline-approved);
+        border-radius: 10px;
+      }
+      .timeline-meter-segment { display: block; height: 100%; }
+      .timeline-meter-segment + .timeline-meter-segment { border-left: 1.5px solid; }
+      .timeline-meter-segment.is-open {
+        width: 23.08%; background: var(--timeline-open-fill); border-color: var(--timeline-open);
+      }
+      .timeline-meter-segment.is-pending {
+        width: 30.77%; background: var(--timeline-pending-fill); border-color: var(--timeline-pending);
+      }
+      .timeline-meter-segment.is-approved {
+        flex: 1; background: var(--timeline-approved-fill); border-color: var(--timeline-approved);
+      }
+      @media (max-width: 600px) {
+        .status-timeline { font-size: 17px; width: calc(100% - 24px); margin-top: 38px; margin-bottom: 54px; }
+        .timeline-time-control { gap: 10px; margin-bottom: 52px; }
+        .timeline-time-input { width: 210px; max-width: calc(100vw - 100px); }
+        .timeline-status-label { padding: 6px 6px; border-radius: 7px; border-width: 1.5px; }
+        .timeline-status-labels { height: 42px; }
+        .timeline-connectors, .timeline-connector { height: 44px; }
+        .timeline-connector::after { top: 25px; width: 35px; }
+        .connector-pending::after, .connector-approved::after { width: 35px; }
+        .timeline-meter { height: 24px; border-radius: 8px; }
+      }
+    </style>
+
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
@@ -165,8 +302,38 @@
             </div>
           </div>
         </div>
+        <!-- Full-width status timeline -->
+        <section class="status-timeline" aria-label="Status timeline">
+          <div class="timeline-time-control">
+            <label for="timeline-time">Time</label>
+            <div class="timeline-time-input">
+              <input type="range" id="timeline-time" min="9" max="13" step="1" value="11"
+                aria-label="Select time" aria-valuetext="11am" />
+              <div class="timeline-time-ticks" aria-hidden="true">
+                <span>9am</span><span>10am</span><span>11am</span><span>12pm</span><span>1pm</span>
+              </div>
+            </div>
+          </div>
 
-        <!-- Logo Bar -->
+          <div class="timeline-status-area">
+            <div class="timeline-status-labels">
+              <div class="timeline-status-label is-open">Open</div>
+              <div class="timeline-status-label is-pending">Pending</div>
+              <div class="timeline-status-label is-approved">Approved</div>
+            </div>
+            <div class="timeline-connectors" aria-hidden="true">
+              <span class="timeline-connector connector-open"></span>
+              <span class="timeline-connector connector-pending"></span>
+              <span class="timeline-connector connector-approved"></span>
+            </div>
+            <div class="timeline-meter" role="img" aria-label="Timeline status segments: Open, Pending, Approved">
+              <span class="timeline-meter-segment is-open"></span>
+              <span class="timeline-meter-segment is-pending"></span>
+              <span class="timeline-meter-segment is-approved"></span>
+            </div>
+          </div>
+        </section>
+        <!-- Logo Bar
         <div class="container padding-global">
           <div class="hero_logobar">
             <div class="hero_logo-wrapper">
@@ -207,7 +374,7 @@
             </div>
           </div>
         </div>
-      </section>
+      </section> -->
 
       <!-- ============================================================
          OUR WORKS
@@ -911,6 +1078,19 @@
       </div>
     </footer>
 
+    <script>
+      (() => {
+        const slider = document.getElementById('timeline-time');
+        if (!slider) return;
+        const updateTime = () => {
+          const hour = Number(slider.value);
+          const label = hour < 12 ? `${hour}am` : hour === 12 ? '12pm' : `${hour - 12}pm`;
+          slider.setAttribute('aria-valuetext', label);
+        };
+        slider.addEventListener('input', updateTime);
+        updateTime();
+      })();
+    </script>
     <script src="js/main.js" defer></script>
   </body>
 </html>
