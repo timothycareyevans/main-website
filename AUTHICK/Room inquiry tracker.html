@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Room inquiry tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e8edf0;--panel:#f6f8f9;--ink:#17262e;--mute:#5d6e77;--line:#cbd5da;--acc:#c2410c;--ok:#1f7a5a;--warn:#946200;--in:#dcebe5;--out:#e1e8ec;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10181d;--panel:#18232a;--ink:#e6edf0;--mute:#8fa1aa;--line:#2b3a43;--acc:#f0845a;--ok:#4fc79b;--warn:#e0b04a;--in:#17352b;--out:#223039;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#10181d;--panel:#18232a;--ink:#e6edf0;--mute:#8fa1aa;--line:#2b3a43;--acc:#f0845a;--ok:#4fc79b;--warn:#e0b04a;--in:#17352b;--out:#223039;color-scheme:dark}
+*{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1080px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:1.5rem;margin:0 0 2px;letter-spacing:-.01em}
+.sub{color:var(--mute);margin:0 0 18px}
+.stats{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:0;border:1px solid var(--line);background:var(--panel);border-radius:10px;margin-bottom:18px}
+.stats>div{padding:14px 16px;border-left:1px solid var(--line)}
+.stats>div:first-child{border-left:0}
+.big{font-size:2.6rem;font-weight:700;line-height:1;color:var(--acc);letter-spacing:-.03em}
+.lbl{color:var(--mute);font-size:.85rem}
+.num{font-size:1.5rem;font-weight:600;line-height:1.1}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:18px;align-items:start}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+button,input,select,textarea{font:inherit;color:inherit}
+.chip{border:1px solid var(--line);background:transparent;border-radius:999px;padding:3px 11px;cursor:pointer;font-size:.88rem}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--bg);border-radius:6px;padding:7px 14px;cursor:pointer;font-weight:600}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line);font-weight:500}
+.btn.danger{color:var(--acc);border-color:var(--line);background:transparent}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.row{display:block;width:100%;text-align:left;background:transparent;border:0;border-top:1px solid var(--line);padding:10px 4px;cursor:pointer}
+.row:first-of-type{border-top:0}
+.row[aria-current="true"]{background:var(--out);border-radius:6px}
+.row b{display:block}
+.meta{color:var(--mute);font-size:.85rem}
+.tag{display:inline-block;font-size:.78rem;padding:0 8px;border-radius:999px;border:1px solid currentColor;margin-left:6px;vertical-align:1px}
+.t-waiting{color:var(--mute)}.t-replied{color:var(--ok)}.t-viewing{color:var(--ok);font-weight:600}.t-applied{color:var(--ink)}.t-passed{color:var(--mute);text-decoration:line-through}
+.fu{color:var(--warn);font-weight:600}
+label{display:block;font-size:.85rem;color:var(--mute);margin-top:8px}
+input,select,textarea{width:100%;border:1px solid var(--line);background:var(--bg);border-radius:6px;padding:7px 9px}
+textarea{min-height:90px;resize:vertical}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.msg{padding:8px 11px;border-radius:8px;margin:8px 0;white-space:pre-wrap;max-width:92%}
+.msg.out{background:var(--out)}.msg.in{background:var(--in);margin-left:auto}
+.msg small{display:block;color:var(--mute)}
+details{margin-top:14px}summary{cursor:pointer;color:var(--mute)}
+.empty{color:var(--mute);padding:14px 0}
+h2{font-size:1.05rem;margin:0 0 8px}
+@media (max-width:760px){.cols{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.stats>div{border-top:1px solid var(--line)}.stats>div:nth-child(-n+2){border-top:0}.stats>div:nth-child(3){border-left:0}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head>
+<body><main>
+<h1>Room inquiry tracker</h1>
+<p class="sub">Log every message you send and every reply you get. Your response rate updates as you go.</p>
+<section class="stats" id="stats" aria-live="polite"></section>
+<div class="cols">
+  <section class="panel">
+    <h2>Inquiries</h2>
+    <div class="chips" id="chips"></div>
+    <div id="list"></div>
+    <details id="addwrap"><summary>Add an inquiry</summary>
+      <form id="add" onsubmit="return false">
+        <label>Listing title<input id="f-title" placeholder="Bedroom available in North Beach"></label>
+        <label>Listing link<input id="f-url" placeholder="https://www.craigslist.org/..."></label>
+        <div class="g2">
+          <label>Neighborhood<input id="f-hood" placeholder="North Beach"></label>
+          <label>Rent per month<input id="f-price" inputmode="numeric" placeholder="1800"></label>
+          <label>Contact<input id="f-contact" placeholder="Name, email or phone"></label>
+          <label>Date sent<input id="f-date" type="date"></label>
+        </div>
+        <label>Message you sent<textarea id="f-msg"></textarea></label>
+        <p><button class="btn" data-act="add" type="button">Save inquiry</button></p>
+      </form>
+    </details>
+    <details><summary>Message template</summary>
+      <label>Used to prefill new inquiries<textarea id="tpl" style="min-height:150px"></textarea></label>
+      <p><button class="btn ghost" data-act="copytpl" type="button">Copy template</button> <span class="meta" id="copied"></span></p>
+    </details>
+  </section>
+  <section class="panel" id="detail"></section>
+</div>
+</main>
+<script>
+const KEY='room-inquiries-v1';
+const STAT=[['waiting','Waiting'],['replied','Replied'],['viewing','Viewing set'],['applied','Applied'],['passed','Passed']];
+const DEF_TPL="Hi there,\n\nMy name is [your name]. I’m interested in the room you have for rent. What are your leasing requirements, and when are you looking to fill the vacancy?\n\nYou can reach me at [email] or [phone].\n\nThanks for your time,\n[your name]";
+let S={items:[],tpl:DEF_TPL},sel=null,filter='all';
+try{const r=localStorage.getItem(KEY);if(r){const p=JSON.parse(r);if(p&&Array.isArray(p.items))S=Object.assign(S,p)}}catch(e){}
+const $=id=>document.getElementById(id);
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const iso=d=>{const x=d||new Date();return x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0')};
+const day=s=>Date.parse(s+'T00:00:00');
+const diff=(a,b)=>Math.round((day(b)-day(a))/864e5);
+const fmt=s=>new Date(day(s)).toLocaleDateString(undefined,{month:'short',day:'numeric'});
+const gotReply=i=>i.log.some(l=>l.dir==='in');
+function firstGap(i){const o=i.log.filter(l=>l.dir==='out').sort((a,b)=>a.date<b.date?-1:1)[0],n=i.log.filter(l=>l.dir==='in').sort((a,b)=>a.date<b.date?-1:1)[0];return o&&n?Math.max(0,diff(o.date,n.date)):null}
+const needsFollow=i=>i.status==='waiting'&&!gotReply(i)&&diff(i.sent,iso())>=3;
+function stats(){
+  const n=S.items.length,r=S.items.filter(gotReply).length,gaps=S.items.map(firstGap).filter(g=>g!==null);
+  const avg=gaps.length?(gaps.reduce((a,b)=>a+b,0)/gaps.length):null;
+  $('stats').innerHTML=`<div><div class="big">${n?Math.round(r/n*100)+'%':'–'}</div><div class="lbl">response rate · ${r} of ${n} inquiries answered</div></div>
+  <div><div class="num">${n}</div><div class="lbl">sent</div></div>
+  <div><div class="num">${avg===null?'–':(avg<1?'<1':avg.toFixed(1))+' d'}</div><div class="lbl">average time to first reply</div></div>
+  <div><div class="num">${S.items.filter(needsFollow).length}</div><div class="lbl">due for a follow-up</div></div>`;
+}
+function chips(){
+  const all=[['all','All'],...STAT];
+  $('chips').innerHTML=all.map(([k,l])=>`<button class="chip" data-act="filter" data-k="${k}" aria-pressed="${filter===k}">${l}${k==='all'?'':' '+S.items.filter(i=>i.status===k).length}</button>`).join('');
+}
+function list(){
+  const items=S.items.filter(i=>filter==='all'||i.status===filter).sort((a,b)=>a.sent<b.sent?1:-1);
+  $('list').innerHTML=items.length?items.map(i=>`<button class="row" data-act="open" data-id="${i.id}" aria-current="${i.id===sel}"><b>${esc(i.title||'Untitled listing')}<span class="tag t-${i.status}">${STAT.find(s=>s[0]===i.status)[1]}</span></b><span class="meta">${esc([i.hood,i.price?'$'+i.price:'',' sent '+fmt(i.sent)].filter(Boolean).join(' · '))}${needsFollow(i)?' <span class="fu">· follow up</span>':''}</span></button>`).join(''):`<div class="empty">${S.items.length?'No inquiries with this status.':'Nothing logged yet. Add your first inquiry below.'}</div>`;
+}
+function detail(){
+  const i=S.items.find(x=>x.id===sel);
+  if(!i){$('detail').innerHTML='<div class="empty">Pick an inquiry to see its conversation, or add a new one.</div>';return}
+  const log=[...i.log].sort((a,b)=>a.date<b.date?-1:a.date>b.date?1:a.id-b.id);
+  $('detail').innerHTML=`<h2>${esc(i.title||'Untitled listing')}</h2>
+  <div class="meta">${esc([i.hood,i.price?'$'+i.price+'/mo':'',i.contact].filter(Boolean).join(' · '))}${i.url&&/^https?:\/\//i.test(i.url)?` · <a href="${esc(i.url)}" target="_blank" rel="noopener">listing</a>`:''}</div>
+  <label>Status<select data-act="status">${STAT.map(([k,l])=>`<option value="${k}"${k===i.status?' selected':''}>${l}</option>`).join('')}</select></label>
+  <div>${log.map(l=>`<div class="msg ${l.dir}"><small>${l.dir==='out'?'You sent':'They replied'} · ${fmt(l.date)}</small>${esc(l.text)}</div>`).join('')||'<div class="empty">No messages yet.</div>'}</div>
+  <label>Add to the conversation</label>
+  <div class="g2"><select id="l-dir"><option value="in">They replied</option><option value="out">I sent</option></select><input id="l-date" type="date" value="${iso()}"></div>
+  <label><textarea id="l-text" placeholder="Paste or summarize the message"></textarea></label>
+  <p><button class="btn" data-act="log" type="button">Add message</button> <button class="btn danger" data-act="del" type="button">Delete inquiry</button></p>`;
+}
+function render(){stats();chips();list();detail()}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act;
+  if(a==='filter'){filter=b.dataset.k;chips();list()}
+  else if(a==='open'){sel=Number(b.dataset.id);list();detail()}
+  else if(a==='add'){
+    const date=$('f-date').value||iso(),msg=$('f-msg').value.trim();
+    const id=Date.now();
+    S.items.push({id,title:$('f-title').value.trim(),url:$('f-url').value.trim(),hood:$('f-hood').value.trim(),price:$('f-price').value.trim(),contact:$('f-contact').value.trim(),sent:date,status:'waiting',log:msg?[{id,dir:'out',date,text:msg}]:[]});
+    sel=id;save();['f-title','f-url','f-hood','f-price','f-contact'].forEach(k=>$(k).value='');$('f-msg').value=S.tpl;$('addwrap').open=false;render()}
+  else if(a==='log'){
+    const i=S.items.find(x=>x.id===sel),t=$('l-text').value.trim();if(!i||!t)return;
+    const dir=$('l-dir').value;i.log.push({id:Date.now(),dir,date:$('l-date').value||iso(),text:t});
+    if(dir==='in'&&i.status==='waiting')i.status='replied';save();render()}
+  else if(a==='del'){
+    if(!confirm('Delete this inquiry and its messages?'))return;
+    S.items=S.items.filter(x=>x.id!==sel);sel=null;save();render()}
+  else if(a==='copytpl'){
+    const done=ok=>$('copied').textContent=ok?'Copied.':'Select the text and copy it manually.';
+    try{navigator.clipboard.writeText(S.tpl).then(()=>done(true),()=>done(false))}catch(err){done(false)}}
+});
+document.addEventListener('change',e=>{
+  if(e.target.dataset.act==='status'){const i=S.items.find(x=>x.id===sel);if(i){i.status=e.target.value;save();render()}}
+});
+$('tpl').addEventListener('input',e=>{S.tpl=e.target.value;save()});
+$('tpl').value=S.tpl;$('f-msg').value=S.tpl;$('f-date').value=iso();
+render();
+</script></body></html>
