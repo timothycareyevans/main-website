@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Humanoid Animation Gallery</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #0b1d2a; font-family: system-ui, sans-serif; }
+  #ui { position: fixed; top: 12px; left: 12px; display: flex; flex-wrap: wrap; gap: 8px; max-width: 90vw; }
+  #ui button { padding: 8px 14px; border: 0; border-radius: 8px; background: #1f4b66; color: #fff; font-size: 14px; cursor: pointer; }
+  #ui button.active { background: #e8a33d; color: #111; }
+  #hint { position: fixed; bottom: 10px; left: 12px; color: #9fc3d6; font-size: 12px; }
+</style>
+</head>
+<body>
+<div id="ui"></div>
+<div id="hint">WASD or arrows to walk in Walk mode. Buttons pick an animation.</div>
+<script type="importmap">
+{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
+</script>
+<script type="module">
+import * as THREE from 'three';
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0b1d2a);
+scene.fog = new THREE.Fog(0x0b1d2a, 25, 60);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.shadowMap.enabled = true;
+document.body.appendChild(renderer.domElement);
+
+const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.1, 200);
+
+scene.add(new THREE.HemisphereLight(0xbfe3ff, 0x1b3a4b, 0.9));
+const sun = new THREE.DirectionalLight(0xfff1d0, 1.2);
+sun.position.set(6, 12, 4);
+sun.castShadow = true;
+sun.shadow.mapSize.set(1024, 1024);
+scene.add(sun);
+
+const ground = new THREE.Mesh(
+  new THREE.CircleGeometry(30, 64),
+  new THREE.MeshStandardMaterial({ color: 0x2f6f5e, roughness: 1 })
+);
+ground.rotation.x = -Math.PI / 2;
+ground.receiveShadow = true;
+scene.add(ground);
+scene.add(new THREE.GridHelper(60, 60, 0x3d8f7a, 0x2a6a58));
+
+// ---------- Loose rig: pivots at the joints ----------
+const skin = new THREE.MeshStandardMaterial({ color: 0xe0b48a, roughness: 0.8 });
+const shirt = new THREE.MeshStandardMaterial({ color: 0xd9552b, roughness: 0.8 });
+const pants = new THREE.MeshStandardMaterial({ color: 0x2b3a67, roughness: 0.8 });
+
+function box(w, h, d, mat, y = 0) {
+  const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+  m.position.y = y;
+  m.castShadow = true;
+  return m;
+}
+
+const figure = new THREE.Group();
+scene.add(figure);
+
+const hips = new THREE.Group();
+hips.position.y = 1.0;
+figure.add(hips);
+
+const torso = new THREE.Group();
+torso.position.y = 0.1;
+hips.add(torso);
+torso.add(box(0.7, 0.8, 0.35, shirt, 0.4));
+
+const neck = new THREE.Group();
+neck.position.y = 0.85;
+torso.add(neck);
+const head = box(0.4, 0.4, 0.4, skin, 0.25);
+neck.add(head);
+
+function limb(parent, x, y, len, w, mat) {
+  const joint = new THREE.Group();
+  joint.position.set(x, y, 0);
+  joint.add(box(w, len, w, mat, -len / 2));
+  parent.add(joint);
+  return joint;
+}
+
+const armL = limb(torso, -0.46, 0.75, 0.7, 0.2, skin);
+const armR = limb(torso, 0.46, 0.75, 0.7, 0.2, skin);
+const legL = limb(hips, -0.2, 0, 1.0, 0.26, pants);
+const legR = limb(hips, 0.2, 0, 1.0, 0.26, pants);
+
+// Face dots so you can tell which way it looks
+const eyeMat = new THREE.MeshBasicMaterial({ color: 0x111111 });
+for (const x of [-0.1, 0.1]) {
+  const eye = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.06, 0.02), eyeMat);
+  eye.position.set(x, 0.3, 0.21);
+  neck.add(eye);
+}
+Part two. Paste this directly after the first block, inside the same script tag, then close it with the final lines shown.
+// ---------- Animations (each one just sets joint rotations over time) ----------
+const clock = new THREE.Clock();
+let current = 'Idle';
+const walkKeys = {};
+
+const anims = {
+  Idle(t) {
+    hips.position.y = 1.0 + Math.sin(t * 2) * 0.01;
+    torso.rotation.set(Math.sin(t * 2) * 0.02, 0, 0);
+    neck.rotation.set(0, Math.sin(t * 0.7) * 0.2, 0);
+    armL.rotation.set(0, 0, 0.08 + Math.sin(t * 2) * 0.03);
+    armR.rotation.set(0, 0, -0.08 - Math.sin(t * 2) * 0.03);
+    legL.rotation.set(0, 0, 0);
+    legR.rotation.set(0, 0, 0);
+  },
+  Wave(t) {
+    anims.Idle(t);
+    // Right arm raised, forearm-style wobble from the shoulder
+    armR.rotation.set(0, 0, Math.PI * 0.85 + Math.sin(t * 8) * 0.35);
+    torso.rotation.z = Math.sin(t * 8) * 0.03;
+    neck.rotation.set(0, -0.3, 0.1);
+  },
+  Walk(t) {
+    const s = Math.sin(t * 6);
+    hips.position.y = 1.0 + Math.abs(Math.cos(t * 6)) * 0.06;
+    legL.rotation.set(s * 0.7, 0, 0);
+    legR.rotation.set(-s * 0.7, 0, 0);
+    armL.rotation.set(-s * 0.6, 0, 0.05);
+    armR.rotation.set(s * 0.6, 0, -0.05);
+    torso.rotation.set(0, s * 0.1, 0);
+    neck.rotation.set(0, -s * 0.1, 0);
+  },
+  Run(t) {
+    const s = Math.sin(t * 10);
+    hips.position.y = 1.0 + Math.abs(Math.cos(t * 10)) * 0.12;
+    legL.rotation.set(s * 1.0, 0, 0);
+    legR.rotation.set(-s * 1.0, 0, 0);
+    armL.rotation.set(-s * 1.1, 0, 0.1);
+    armR.rotation.set(s * 1.1, 0, -0.1);
+    torso.rotation.set(0.25, s * 0.15, 0);
+    neck.rotation.set(-0.2, 0, 0);
+  },
+  Jump(t) {
+    const p = (t % 1.2) / 1.2;
+    const h = Math.sin(p * Math.PI);
+    hips.position.y = 1.0 + h * 0.9;
+    const crouch = p < 0.15 || p > 0.85 ? 0.5 : 0;
+    legL.rotation.set(-0.3 * h + crouch, 0, 0);
+    legR.rotation.set(-0.3 * h + crouch, 0, 0);
+    armL.rotation.set(0, 0, 0.3 + h * 2.2);
+    armR.rotation.set(0, 0, -0.3 - h * 2.2);
+    torso.rotation.set(0, 0, 0);
+    neck.rotation.set(0, 0, 0);
+  },
+  Dance(t) {
+    hips.position.y = 1.0 + Math.abs(Math.sin(t * 5)) * 0.1;
+    hips.rotation.y = Math.sin(t * 2.5) * 0.5;
+    torso.rotation.set(0, Math.sin(t * 5) * 0.3, Math.sin(t * 2.5) * 0.15);
+    armL.rotation.set(0, 0, Math.PI * 0.7 + Math.sin(t * 5) * 0.4);
+    armR.rotation.set(0, 0, -Math.PI * 0.7 - Math.sin(t * 5 + 1) * 0.4);
+    legL.rotation.set(Math.sin(t * 5) * 0.4, 0, 0);
+    legR.rotation.set(-Math.sin(t * 5) * 0.4, 0, 0);
+    neck.rotation.set(0, 0, Math.sin(t * 5) * 0.15);
+  }
+};
+
+// ---------- Gallery buttons ----------
+const ui = document.getElementById('ui');
+const names = [...Object.keys(anims), 'Free Walk'];
+const buttons = {};
+for (const n of names) {
+  const b = document.createElement('button');
+  b.textContent = n;
+  b.onclick = () => select(n);
+  ui.appendChild(b);
+  buttons[n] = b;
+}
+function select(n) {
+  current = n;
+  for (const k in buttons) buttons[k].classList.toggle('active', k === n);
+  if (n !== 'Dance') hips.rotation.y = 0;
+}
+select('Wave');
+
+// ---------- Free walk controls ----------
+addEventListener('keydown', e => { walkKeys[e.key.toLowerCase()] = true; });
+addEventListener('keyup', e => { walkKeys[e.key.toLowerCase()] = false; });
+const velocity = new THREE.Vector3();
+
+function updateFreeWalk(dt) {
+  let dx = 0, dz = 0;
+  if (walkKeys['w'] || walkKeys['arrowup']) dz -= 1;
+  if (walkKeys['s'] || walkKeys['arrowdown']) dz += 1;
+  if (walkKeys['a'] || walkKeys['arrowleft']) dx -= 1;
+  if (walkKeys['d'] || walkKeys['arrowright']) dx += 1;
+  const moving = dx !== 0 || dz !== 0;
+  if (moving) {
+    velocity.set(dx, 0, dz).normalize().multiplyScalar(3.5 * dt);
+    figure.position.add(velocity);
+    figure.rotation.y = Math.atan2(dx, dz);
+    figure.position.clampLength(0, 28);
+  }
+  return moving;
+}
+
+// ---------- Overhead third-person camera ----------
+const camOffset = new THREE.Vector3(0, 11, 5);
+const camTarget = new THREE.Vector3();
+
+function updateCamera(dt) {
+  camTarget.copy(figure.position).add(new THREE.Vector3(0, 1, 0));
+  const desired = figure.position.clone().add(camOffset);
+  camera.position.lerp(desired, 1 - Math.pow(0.001, dt));
+  camera.lookAt(camTarget);
+}
+
+// ---------- Main loop ----------
+function loop() {
+  const dt = Math.min(clock.getDelta(), 0.05);
+  const t = clock.elapsedTime;
+
+  if (current === 'Free Walk') {
+    const moving = updateFreeWalk(dt);
+    anims[moving ? 'Walk' : 'Idle'](t);
+  } else {
+    anims[current](t);
+  }
+
+  updateCamera(dt);
+  renderer.render(scene, camera);
+  requestAnimationFrame(loop);
+}
+camera.position.copy(figure.position).add(camOffset);
+loop();
+
+addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+Pick an animation. In Free Walk, use WASD or the arrow keys.
