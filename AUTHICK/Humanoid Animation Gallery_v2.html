@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Humanoid Animation Gallery</title>
+<style>
+  :root { box-sizing: border-box; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #e4e4e4; font-family: system-ui, sans-serif; }
+  #ui { position: fixed; top: calc(12px + env(safe-area-inset-top, 0px)); left: 12px; display: flex; flex-wrap: wrap; gap: 8px; max-width: 92vw; z-index: 2; }
+  #ui button { padding: 8px 14px; border: 2px solid #111; border-radius: 8px; background: #fff; color: #111; font-size: 14px; cursor: pointer; }
+  #ui button.active { background: #111; color: #fff; }
+  #hint { position: fixed; bottom: calc(10px + env(safe-area-inset-bottom, 0px)); left: 12px; color: #222; font-size: 12px; z-index: 2; }
+  #dial { position: fixed; right: 12px; bottom: calc(10px + env(safe-area-inset-bottom, 0px)); z-index: 2; background: #fff; color: #111; border: 2px solid #111; border-radius: 10px; padding: 8px 12px; font-size: 13px; display: flex; flex-direction: column; gap: 6px; }
+  #dial input { width: 200px; accent-color: #111; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<div id="ui"></div>
+<div id="hint">Pick an animation. In Free Walk, use WASD or the arrow keys.</div>
+<div id="dial"><label for="cam">Camera view: <span id="deg">0°</span></label><input id="cam" type="range" min="0" max="360" step="1" value="0"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function () {
+  var scene = new THREE.Scene();
+  scene.background = new THREE.Color(0xe4e4e4);
+
+  var renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.shadowMap.enabled = true;
+  document.body.appendChild(renderer.domElement);
+
+  var camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 200);
+
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x777777, 0.9));
+  var sun = new THREE.DirectionalLight(0xffffff, 0.9);
+  sun.position.set(6, 12, 4);
+  sun.castShadow = true;
+  scene.add(sun);
+
+  var ground = new THREE.Mesh(
+    new THREE.CircleGeometry(30, 64),
+    new THREE.MeshStandardMaterial({ color: 0xb8b8b8, roughness: 1 })
+  );
+  ground.rotation.x = -Math.PI / 2;
+  ground.receiveShadow = true;
+  scene.add(ground);
+  var grid = new THREE.GridHelper(60, 60, 0x555555, 0x888888);
+  grid.position.y = 0.01;
+  scene.add(grid);
+
+  // Figure: dark torso and legs, light skin, so it reads in grayscale
+  var skin = new THREE.MeshStandardMaterial({ color: 0xf7f7f7, roughness: 0.8 });
+  var shirt = new THREE.MeshStandardMaterial({ color: 0x1c1c1c, roughness: 0.8 });
+  var pants = new THREE.MeshStandardMaterial({ color: 0x4a4a4a, roughness: 0.8 });
+
+  function box(w, h, d, mat, y) {
+    var m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+    m.position.y = y || 0;
+    m.castShadow = true;
+    return m;
+  }
+  function limb(parent, x, y, len, w, mat) {
+    var j = new THREE.Group();
+    j.position.set(x, y, 0);
+    j.add(box(w, len, w, mat, -len / 2));
+    parent.add(j);
+    return j;
+  }
+
+  var figure = new THREE.Group();
+  scene.add(figure);
+  var hips = new THREE.Group(); hips.position.y = 1.0; figure.add(hips);
+  var torso = new THREE.Group(); torso.position.y = 0.1; hips.add(torso);
+  torso.add(box(0.7, 0.8, 0.35, shirt, 0.4));
+  var neck = new THREE.Group(); neck.position.y = 0.85; torso.add(neck);
+  neck.add(box(0.4, 0.4, 0.4, skin, 0.25));
+  var eyeMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
+  [-0.1, 0.1].forEach(function (x) {
+    var e = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.06, 0.02), eyeMat);
+    e.position.set(x, 0.3, 0.21);
+    neck.add(e);
+  });
+  var armL = limb(torso, -0.46, 0.75, 0.7, 0.2, skin);
+  var armR = limb(torso, 0.46, 0.75, 0.7, 0.2, skin);
+  var legL = limb(hips, -0.2, 0, 1.0, 0.26, pants);
+  var legR = limb(hips, 0.2, 0, 1.0, 0.26, pants);
+
+  var anims = {
+    Idle: function (t) {
+      hips.position.y = 1.0 + Math.sin(t * 2) * 0.01;
+      hips.rotation.y = 0;
+      torso.rotation.set(Math.sin(t * 2) * 0.02, 0, 0);
+      neck.rotation.set(0, Math.sin(t * 0.7) * 0.2, 0);
+      armL.rotation.set(0, 0, 0.08 + Math.sin(t * 2) * 0.03);
+      armR.rotation.set(0, 0, -0.08 - Math.sin(t * 2) * 0.03);
+      legL.rotation.set(0, 0, 0);
+      legR.rotation.set(0, 0, 0);
+    },
+    Wave: function (t) {
+      anims.Idle(t);
+      armR.rotation.set(0, 0, Math.PI * 0.85 + Math.sin(t * 8) * 0.35);
+      neck.rotation.set(0, -0.3, 0.1);
+    },
+    Walk: function (t) {
+      var s = Math.sin(t * 6);
+      hips.position.y = 1.0 + Math.abs(Math.cos(t * 6)) * 0.06;
+      hips.rotation.y = 0;
+      legL.rotation.set(s * 0.7, 0, 0);
+      legR.rotation.set(-s * 0.7, 0, 0);
+      armL.rotation.set(-s * 0.6, 0, 0.05);
+      armR.rotation.set(s * 0.6, 0, -0.05);
+      torso.rotation.set(0, s * 0.1, 0);
+      neck.rotation.set(0, -s * 0.1, 0);
+    },
+    Run: function (t) {
+      var s = Math.sin(t * 10);
+      hips.position.y = 1.0 + Math.abs(Math.cos(t * 10)) * 0.12;
+      hips.rotation.y = 0;
+      legL.rotation.set(s, 0, 0);
+      legR.rotation.set(-s, 0, 0);
+      armL.rotation.set(-s * 1.1, 0, 0.1);
+      armR.rotation.set(s * 1.1, 0, -0.1);
+      torso.rotation.set(0.25, s * 0.15, 0);
+      neck.rotation.set(-0.2, 0, 0);
+    },
+    Jump: function (t) {
+      var p = (t % 1.2) / 1.2, h = Math.sin(p * Math.PI);
+      var crouch = (p < 0.15 || p > 0.85) ? 0.5 : 0;
+      hips.position.y = 1.0 + h * 0.9;
+      hips.rotation.y = 0;
+      legL.rotation.set(-0.3 * h + crouch, 0, 0);
+      legR.rotation.set(-0.3 * h + crouch, 0, 0);
+      armL.rotation.set(0, 0, 0.3 + h * 2.2);
+      armR.rotation.set(0, 0, -0.3 - h * 2.2);
+      torso.rotation.set(0, 0, 0);
+      neck.rotation.set(0, 0, 0);
+    },
+    Dance: function (t) {
+      hips.position.y = 1.0 + Math.abs(Math.sin(t * 5)) * 0.1;
+      hips.rotation.y = Math.sin(t * 2.5) * 0.5;
+      torso.rotation.set(0, Math.sin(t * 5) * 0.3, Math.sin(t * 2.5) * 0.15);
+      armL.rotation.set(0, 0, Math.PI * 0.7 + Math.sin(t * 5) * 0.4);
+      armR.rotation.set(0, 0, -Math.PI * 0.7 - Math.sin(t * 5 + 1) * 0.4);
+      legL.rotation.set(Math.sin(t * 5) * 0.4, 0, 0);
+      legR.rotation.set(-Math.sin(t * 5) * 0.4, 0, 0);
+      neck.rotation.set(0, 0, Math.sin(t * 5) * 0.15);
+    }
+  };
+
+  var current = 'Wave', buttons = {};
+  var ui = document.getElementById('ui');
+  Object.keys(anims).concat(['Free Walk']).forEach(function (n) {
+    var b = document.createElement('button');
+    b.textContent = n;
+    b.onclick = function () { select(n); };
+    ui.appendChild(b);
+    buttons[n] = b;
+  });
+  function select(n) {
+    current = n;
+    for (var k in buttons) buttons[k].classList.toggle('active', k === n);
+  }
+  select('Wave');
+
+  var keys = {};
+  window.addEventListener('keydown', function (e) { keys[e.key.toLowerCase()] = true; });
+  window.addEventListener('keyup', function (e) { keys[e.key.toLowerCase()] = false; });
+
+  function freeWalk(dt) {
+    var dx = 0, dz = 0;
+    if (keys['w'] || keys['arrowup']) dz -= 1;
+    if (keys['s'] || keys['arrowdown']) dz += 1;
+    if (keys['a'] || keys['arrowleft']) dx -= 1;
+    if (keys['d'] || keys['arrowright']) dx += 1;
+    if (!dx && !dz) return false;
+    var v = new THREE.Vector3(dx, 0, dz).normalize().multiplyScalar(3.5 * dt);
+    v.applyAxisAngle(new THREE.Vector3(0, 1, 0), camAngle);
+    figure.position.add(v);
+    figure.position.clampLength(0, 28);
+    figure.rotation.y = Math.atan2(v.x, v.z);
+    return true;
+  }
+
+  // Overhead third-person camera
+  var camAngle = 0, camRadius = 5, camHeight = 11;
+  var camOffset = new THREE.Vector3(0, camHeight, camRadius);
+  camera.position.copy(camOffset);
+  var dial = document.getElementById('cam'), deg = document.getElementById('deg');
+  dial.addEventListener('input', function () {
+    var d = parseFloat(dial.value);
+    camAngle = d * Math.PI / 180;
+    camOffset.set(Math.sin(camAngle) * camRadius, camHeight, Math.cos(camAngle) * camRadius);
+    deg.textContent = Math.round(d) + '°';
+  });
+  var clock = new THREE.Clock();
+
+  function loop() {
+    var dt = Math.min(clock.getDelta(), 0.05), t = clock.elapsedTime;
+    if (current === 'Free Walk') anims[freeWalk(dt) ? 'Walk' : 'Idle'](t);
+    else anims[current](t);
+    var want = figure.position.clone().add(camOffset);
+    camera.position.lerp(want, 1 - Math.pow(0.001, dt));
+    camera.lookAt(figure.position.x, 1, figure.position.z);
+    renderer.render(scene, camera);
+    requestAnimationFrame(loop);
+  }
+  loop();
+
+  window.addEventListener('resize', function () {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+})();
+</script>
+</body>
+</html>
