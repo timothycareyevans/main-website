@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 630 278" role="img" aria-labelledby="title desc">
+  <title id="title">TCE monogram mark</title>
+  <desc id="desc">A white TCE monogram between left and right angle brackets on a transparent background.</desc>
+  <g fill="#fff">
+    <path d="M34 139 114 71v27l-48 41 48 41v27z"/>
+    <path d="M209 52h183v20H289v178h-20V72h-60z"/>
+    <path d="M357 84c41 0 71 14 93 43l-20 16c-16-21-39-32-70-32-50 0-83 35-83 86s33 86 82 86c30 0 55-11 74-33l18 17c-22 28-56 43-95 43-64 0-109-46-109-113 0-67 46-113 110-113z"/>
+    <path d="M405 139h104v20H405z"/>
+    <path d="M405 181h104v20H405z"/>
+    <path d="M596 139 516 71v27l48 41-48 41v27z"/>
+  </g>
+</svg>
