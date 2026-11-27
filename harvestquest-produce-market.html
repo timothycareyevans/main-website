@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HarvestQuest | Fresh Focus</title>
+<style>
+  :root {
+    --bg: #0f0f1a;
+    --surface: #1a1a2e;
+    --surface2: #16213e;
+    --accent: #e94560;
+    --accent2: #0f3460;
+    --gold: #ffd700;
+    --green: #00d4aa;
+    --purple: #9b59b6;
+    --text: #e8e8f0;
+    --muted: #6b6b8a;
+    --border: #2a2a4a;
+    --work: #e94560;
+    --short: #00d4aa;
+    --long: #9b59b6;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Header */
+  .header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo { font-size: 1.4rem; font-weight: 800; color: var(--accent); letter-spacing: -0.5px; }
+  .logo span { color: var(--text); }
+  .player-info { display: flex; align-items: center; gap: 12px; }
+  .player-name-display {
+    font-weight: 600; font-size: 0.9rem;
+    cursor: pointer; color: var(--text);
+    background: var(--surface2); padding: 6px 12px;
+    border-radius: 20px; border: 1px solid var(--border);
+    transition: border-color 0.2s;
+  }
+  .player-name-display:hover { border-color: var(--accent); }
+  .level-badge {
+    background: linear-gradient(135deg, var(--accent), #ff6b35);
+    color: white; font-weight: 800; font-size: 0.75rem;
+    padding: 4px 10px; border-radius: 12px;
+  }
+  .xp-bar-wrap { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+  .xp-label { font-size: 0.7rem; color: var(--muted); }
+  .xp-bar {
+    width: 140px; height: 6px;
+    background: var(--border); border-radius: 3px; overflow: hidden;
+  }
+  .xp-fill {
+    height: 100%; background: linear-gradient(90deg, var(--accent), var(--gold));
+    border-radius: 3px; transition: width 0.6s cubic-bezier(.4,0,.2,1);
+  }
+  .streak-badge {
+    display: flex; align-items: center; gap: 4px;
+    background: var(--surface2); border: 1px solid var(--border);
+    padding: 5px 10px; border-radius: 20px; font-size: 0.8rem;
+  }
+  .streak-badge.active { border-color: var(--gold); color: var(--gold); }
+
+  /* Tabs */
+  .tabs {
+    display: flex; gap: 4px; padding: 16px 24px 0;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .tab {
+    padding: 10px 20px; border: none; background: none;
+    color: var(--muted); cursor: pointer; font-size: 0.9rem;
+    font-weight: 600; border-radius: var(--radius) var(--radius) 0 0;
+    transition: all 0.2s; position: relative; top: 1px;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active {
+    color: var(--accent);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-bottom-color: var(--bg);
+  }
+
+  /* Panels */
+  .panel { display: none; padding: 32px 24px; max-width: 900px; margin: 0 auto; }
+  .panel.active { display: block; }
+
+  /* Timer Panel */
+  .timer-layout { display: grid; grid-template-columns: 1fr 320px; gap: 32px; align-items: start; }
+  @media (max-width: 700px) { .timer-layout { grid-template-columns: 1fr; } }
+
+  .mode-buttons { display: flex; gap: 8px; margin-bottom: 28px; }
+  .mode-btn {
+    flex: 1; padding: 10px; border: 2px solid var(--border);
+    background: var(--surface); color: var(--muted);
+    border-radius: var(--radius); cursor: pointer; font-weight: 600; font-size: 0.85rem;
+    transition: all 0.2s;
+  }
+  .mode-btn.active[data-mode="work"] { border-color: var(--work); color: var(--work); background: rgba(233,69,96,0.1); }
+  .mode-btn.active[data-mode="short"] { border-color: var(--short); color: var(--short); background: rgba(0,212,170,0.1); }
+  .mode-btn.active[data-mode="long"] { border-color: var(--long); color: var(--long); background: rgba(155,89,182,0.1); }
+
+  .timer-ring-wrap {
+    display: flex; flex-direction: column; align-items: center; gap: 24px;
+  }
+  .ring-container { position: relative; width: 240px; height: 240px; }
+  .ring-svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .ring-bg { fill: none; stroke: var(--border); stroke-width: 8; }
+  .ring-progress {
+    fill: none; stroke-width: 8; stroke-linecap: round;
+    transition: stroke-dashoffset 1s linear, stroke 0.3s;
+  }
+  .ring-center {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    text-align: center;
+  }
+  .time-display { font-size: 3rem; font-weight: 800; letter-spacing: -2px; line-height: 1; }
+  .mode-label { font-size: 0.75rem; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 2px; }
+
+  .timer-controls { display: flex; gap: 12px; }
+  .btn {
+    padding: 12px 28px; border: none; border-radius: var(--radius);
+    cursor: pointer; font-weight: 700; font-size: 0.95rem;
+    transition: all 0.2s; letter-spacing: 0.5px;
+  }
+  .btn-primary {
+    background: var(--accent); color: white;
+    box-shadow: 0 4px 20px rgba(233,69,96,0.4);
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(233,69,96,0.5); }
+  .btn-secondary {
+    background: var(--surface2); color: var(--muted);
+    border: 1px solid var(--border);
+  }
+  .btn-secondary:hover { color: var(--text); border-color: var(--muted); }
+  .btn:active { transform: translateY(0); }
+
+  .task-input-wrap { width: 100%; }
+  .task-input {
+    width: 100%; padding: 12px 16px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius); color: var(--text);
+    font-size: 0.9rem; outline: none; transition: border-color 0.2s;
+  }
+  .task-input::placeholder { color: var(--muted); }
+  .task-input:focus { border-color: var(--accent); }
+
+  /* Stats sidebar */
+  .stats-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .stats-card h3 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); }
+  .stat-row { display: flex; justify-content: space-between; align-items: center; }
+  .stat-label { font-size: 0.85rem; color: var(--muted); }
+  .stat-val { font-size: 1.1rem; font-weight: 700; }
+  .stat-val.accent { color: var(--accent); }
+  .stat-val.gold { color: var(--gold); }
+  .stat-val.green { color: var(--green); }
+
+  .session-goal { display: flex; flex-direction: column; gap: 8px; }
+  .goal-input-row { display: flex; gap: 8px; }
+  .goal-input {
+    flex: 1; padding: 8px 12px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; color: var(--text); font-size: 0.9rem; outline: none;
+  }
+  .btn-small {
+    padding: 8px 14px; font-size: 0.8rem; border-radius: 8px;
+    border: none; background: var(--accent); color: white;
+    cursor: pointer; font-weight: 600; transition: opacity 0.2s;
+  }
+  .btn-small:hover { opacity: 0.85; }
+  .goal-progress-bar {
+    height: 6px; background: var(--border); border-radius: 3px; overflow: hidden;
+  }
+  .goal-progress-fill {
+    height: 100%; background: linear-gradient(90deg, var(--green), var(--accent));
+    border-radius: 3px; transition: width 0.5s;
+  }
+  .goal-label { font-size: 0.78rem; color: var(--muted); }
+
+  /* Log & Chart Panel */
+  .chart-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 24px; margin-bottom: 24px;
+  }
+  .card-title {
+    font-size: 1rem; font-weight: 700; margin-bottom: 16px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .chart-canvas { width: 100%; height: 200px; }
+  .chart-stats { display: flex; gap: 24px; margin-top: 12px; }
+  .chart-stat { text-align: center; }
+  .chart-stat-val { font-size: 1.5rem; font-weight: 800; color: var(--accent); }
+  .chart-stat-lbl { font-size: 0.75rem; color: var(--muted); }
+
+  .log-filters { display: flex; gap: 8px; margin-bottom: 16px; }
+  .filter-btn {
+    padding: 6px 14px; border: 1px solid var(--border);
+    background: var(--surface); border-radius: 20px;
+    color: var(--muted); cursor: pointer; font-size: 0.8rem; font-weight: 600;
+    transition: all 0.2s;
+  }
+  .filter-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(233,69,96,0.1); }
+
+  .log-list { display: flex; flex-direction: column; gap: 8px; }
+  .log-item {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 14px 16px;
+    display: flex; align-items: center; gap: 12px;
+    animation: slideIn 0.3s ease;
+  }
+  @keyframes slideIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+  .log-dot {
+    width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+  }
+  .log-dot.work { background: var(--work); }
+  .log-dot.short { background: var(--short); }
+  .log-dot.long { background: var(--long); }
+  .log-task { flex: 1; font-size: 0.9rem; font-weight: 500; }
+  .log-meta { font-size: 0.75rem; color: var(--muted); white-space: nowrap; }
+  .log-xp { font-size: 0.78rem; font-weight: 700; color: var(--gold); }
+  .log-empty { text-align: center; color: var(--muted); padding: 40px; font-size: 0.9rem; }
+
+  /* Leaderboard */
+  .leaderboard-add {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px; margin-bottom: 24px;
+  }
+  .leaderboard-add h3 { font-size: 0.85rem; color: var(--muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+  .lb-add-row { display: flex; gap: 8px; }
+  .lb-input {
+    flex: 1; padding: 10px 14px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius); color: var(--text); font-size: 0.9rem; outline: none;
+  }
+  .lb-input:focus { border-color: var(--accent); }
+
+  .lb-list { display: flex; flex-direction: column; gap: 8px; }
+  .lb-item {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 14px 18px;
+    display: flex; align-items: center; gap: 14px;
+    transition: transform 0.2s;
+  }
+  .lb-item:hover { transform: translateX(3px); }
+  .lb-item.rank-1 { border-color: var(--gold); background: rgba(255,215,0,0.05); }
+  .lb-item.rank-2 { border-color: #c0c0c0; }
+  .lb-item.rank-3 { border-color: #cd7f32; }
+  .lb-rank {
+    width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; font-weight: 800; font-size: 0.9rem;
+    background: var(--surface2); color: var(--muted); flex-shrink: 0;
+  }
+  .lb-rank.r1 { background: var(--gold); color: #000; }
+  .lb-rank.r2 { background: #c0c0c0; color: #000; }
+  .lb-rank.r3 { background: #cd7f32; color: #fff; }
+  .lb-name { flex: 1; font-weight: 600; }
+  .lb-level { font-size: 0.75rem; color: var(--muted); }
+  .lb-score { font-weight: 800; color: var(--gold); }
+  .lb-pomodoros { font-size: 0.8rem; color: var(--muted); }
+  .lb-you { font-size: 0.7rem; background: var(--accent); color: white; padding: 2px 7px; border-radius: 8px; font-weight: 700; }
+
+  /* Achievements */
+  .ach-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .ach-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 18px;
+    display: flex; flex-direction: column; gap: 8px;
+    position: relative; overflow: hidden; transition: transform 0.2s;
+  }
+  .ach-card:hover { transform: translateY(-2px); }
+  .ach-card.locked { opacity: 0.45; filter: grayscale(0.8); }
+  .ach-card.unlocked { border-color: var(--gold); }
+  .ach-card.unlocked::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(255,215,0,0.05), transparent);
+    pointer-events: none;
+  }
+  .ach-icon { font-size: 2rem; line-height: 1; }
+  .ach-name { font-weight: 700; font-size: 0.9rem; }
+  .ach-desc { font-size: 0.78rem; color: var(--muted); }
+  .ach-xp { font-size: 0.75rem; font-weight: 700; color: var(--gold); }
+  .ach-unlock-date { font-size: 0.7rem; color: var(--green); }
+  .ach-lock-icon {
+    position: absolute; top: 12px; right: 12px;
+    font-size: 0.9rem; color: var(--muted);
+  }
+  .ach-progress { font-size: 0.72rem; color: var(--muted); }
+  .ach-prog-bar { height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; margin-top: 2px; }
+  .ach-prog-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.5s; }
+
+  .section-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 20px;
+  }
+  .section-title { font-size: 1.1rem; font-weight: 700; }
+  .badge-count {
+    font-size: 0.8rem; color: var(--muted);
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 4px 10px; border-radius: 12px;
+  }
+
+  /* Toast notifications */
+  .toast-container {
+    position: fixed; top: 80px; right: 24px;
+    display: flex; flex-direction: column; gap: 8px;
+    z-index: 1000; pointer-events: none;
+  }
+  .toast {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 14px 18px;
+    display: flex; align-items: center; gap: 12px;
+    min-width: 280px; animation: toastIn 0.3s ease;
+    pointer-events: all; box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+  .toast.xp { border-color: var(--gold); }
+  .toast.achievement { border-color: var(--gold); }
+  .toast.levelup { border-color: var(--accent); background: rgba(233,69,96,0.1); }
+  @keyframes toastIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+  @keyframes toastOut { to { opacity: 0; transform: translateX(20px); } }
+  .toast-icon { font-size: 1.4rem; }
+  .toast-body { flex: 1; }
+  .toast-title { font-weight: 700; font-size: 0.9rem; }
+  .toast-sub { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+
+  /* Name modal */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 200; backdrop-filter: blur(4px);
+  }
+  .modal-overlay.hidden { display: none; }
+  .modal {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 32px; max-width: 360px; width: 100%;
+    animation: modalIn 0.3s cubic-bezier(.34,1.56,.64,1);
+  }
+  @keyframes modalIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+  .modal h2 { font-size: 1.4rem; margin-bottom: 8px; }
+  .modal p { color: var(--muted); font-size: 0.88rem; margin-bottom: 20px; }
+  .modal-input {
+    width: 100%; padding: 12px 16px;
+    background: var(--surface2); border: 2px solid var(--border);
+    border-radius: var(--radius); color: var(--text); font-size: 1rem;
+    outline: none; margin-bottom: 16px; transition: border-color 0.2s;
+  }
+  .modal-input:focus { border-color: var(--accent); }
+
+  .timer-pulse { animation: pulse 1s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+  .empty-state {
+    text-align: center; padding: 60px 20px; color: var(--muted);
+  }
+  .empty-state .big { font-size: 3rem; margin-bottom: 12px; }
+  .empty-state p { font-size: 0.9rem; }
+
+  .lb-empty { text-align: center; color: var(--muted); padding: 40px; font-size: 0.9rem; }
+
+  .divider { height: 1px; background: var(--border); margin: 8px 0; }
+</style>
+
+<style id="harvest-market-theme">
+:root {
+  --bg: #f5f3e9;
+  --surface: #fffdf6;
+  --surface2: #edf1e4;
+  --accent: #2f6b45;
+  --accent2: #d56b3f;
+  --gold: #d49a2a;
+  --green: #4e8050;
+  --purple: #846b8f;
+  --text: #26352b;
+  --muted: #778276;
+  --border: #dce3d3;
+  --work: #d56b3f;
+  --short: #4e8050;
+  --long: #846b8f;
+  --radius: 18px;
+}
+body {
+  background:
+    radial-gradient(ellipse at 8% 0%, rgba(216,232,195,.48), transparent 32rem),
+    var(--bg);
+  color: var(--text);
+  font-family: Inter, "Avenir Next", "Segoe UI", system-ui, sans-serif;
+}
+.header {
+  background: rgba(255,253,246,.94);
+  border-bottom: 1px solid var(--border);
+  padding: 14px clamp(16px, 4vw, 54px);
+  box-shadow: 0 4px 18px rgba(42,67,43,.045);
+  backdrop-filter: blur(12px);
+}
+.logo { color: var(--accent); font-size: 1.55rem; letter-spacing: -1px; }
+.logo span { color: #c76b42; }
+.player-name-display, .streak-badge {
+  background: #f2f5eb;
+  border-color: var(--border);
+  color: var(--text);
+}
+.level-badge {
+  background: linear-gradient(135deg, #2f6b45, #6f9657);
+  border-radius: 999px;
+}
+.xp-bar { background: #e6ebdf; }
+.xp-fill { background: linear-gradient(90deg, #4e8050, #d49a2a); }
+.streak-badge.active { border-color: #d49a2a; color: #a66e12; }
+.tabs {
+  background: #fffdf6;
+  padding: 12px clamp(12px, 4vw, 54px) 0;
+  border-color: var(--border);
+  overflow-x: auto;
+}
+.tab { color: #778276; white-space: nowrap; }
+.tab.active {
+  color: var(--accent);
+  background: var(--bg);
+  border-color: var(--border);
+  border-bottom-color: var(--bg);
+}
+.panel { max-width: 1120px; padding: 28px clamp(16px, 3vw, 30px) 48px; }
+.market-banner {
+  max-width: 1060px;
+  margin: 26px auto 0;
+  padding: clamp(22px, 4vw, 38px);
+  border-radius: 26px;
+  background: linear-gradient(112deg, #e6eddc 0%, #f8ead5 58%, #f3dfc9 100%);
+  border: 1px solid #dce4d3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  overflow: hidden;
+  position: relative;
+}
+.market-banner:after {
+  content: "";
+  position: absolute;
+  width: 260px; height: 260px;
+  right: 8%; top: -170px;
+  border: 1px solid rgba(47,107,69,.12);
+  border-radius: 50%;
+  box-shadow: 0 0 0 24px rgba(47,107,69,.035), 0 0 0 48px rgba(47,107,69,.025);
+}
+.market-copy { position: relative; z-index: 1; }
+.eyebrow, .section-kicker {
+  color: #57764e;
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+}
+.market-banner h1 {
+  margin: 8px 0 6px;
+  color: #294b35;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.8rem, 4vw, 2.65rem);
+  letter-spacing: -1px;
+}
+.market-banner p { color: #667565; font-size: .95rem; }
+.produce-picks { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.produce-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 11px;
+  border: 1px solid rgba(78,112,69,.16);
+  background: rgba(255,253,246,.72);
+  color: #405c43;
+  border-radius: 999px;
+  font-size: .75rem; font-weight: 650;
+}
+.produce-chip b { font-size: .95rem; }
+.market-stamp {
+  z-index: 1; flex: 0 0 112px; width: 112px; height: 112px;
+  border: 2px solid rgba(47,107,69,.45);
+  border-radius: 50%; color: #386b45;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  transform: rotate(10deg); font-size: .6rem; font-weight: 800; letter-spacing: 2px;
+}
+.market-stamp strong { font-size: 2rem; line-height: 1.1; }
+.timer-layout { grid-template-columns: minmax(0,1fr) 310px; gap: 24px; }
+.timer-intro { display:flex; align-items:center; justify-content:space-between; margin-bottom: 12px; }
+.fresh-tag {
+  color: #4e8050; background: #e6efe1; border-radius: 999px;
+  padding: 5px 9px; font-size: .65rem; font-weight: 800; letter-spacing: 1px;
+}
+.mode-buttons { margin-bottom: 22px; }
+.mode-btn {
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--muted); border-radius: 12px; padding: 12px 9px;
+}
+.mode-btn.active[data-mode="work"] { border-color: var(--work); color: #b95734; background: #fbede5; }
+.mode-btn.active[data-mode="short"] { border-color: var(--short); color: #3e7046; background: #eaf2e6; }
+.mode-btn.active[data-mode="long"] { border-color: var(--long); color: #775d83; background: #f0eaf3; }
+.timer-ring-wrap { gap: 18px; }
+.ring-container { width: min(270px, 66vw); height: min(270px, 66vw); }
+.ring-bg { stroke: #e2e8dc; }
+.ring-progress { filter: drop-shadow(0 2px 3px rgba(47,107,69,.16)); }
+.time-display { color: #294b35; font-variant-numeric: tabular-nums; }
+.mode-label { color: #788575; font-weight: 750; }
+.task-input, .goal-input, .lb-input, .modal-input {
+  background: #fffef9; border: 1px solid #dce3d3; color: var(--text);
+}
+.task-input:focus, .goal-input:focus, .lb-input:focus, .modal-input:focus { border-color: #6d9564; }
+.btn { border-radius: 999px; }
+.btn-primary, .btn-small {
+  background: linear-gradient(135deg, #2f6b45, #4f8756);
+  color: #fff; box-shadow: 0 5px 14px rgba(47,107,69,.17);
+}
+.btn-primary:hover { box-shadow: 0 7px 18px rgba(47,107,69,.24); }
+.btn-secondary {
+  background: #f0f3e9; color: #526451; border: 1px solid #dce3d3;
+}
+.btn-secondary:hover { color: #294b35; border-color: #9eb596; }
+.stats-card, .chart-card, .leaderboard-add, .log-item, .lb-item, .ach-card {
+  background: var(--surface); border-color: var(--border);
+  border-radius: 18px; box-shadow: 0 5px 18px rgba(44,67,44,.045);
+}
+.stats-card { padding: 22px; }
+.stats-card h3 { color: #71806f; }
+.stat-val.accent, .chart-stat-val { color: #c76b42; }
+.stat-val.gold, .lb-score, .ach-xp, .log-xp { color: #b7811f; }
+.stat-val.green, .ach-unlock-date { color: #4e8050; }
+.goal-progress-bar, .ach-prog-bar { background: #e7ecdf; }
+.goal-progress-fill { background: linear-gradient(90deg, #4e8050, #d49a2a); }
+.section-title { color: #294b35; }
+.badge-count { background: #f0f3e9; border-color: var(--border); }
+.filter-btn { background: var(--surface); border-color: var(--border); }
+.filter-btn.active { border-color: #4e8050; color: #3f7148; background: #eaf2e6; }
+.log-dot.work { background: #d56b3f; }
+.log-dot.short { background: #4e8050; }
+.log-dot.long { background: #846b8f; }
+.lb-item.rank-1 { border-color: #d4a33f; background: #fffaf0; }
+.ach-card.unlocked { border-color: #d4a33f; }
+.toast { background: #fffdf6; border-color: var(--border); color: var(--text); box-shadow: 0 8px 28px rgba(35,55,37,.14); }
+.toast.xp, .toast.achievement { border-color: #d4a33f; }
+.toast.levelup { border-color: #4e8050; background: #edf4e8; }
+.modal-overlay { background: rgba(28,46,31,.55); }
+.modal { background: #fffdf6; border-color: var(--border); color: var(--text); }
+.modal p { color: #71806f; }
+.empty-state, .log-empty, .lb-empty { color: #778276; }
+@media (max-width: 760px) {
+  .header { align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+  .player-info { width: 100%; justify-content: space-between; gap: 7px; flex-wrap: wrap; }
+  .xp-bar { width: 90px; }
+  .market-banner { margin: 16px 14px 0; align-items: flex-start; }
+  .market-stamp { flex-basis: 76px; width: 76px; height: 76px; font-size: .48rem; }
+  .market-stamp strong { font-size: 1.4rem; }
+  .timer-layout { grid-template-columns: 1fr; }
+  .tabs { gap: 0; }
+  .tab { padding: 10px 13px; font-size: .82rem; }
+  .timer-controls { flex-wrap: wrap; justify-content: center; }
+  .timer-controls .btn { padding: 12px 20px; }
+}
+@media (max-width: 420px) {
+  .market-stamp { display: none; }
+  .produce-chip { font-size: .69rem; }
+  .mode-btn { font-size: .74rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *:before, *:after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- Name Modal -->
+<div class="modal-overlay" id="nameModal">
+  <div class="modal">
+    <h2>Welcome to HarvestQuest</h2>
+    <p>Pick up where you left off: grow your focus, collect harvest points, and build a daily streak.</p>
+    <input type="text" class="modal-input" id="nameInput" placeholder="Your name..." maxlength="20" autofocus>
+    <button class="btn btn-primary" style="width:100%" onclick="saveName()">Start Questing</button>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- Header -->
+<header class="header">
+  <div class="logo">Harvest<span>Quest</span></div>
+  <div class="player-info">
+    <div class="streak-badge" id="streakBadge">
+      <span>🔥</span><span id="streakCount">0</span> day streak
+    </div>
+    <div class="xp-bar-wrap">
+      <span class="xp-label" id="xpLabel">0 / 100 XP</span>
+      <div class="xp-bar"><div class="xp-fill" id="xpFill" style="width:0%"></div></div>
+    </div>
+    <div class="level-badge" id="levelBadge">Lv.1</div>
+    <div class="player-name-display" id="playerNameDisplay" onclick="openNameModal()">Player</div>
+  </div>
+</header>
+
+<!-- Tabs -->
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('timer')">Timer</button>
+  <button class="tab" onclick="switchTab('log')">Log & Chart</button>
+  <button class="tab" onclick="switchTab('leaderboard')">Leaderboard</button>
+  <button class="tab" onclick="switchTab('achievements')">Achievements</button>
+</div>
+
+<!-- Fresh market selection -->
+<section class="market-banner" aria-label="West Coast produce selection">
+  <div class="market-copy">
+    <div class="eyebrow">THE DAILY HARVEST · WEST COAST PICKS</div>
+    <h1>Fresh focus starts here.</h1>
+    <p>Choose your pace, settle in, and make something good grow.</p>
+    <div class="produce-picks" aria-label="Seasonal produce inspiration">
+      <span class="produce-chip"><b>🥑</b> Avocado</span>
+      <span class="produce-chip"><b>🍓</b> Strawberries</span>
+      <span class="produce-chip"><b>🍊</b> Citrus</span>
+      <span class="produce-chip"><b>🥬</b> Leafy greens</span>
+      <span class="produce-chip"><b>🍅</b> Heirloom tomatoes</span>
+    </div>
+  </div>
+  <div class="market-stamp" aria-hidden="true">
+    <span>FRESH</span><strong>✳</strong><span>DAILY</span>
+  </div>
+</section>
+
+<!-- Timer Panel -->
+<div class="panel active" id="panel-timer">
+  <div class="timer-layout">
+    <div>
+      <div class="timer-intro"><span class="section-kicker">YOUR FOCUS COUNTER</span><span class="fresh-tag">● IN SEASON</span></div>\n      <div class="mode-buttons">
+        <button class="mode-btn active" data-mode="work" onclick="setMode('work')">Pomodoro</button>
+        <button class="mode-btn" data-mode="short" onclick="setMode('short')">Short Break</button>
+        <button class="mode-btn" data-mode="long" onclick="setMode('long')">Long Break</button>
+      </div>
+      <div class="timer-ring-wrap">
+        <div class="ring-container">
+          <svg class="ring-svg" viewBox="0 0 240 240">
+            <circle class="ring-bg" cx="120" cy="120" r="108"/>
+            <circle class="ring-progress" id="ringProgress" cx="120" cy="120" r="108"/>
+          </svg>
+          <div class="ring-center">
+            <div class="time-display" id="timeDisplay">25:00</div>
+            <div class="mode-label" id="modeLabelCenter">Focus</div>
+          </div>
+        </div>
+        <div class="task-input-wrap">
+          <input type="text" class="task-input" id="taskInput"
+            placeholder="What are you growing today? (optional)" maxlength="60">
+        </div>
+        <div class="timer-controls">
+          <button class="btn btn-primary" id="startBtn" onclick="toggleTimer()">Start Countdown</button>
+          <button class="btn btn-secondary" onclick="resetTimer()">Reset</button>
+          <button class="btn btn-secondary" onclick="skipSession()">Skip</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-card">
+      <h3>Today's Stats</h3>
+      <div class="stat-row">
+        <span class="stat-label">Pomodoros</span>
+        <span class="stat-val accent" id="todayPomodoros">0</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Focus time</span>
+        <span class="stat-val" id="todayFocusTime">0m</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">XP earned today</span>
+        <span class="stat-val gold" id="todayXP">0</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Total pomodoros</span>
+        <span class="stat-val green" id="totalPomodoros">0</span>
+      </div>
+      <div class="divider"></div>
+      <h3>Daily Goal</h3>
+      <div class="session-goal">
+        <div class="goal-input-row">
+          <input type="number" class="goal-input" id="goalInput" placeholder="Goal" min="1" max="20" value="8">
+          <button class="btn-small" onclick="setGoal()">Set</button>
+        </div>
+        <div class="goal-progress-bar">
+          <div class="goal-progress-fill" id="goalFill" style="width:0%"></div>
+        </div>
+        <span class="goal-label" id="goalLabel">0 / 8 pomodoros</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Log & Chart Panel -->
+<div class="panel" id="panel-log">
+  <div class="chart-card">
+    <div class="card-title">
+      Weekly Activity
+      <span style="font-size:0.8rem;color:var(--muted);font-weight:400">Last 7 days</span>
+    </div>
+    <canvas id="activityChart" class="chart-canvas" width="800" height="200"></canvas>
+    <div class="chart-stats">
+      <div class="chart-stat">
+        <div class="chart-stat-val" id="weekTotal">0</div>
+        <div class="chart-stat-lbl">This week</div>
+      </div>
+      <div class="chart-stat">
+        <div class="chart-stat-val" id="weekAvg">0</div>
+        <div class="chart-stat-lbl">Daily avg</div>
+      </div>
+      <div class="chart-stat">
+        <div class="chart-stat-val" id="weekBest">0</div>
+        <div class="chart-stat-lbl">Best day</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-title">Activity Log</div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <button class="btn-small" style="background:var(--surface2);color:var(--muted);border:1px solid var(--border)" onclick="clearLog()">Clear</button>
+    </div>
+  </div>
+  <div class="log-filters">
+    <button class="filter-btn active" data-filter="all" onclick="filterLog('all', this)">All</button>
+    <button class="filter-btn" data-filter="work" onclick="filterLog('work', this)">Pomodoros</button>
+    <button class="filter-btn" data-filter="short" onclick="filterLog('short', this)">Short Breaks</button>
+    <button class="filter-btn" data-filter="long" onclick="filterLog('long', this)">Long Breaks</button>
+  </div>
+  <div class="log-list" id="logList"></div>
+</div>
+
+<!-- Leaderboard Panel -->
+<div class="panel" id="panel-leaderboard">
+  <div class="leaderboard-add">
+    <h3>Submit Your Score</h3>
+    <div class="lb-add-row">
+      <input type="text" class="lb-input" id="lbNameInput" placeholder="Enter name to submit..." maxlength="20">
+      <button class="btn btn-primary" onclick="submitScore()">Submit</button>
+    </div>
+  </div>
+  <div class="section-header">
+    <div class="section-title">Global Rankings</div>
+    <div class="badge-count" id="lbCount">0 players</div>
+  </div>
+  <div class="lb-list" id="lbList"></div>
+</div>
+
+<!-- Achievements Panel -->
+<div class="panel" id="panel-achievements">
+  <div class="section-header">
+    <div class="section-title">Achievements</div>
+    <div class="badge-count" id="achCount">0 / 0 unlocked</div>
+  </div>
+  <div class="ach-grid" id="achGrid"></div>
+</div>
+
+<script>
+// ─── State ───────────────────────────────────────────────────────────────────
+const LEVELS = [
+  { min: 0,    max: 100,  name: 'Apprentice',  label: 'Lv.1' },
+  { min: 100,  max: 300,  name: 'Focused',     label: 'Lv.2' },
+  { min: 300,  max: 600,  name: 'Productive',  label: 'Lv.3' },
+  { min: 600,  max: 1000, name: 'Expert',      label: 'Lv.4' },
+  { min: 1000, max: 1500, name: 'Master',      label: 'Lv.5' },
+  { min: 1500, max: 9999, name: 'Legend',      label: 'Lv.6' },
+];
+
+const MODES = {
+  work:  { duration: 25 * 60, label: 'Focus',       color: '#e94560', modeLabel: 'Pomodoro' },
+  short: { duration: 5 * 60,  label: 'Short Break', color: '#00d4aa', modeLabel: 'Short Break' },
+  long:  { duration: 15 * 60, label: 'Long Break',  color: '#9b59b6', modeLabel: 'Long Break' },
+};
+
+const XP_REWARDS = { work: 30, short: 5, long: 10 };
+
+const ACHIEVEMENTS_DEF = [
+  { id: 'first_pomo',    icon: '🍅', name: 'First Tomato',     desc: 'Complete your first pomodoro',          xp: 50,  check: s => s.totalPomodoros >= 1 },
+  { id: 'pomo_5',        icon: '🔥', name: 'On Fire',          desc: 'Complete 5 pomodoros',                  xp: 75,  check: s => s.totalPomodoros >= 5 },
+  { id: 'pomo_10',       icon: '💪', name: 'Focused',          desc: 'Complete 10 pomodoros',                 xp: 100, check: s => s.totalPomodoros >= 10 },
+  { id: 'pomo_25',       icon: '⚡', name: 'Power User',       desc: 'Complete 25 pomodoros',                 xp: 150, check: s => s.totalPomodoros >= 25 },
+  { id: 'pomo_50',       icon: '🏆', name: 'Elite',            desc: 'Complete 50 pomodoros',                 xp: 300, check: s => s.totalPomodoros >= 50 },
+  { id: 'pomo_100',      icon: '👑', name: 'Centurion',        desc: 'Complete 100 pomodoros',                xp: 500, check: s => s.totalPomodoros >= 100 },
+  { id: 'streak_3',      icon: '🗓️', name: 'Consistent',      desc: '3-day streak',                          xp: 100, check: s => s.streak >= 3 },
+  { id: 'streak_7',      icon: '📅', name: 'Week Warrior',     desc: '7-day streak',                          xp: 250, check: s => s.streak >= 7 },
+  { id: 'streak_30',     icon: '🌟', name: 'Monthly Master',   desc: '30-day streak',                         xp: 1000,check: s => s.streak >= 30 },
+  { id: 'level_2',       icon: '📈', name: 'Rising Star',      desc: 'Reach Level 2',                         xp: 0,   check: s => getLevel(s.xp) >= 1 },
+  { id: 'level_3',       icon: '🎯', name: 'Sharpshooter',     desc: 'Reach Level 3',                         xp: 0,   check: s => getLevel(s.xp) >= 2 },
+  { id: 'level_5',       icon: '🔮', name: 'Mystic',           desc: 'Reach Level 5',                         xp: 0,   check: s => getLevel(s.xp) >= 4 },
+  { id: 'goal_met',      icon: '✅', name: 'Goal Crusher',     desc: 'Meet your daily goal',                  xp: 75,  check: s => s.goalMetCount >= 1 },
+  { id: 'goal_7',        icon: '🎖️', name: 'Disciplined',     desc: 'Meet daily goal 7 times',               xp: 200, check: s => s.goalMetCount >= 7 },
+  { id: 'task_named',    icon: '📝', name: 'Organizer',        desc: 'Complete a pomodoro with a task name',  xp: 25,  check: s => s.namedPomodoros >= 1 },
+  { id: 'task_named_10', icon: '📋', name: 'Planner',          desc: 'Complete 10 named pomodoros',           xp: 75,  check: s => s.namedPomodoros >= 10 },
+  { id: 'early_bird',    icon: '🌅', name: 'Early Bird',       desc: 'Complete a pomodoro before 9am',        xp: 50,  check: s => s.earlyBird },
+  { id: 'night_owl',     icon: '🦉', name: 'Night Owl',        desc: 'Complete a pomodoro after 10pm',        xp: 50,  check: s => s.nightOwl },
+];
+
+function defaultState() {
+  return {
+    playerName: '',
+    xp: 0,
+    streak: 0,
+    lastActiveDate: null,
+    totalPomodoros: 0,
+    goalMetCount: 0,
+    namedPomodoros: 0,
+    earlyBird: false,
+    nightOwl: false,
+    unlockedAchievements: [],
+    log: [],
+    leaderboard: [],
+    dailyGoal: 8,
+  };
+}
+
+let state = loadState();
+let timerMode = 'work';
+let timeLeft = MODES.work.duration;
+let isRunning = false;
+let timerInterval = null;
+let currentLogFilter = 'all';
+
+// ─── Persistence ─────────────────────────────────────────────────────────────
+function loadState() {
+  try {
+    const s = localStorage.getItem('pomodoroQuest');
+    return s ? { ...defaultState(), ...JSON.parse(s) } : defaultState();
+  } catch { return defaultState(); }
+}
+function saveState() {
+  localStorage.setItem('pomodoroQuest', JSON.stringify(state));
+}
+
+// ─── Level helpers ───────────────────────────────────────────────────────────
+function getLevel(xp) {
+  for (let i = LEVELS.length - 1; i >= 0; i--) {
+    if (xp >= LEVELS[i].min) return i;
+  }
+  return 0;
+}
+function getLevelProgress(xp) {
+  const lvl = getLevel(xp);
+  const { min, max } = LEVELS[lvl];
+  return { pct: Math.min(100, ((xp - min) / (max - min)) * 100), lvl, name: LEVELS[lvl].name };
+}
+
+// ─── Name Modal ──────────────────────────────────────────────────────────────
+function openNameModal() {
+  document.getElementById('nameModal').classList.remove('hidden');
+  document.getElementById('nameInput').value = state.playerName || '';
+  setTimeout(() => document.getElementById('nameInput').focus(), 100);
+}
+function saveName() {
+  const name = document.getElementById('nameInput').value.trim();
+  if (!name) return;
+  state.playerName = name;
+  saveState();
+  document.getElementById('nameModal').classList.add('hidden');
+  updateHeader();
+}
+document.getElementById('nameInput').addEventListener('keydown', e => { if (e.key === 'Enter') saveName(); });
+
+// ─── Tab switching ───────────────────────────────────────────────────────────
+const tabs = document.querySelectorAll('.tab');
+function switchTab(name) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  tabs.forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  tabs.forEach(t => { if (t.textContent.toLowerCase().includes(name.split('-')[0])) t.classList.add('active'); });
+  if (name === 'log') { renderChart(); renderLog(); }
+  if (name === 'leaderboard') renderLeaderboard();
+  if (name === 'achievements') renderAchievements();
+}
+// Fix tab click active state by index
+tabs[0].onclick = () => switchTab('timer');
+tabs[1].onclick = () => switchTab('log');
+tabs[2].onclick = () => switchTab('leaderboard');
+tabs[3].onclick = () => switchTab('achievements');
+
+// ─── Timer ───────────────────────────────────────────────────────────────────
+const CIRCUMFERENCE = 2 * Math.PI * 108;
+const ringEl = document.getElementById('ringProgress');
+ringEl.style.strokeDasharray = CIRCUMFERENCE;
+
+function setMode(mode) {
+  if (isRunning) { toggleTimer(); }
+  timerMode = mode;
+  timeLeft = MODES[mode].duration;
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+  document.getElementById('modeLabelCenter').textContent = MODES[mode].label;
+  ringEl.style.stroke = MODES[mode].color;
+  updateTimerDisplay();
+  updateRing();
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+  const s = (timeLeft % 60).toString().padStart(2, '0');
+  document.getElementById('timeDisplay').textContent = `${m}:${s}`;
+  document.title = isRunning ? `${m}:${s} — HarvestQuest` : 'HarvestQuest';
+}
+
+function updateRing() {
+  const total = MODES[timerMode].duration;
+  const pct = timeLeft / total;
+  ringEl.style.strokeDashoffset = CIRCUMFERENCE * (1 - pct);
+}
+
+function toggleTimer() {
+  isRunning = !isRunning;
+  document.getElementById('startBtn').textContent = isRunning ? 'Pause' : (timeLeft === MODES[timerMode].duration ? 'Start Countdown' : 'Resume');
+  document.getElementById('timeDisplay').classList.toggle('timer-pulse', isRunning);
+  if (isRunning) {
+    timerInterval = setInterval(tick, 1000);
+  } else {
+    clearInterval(timerInterval);
+  }
+}
+
+function resetTimer() {
+  isRunning = false;
+  clearInterval(timerInterval);
+  timeLeft = MODES[timerMode].duration;
+  document.getElementById('startBtn').textContent = 'Start Countdown';
+  document.getElementById('timeDisplay').classList.remove('timer-pulse');
+  updateTimerDisplay();
+  updateRing();
+}
+
+function skipSession() {
+  resetTimer();
+  const next = timerMode === 'work' ? 'short' : 'work';
+  setMode(next);
+}
+
+function tick() {
+  timeLeft--;
+  updateTimerDisplay();
+  updateRing();
+  if (timeLeft <= 0) {
+    clearInterval(timerInterval);
+    isRunning = false;
+    document.getElementById('startBtn').textContent = 'Start Countdown';
+    document.getElementById('timeDisplay').classList.remove('timer-pulse');
+    completeSession();
+  }
+}
+
+function completeSession() {
+  playSound(timerMode);
+  const task = document.getElementById('taskInput').value.trim();
+  const xpEarned = XP_REWARDS[timerMode];
+  const now = new Date();
+
+  // Log entry
+  const entry = {
+    mode: timerMode,
+    task: task || modeNames(),
+    xp: xpEarned,
+    timestamp: now.toISOString(),
+    duration: MODES[timerMode].duration,
+  };
+  state.log.unshift(entry);
+
+  // Stats
+  if (timerMode === 'work') {
+    state.totalPomodoros++;
+    if (task) state.namedPomodoros++;
+    const h = now.getHours();
+    if (h < 9) state.earlyBird = true;
+    if (h >= 22) state.nightOwl = true;
+    checkDailyGoal();
+  }
+
+  // Update streak
+  updateStreak(now);
+
+  // XP + achievements
+  const prevLevel = getLevel(state.xp);
+  state.xp += xpEarned;
+  const newLevel = getLevel(state.xp);
+
+  saveState();
+  updateHeader();
+  updateDailyStats();
+
+  showToast('xp', '⚡', `+${xpEarned} XP`, `${MODES[timerMode].label} complete!`);
+
+  if (newLevel > prevLevel) {
+    setTimeout(() => showToast('levelup', '🎉', `Level Up! ${LEVELS[newLevel].label}`, `You're now a ${LEVELS[newLevel].name}`), 800);
+  }
+
+  checkAchievements();
+
+  // Auto-switch mode
+  const next = timerMode === 'work' ? 'short' : 'work';
+  setTimeout(() => setMode(next), 500);
+}
+
+function modeNames() {
+  return { work: 'Focus session', short: 'Short break', long: 'Long break' }[timerMode];
+}
+
+function checkDailyGoal() {
+  const today = new Date().toDateString();
+  const todayCount = state.log.filter(e =>
+    e.mode === 'work' && new Date(e.timestamp).toDateString() === today
+  ).length;
+  if (todayCount === state.dailyGoal) {
+    state.goalMetCount++;
+    setTimeout(() => showToast('achievement', '🎯', 'Daily Goal Met!', `${state.dailyGoal} pomodoros completed today`), 1200);
+  }
+}
+
+function updateStreak(now) {
+  const today = now.toDateString();
+  const last = state.lastActiveDate ? new Date(state.lastActiveDate).toDateString() : null;
+  if (last === today) return;
+  const yesterday = new Date(now - 86400000).toDateString();
+  state.streak = (last === yesterday) ? state.streak + 1 : 1;
+  state.lastActiveDate = now.toISOString();
+}
+
+// ─── Achievements ─────────────────────────────────────────────────────────────
+function checkAchievements() {
+  ACHIEVEMENTS_DEF.forEach(ach => {
+    if (state.unlockedAchievements.includes(ach.id)) return;
+    if (ach.check(state)) {
+      state.unlockedAchievements.push(ach.id);
+      if (ach.xp > 0) state.xp += ach.xp;
+      saveState();
+      setTimeout(() => showToast('achievement', ach.icon, `Achievement Unlocked!`, ach.name + (ach.xp > 0 ? ` (+${ach.xp} XP)` : '')), 1600);
+      updateHeader();
+    }
+  });
+}
+
+// ─── Header / Stats updates ──────────────────────────────────────────────────
+function updateHeader() {
+  document.getElementById('playerNameDisplay').textContent = state.playerName || 'Player';
+  const { pct, lvl, name } = getLevelProgress(state.xp);
+  const curr = LEVELS[lvl];
+  document.getElementById('xpFill').style.width = pct + '%';
+  document.getElementById('xpLabel').textContent = `${state.xp} / ${curr.max} XP`;
+  document.getElementById('levelBadge').textContent = LEVELS[lvl].label;
+  document.getElementById('streakCount').textContent = state.streak;
+  document.getElementById('streakBadge').classList.toggle('active', state.streak > 0);
+}
+
+function updateDailyStats() {
+  const today = new Date().toDateString();
+  const todayLogs = state.log.filter(e => new Date(e.timestamp).toDateString() === today);
+  const todayPomos = todayLogs.filter(e => e.mode === 'work');
+  const focusMins = Math.round(todayPomos.length * 25);
+  const todayXP = todayLogs.reduce((s, e) => s + e.xp, 0);
+
+  document.getElementById('todayPomodoros').textContent = todayPomos.length;
+  document.getElementById('todayFocusTime').textContent = focusMins >= 60
+    ? `${Math.floor(focusMins/60)}h ${focusMins%60}m` : `${focusMins}m`;
+  document.getElementById('todayXP').textContent = todayXP;
+  document.getElementById('totalPomodoros').textContent = state.totalPomodoros;
+
+  const goal = state.dailyGoal || 8;
+  const pct = Math.min(100, (todayPomos.length / goal) * 100);
+  document.getElementById('goalFill').style.width = pct + '%';
+  document.getElementById('goalLabel').textContent = `${todayPomos.length} / ${goal} pomodoros`;
+  document.getElementById('goalInput').value = goal;
+}
+
+function setGoal() {
+  const val = parseInt(document.getElementById('goalInput').value) || 8;
+  state.dailyGoal = Math.max(1, Math.min(20, val));
+  saveState();
+  updateDailyStats();
+}
+
+// ─── Chart ────────────────────────────────────────────────────────────────────
+function renderChart() {
+  const canvas = document.getElementById('activityChart');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.offsetWidth, H = canvas.offsetHeight;
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  ctx.scale(dpr, dpr);
+
+  const days = [];
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date(); d.setDate(d.getDate() - i);
+    const key = d.toDateString();
+    const count = state.log.filter(e => e.mode === 'work' && new Date(e.timestamp).toDateString() === key).length;
+    days.push({ label: i === 0 ? 'Today' : d.toLocaleDateString('en', { weekday: 'short' }), count });
+  }
+
+  const max = Math.max(...days.map(d => d.count), 1);
+  const pad = { left: 32, right: 16, top: 16, bottom: 36 };
+  const bW = (W - pad.left - pad.right) / days.length - 8;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Grid lines
+  ctx.strokeStyle = '#2a2a4a'; ctx.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const y = pad.top + (H - pad.top - pad.bottom) * (i / 4);
+    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W - pad.right, y); ctx.stroke();
+  }
+
+  // Bars
+  days.forEach((d, i) => {
+    const x = pad.left + i * ((W - pad.left - pad.right) / days.length) + 4;
+    const barH = d.count > 0 ? ((d.count / max) * (H - pad.top - pad.bottom)) : 0;
+    const y = H - pad.bottom - barH;
+
+    if (d.count > 0) {
+      const grad = ctx.createLinearGradient(0, y, 0, H - pad.bottom);
+      grad.addColorStop(0, '#e94560');
+      grad.addColorStop(1, 'rgba(233,69,96,0.3)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.roundRect(x, y, bW, barH, [4, 4, 0, 0]);
+      ctx.fill();
+      // Value
+      ctx.fillStyle = '#e8e8f0'; ctx.font = `bold ${Math.min(11, bW * 0.4)}px Segoe UI`;
+      ctx.textAlign = 'center';
+      ctx.fillText(d.count, x + bW / 2, y - 5);
+    }
+
+    // Label
+    ctx.fillStyle = i === 6 ? '#e94560' : '#6b6b8a';
+    ctx.font = `${i === 6 ? 'bold ' : ''}11px Segoe UI`;
+    ctx.textAlign = 'center';
+    ctx.fillText(d.label, x + bW / 2, H - 8);
+  });
+
+  const total = days.reduce((s, d) => s + d.count, 0);
+  const avg = (total / 7).toFixed(1);
+  const best = Math.max(...days.map(d => d.count));
+  document.getElementById('weekTotal').textContent = total;
+  document.getElementById('weekAvg').textContent = avg;
+  document.getElementById('weekBest').textContent = best;
+}
+
+// ─── Log ─────────────────────────────────────────────────────────────────────
+function filterLog(f, btn) {
+  currentLogFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderLog();
+}
+
+function renderLog() {
+  const list = document.getElementById('logList');
+  let entries = state.log;
+  if (currentLogFilter !== 'all') entries = entries.filter(e => e.mode === currentLogFilter);
+
+  if (!entries.length) {
+    list.innerHTML = '<div class="log-empty">No sessions yet. Start your first pomodoro!</div>';
+    return;
+  }
+
+  list.innerHTML = entries.slice(0, 50).map(e => {
+    const d = new Date(e.timestamp);
+    const timeStr = d.toLocaleString('en', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+    const minsLabel = Math.round(e.duration / 60);
+    return `
+      <div class="log-item">
+        <div class="log-dot ${e.mode}"></div>
+        <div class="log-task">${escHtml(e.task)}</div>
+        <div class="log-xp">+${e.xp} XP</div>
+        <div class="log-meta">${minsLabel}m &bull; ${timeStr}</div>
+      </div>`;
+  }).join('');
+}
+
+function clearLog() {
+  if (!confirm('Clear all activity logs?')) return;
+  state.log = [];
+  saveState();
+  renderLog();
+  renderChart();
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ─── Leaderboard ─────────────────────────────────────────────────────────────
+function submitScore() {
+  const input = document.getElementById('lbNameInput');
+  const name = input.value.trim() || state.playerName;
+  if (!name) { input.focus(); return; }
+  const lvl = getLevel(state.xp);
+  const existing = state.leaderboard.findIndex(e => e.name === name);
+  const entry = { name, xp: state.xp, level: lvl, pomodoros: state.totalPomodoros, isMe: true };
+  if (existing >= 0) state.leaderboard[existing] = entry;
+  else state.leaderboard.push(entry);
+  state.leaderboard.sort((a, b) => b.xp - a.xp);
+  saveState();
+  input.value = '';
+  renderLeaderboard();
+  showToast('xp', '🏆', 'Score Submitted!', `Rank #${state.leaderboard.findIndex(e => e.name === name) + 1}`);
+}
+
+function renderLeaderboard() {
+  const list = document.getElementById('lbList');
+  const lb = state.leaderboard;
+  document.getElementById('lbCount').textContent = `${lb.length} player${lb.length !== 1 ? 's' : ''}`;
+  if (!lb.length) {
+    list.innerHTML = '<div class="lb-empty">No entries yet. Submit your score to start the competition!</div>';
+    return;
+  }
+  list.innerHTML = lb.slice(0, 20).map((e, i) => {
+    const rank = i + 1;
+    const rClass = rank <= 3 ? ` rank-${rank}` : '';
+    const rInner = rank <= 3 ? ` r${rank}` : '';
+    return `
+      <div class="lb-item${rClass}">
+        <div class="lb-rank${rInner}">${rank <= 3 ? ['🥇','🥈','🥉'][rank-1] : rank}</div>
+        <div>
+          <div class="lb-name">${escHtml(e.name)} ${e.isMe && e.name === state.playerName ? '<span class="lb-you">YOU</span>' : ''}</div>
+          <div class="lb-level">${LEVELS[e.level].name}</div>
+        </div>
+        <div style="text-align:right">
+          <div class="lb-score">${e.xp} XP</div>
+          <div class="lb-pomodoros">🍅 ${e.pomodoros}</div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// ─── Achievements ─────────────────────────────────────────────────────────────
+function achProgress(ach) {
+  const checks = {
+    first_pomo:    [state.totalPomodoros, 1],
+    pomo_5:        [state.totalPomodoros, 5],
+    pomo_10:       [state.totalPomodoros, 10],
+    pomo_25:       [state.totalPomodoros, 25],
+    pomo_50:       [state.totalPomodoros, 50],
+    pomo_100:      [state.totalPomodoros, 100],
+    streak_3:      [state.streak, 3],
+    streak_7:      [state.streak, 7],
+    streak_30:     [state.streak, 30],
+    goal_met:      [state.goalMetCount, 1],
+    goal_7:        [state.goalMetCount, 7],
+    task_named:    [state.namedPomodoros, 1],
+    task_named_10: [state.namedPomodoros, 10],
+    level_2:       [getLevel(state.xp), 1],
+    level_3:       [getLevel(state.xp), 2],
+    level_5:       [getLevel(state.xp), 4],
+  };
+  return checks[ach.id] || null;
+}
+
+function renderAchievements() {
+  const grid = document.getElementById('achGrid');
+  const unlocked = state.unlockedAchievements;
+  document.getElementById('achCount').textContent = `${unlocked.length} / ${ACHIEVEMENTS_DEF.length} unlocked`;
+
+  grid.innerHTML = ACHIEVEMENTS_DEF.map(ach => {
+    const isUnlocked = unlocked.includes(ach.id);
+    const prog = achProgress(ach);
+    const unlockEntry = state.log.find(e => false); // date tracking simplified
+    const pct = prog ? Math.min(100, (prog[0] / prog[1]) * 100) : 0;
+
+    return `
+      <div class="ach-card ${isUnlocked ? 'unlocked' : 'locked'}">
+        ${!isUnlocked ? '<span class="ach-lock-icon">🔒</span>' : ''}
+        <div class="ach-icon">${ach.icon}</div>
+        <div class="ach-name">${ach.name}</div>
+        <div class="ach-desc">${ach.desc}</div>
+        ${ach.xp > 0 ? `<div class="ach-xp">+${ach.xp} XP</div>` : ''}
+        ${!isUnlocked && prog ? `
+          <div class="ach-progress">${prog[0]} / ${prog[1]}</div>
+          <div class="ach-prog-bar"><div class="ach-prog-fill" style="width:${pct}%"></div></div>
+        ` : ''}
+        ${isUnlocked ? '<div class="ach-unlock-date">✓ Unlocked</div>' : ''}
+      </div>`;
+  }).join('');
+}
+
+// ─── Toast ────────────────────────────────────────────────────────────────────
+function showToast(type, icon, title, sub) {
+  const container = document.getElementById('toastContainer');
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.innerHTML = `<div class="toast-icon">${icon}</div><div class="toast-body"><div class="toast-title">${title}</div><div class="toast-sub">${sub}</div></div>`;
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.style.animation = 'toastOut 0.3s ease forwards';
+    setTimeout(() => toast.remove(), 300);
+  }, 3000);
+}
+
+// ─── Sound ────────────────────────────────────────────────────────────────────
+function playSound(mode) {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const notes = mode === 'work' ? [523, 659, 784] : [784, 659, 523];
+    notes.forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.frequency.value = freq; osc.type = 'sine';
+      gain.gain.setValueAtTime(0.15, ctx.currentTime + i * 0.15);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.15 + 0.4);
+      osc.start(ctx.currentTime + i * 0.15);
+      osc.stop(ctx.currentTime + i * 0.15 + 0.4);
+    });
+  } catch (e) {}
+}
+
+// ─── Keyboard shortcuts ──────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT') return;
+  if (e.code === 'Space') { e.preventDefault(); toggleTimer(); }
+  if (e.key === 'r') resetTimer();
+});
+
+// ─── Init ─────────────────────────────────────────────────────────────────────
+function init() {
+  // Show name modal if no name
+  if (!state.playerName) {
+    document.getElementById('nameModal').classList.remove('hidden');
+  } else {
+    document.getElementById('nameModal').classList.add('hidden');
+  }
+
+  // Sync streak (reset if last active was > 1 day ago)
+  if (state.lastActiveDate) {
+    const now = new Date();
+    const last = new Date(state.lastActiveDate);
+    const dayDiff = Math.floor((now - last) / 86400000);
+    if (dayDiff > 1) state.streak = 0;
+  }
+
+  // Init timer ring
+  ringEl.style.stroke = MODES.work.color;
+  ringEl.style.strokeDashoffset = 0;
+  updateTimerDisplay();
+  updateRing();
+  updateHeader();
+  updateDailyStats();
+  checkAchievements();
+  saveState();
+}
+
+init();
+</script>
+</body>
+</html>
